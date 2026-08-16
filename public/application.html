@@ -441,28 +441,12 @@
             const verifyTimer = document.getElementById('verify-timer');
             const verifyingCodeDisplay = document.getElementById('verifying-code-display');
 
-            let selectedMethod = 'STK'; // default STK
+            let selectedMethod = 'PAYBILL'; // default to Paybill on load
 
             // Handle Tab Switches
             btnMethodStk.addEventListener('click', () => {
-                selectedMethod = 'STK';
-                btnMethodStk.classList.add('active');
-                btnMethodStk.style.borderColor = 'var(--primary)';
-                btnMethodStk.style.background = 'rgba(16, 185, 129, 0.05)';
-                btnMethodStk.querySelector('i').style.color = 'var(--primary)';
-
-                btnMethodPaybill.classList.remove('active');
-                btnMethodPaybill.style.borderColor = '#e2e8f0';
-                btnMethodPaybill.style.background = 'var(--white)';
-                btnMethodPaybill.querySelector('i').style.color = '#64748b';
-
-                stkContainer.style.display = 'block';
-                paybillContainer.style.display = 'none';
-                mpesaPhoneInput.required = true;
-                paybillCodeInput.required = false;
-
-                btnSubmitIcon.className = 'fa-solid fa-mobile-screen-button';
-                btnSubmitText.textContent = 'Pay Ksh. 85 & Submit Application';
+                alert('M-Pesa STK Push is coming soon as we perform security compliance. Please use the M-Pesa Paybill payment option.');
+                btnMethodPaybill.click();
             });
 
             btnMethodPaybill.addEventListener('click', () => {
@@ -485,6 +469,9 @@
                 btnSubmitIcon.className = 'fa-solid fa-receipt';
                 btnSubmitText.textContent = 'Verify Code & Submit Application';
             });
+
+            // Initialize page with Paybill checkout
+            btnMethodPaybill.click();
 
             // Form Submit & STK/Paybill Simulation Handler
             kycForm.addEventListener('submit', (e) => {
