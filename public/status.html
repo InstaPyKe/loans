@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application Status | PesaQuick</title>
+    <!-- FontAwesome for Premium Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom Style Sheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Animated Mesh Background & Glowing Orbs -->
+    <div class="bg-mesh"></div>
+    <div class="floating-orbs-container">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+        <div class="comet comet-1"></div>
+        <div class="comet comet-2"></div>
+        <div class="comet comet-3"></div>
+    </div>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="header-container">
+            <div class="logo-section">
+                <i class="fa-solid fa-bolt-lightning"></i>
+                <span>PesaQuick Loans</span>
+            </div>
+            <span class="status-badge-live">
+                <span class="pulse-dot"></span> Under Review
+            </span>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main>
+        <div class="card-container">
+
+            <!-- Banner Header -->
+            <div class="hero-image-box"
+                style="aspect-ratio: 16 / 5; background: linear-gradient(135deg, var(--dark) 0%, #1e293b 100%);">
+                <div class="hero-overlay" style="align-items: stretch; text-align: left; padding: 20px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                        <div>
+                            <span
+                                style="font-size: 0.65rem; font-weight: 800; text-transform: uppercase; color: #94a3b8; letter-spacing: 0.8px; display: block; margin-bottom: 2px;">Application
+                                Reference</span>
+                            <h2 id="app-id-display"
+                                style="font-family: monospace; font-size: 1.25rem; font-weight: 800; color: var(--accent);">
+                                APP-2026-00000</h2>
+                        </div>
+                        <div style="text-align: right;">
+                            <span
+                                style="font-size: 0.65rem; font-weight: 800; text-transform: uppercase; color: #94a3b8; letter-spacing: 0.8px; display: block; margin-bottom: 2px;">Submitted</span>
+                            <span id="submit-time-display"
+                                style="font-size: 0.8rem; color: var(--white); font-weight: 600;">Just now</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card Content Body -->
+            <div class="card-content" style="display: flex; flex-direction: column; gap: 20px;">
+
+                <!-- Live Queue Status Tracker Card -->
+                <div class="queue-card blue-splash animate-slide-up delay-1">
+                    <div class="queue-icon-box">
+                        <i class="fa-solid fa-hourglass-half fa-spin"></i>
+                    </div>
+                    <div class="queue-details" style="flex-grow: 1;">
+                        <h3>Queued for Disbursement</h3>
+                        <p>Your Ksh. 85 fee was confirmed. Our audit team is finalising credit criteria checks.</p>
+
+                        <!-- Progress Bar -->
+                        <div class="progress-container">
+                            <div class="progress-header">
+                                <span>Verification Stage</span>
+                                <span>75% Complete</span>
+                            </div>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar-fill"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Transaction Summary Card -->
+                <div class="summary-block animate-slide-up delay-2"
+                    style="background: var(--white); padding: 20px; border: 1px solid #e2e8f0; border-radius: var(--border-radius-lg); box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05);">
+                    <div class="summary-block-title"
+                        style="font-size: 0.8rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: #64748b; margin-bottom: 16px; border-bottom: 1px solid #f1f5f9; padding-bottom: 10px;">
+                        summary of Applicant information</div>
+                    <div class="summary-rows-container"
+                        style="display: flex; flex-direction: column; border-radius: var(--border-radius-md); overflow: hidden; border: 1px solid #f1f5f9;">
+
+                        <!-- Row 1: Name -->
+                        <div class="summary-row-item"
+                            style="display: flex; background: #f8fafc; border-bottom: 1px solid #f1f5f9;">
+                            <div class="summary-item-label"
+                                style="flex: 1; padding: 12px 16px; font-size: 0.72rem; font-weight: 700; color: #64748b; text-transform: uppercase; border-right: 1px solid #f1f5f9; display: flex; align-items: center;">
+                                Applicant Name</div>
+                            <div id="summary-name" class="summary-item-value"
+                                style="flex: 1.3; padding: 12px 16px; font-size: 0.85rem; font-weight: 700; color: var(--dark); display: flex; align-items: center;">
+                                uhioihl</div>
+                        </div>
+
+                        <!-- Row 2: National ID -->
+                        <div class="summary-row-item"
+                            style="display: flex; background: var(--white); border-bottom: 1px solid #f1f5f9;">
+                            <div class="summary-item-label"
+                                style="flex: 1; padding: 12px 16px; font-size: 0.72rem; font-weight: 700; color: #64748b; text-transform: uppercase; border-right: 1px solid #f1f5f9; display: flex; align-items: center;">
+                                National ID</div>
+                            <div id="summary-id" class="summary-item-value"
+                                style="flex: 1.3; padding: 12px 16px; font-size: 0.85rem; font-weight: 700; color: var(--dark); display: flex; align-items: center;">
+                                23334555</div>
+                        </div>
+
+                        <!-- Row 3: Allocated Loan -->
+                        <div class="summary-row-item"
+                            style="display: flex; background: #eff6ff; border-bottom: 1px solid #dbeafe;">
+                            <div class="summary-item-label"
+                                style="flex: 1; padding: 12px 16px; font-size: 0.72rem; font-weight: 700; color: #1e40af; text-transform: uppercase; border-right: 1px solid #dbeafe; display: flex; align-items: center;">
+                                Allocated Loan</div>
+                            <div id="summary-principal" class="summary-item-value highlight-blue"
+                                style="flex: 1.3; padding: 12px 16px; font-size: 0.95rem; font-weight: 800; color: var(--secondary-hover); display: flex; align-items: center;">
+                                Ksh. 4,500</div>
+                        </div>
+
+                        <!-- Row 4: Total Payable -->
+                        <div class="summary-row-item"
+                            style="display: flex; background: var(--white); border-bottom: 1px solid #f1f5f9;">
+                            <div class="summary-item-label"
+                                style="flex: 1; padding: 12px 16px; font-size: 0.72rem; font-weight: 700; color: #64748b; text-transform: uppercase; border-right: 1px solid #f1f5f9; display: flex; align-items: center;">
+                                Total Payable (30d)</div>
+                            <div id="summary-total" class="summary-item-value"
+                                style="flex: 1.3; padding: 12px 16px; font-size: 0.85rem; font-weight: 700; color: var(--dark); display: flex; align-items: center;">
+                                Ksh. 4,950</div>
+                        </div>
+
+                        <!-- Row 5: M-Pesa Receipt -->
+                        <div class="summary-row-item"
+                            style="display: flex; background: #ecfdf5; border-bottom: 1px solid #a7f3d0;">
+                            <div class="summary-item-label"
+                                style="flex: 1; padding: 12px 16px; font-size: 0.72rem; font-weight: 700; color: #065f46; text-transform: uppercase; border-right: 1px solid #a7f3d0; display: flex; align-items: center;">
+                                M-Pesa Receipt</div>
+                            <div id="summary-mpesa" class="summary-item-value highlight-green"
+                                style="flex: 1.3; padding: 12px 16px; font-size: 0.88rem; font-weight: 800; color: var(--primary-hover); font-family: monospace; display: flex; align-items: center;">
+                                RQYWGUUERT</div>
+                        </div>
+
+                        <!-- Row 6: Disbursement Line -->
+                        <div class="summary-row-item" style="display: flex; background: var(--white);">
+                            <div class="summary-item-label"
+                                style="flex: 1; padding: 12px 16px; font-size: 0.72rem; font-weight: 700; color: #64748b; text-transform: uppercase; border-right: 1px solid #f1f5f9; display: flex; align-items: center;">
+                                Disbursement Line</div>
+                            <div id="summary-phone" class="summary-item-value"
+                                style="flex: 1.3; padding: 12px 16px; font-size: 0.85rem; font-weight: 700; color: var(--dark); font-family: monospace; display: flex; align-items: center;">
+                                0758777554</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Guidance & Review Window Notice -->
+                <div class="info-card animate-slide-up delay-3">
+                    <i class="fa-solid fa-circle-info"></i>
+                    <p>
+                        Disbursements are processed automatically upon admin queue sign-off (typically within <strong>24
+                            to 48 hours</strong>). You will receive an SMS confirmation once M-Pesa transfer completes.
+                    </p>
+                </div>
+
+                <!-- Actions Button Stack -->
+                <div class="action-stack animate-slide-up delay-4">
+                    <button type="button" id="btn-refresh" class="btn-secondary">
+                        <i class="fa-solid fa-rotate-right"></i>
+                        <span>Check Updated Queue Status</span>
+                    </button>
+
+                    <button type="button" id="btn-print" class="btn-tertiary">
+                        <i class="fa-solid fa-print"></i>
+                        <span>Download/Print Application Receipt</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer
+        style="background: #0f172a; color: #64748b; padding: 32px 24px 24px; border-top: 1px solid #1e293b; text-align: left; font-size: 0.68rem; font-weight: 400; font-family: 'Outfit', sans-serif;">
+        <div style="max-width: 480px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px;">
+
+            <!-- Two Columns Section -->
+            <div
+                style="display: grid; grid-template-cols: 1fr 1fr; gap: 20px; border-bottom: 1px solid #1e293b; padding-bottom: 20px;">
+                <!-- Column 1: Government Affiliated Funds -->
+                <div>
+                    <h4
+                        style="color: #94a3b8; font-weight: 600; font-size: 0.7rem; letter-spacing: 0.5px; margin-bottom: 8px; display: flex; align-items: center; gap: 4px;">
+                        <i class="fa-solid fa-building" style="opacity: 0.8;"></i> National Loan Funds
+                    </h4>
+                    <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 5px;">
+                        <li><a href="https://www.hustlerfund.go.ke" target="_blank"
+                                style="color: #64748b; text-decoration: none; font-weight: 400; transition: color 0.2s;"
+                                onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='#64748b'">•
+                                Hustler Fund API Gateway</a></li>
+                        <li><a href="https://www.youthfund.go.ke" target="_blank"
+                                style="color: #64748b; text-decoration: none; font-weight: 400; transition: color 0.2s;"
+                                onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='#64748b'">•
+                                Youth Enterprise Fund</a></li>
+                        <li><a href="https://wef.co.ke" target="_blank"
+                                style="color: #64748b; text-decoration: none; font-weight: 400; transition: color 0.2s;"
+                                onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='#64748b'">•
+                                Women Enterprise Fund</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 2: Legal Regulations -->
+                <div>
+                    <h4
+                        style="color: #94a3b8; font-weight: 600; font-size: 0.7rem; letter-spacing: 0.5px; margin-bottom: 8px; display: flex; align-items: center; gap: 4px;">
+                        <i class="fa-solid fa-scale-balanced" style="opacity: 0.8;"></i> State Regulation
+                    </h4>
+                    <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 5px;">
+                        <li><a href="https://www.centralbank.go.ke" target="_blank"
+                                style="color: #64748b; text-decoration: none; font-weight: 400; transition: color 0.2s;"
+                                onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='#64748b'">•
+                                CBK Act (Cap 491) Standard</a></li>
+                        <li><a href="https://www.odpc.go.ke" target="_blank"
+                                style="color: #64748b; text-decoration: none; font-weight: 400; transition: color 0.2s;"
+                                onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='#64748b'">•
+                                Data Protection Act 2019</a></li>
+                        <li><a href="https://www.centralbank.go.ke/crb/" target="_blank"
+                                style="color: #64748b; text-decoration: none; font-weight: 400; transition: color 0.2s;"
+                                onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='#64748b'">•
+                                CRB Registry Guidelines</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Bottom Copyright & Sponsor Info -->
+            <div
+                style="text-align: center; font-size: 0.65rem; color: #475569; display: flex; flex-direction: column; gap: 4px;">
+                <p>&copy; 2026 PesaQuick Loans Kenya. All rights reserved.</p>
+                <p style="color: #64748b; font-weight: 500; opacity: 0.85;">
+                    Managed by Jasper Markets and Loan Insurers
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Check if session data is missing and populate defaults if so (enables direct previewing)
+            if (!sessionStorage.getItem('app_id') || !sessionStorage.getItem('mpesa_code')) {
+                sessionStorage.setItem('app_id', 'APP-2026-98102');
+                sessionStorage.setItem('mpesa_code', 'RQYWGUUERT');
+                sessionStorage.setItem('user_phone', '0758777554');
+                sessionStorage.setItem('selected_principal', '4500');
+                sessionStorage.setItem('total_repayable', '4950');
+                sessionStorage.setItem('applicant_name', 'uhioihl');
+                sessionStorage.setItem('applicant_id', '23334555');
+                sessionStorage.setItem('submitted_at', new Date().toISOString());
+            }
+
+            // Retrieve session data
+            const appId = sessionStorage.getItem('app_id');
+            const mpesaCode = sessionStorage.getItem('mpesa_code');
+            const userPhone = sessionStorage.getItem('user_phone');
+            const selectedPrincipal = sessionStorage.getItem('selected_principal');
+            const totalRepayable = sessionStorage.getItem('total_repayable');
+            const applicantName = sessionStorage.getItem('applicant_name');
+            const applicantId = sessionStorage.getItem('applicant_id');
+            const submittedAt = sessionStorage.getItem('submitted_at');
+
+            // Populate UI Fields
+            document.getElementById('app-id-display').textContent = appId;
+            document.getElementById('summary-name').textContent = applicantName || 'N/A';
+            document.getElementById('summary-id').textContent = applicantId || 'N/A';
+
+            // Robust parsing for formatted numeric values
+            const parsedPrincipal = parseInt(String(selectedPrincipal).replace(/[^0-9]/g, '')) || 0;
+            const parsedTotal = parseInt(String(totalRepayable).replace(/[^0-9]/g, '')) || 0;
+
+            document.getElementById('summary-principal').textContent = `Ksh. ${parsedPrincipal.toLocaleString()}`;
+            document.getElementById('summary-total').textContent = `Ksh. ${parsedTotal.toLocaleString()}`;
+            document.getElementById('summary-mpesa').textContent = mpesaCode;
+            document.getElementById('summary-phone').textContent = userPhone;
+
+            if (submittedAt) {
+                const dateObj = new Date(submittedAt);
+                document.getElementById('submit-time-display').textContent = dateObj.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            }
+
+            // Status Refresh Animation
+            const btnRefresh = document.getElementById('btn-refresh');
+            btnRefresh.addEventListener('click', () => {
+                const icon = btnRefresh.querySelector('i');
+                icon.classList.add('fa-spin');
+                btnRefresh.disabled = true;
+
+                setTimeout(() => {
+                    icon.classList.remove('fa-spin');
+                    btnRefresh.disabled = false;
+                    alert('Queue Status: Application is currently at Position #4 in the admin review queue. Check back shortly!');
+                }, 1200);
+            });
+
+            // Print Receipt Action
+            document.getElementById('btn-print').addEventListener('click', () => {
+                window.print();
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application & Fee Checkout | PesaQuick</title>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom Style Sheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Animated Mesh Background & Glowing Orbs -->
+    <div class="bg-mesh"></div>
+    <div class="floating-orbs-container">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+        <div class="comet comet-1"></div>
+        <div class="comet comet-2"></div>
+        <div class="comet comet-3"></div>
+    </div>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="header-container">
+            <div class="logo-section">
+                <i class="fa-solid fa-bolt-lightning"></i>
+                <span>PesaQuick Loans</span>
+            </div>
+            <span class="step-badge">
+                Step 3 of 4
+            </span>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main>
+        <div class="card-container">
+
+            <!-- Banner Header -->
+            <div class="hero-image-box"
+                style="aspect-ratio: 16 / 6; background: linear-gradient(135deg, var(--dark) 0%, #1e293b 100%);">
+                <div class="hero-overlay" style="align-items: flex-start; text-align: left; padding: 20px;">
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; width: 100%; margin-bottom: 6px;">
+                        <span
+                            style="font-size: 0.65rem; font-weight: 800; text-transform: uppercase; color: var(--accent); letter-spacing: 1px;">Application
+                            Form</span>
+                        <span style="font-size: 0.72rem; color: #94a3b8; font-weight: 600;">Allocated: <strong
+                                style="color: var(--white);">Ksh. <span id="summary-principal">0</span></strong></span>
+                    </div>
+                    <h1 class="hero-title" style="font-size: 1.3rem;">Complete KYC & APPLY</h1>
+                    <p class="hero-subtitle" style="font-size: 0.75rem; color: #94a3b8; margin-top: 2px;">Provide
+                        accurate details to finalize your queue submission.</p>
+                </div>
+            </div>
+
+            <!-- Card Content Body -->
+            <div class="card-content">
+
+                <!-- KYC Details Form -->
+                <form id="kyc-form">
+
+                    <!-- Full Legal Name -->
+                    <div class="form-group animate-slide-up delay-1">
+                        <label for="full-name" class="form-label">Full Name (As shown on ID)</label>
+                        <div class="input-wrapper">
+                            <span class="input-icon"><i class="fa-solid fa-user"></i></span>
+                            <input type="text" id="full-name" placeholder="e.g. John Kamau Njoroge" class="form-input"
+                                required>
+                        </div>
+                    </div>
+
+                    <!-- National ID & DOB Row -->
+                    <div class="grid-cols-2 form-group animate-slide-up delay-2">
+                        <div>
+                            <label for="id-number" class="form-label">National ID No.</label>
+                            <div class="input-wrapper">
+                                <span class="input-icon"><i class="fa-solid fa-id-card"></i></span>
+                                <input type="number" id="id-number" placeholder="8-digit ID" class="form-input"
+                                    min="10000000" max="99999999" style="padding-left: 38px;" required>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="dob" class="form-label">Date of Birth</label>
+                            <input type="date" id="dob" class="form-input" style="padding-left: 14px;" required>
+                        </div>
+                    </div>
+
+                    <!-- County Dropdown & Employment -->
+                    <div class="grid-cols-2 form-group animate-slide-up delay-3">
+                        <div>
+                            <label for="county" class="form-label">Residence County</label>
+                            <select id="county" class="form-select" required>
+                                <option value="" disabled selected>Select</option>
+                                <option value="Nairobi">Nairobi</option>
+                                <option value="Mombasa">Mombasa</option>
+                                <option value="Kisumu">Kisumu</option>
+                                <option value="Nakuru">Nakuru</option>
+                                <option value="Kiambu">Kiambu</option>
+                                <option value="Bungoma">Bungoma</option>
+                                <option value="Homa Bay">Homa Bay</option>
+                                <option value="Uasin Gishu">Uasin Gishu</option>
+                                <option value="Other">Other County</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="employment" class="form-label">Employment</label>
+                            <select id="employment" class="form-select" required>
+                                <option value="" disabled selected>Select</option>
+                                <option value="Self-Employed">Self-Employed</option>
+                                <option value="Salaried">Salaried</option>
+                                <option value="Casual Worker">Casual Worker</option>
+                                <option value="Student">Student</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Next of Kin Alternative Contact -->
+                    <div class="form-group animate-slide-up delay-4">
+                        <label for="alt-phone" class="form-label">Next of Kin Contact Number</label>
+                        <div class="input-wrapper">
+                            <span class="input-icon"><i class="fa-solid fa-users"></i></span>
+                            <input type="tel" id="alt-phone" placeholder="07XXXXXXXX or 01XXXXXXXX" class="form-input"
+                                required>
+                        </div>
+                    </div>
+
+                    <!-- Blue Splash Summary Section -->
+                    <div class="blue-splash-card animate-slide-up delay-5" style="margin-bottom: 20px;">
+                        <span
+                            style="font-size: 0.72rem; font-weight: 800; color: var(--accent); text-transform: uppercase; letter-spacing: 1.5px; display: block; margin-bottom: 6px;">Allocated
+                            Loan Amount</span>
+                        <h2 class="blue-splash-text" style="font-size: 2.5rem; margin: 0;">
+                            Ksh. <span id="summary-principal-splash">0</span>
+                        </h2>
+                        <span
+                            style="font-size: 0.68rem; color: #eff6ff; display: block; margin-top: 6px; font-weight: 600;">Secured
+                            & Protected by Loan Insurers</span>
+                    </div>
+
+                    <!-- M-Pesa Payment Method Selection -->
+                    <div class="form-group animate-slide-up delay-6" style="margin-top: 24px; margin-bottom: 16px;">
+                        <label class="form-label">Choose Payment Method</label>
+                        <div class="payment-method-selector" style="display: flex; gap: 12px; margin-top: 6px;">
+                            <button type="button" id="pay-method-stk" class="method-tab active"
+                                style="flex: 1; padding: 12px; border-radius: var(--border-radius-md); border: 2px solid var(--primary); background: rgba(16, 185, 129, 0.05); cursor: pointer; text-align: center; transition: all 0.2s ease; display: flex; flex-direction: column; align-items: center; gap: 4px; outline: none;">
+                                <i class="fa-solid fa-mobile-screen-button"
+                                    style="font-size: 1.25rem; color: var(--primary);"></i>
+                                <span
+                                    style="font-weight: 700; font-size: 0.78rem; color: var(--dark); display: block;">M-Pesa
+                                    STK Push</span>
+                                <span style="font-size: 0.62rem; color: #64748b; font-weight: 500;">Instant request to
+                                    phone</span>
+                            </button>
+                            <button type="button" id="pay-method-paybill" class="method-tab"
+                                style="flex: 1; padding: 12px; border-radius: var(--border-radius-md); border: 2px solid #e2e8f0; background: var(--white); cursor: pointer; text-align: center; transition: all 0.2s ease; display: flex; flex-direction: column; align-items: center; gap: 4px; outline: none;">
+                                <i class="fa-solid fa-building-columns" style="font-size: 1.25rem; color: #64748b;"></i>
+                                <span
+                                    style="font-weight: 700; font-size: 0.78rem; color: var(--dark); display: block;">M-Pesa
+                                    Paybill</span>
+                                <span style="font-size: 0.62rem; color: #64748b; font-weight: 500;">Manual Paybill
+                                    payment</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- M-Pesa Fee Checkout Card -->
+                    <div class="payment-card animate-slide-up delay-7" id="payment-card-container">
+                        <div class="payment-card-header">
+                            <div>
+                                <h4 class="payment-title">Facilitation Fee</h4>
+                                <p class="payment-subtitle">Account setup & CRB check</p>
+                            </div>
+                            <div class="payment-amount">Ksh. 85.00</div>
+                        </div>
+
+                        <!-- STK Option Panel -->
+                        <div id="stk-checkout-container">
+                            <div class="form-group" style="margin-bottom: 0;">
+                                <label for="mpesa-phone" class="form-label" style="color: #065f46; font-size: 0.65rem;">
+                                    M-Pesa Payment Phone Line
+                                </label>
+                                <div class="input-wrapper">
+                                    <span class="input-icon" style="color: #059669;"><i
+                                            class="fa-solid fa-mobile-screen"></i></span>
+                                    <input type="tel" id="mpesa-phone" class="form-input"
+                                        style="border-color: #a7f3d0; background: var(--white); color: #065f46; padding-left: 42px;"
+                                        required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Paybill Option Panel -->
+                        <div id="paybill-checkout-container" style="display: none;">
+                            <div
+                                style="background: rgba(4, 120, 87, 0.05); border: 1px dashed rgba(4, 120, 87, 0.25); border-radius: var(--border-radius-md); padding: 12px; font-size: 0.72rem; color: #065f46; line-height: 1.5; margin-bottom: 12px;">
+                                <div
+                                    style="display: flex; justify-content: space-between; margin-bottom: 4px; border-bottom: 1px solid rgba(4, 120, 87, 0.1); padding-bottom: 4px;">
+                                    <span>1. Paybill Business No.</span>
+                                    <strong style="font-family: monospace; font-size: 0.8rem;">522533</strong>
+                                </div>
+                                <div
+                                    style="display: flex; justify-content: space-between; margin-bottom: 4px; border-bottom: 1px solid rgba(4, 120, 87, 0.1); padding-bottom: 4px;">
+                                    <span>2. Account No.</span>
+                                    <strong style="font-family: monospace; font-size: 0.8rem;">8106675</strong>
+                                </div>
+                                <div style="display: flex; justify-content: space-between;">
+                                    <span>3. Business Name</span>
+                                    <strong style="font-size: 0.75rem;">JASPER MARKETS</strong>
+                                </div>
+                            </div>
+
+                            <div class="form-group" style="margin-bottom: 0;">
+                                <label for="paybill-mpesa-code" class="form-label"
+                                    style="color: #065f46; font-size: 0.65rem;">
+                                    M-Pesa Transaction Code
+                                </label>
+                                <div class="input-wrapper">
+                                    <span class="input-icon" style="color: #059669;"><i
+                                            class="fa-solid fa-receipt"></i></span>
+                                    <input type="text" id="paybill-mpesa-code" placeholder="e.g. QK88102938"
+                                        class="form-input"
+                                        style="border-color: #a7f3d0; background: var(--white); color: #065f46; padding-left: 42px; text-transform: uppercase;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Submit & Pay CTA -->
+                    <button type="submit" id="btn-pay-submit" class="btn-primary btn-emerald animate-slide-up delay-8"
+                        style="margin-top: 10px;">
+                        <i class="fa-solid fa-mobile-screen-button" id="btn-submit-icon"></i>
+                        <span id="btn-submit-text">Pay Ksh. 85 & Submit Application</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <!-- STK Push Waiting Modal -->
+    <div id="stk-modal" class="modal-backdrop">
+        <div class="modal-card" style="text-align: center;">
+
+            <!-- Animated Spinner -->
+            <div class="spinner-container">
+                <div class="spinner"></div>
+                <div class="spinner-icon">
+                    <i class="fa-solid fa-mobile-screen-button"></i>
+                </div>
+            </div>
+
+            <div style="margin-bottom: 16px;">
+                <h3 class="heading-font" style="font-size: 1.15rem; color: var(--dark); margin-bottom: 6px;">M-Pesa STK
+                    Push Sent!</h3>
+                <p style="font-size: 0.78rem; color: #64748b; line-height: 1.5; padding: 0 8px;">
+                    Check your mobile handset and enter your <strong>M-Pesa PIN</strong> to complete the Ksh. 85 fee
+                    transaction.
+                </p>
+            </div>
+
+            <!-- Countdown Timer Box -->
+            <div class="countdown-box">
+                <span class="countdown-label">Waiting for M-Pesa Callback</span>
+                <span id="stk-timer" class="countdown-timer">00:15</span>
+            </div>
+
+            <p style="font-size: 0.68rem; color: #94a3b8;">Do not close or refresh this page while payment processes.
+            </p>
+        </div>
+    </div>
+
+    <!-- Paybill Code Verification Modal -->
+    <div id="verify-modal" class="modal-backdrop">
+        <div class="modal-card" style="text-align: center;">
+
+            <!-- Animated Blue Spinner -->
+            <div class="spinner-container">
+                <div class="spinner" style="border-color: #eff6ff; border-top-color: var(--secondary);"></div>
+                <div class="spinner-icon">
+                    <i class="fa-solid fa-shield-halved" style="color: var(--secondary);"></i>
+                </div>
+            </div>
+
+            <div style="margin-bottom: 16px;">
+                <h3 class="heading-font" style="font-size: 1.15rem; color: var(--dark); margin-bottom: 6px;">Verifying
+                    Transaction...</h3>
+                <p style="font-size: 0.78rem; color: #64748b; line-height: 1.5; padding: 0 8px;">
+                    We are verifying the M-Pesa Transaction code <strong id="verifying-code-display"
+                        style="color: var(--secondary-hover);"></strong> against the JASPER MARKETS ledger. This will
+                    take a moment.
+                </p>
+            </div>
+
+            <!-- Countdown Timer Box -->
+            <div class="countdown-box">
+                <span class="countdown-label">Reconciling with M-Pesa API</span>
+                <span id="verify-timer" class="countdown-timer">00:05</span>
+            </div>
+
+            <p style="font-size: 0.68rem; color: #94a3b8;">Do not close or refresh this page while verification
+                processes.</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer
+        style="background: #0f172a; color: #64748b; padding: 32px 24px 24px; border-top: 1px solid #1e293b; text-align: left; font-size: 0.68rem; font-weight: 400; font-family: 'Outfit', sans-serif;">
+        <div style="max-width: 480px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px;">
+
+            <!-- Two Columns Section -->
+            <div
+                style="display: grid; grid-template-cols: 1fr 1fr; gap: 20px; border-bottom: 1px solid #1e293b; padding-bottom: 20px;">
+                <!-- Column 1: Government Affiliated Funds -->
+                <div>
+                    <h4
+                        style="color: #94a3b8; font-weight: 600; font-size: 0.7rem; letter-spacing: 0.5px; margin-bottom: 8px; display: flex; align-items: center; gap: 4px;">
+                        <i class="fa-solid fa-building" style="opacity: 0.8;"></i> National Loan Funds
+                    </h4>
+                    <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 5px;">
+                        <li><a href="https://www.hustlerfund.go.ke" target="_blank"
+                                style="color: #64748b; text-decoration: none; font-weight: 400; transition: color 0.2s;"
+                                onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='#64748b'">•
+                                Hustler Fund API Gateway</a></li>
+                        <li><a href="https://www.youthfund.go.ke" target="_blank"
+                                style="color: #64748b; text-decoration: none; font-weight: 400; transition: color 0.2s;"
+                                onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='#64748b'">•
+                                Youth Enterprise Fund</a></li>
+                        <li><a href="https://wef.co.ke" target="_blank"
+                                style="color: #64748b; text-decoration: none; font-weight: 400; transition: color 0.2s;"
+                                onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='#64748b'">•
+                                Women Enterprise Fund</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 2: Legal Regulations -->
+                <div>
+                    <h4
+                        style="color: #94a3b8; font-weight: 600; font-size: 0.7rem; letter-spacing: 0.5px; margin-bottom: 8px; display: flex; align-items: center; gap: 4px;">
+                        <i class="fa-solid fa-scale-balanced" style="opacity: 0.8;"></i> State Regulation
+                    </h4>
+                    <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 5px;">
+                        <li><a href="https://www.centralbank.go.ke" target="_blank"
+                                style="color: #64748b; text-decoration: none; font-weight: 400; transition: color 0.2s;"
+                                onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='#64748b'">•
+                                CBK Act (Cap 491) Standard</a></li>
+                        <li><a href="https://www.odpc.go.ke" target="_blank"
+                                style="color: #64748b; text-decoration: none; font-weight: 400; transition: color 0.2s;"
+                                onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='#64748b'">•
+                                Data Protection Act 2019</a></li>
+                        <li><a href="https://www.centralbank.go.ke/crb/" target="_blank"
+                                style="color: #64748b; text-decoration: none; font-weight: 400; transition: color 0.2s;"
+                                onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='#64748b'">•
+                                CRB Registry Guidelines</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Bottom Copyright & Sponsor Info -->
+            <div
+                style="text-align: center; font-size: 0.65rem; color: #475569; display: flex; flex-direction: column; gap: 4px;">
+                <p>&copy; 2026 PesaQuick Loans Kenya. All rights reserved.</p>
+                <p style="color: #64748b; font-weight: 500; opacity: 0.85;">
+                    Managed by Jasper Markets and Loan Insurers
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Retrieve session parameters
+            const userPhone = sessionStorage.getItem('user_phone');
+            const selectedPrincipal = sessionStorage.getItem('selected_principal');
+
+            if (!userPhone || !selectedPrincipal) {
+                window.location.href = 'index.html';
+                return;
+            }
+
+            // Populate static UI elements
+            document.getElementById('summary-principal').textContent = parseInt(selectedPrincipal).toLocaleString();
+            document.getElementById('summary-principal-splash').textContent = parseInt(selectedPrincipal).toLocaleString();
+            const mpesaPhoneInput = document.getElementById('mpesa-phone');
+            mpesaPhoneInput.value = userPhone; // Auto-prefill verified phone line
+
+            // Prefill registered KYC details from simulated Safaricom database based on user phone
+            function getMockRegistrationData(phone) {
+                const digits = phone.replace(/\D/g, '');
+                const lastDigit = parseInt(digits.slice(-1)) || 0;
+                
+                const mockUsers = [
+                    { name: 'Joseph Kamau Kuria', id: '28492011', dob: '1988-05-14', county: 'Nairobi', employment: 'Self-Employed' },
+                    { name: 'Grace Wanjiku Mwangi', id: '31928374', dob: '1992-10-22', county: 'Kiambu', employment: 'Salaried' },
+                    { name: 'David Ochieng Onyango', id: '25481920', dob: '1985-03-08', county: 'Kisumu', employment: 'Salaried' },
+                    { name: 'Mercy Chepngetich Koech', id: '34901293', dob: '1995-12-15', county: 'Nakuru', employment: 'Self-Employed' },
+                    { name: 'Peter Kiprop Chemutai', id: '30293847', dob: '1990-07-30', county: 'Uasin Gishu', employment: 'Self-Employed' },
+                    { name: 'Fatuma Hassan Ibrahim', id: '27492019', dob: '1987-02-18', county: 'Mombasa', employment: 'Salaried' },
+                    { name: 'Daniel Mutua Musyoka', id: '29384712', dob: '1989-11-05', county: 'Machakos', employment: 'Student' },
+                    { name: 'Alice Nyambura Kamau', id: '33481920', dob: '1994-08-12', county: 'Nyeri', employment: 'Self-Employed' },
+                    { name: 'John Kipkemboi Rono', id: '26473829', dob: '1986-04-25', county: 'Kericho', employment: 'Salaried' },
+                    { name: 'Sarah Wambui Kimani', id: '32104928', dob: '1993-09-03', county: 'Murang\'a', employment: 'Salaried' }
+                ];
+                return mockUsers[lastDigit % mockUsers.length];
+            }
+
+            const regData = getMockRegistrationData(userPhone);
+            const fullNameInput = document.getElementById('full-name');
+            const idNumberInput = document.getElementById('id-number');
+            const dobInput = document.getElementById('dob');
+            const countySelect = document.getElementById('county');
+            const employmentSelect = document.getElementById('employment');
+
+            // Auto pre-fill the form with Safaricom registered details
+            if (fullNameInput) fullNameInput.value = regData.name;
+            if (idNumberInput) idNumberInput.value = regData.id;
+            if (dobInput) dobInput.value = regData.dob;
+            if (countySelect) countySelect.value = regData.county;
+            if (employmentSelect) employmentSelect.value = regData.employment;
+
+            // DOM Elements
+            const kycForm = document.getElementById('kyc-form');
+            const stkModal = document.getElementById('stk-modal');
+            const stkTimer = document.getElementById('stk-timer');
+
+            // Payment method selector DOM Elements
+            const btnMethodStk = document.getElementById('pay-method-stk');
+            const btnMethodPaybill = document.getElementById('pay-method-paybill');
+            const stkContainer = document.getElementById('stk-checkout-container');
+            const paybillContainer = document.getElementById('paybill-checkout-container');
+            const paybillCodeInput = document.getElementById('paybill-mpesa-code');
+            const btnSubmitIcon = document.getElementById('btn-submit-icon');
+            const btnSubmitText = document.getElementById('btn-submit-text');
+
+            const verifyModal = document.getElementById('verify-modal');
+            const verifyTimer = document.getElementById('verify-timer');
+            const verifyingCodeDisplay = document.getElementById('verifying-code-display');
+
+            let selectedMethod = 'STK'; // default STK
+
+            // Handle Tab Switches
+            btnMethodStk.addEventListener('click', () => {
+                selectedMethod = 'STK';
+                btnMethodStk.classList.add('active');
+                btnMethodStk.style.borderColor = 'var(--primary)';
+                btnMethodStk.style.background = 'rgba(16, 185, 129, 0.05)';
+                btnMethodStk.querySelector('i').style.color = 'var(--primary)';
+
+                btnMethodPaybill.classList.remove('active');
+                btnMethodPaybill.style.borderColor = '#e2e8f0';
+                btnMethodPaybill.style.background = 'var(--white)';
+                btnMethodPaybill.querySelector('i').style.color = '#64748b';
+
+                stkContainer.style.display = 'block';
+                paybillContainer.style.display = 'none';
+                mpesaPhoneInput.required = true;
+                paybillCodeInput.required = false;
+
+                btnSubmitIcon.className = 'fa-solid fa-mobile-screen-button';
+                btnSubmitText.textContent = 'Pay Ksh. 85 & Submit Application';
+            });
+
+            btnMethodPaybill.addEventListener('click', () => {
+                selectedMethod = 'PAYBILL';
+                btnMethodPaybill.classList.add('active');
+                btnMethodPaybill.style.borderColor = 'var(--primary)';
+                btnMethodPaybill.style.background = 'rgba(16, 185, 129, 0.05)';
+                btnMethodPaybill.querySelector('i').style.color = 'var(--primary)';
+
+                btnMethodStk.classList.remove('active');
+                btnMethodStk.style.borderColor = '#e2e8f0';
+                btnMethodStk.style.background = 'var(--white)';
+                btnMethodStk.querySelector('i').style.color = '#64748b';
+
+                stkContainer.style.display = 'none';
+                paybillContainer.style.display = 'block';
+                mpesaPhoneInput.required = false;
+                paybillCodeInput.required = true;
+
+                btnSubmitIcon.className = 'fa-solid fa-receipt';
+                btnSubmitText.textContent = 'Verify Code & Submit Application';
+            });
+
+            // Form Submit & STK/Paybill Simulation Handler
+            kycForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+
+                const nameVal = fullNameInput.value.trim();
+                const idVal = idNumberInput.value.trim();
+                const dobVal = dobInput.value;
+                const altPhoneVal = document.getElementById('alt-phone').value.trim();
+
+                // 1. Full Name Validation (At least two names, letters only)
+                if (!/^[a-zA-Z]{2,}(?:\s+[a-zA-Z]{2,})+$/.test(nameVal)) {
+                    alert('Please enter your full legal name (at least two names, letters and spaces only).');
+                    return;
+                }
+
+                // 2. ID Number Validation (Exactly 8 digits)
+                if (!/^\d{8}$/.test(idVal)) {
+                    alert('Please enter a valid 8-digit National ID number.');
+                    return;
+                }
+
+                // 3. Date of Birth Validation (Age must be between 18 and 65 years)
+                const birthDate = new Date(dobVal);
+                const today = new Date();
+                let age = today.getFullYear() - birthDate.getFullYear();
+                const monthDiff = today.getMonth() - birthDate.getMonth();
+                if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+                    age--;
+                }
+                if (age < 18 || age > 65) {
+                    alert('Applicant must be between 18 and 65 years of age.');
+                    return;
+                }
+
+                // 4. Next of Kin Number Validation (Valid phone prefix and distinct from primary)
+                const kenyanPhoneRegex = /^(?:254|\+254|0)?(7[0-9]|1[0-9])[0-9]{7}$/;
+                if (!kenyanPhoneRegex.test(altPhoneVal)) {
+                    alert('Please enter a valid Kenyan contact number for your Next of Kin (e.g. 07XXXXXXXX).');
+                    return;
+                }
+                if (altPhoneVal.replace(/\D/g, '').slice(-9) === userPhone.replace(/\D/g, '').slice(-9)) {
+                    alert('Next of Kin contact number cannot be the same as your primary disbursement line.');
+                    return;
+                }
+
+                // Save KYC details in session storage
+                sessionStorage.setItem('applicant_name', nameVal);
+                sessionStorage.setItem('applicant_id', idVal);
+                sessionStorage.setItem('applicant_county', countySelect.value);
+                sessionStorage.setItem('applicant_employment', employmentSelect.value);
+                sessionStorage.setItem('applicant_alt_phone', altPhoneVal);
+                sessionStorage.setItem('payment_phone', mpesaPhoneInput.value.trim());
+                sessionStorage.setItem('payment_method', selectedMethod);
+
+                const randomAppId = 'APP-2026-' + Math.floor(10000 + Math.random() * 90000);
+
+                if (selectedMethod === 'STK') {
+                    // Show STK push modal with active transition class
+                    stkModal.classList.add('active');
+
+                    // Simulate STK Countdown Timer (15 seconds simulated verification)
+                    let timeLeft = 15;
+                    stkTimer.textContent = `00:${timeLeft < 10 ? '0' : ''}${timeLeft}`;
+
+                    const countdown = setInterval(() => {
+                        timeLeft--;
+                        stkTimer.textContent = `00:${timeLeft < 10 ? '0' : ''}${timeLeft}`;
+
+                        if (timeLeft <= 0) {
+                            clearInterval(countdown);
+
+                            // Generate mock M-Pesa Code
+                            const randomMpesaCode = 'QK' + Math.floor(10000000 + Math.random() * 90000000);
+
+                            sessionStorage.setItem('app_id', randomAppId);
+                            sessionStorage.setItem('mpesa_code', randomMpesaCode);
+                            sessionStorage.setItem('submitted_at', new Date().toISOString());
+
+                            // Redirect to status page
+                            window.location.href = 'status.html';
+                        }
+                    }, 1000);
+                } else {
+                    // Paybill method chosen
+                    const enteredCode = paybillCodeInput.value.trim().toUpperCase();
+
+                    // Simple check for M-Pesa transaction code format
+                    const mpesaRegex = /^[A-Z0-9]{10}$/;
+                    if (!mpesaRegex.test(enteredCode)) {
+                        alert('Please enter a valid 10-character M-Pesa Transaction Code (e.g. QK88102938).');
+                        return;
+                    }
+
+                    // Show verification modal
+                    verifyingCodeDisplay.textContent = enteredCode;
+                    verifyModal.classList.add('active');
+
+                    let timeLeft = 5;
+                    verifyTimer.textContent = `00:0${timeLeft}`;
+
+                    const countdown = setInterval(() => {
+                        timeLeft--;
+                        verifyTimer.textContent = `00:0${timeLeft}`;
+
+                        if (timeLeft <= 0) {
+                            clearInterval(countdown);
+
+                            sessionStorage.setItem('app_id', randomAppId);
+                            sessionStorage.setItem('mpesa_code', enteredCode);
+                            sessionStorage.setItem('submitted_at', new Date().toISOString());
+
+                            // Redirect to status page
+                            window.location.href = 'status.html';
+                        }
+                    }, 1000);
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

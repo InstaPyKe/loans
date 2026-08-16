@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Allocation Result | PesaQuick</title>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Animated Mesh Background & Glowing Orbs -->
+    <div class="bg-mesh"></div>
+    <div class="floating-orbs-container">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+        <div class="comet comet-1"></div>
+        <div class="comet comet-2"></div>
+        <div class="comet comet-3"></div>
+    </div>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="header-container">
+            <div class="logo-section">
+                <i class="fa-solid fa-bolt-lightning"></i>
+                <span>PesaQuick Loans</span>
+            </div>
+            <span class="step-badge">
+                Step 2 of 4
+            </span>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main>
+        <div class="card-container">
+            
+            <!-- Banner Header -->
+            <div class="hero-image-box" style="aspect-ratio: 16 / 7; background: linear-gradient(135deg, var(--primary) 0%, var(--primary-hover) 100%);">
+                <div class="hero-overlay" style="background: transparent;">
+                    <div style="width: 52px; height: 52px; background: rgba(255, 255, 255, 0.2); border-radius: 50%; display: grid; place-content: center; margin: 0 auto 12px; font-size: 1.5rem; color: var(--white); backdrop-filter: blur(4px);">
+                        <i class="fa-solid fa-circle-check"></i>
+                    </div>
+                    <h1 class="hero-title" style="font-size: 1.4rem;">Line Verified & Allocated!</h1>
+                    <p id="display-phone" style="font-family: monospace; font-size: 0.8rem; color: rgba(255,255,255,0.85); font-weight: 600; margin-top: 4px;">07XXXXXXXX</p>
+                </div>
+            </div>
+
+            <!-- Card Content Body -->
+            <div class="card-content">
+                
+                <!-- Max Allocation Display with Blue Splash -->
+                <div class="blue-splash-card animate-slide-up delay-1">
+                    <span style="font-size: 0.72rem; font-weight: 800; color: var(--accent); text-transform: uppercase; letter-spacing: 1.5px; display: block; margin-bottom: 6px;">Maximum Approved Limit</span>
+                    <h2 class="blue-splash-text" style="font-size: 2.5rem; margin: 0;">
+                        Ksh. <span id="max-allocation">0</span>
+                    </h2>
+                    <span style="font-size: 0.68rem; color: #eff6ff; display: block; margin-top: 6px; font-weight: 600;">Pre-Approved & Safely Reserved</span>
+                </div>
+
+                <!-- Interactive Range Slider Box -->
+                <div class="slider-container animate-slide-up delay-2">
+                    <div class="slider-label-row">
+                        <span>Select Loan Amount</span>
+                        <span class="selected-amount-badge">Ksh. <span id="selected-amount">0</span></span>
+                    </div>
+
+                    <input 
+                        type="range" 
+                        id="loan-slider" 
+                        min="500" 
+                        max="5000" 
+                        step="250" 
+                        class="slider-input"
+                    >
+
+                    <div class="slider-limits">
+                        <span>Min: Ksh. 500</span>
+                        <span>Max: Ksh. <span id="slider-max-label">5,000</span></span>
+                    </div>
+                </div>
+
+                <!-- Financial Calculation Breakdown Card -->
+                <div class="breakdown-card animate-slide-up delay-3" style="background: var(--dark); border: 1px solid #334155; border-radius: var(--border-radius-lg); padding: 20px; box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.3);">
+                    <div class="breakdown-title" style="font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: #94a3b8; border-bottom: 1px solid #334155; padding-bottom: 10px; margin-bottom: 16px;">
+                        Loan Repayment Breakdown
+                    </div>
+                    
+                    <div class="breakdown-table" style="display: flex; flex-direction: column; border-radius: var(--border-radius-md); overflow: hidden; border: 1px solid #334155;">
+                        <!-- Row 1: Requested Principal -->
+                        <div style="display: flex; border-bottom: 1px solid #334155; background: rgba(255,255,255,0.02);">
+                            <div style="flex: 1.2; padding: 12px 16px; font-size: 0.78rem; color: #cbd5e1; border-right: 1px solid #334155; display: flex; align-items: center;">Requested Principal</div>
+                            <div style="flex: 1; padding: 12px 16px; font-size: 0.85rem; font-weight: 700; color: #ffffff; display: flex; align-items: center;">
+                                Ksh. <span id="breakdown-principal">0</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Row 2: Facilitation Fee -->
+                        <div style="display: flex; border-bottom: 1px solid #334155; background: rgba(251, 191, 36, 0.04);">
+                            <div style="flex: 1.2; padding: 12px 16px; font-size: 0.78rem; font-weight: 700; color: var(--accent); border-right: 1px solid #334155; display: flex; align-items: center;">Facilitation Fee (Payable Now)</div>
+                            <div style="flex: 1; padding: 12px 16px; font-size: 0.85rem; font-weight: 800; color: var(--accent); display: flex; align-items: center;">
+                                Ksh. 85
+                            </div>
+                        </div>
+
+                        <!-- Row 3: Interest Fee -->
+                        <div style="display: flex; border-bottom: 1px solid #334155; background: rgba(255,255,255,0.02);">
+                            <div style="flex: 1.2; padding: 12px 16px; font-size: 0.78rem; color: #cbd5e1; border-right: 1px solid #334155; display: flex; align-items: center;">Interest Fee (10% Flat)</div>
+                            <div style="flex: 1; padding: 12px 16px; font-size: 0.85rem; font-weight: 700; color: #ffffff; display: flex; align-items: center;">
+                                Ksh. <span id="breakdown-interest">0</span>
+                            </div>
+                        </div>
+
+                        <!-- Row 4: Total Repayable -->
+                        <div style="display: flex; background: rgba(52, 211, 153, 0.05);">
+                            <div style="flex: 1.2; padding: 14px 16px; font-size: 0.85rem; font-weight: 800; color: #34d399; border-right: 1px solid #334155; display: flex; align-items: center;">Total Repayable</div>
+                            <div style="flex: 1; padding: 14px 16px; font-size: 1.05rem; font-weight: 800; color: #34d399; display: flex; align-items: center;">
+                                Ksh. <span id="breakdown-total">0</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="breakdown-maturity-label" style="text-align: right; font-size: 0.68rem; color: #94a3b8; margin-top: 12px; display: flex; align-items: center; justify-content: flex-end; gap: 4px;">
+                        <i class="fa-solid fa-calendar-days" style="color: var(--accent);"></i> Repayment due in <strong>30 Days</strong>
+                    </div>
+                </div>
+
+                <!-- Submit Action -->
+                <button 
+                    type="button" 
+                    id="btn-proceed" 
+                    class="btn-primary animate-slide-up delay-4"
+                >
+                    <span>Proceed to Verification & Fee Checkout</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <!-- Footer -->
+    <footer style="background: #0f172a; color: #64748b; padding: 32px 24px 24px; border-top: 1px solid #1e293b; text-align: left; font-size: 0.68rem; font-weight: 400; font-family: 'Outfit', sans-serif;">
+        <div style="max-width: 480px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px;">
+            
+            <!-- Two Columns Section -->
+            <div style="display: grid; grid-template-cols: 1fr 1fr; gap: 20px; border-bottom: 1px solid #1e293b; padding-bottom: 20px;">
+                <!-- Column 1: Government Affiliated Funds -->
+                <div>
+                    <h4 style="color: #94a3b8; font-weight: 600; font-size: 0.7rem; letter-spacing: 0.5px; margin-bottom: 8px; display: flex; align-items: center; gap: 4px;">
+                        <i class="fa-solid fa-building" style="opacity: 0.8;"></i> National Loan Funds
+                    </h4>
+                    <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 5px;">
+                        <li><a href="https://www.hustlerfund.go.ke" target="_blank" style="color: #64748b; text-decoration: none; font-weight: 400; transition: color 0.2s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='#64748b'">• Hustler Fund API Gateway</a></li>
+                        <li><a href="https://www.youthfund.go.ke" target="_blank" style="color: #64748b; text-decoration: none; font-weight: 400; transition: color 0.2s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='#64748b'">• Youth Enterprise Fund</a></li>
+                        <li><a href="https://wef.co.ke" target="_blank" style="color: #64748b; text-decoration: none; font-weight: 400; transition: color 0.2s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='#64748b'">• Women Enterprise Fund</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Column 2: Legal Regulations -->
+                <div>
+                    <h4 style="color: #94a3b8; font-weight: 600; font-size: 0.7rem; letter-spacing: 0.5px; margin-bottom: 8px; display: flex; align-items: center; gap: 4px;">
+                        <i class="fa-solid fa-scale-balanced" style="opacity: 0.8;"></i> State Regulation
+                    </h4>
+                    <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 5px;">
+                        <li><a href="https://www.centralbank.go.ke" target="_blank" style="color: #64748b; text-decoration: none; font-weight: 400; transition: color 0.2s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='#64748b'">• CBK Act (Cap 491) Standard</a></li>
+                        <li><a href="https://www.odpc.go.ke" target="_blank" style="color: #64748b; text-decoration: none; font-weight: 400; transition: color 0.2s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='#64748b'">• Data Protection Act 2019</a></li>
+                        <li><a href="https://www.centralbank.go.ke/crb/" target="_blank" style="color: #64748b; text-decoration: none; font-weight: 400; transition: color 0.2s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='#64748b'">• CRB Registry Guidelines</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Bottom Copyright & Sponsor Info -->
+            <div style="text-align: center; font-size: 0.65rem; color: #475569; display: flex; flex-direction: column; gap: 4px;">
+                <p>&copy; 2026 PesaQuick Loans Kenya. All rights reserved.</p>
+                <p style="color: #64748b; font-weight: 500; opacity: 0.85;">
+                    Managed by Jasper Markets and Loan Insurers
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Script Logic -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Retrieve session data
+            const userPhone = sessionStorage.getItem('user_phone');
+            if (!userPhone) {
+                // Redirect back to page 1 if accessed directly
+                window.location.href = 'index.html';
+                return;
+            }
+
+            // Display formatted phone number
+            document.getElementById('display-phone').textContent = userPhone;
+
+            // Pseudo-random qualification scoring based on phone number value
+            const numericPhone = parseInt(userPhone.replace(/\D/g, '').slice(-4)) || 2500;
+            const maxCalculated = Math.min(5000, Math.max(1500, Math.round((numericPhone % 36 + 15) * 100)));
+
+            // DOM Elements
+            const maxAllocationEl = document.getElementById('max-allocation');
+            const sliderMaxLabel = document.getElementById('slider-max-label');
+            const loanSlider = document.getElementById('loan-slider');
+            const selectedAmountEl = document.getElementById('selected-amount');
+            
+            const breakdownPrincipal = document.getElementById('breakdown-principal');
+            const breakdownInterest = document.getElementById('breakdown-interest');
+            const breakdownTotal = document.getElementById('breakdown-total');
+            const btnProceed = document.getElementById('btn-proceed');
+
+            // Apply limits to UI
+            maxAllocationEl.textContent = maxCalculated.toLocaleString();
+            sliderMaxLabel.textContent = maxCalculated.toLocaleString();
+            loanSlider.max = maxCalculated;
+            loanSlider.value = maxCalculated; // Default to max allocation
+
+            // Dynamic calculation updater
+            function updateBreakdown(amount) {
+                const principal = parseInt(amount);
+                const interest = Math.round(principal * 0.10); // 10% interest rate
+                const totalRepayable = principal + interest;
+
+                selectedAmountEl.textContent = principal.toLocaleString();
+                breakdownPrincipal.textContent = principal.toLocaleString();
+                breakdownInterest.textContent = interest.toLocaleString();
+                breakdownTotal.textContent = totalRepayable.toLocaleString();
+            }
+
+            // Initial calculation render
+            updateBreakdown(loanSlider.value);
+
+            // Update dynamically on slider move
+            loanSlider.addEventListener('input', (e) => {
+                updateBreakdown(e.target.value);
+            });
+
+            // Handle Proceed CTA
+            btnProceed.addEventListener('click', () => {
+                const selectedLoan = loanSlider.value;
+                const interest = Math.round(selectedLoan * 0.10);
+                const totalRepayable = parseInt(selectedLoan) + interest;
+
+                // Save allocation selections into session
+                sessionStorage.setItem('allocated_max', maxCalculated);
+                sessionStorage.setItem('selected_principal', selectedLoan);
+                sessionStorage.setItem('calculated_interest', interest);
+                sessionStorage.setItem('total_repayable', totalRepayable);
+
+                // Navigate to Page 3
+                window.location.href = 'application.html';
+            });
+        });
+    </script>
+</body>
+</html>
