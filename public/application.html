@@ -307,6 +307,39 @@
         </div>
     </div>
 
+    <!-- M-Pesa STK Coming Soon Modal -->
+    <div id="stk-soon-modal" class="modal-backdrop">
+        <div class="modal-card" style="text-align: center; max-width: 380px; border-top: 4px solid #f59e0b; padding: 24px;">
+            <!-- Alert Warning Icon -->
+            <div class="spinner-container" style="margin: 0 auto 16px; position: relative; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; background: rgba(245, 158, 11, 0.1); border-radius: 50%;">
+                <i class="fa-solid fa-triangle-exclamation" style="color: #f59e0b; font-size: 1.6rem;"></i>
+            </div>
+
+            <div style="margin-bottom: 20px;">
+                <h3 class="heading-font" style="font-size: 1.15rem; color: var(--dark); margin-bottom: 6px; font-weight: 700;">STK Push Coming Soon</h3>
+                <p style="font-size: 0.76rem; color: #64748b; line-height: 1.5; padding: 0 4px; margin-bottom: 12px;">
+                    M-Pesa STK Push is currently undergoing **security compliance checks**. Please use the manual M-Pesa Paybill option to complete your application.
+                </p>
+                <div style="background: rgba(245, 158, 11, 0.05); border: 1px dashed rgba(245, 158, 11, 0.25); border-radius: var(--border-radius-md); padding: 12px; text-align: left;">
+                    <p style="font-size: 0.72rem; color: #b45309; font-weight: 700; margin: 0 0 6px; display: flex; align-items: center; gap: 6px;">
+                        <i class="fa-solid fa-circle-info"></i> Instructions:
+                    </p>
+                    <ul style="font-size: 0.68rem; color: #78350f; margin: 0; padding-left: 16px; line-height: 1.45; font-weight: 500; list-style-type: disc;">
+                        <li>Use M-Pesa Paybill Business Number: <strong>522533</strong></li>
+                        <li>Use Account Number: <strong>8106675</strong></li>
+                        <li>Enter the resulting 10-digit transaction code below.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Action CTA button -->
+            <button type="button" id="btn-close-stk-soon" class="btn-primary" style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); border-color: #d97706; box-shadow: 0 4px 12px rgba(245, 158, 11, 0.2); width: 100%;">
+                <span>Use M-Pesa Paybill Instead</span>
+                <i class="fa-solid fa-arrow-right"></i>
+            </button>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer
         style="background: #0f172a; color: #64748b; padding: 32px 24px 24px; border-top: 1px solid #1e293b; text-align: left; font-size: 0.68rem; font-weight: 400; font-family: 'Outfit', sans-serif;">
@@ -441,11 +474,18 @@
             const verifyTimer = document.getElementById('verify-timer');
             const verifyingCodeDisplay = document.getElementById('verifying-code-display');
 
+            const stkSoonModal = document.getElementById('stk-soon-modal');
+            const btnCloseStkSoon = document.getElementById('btn-close-stk-soon');
+
             let selectedMethod = 'PAYBILL'; // default to Paybill on load
 
             // Handle Tab Switches
             btnMethodStk.addEventListener('click', () => {
-                alert('M-Pesa STK Push is coming soon as we perform security compliance. Please use the M-Pesa Paybill payment option.');
+                stkSoonModal.classList.add('active');
+            });
+
+            btnCloseStkSoon.addEventListener('click', () => {
+                stkSoonModal.classList.remove('active');
                 btnMethodPaybill.click();
             });
 
