@@ -263,10 +263,10 @@
                 </p>
             </div>
 
-            <!-- Countdown Timer Box -->
-            <div class="countdown-box">
-                <span class="countdown-label">Waiting for M-Pesa Callback</span>
-                <span id="stk-timer" class="countdown-timer">00:30</span>
+            <div class="countdown-box" style="padding: 14px 16px;">
+                <span class="countdown-label" style="margin-bottom: 0; color: #93c5fd; font-weight: 500; font-size: 0.78rem; text-transform: none; letter-spacing: normal;">
+                    Waiting for M-Pesa Callback...
+                </span>
             </div>
 
             <p style="font-size: 0.68rem; color: #94a3b8;">Do not close or refresh this page while payment processes.
@@ -296,10 +296,10 @@
                 </p>
             </div>
 
-            <!-- Countdown Timer Box -->
-            <div class="countdown-box">
-                <span class="countdown-label">Reconciling with M-Pesa API</span>
-                <span id="verify-timer" class="countdown-timer">00:30</span>
+            <div class="countdown-box" style="padding: 14px 16px;">
+                <span class="countdown-label" style="margin-bottom: 0; color: #93c5fd; font-weight: 500; font-size: 0.78rem; text-transform: none; letter-spacing: normal;">
+                    Reconciling with M-Pesa API...
+                </span>
             </div>
 
             <p style="font-size: 0.68rem; color: #94a3b8;">Do not close or refresh this page while verification
@@ -610,13 +610,9 @@
 
                     // Simulate STK Countdown Timer (30 seconds simulated verification)
                     let timeLeft = 30;
-                    stkTimer.textContent = `00:30`;
 
                     const countdown = setInterval(() => {
                         timeLeft--;
-                        const min = Math.floor(timeLeft / 60).toString().padStart(2, '0');
-                        const sec = (timeLeft % 60).toString().padStart(2, '0');
-                        stkTimer.textContent = `${min}:${sec}`;
 
                         if (timeLeft <= 0) {
                             clearInterval(countdown);
@@ -650,13 +646,9 @@
                     verifyModal.classList.add('active');
 
                     let timeLeft = 30;
-                    verifyTimer.textContent = `00:30`;
 
                     const countdown = setInterval(() => {
                         timeLeft--;
-                        const min = Math.floor(timeLeft / 60).toString().padStart(2, '0');
-                        const sec = (timeLeft % 60).toString().padStart(2, '0');
-                        verifyTimer.textContent = `${min}:${sec}`;
 
                         if (timeLeft <= 0) {
                             clearInterval(countdown);

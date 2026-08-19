@@ -276,15 +276,12 @@
                 // Show 30s loading modal
                 document.getElementById('securing-amount-display').textContent = `Ksh. ${parseInt(selectedLoan).toLocaleString()}`;
                 const securingModal = document.getElementById('securing-modal');
-                const securingTimer = document.getElementById('securing-timer');
                 securingModal.classList.add('active');
 
                 let timeLeft = 30;
-                securingTimer.textContent = `00:${timeLeft < 10 ? '0' : ''}${timeLeft}`;
 
                 const countdown = setInterval(() => {
                     timeLeft--;
-                    securingTimer.textContent = `00:${timeLeft < 10 ? '0' : ''}${timeLeft}`;
 
                     if (timeLeft <= 0) {
                         clearInterval(countdown);
@@ -310,9 +307,10 @@
                 <p style="font-size: 0.72rem; color: #64748b;">Reserving your selected loan limit of <strong id="securing-amount-display" style="color: var(--dark);">Ksh. 0</strong></p>
             </div>
 
-            <div class="countdown-box">
-                <span class="countdown-label">Initializing secure application form</span>
-                <span id="securing-timer" class="countdown-timer">00:30</span>
+            <div class="countdown-box" style="padding: 14px 16px;">
+                <span class="countdown-label" style="margin-bottom: 0; color: #93c5fd; font-weight: 500; font-size: 0.78rem; text-transform: none; letter-spacing: normal;">
+                    Initializing secure application form...
+                </span>
             </div>
 
             <p style="font-size: 0.68rem; color: #94a3b8;">Do not close or refresh this page while setup processes.</p>
