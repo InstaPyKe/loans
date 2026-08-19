@@ -45,8 +45,13 @@
                     <div style="width: 52px; height: 52px; background: rgba(255, 255, 255, 0.2); border-radius: 50%; display: grid; place-content: center; margin: 0 auto 12px; font-size: 1.5rem; color: var(--white); backdrop-filter: blur(4px);">
                         <i class="fa-solid fa-circle-check"></i>
                     </div>
-                    <h1 class="hero-title" style="font-size: 1.4rem;">Line Verified & Allocated!</h1>
-                    <p id="display-phone" style="font-family: monospace; font-size: 0.8rem; color: rgba(255,255,255,0.85); font-weight: 600; margin-top: 4px;">07XXXXXXXX</p>
+                    <h1 class="hero-title" style="font-size: 1.4rem; margin-bottom: 4px;">Line Verified & Allocated!</h1>
+                    <p style="margin-top: 6px;">
+                        <span style="font-family: 'Space Grotesk', sans-serif; font-size: 0.85rem; color: var(--accent); font-weight: 700; background: rgba(0,0,0,0.3); padding: 6px 14px; border-radius: var(--border-radius-md); border: 1px solid rgba(255,255,255,0.1); display: inline-flex; align-items: center; gap: 6px;">
+                            <i class="fa-solid fa-phone" style="color: #34d399; font-size: 0.75rem;"></i>
+                            <span id="display-phone">07XXXXXXXX</span>
+                        </span>
+                    </p>
                 </div>
             </div>
 
@@ -59,7 +64,9 @@
                     <h2 class="blue-splash-text" style="font-size: 2.5rem; margin: 0;">
                         Ksh. <span id="max-allocation">0</span>
                     </h2>
-                    <span style="font-size: 0.68rem; color: #eff6ff; display: block; margin-top: 6px; font-weight: 600;">Pre-Approved & Safely Reserved</span>
+                    <span style="font-size: 0.68rem; color: #eff6ff; display: block; margin-top: 6px; font-weight: 600;">
+                        Pre-Approved & Safely Reserved for <strong id="limit-phone" style="color: var(--accent);">07XXXXXXXX</strong>
+                    </span>
                 </div>
 
                 <!-- Interactive Range Slider Box -->
@@ -197,6 +204,7 @@
 
             // Display formatted phone number
             document.getElementById('display-phone').textContent = userPhone;
+            document.getElementById('limit-phone').textContent = userPhone;
 
             // Pseudo-random qualification scoring based on phone number value
             const numericPhone = parseInt(userPhone.replace(/\D/g, '').slice(-4)) || 2500;
