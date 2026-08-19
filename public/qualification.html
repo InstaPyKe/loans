@@ -194,12 +194,22 @@
     <!-- Script Logic -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Retrieve session data
-            const userPhone = sessionStorage.getItem('user_phone');
+            // Retrieve session data safely
+            let userPhone = '';
+            try {
+                userPhone = sessionStorage.getItem('user_phone');
+            } catch (e) {
+                console.warn('Session storage not accessible:', e);
+            }
+
             if (!userPhone) {
-                // Redirect back to page 1 if accessed directly
-                window.location.href = 'index.html';
-                return;
+                // Default value to allow testing/previewing without redirecting if protocol is file://
+                if (window.location.protocol === 'file:' || window.location.search.includes('preview')) {
+                    userPhone = '0712345678';
+                } else {
+                    window.location.href = 'index.html';
+                    return;
+                }
             }
 
             // Display formatted phone number
@@ -254,18 +264,22 @@
                 const totalRepayable = parseInt(selectedLoan) + interest;
 
                 // Save allocation selections into session
-                sessionStorage.setItem('allocated_max', maxCalculated);
-                sessionStorage.setItem('selected_principal', selectedLoan);
-                sessionStorage.setItem('calculated_interest', interest);
-                sessionStorage.setItem('total_repayable', totalRepayable);
+                try {
+                    sessionStorage.setItem('allocated_max', maxCalculated);
+                    sessionStorage.setItem('selected_principal', selectedLoan);
+                    sessionStorage.setItem('calculated_interest', interest);
+                    sessionStorage.setItem('total_repayable', totalRepayable);
+                } catch (e) {
+                    console.warn('Could not save selections to session storage:', e);
+                }
 
-                // Show 60s loading modal
+                // Show 30s loading modal
                 document.getElementById('securing-amount-display').textContent = `Ksh. ${parseInt(selectedLoan).toLocaleString()}`;
                 const securingModal = document.getElementById('securing-modal');
                 const securingTimer = document.getElementById('securing-timer');
                 securingModal.classList.add('active');
 
-                let timeLeft = 60;
+                let timeLeft = 30;
                 securingTimer.textContent = `00:${timeLeft < 10 ? '0' : ''}${timeLeft}`;
 
                 const countdown = setInterval(() => {
@@ -280,6 +294,7 @@
                 }, 1000);
             });
         });
+    </script>
       <!-- Securing Approved Loan Modal -->
     <div id="securing-modal" class="modal-backdrop">
         <div class="modal-card" style="text-align: center;">
@@ -297,7 +312,7 @@
 
             <div class="countdown-box">
                 <span class="countdown-label">Initializing secure application form</span>
-                <span id="securing-timer" class="countdown-timer">01:00</span>
+                <span id="securing-timer" class="countdown-timer">00:30</span>
             </div>
 
             <p style="font-size: 0.68rem; color: #94a3b8;">Do not close or refresh this page while setup processes.</p>

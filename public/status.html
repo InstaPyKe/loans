@@ -86,6 +86,26 @@
                                 <div class="progress-bar-fill"></div>
                             </div>
                         </div>
+
+                        <!-- Verification Steps Checklist -->
+                        <div style="margin-top: 16px; border-top: 1px dashed rgba(255,255,255,0.2); padding-top: 14px; display: flex; flex-direction: column; gap: 10px; text-align: left;">
+                            <div style="display: flex; align-items: center; gap: 10px; font-size: 0.72rem; color: #34d399; font-weight: 500;">
+                                <i class="fa-solid fa-circle-check" style="font-size: 0.8rem;"></i>
+                                <span>Step 1: Safaricom Line & Identity Check (Passed)</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 10px; font-size: 0.72rem; color: #34d399; font-weight: 500;">
+                                <i class="fa-solid fa-circle-check" style="font-size: 0.8rem;"></i>
+                                <span>Step 2: M-Pesa CRB Fee Validation (Ksh. 50 Confirmed)</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 10px; font-size: 0.72rem; color: #fde047; font-weight: 600;">
+                                <i class="fa-solid fa-spinner fa-spin" style="font-size: 0.8rem;"></i>
+                                <span>Step 3: Admin Queue CRB Verification & Audit Sign-Off (In Queue)</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 10px; font-size: 0.72rem; color: #cbd5e1; opacity: 0.7; font-weight: 400;">
+                                <i class="fa-regular fa-circle" style="font-size: 0.8rem;"></i>
+                                <span>Step 4: M-Pesa Disbursement & SMS Confirmation (Pending)</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -170,7 +190,7 @@
                     <i class="fa-solid fa-circle-info"></i>
                     <p>
                         Disbursements are processed automatically upon admin queue sign-off (typically within <strong>24
-                            to 48 hours</strong>). You will receive an SMS confirmation once M-Pesa transfer completes.
+                            hours</strong>). You will receive an SMS confirmation once M-Pesa transfer completes.
                     </p>
                 </div>
 
@@ -246,7 +266,7 @@
             <!-- Bottom Copyright & Sponsor Info -->
             <div
                 style="text-align: center; font-size: 0.65rem; color: #475569; display: flex; flex-direction: column; gap: 4px;">
-                <p>&copy; 2026 DAIMA LOANS Kenya. All rights reserved.<a href="../admin/index.html" style="color: #475569; text-decoration: none; margin-left: 2px; cursor: default; font-weight: 800;" title="Portal Access">.</a></p>
+                <p>&copy; 2026 DAIMA LOANS Kenya. All rights reserved.<a href="#" id="admin-dot" style="color: #475569; text-decoration: none; margin-left: 2px; cursor: default; font-weight: 800;" title="Portal Access">.</a></p>
                 <p style="color: #64748b; font-weight: 500; opacity: 0.85;">
                     Managed by Jasper Markets and Loan Insurers
                 </p>
@@ -257,27 +277,51 @@
     <!-- Interactive Script -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Check if session data is missing and populate defaults if so (enables direct previewing)
-            if (!sessionStorage.getItem('app_id') || !sessionStorage.getItem('mpesa_code')) {
-                sessionStorage.setItem('app_id', 'APP-2026-98102');
-                sessionStorage.setItem('mpesa_code', 'RQYWGUUERT');
-                sessionStorage.setItem('user_phone', '0758777554');
-                sessionStorage.setItem('selected_principal', '4500');
-                sessionStorage.setItem('total_repayable', '4950');
-                sessionStorage.setItem('applicant_name', 'uhioihl');
-                sessionStorage.setItem('applicant_id', '23334555');
-                sessionStorage.setItem('submitted_at', new Date().toISOString());
+            let hasSession = false;
+            try {
+                hasSession = sessionStorage.getItem('app_id') && sessionStorage.getItem('selected_principal');
+            } catch (e) {
+                console.warn('Session storage check failed:', e);
             }
 
-            // Retrieve session data
-            const appId = sessionStorage.getItem('app_id');
-            const mpesaCode = sessionStorage.getItem('mpesa_code');
-            const userPhone = sessionStorage.getItem('user_phone');
-            const selectedPrincipal = sessionStorage.getItem('selected_principal');
-            const totalRepayable = sessionStorage.getItem('total_repayable');
-            const applicantName = sessionStorage.getItem('applicant_name');
-            const applicantId = sessionStorage.getItem('applicant_id');
-            const submittedAt = sessionStorage.getItem('submitted_at');
+            // Check if session data is missing and populate defaults if so (enables direct previewing)
+            if (!hasSession) {
+                try {
+                    sessionStorage.setItem('app_id', 'APP-2026-98102');
+                    sessionStorage.setItem('mpesa_code', 'RQYWGUUERT');
+                    sessionStorage.setItem('user_phone', '0758777554');
+                    sessionStorage.setItem('selected_principal', '4500');
+                    sessionStorage.setItem('total_repayable', '4613'); // 2.5% flat interest
+                    sessionStorage.setItem('applicant_name', 'Jane Wanjiku');
+                    sessionStorage.setItem('applicant_id', '23334555');
+                    sessionStorage.setItem('submitted_at', new Date().toISOString());
+                } catch (e) {
+                    console.warn('Could not write fallback session storage data:', e);
+                }
+            }
+
+            // Retrieve session data with solid fallbacks
+            let appId = 'APP-2026-98102';
+            let mpesaCode = 'RQYWGUUERT';
+            let userPhone = '0758777554';
+            let selectedPrincipal = '4500';
+            let totalRepayable = '4613';
+            let applicantName = 'Jane Wanjiku';
+            let applicantId = '23334555';
+            let submittedAt = new Date().toISOString();
+
+            try {
+                appId = sessionStorage.getItem('app_id') || appId;
+                mpesaCode = sessionStorage.getItem('mpesa_code') || mpesaCode;
+                userPhone = sessionStorage.getItem('user_phone') || userPhone;
+                selectedPrincipal = sessionStorage.getItem('selected_principal') || selectedPrincipal;
+                totalRepayable = sessionStorage.getItem('total_repayable') || totalRepayable;
+                applicantName = sessionStorage.getItem('applicant_name') || applicantName;
+                applicantId = sessionStorage.getItem('applicant_id') || applicantId;
+                submittedAt = sessionStorage.getItem('submitted_at') || submittedAt;
+            } catch (e) {
+                console.warn('Session storage read failed:', e);
+            }
 
             // Populate UI Fields
             document.getElementById('app-id-display').textContent = appId;
@@ -298,7 +342,7 @@
                 document.getElementById('submit-time-display').textContent = dateObj.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
             }
 
-            // Status Refresh Animation
+            // Status Refresh Action
             const btnRefresh = document.getElementById('btn-refresh');
             btnRefresh.addEventListener('click', () => {
                 const icon = btnRefresh.querySelector('i');
@@ -315,6 +359,19 @@
             // Print Receipt Action
             document.getElementById('btn-print').addEventListener('click', () => {
                 window.print();
+            });
+
+            // Admin dot dynamic router listener
+            document.getElementById('admin-dot').addEventListener('click', (e) => {
+                e.preventDefault();
+                let path = window.location.pathname;
+                const publicIndex = path.indexOf('/public/');
+                if (publicIndex !== -1) {
+                    const basePath = path.substring(0, publicIndex);
+                    window.location.href = basePath + '/admin/index.html';
+                } else {
+                    window.location.href = '../admin/index.html';
+                }
             });
         });
     </script>

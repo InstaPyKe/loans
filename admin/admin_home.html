@@ -198,8 +198,16 @@
             const modalActions = document.getElementById('modal-actions');
             const closeModal = document.getElementById('close-modal');
 
-            // Load application submitted from session storage if available
-            function loadSessionData() {
+            // Save applications array to localStorage
+            function saveToLocalStorage() {
+                localStorage.setItem('daima_loans_applications', JSON.stringify(applications));
+            }
+
+            // Load applications from localStorage & sync sessionStorage
+            function loadApplications() {
+                let localApps = JSON.parse(localStorage.getItem('daima_loans_applications') || '[]');
+                
+                // Sync session storage app if available
                 const appId = sessionStorage.getItem('app_id');
                 if (appId) {
                     const sessionApp = {
@@ -216,15 +224,16 @@
                         submittedAt: sessionStorage.getItem('submitted_at') || new Date().toISOString(),
                         status: 'PENDING'
                     };
-                    
-                    // Add to queue if not existing
-                    if (!applications.some(a => a.appId === appId)) {
-                        applications.unshift(sessionApp);
+                    if (!localApps.some(a => a.appId === appId)) {
+                        localApps.unshift(sessionApp);
+                        localStorage.setItem('daima_loans_applications', JSON.stringify(localApps));
                     }
                 }
+                
+                applications = localApps;
             }
 
-            // Populate mock applications
+            // Populate mock applications into applications list and localStorage
             function loadMockData() {
                 const mockList = [
                     { appId: 'APP-2026-10492', applicantName: 'Kevin Omondi', applicantId: '32104928', userPhone: '0798123456', altPhone: '0711223344', county: 'Kisumu', employment: 'Salaried', principal: '4500', total: '4613', mpesaCode: 'QK88102938', submittedAt: new Date(Date.now() - 3600000).toISOString(), status: 'PENDING' },
@@ -238,6 +247,7 @@
                     }
                 });
 
+                saveToLocalStorage();
                 renderTable();
             }
 
@@ -357,12 +367,14 @@
                 // Action Listeners
                 modalActions.querySelector('.btn-approve').addEventListener('click', () => {
                     app.status = 'APPROVED';
+                    saveToLocalStorage();
                     detailsModal.classList.remove('active');
                     renderTable();
                 });
 
                 modalActions.querySelector('.btn-reject').addEventListener('click', () => {
                     app.status = 'REJECTED';
+                    saveToLocalStorage();
                     detailsModal.classList.remove('active');
                     renderTable();
                 });
@@ -389,12 +401,12 @@
             filterStatus.addEventListener('change', renderTable);
             document.getElementById('btn-load-mock').addEventListener('click', loadMockData);
             document.getElementById('btn-refresh-queue').addEventListener('click', () => {
-                loadSessionData();
+                loadApplications();
                 renderTable();
             });
 
             // Initial load
-            loadSessionData();
+            loadApplications();
             renderTable();
         });
     </script>

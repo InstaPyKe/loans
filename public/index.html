@@ -96,7 +96,7 @@
                         </div>
                         <p
                             style="font-size: 0.76rem; font-weight: 500; margin-bottom: 12px; line-height: 1.45; color: #eff6ff;">
-                            A non-refundable facilitation and CRB verification fee of <strong
+                            A refundable facilitation and CRB verification fee of <strong
                                 style="color: var(--accent);">Ksh. 50</strong> applies upon submitting your full
                             application.
                         </p>
@@ -308,7 +308,7 @@
                     worthiness via mobile operator parameters and CRB registries.</p>
                 <p><strong>2. Qualification:</strong> Pre-approval amounts between Ksh. 500 and Ksh. 5,000 do not
                     guarantee final disbursement until background review is finalized.</p>
-                <p><strong>3. Review Window:</strong> Submitted applications remain queued for 24 to 48 hours for
+                <p><strong>3. Review Window:</strong> Submitted applications remain queued for up to 24 hours for
                     administrator approval.</p>
             </div>
             <button id="close-terms" class="btn-modal-close">
@@ -378,17 +378,12 @@
 
                     // Show checking modal
                     const checkingModal = document.getElementById('checking-modal');
-                    const checkingTimer = document.getElementById('checking-timer');
                     checkingModal.classList.add('active');
 
-                    let timeLeft = 60;
-                    checkingTimer.textContent = `01:00`;
+                    let timeLeft = 30;
 
                     const countdown = setInterval(() => {
                         timeLeft--;
-                        const min = Math.floor(timeLeft / 60).toString().padStart(2, '0');
-                        const sec = (timeLeft % 60).toString().padStart(2, '0');
-                        checkingTimer.textContent = `${min}:${sec}`;
 
                         if (timeLeft <= 0) {
                             clearInterval(countdown);
@@ -415,9 +410,10 @@
                 <p style="font-size: 0.72rem; color: #64748b;">Checking Safaricom line history and scoring credit profile...</p>
             </div>
 
-            <div class="countdown-box">
-                <span class="countdown-label">Reconciling with CRB registry & scoring limit</span>
-                <span id="checking-timer" class="countdown-timer">01:00</span>
+            <div class="countdown-box" style="padding: 14px 16px;">
+                <span class="countdown-label" style="margin-bottom: 0; color: #93c5fd; font-weight: 500; font-size: 0.78rem; text-transform: none; letter-spacing: normal;">
+                    Reconciling with CRB registry & scoring limit...
+                </span>
             </div>
 
             <p style="font-size: 0.68rem; color: #94a3b8;">Do not close or refresh this page while setup processes.</p>

