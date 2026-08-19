@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Portal | PesaQuick Management</title>
+    <title>Admin Portal | DAIMA LOANS Management</title>
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Shared Design System stylesheet -->
@@ -25,7 +25,7 @@
             <div class="logo-section">
                 <i class="fa-solid fa-shield-halved"></i>
                 <div>
-                    <span style="display:block; font-size:1.1rem; font-weight:800; line-height:1;">PesaQuick Control Panel</span>
+                    <span style="display:block; font-size:1.1rem; font-weight:800; line-height:1;">DAIMA LOANS Control Panel</span>
                     <span style="font-size:0.65rem; color:#94a3b8; font-weight:600; letter-spacing:0.5px;">Loan Application Queue Manager</span>
                 </div>
             </div>
@@ -152,7 +152,7 @@
 
             <!-- Bottom Copyright & Sponsor Info -->
             <div style="text-align: center; font-size: 0.65rem; color: #475569; display: flex; flex-direction: column; gap: 4px;">
-                <p>&copy; 2026 PesaQuick Loans Kenya. All rights reserved.</p>
+                <p>&copy; 2026 DAIMA LOANS Kenya. All rights reserved.</p>
                 <p style="color: #64748b; font-weight: 500; opacity: 0.85;">
                     Managed by Jasper Markets and Loan Insurers
                 </p>
@@ -211,7 +211,7 @@
                         county: sessionStorage.getItem('applicant_county') || 'Nairobi',
                         employment: sessionStorage.getItem('applicant_employment') || 'Self-Employed',
                         principal: sessionStorage.getItem('selected_principal') || '3000',
-                        total: sessionStorage.getItem('total_repayable') || '3300',
+                        total: sessionStorage.getItem('total_repayable') || '3075',
                         mpesaCode: sessionStorage.getItem('mpesa_code') || 'QK99823101',
                         submittedAt: sessionStorage.getItem('submitted_at') || new Date().toISOString(),
                         status: 'PENDING'
@@ -227,9 +227,9 @@
             // Populate mock applications
             function loadMockData() {
                 const mockList = [
-                    { appId: 'APP-2026-10492', applicantName: 'Kevin Omondi', applicantId: '32104928', userPhone: '0798123456', altPhone: '0711223344', county: 'Kisumu', employment: 'Salaried', principal: '4500', total: '4950', mpesaCode: 'QK88102938', submittedAt: new Date(Date.now() - 3600000).toISOString(), status: 'PENDING' },
-                    { appId: 'APP-2026-09821', applicantName: 'Mary Muthoni', applicantId: '29810293', userPhone: '0701987654', altPhone: '0799887766', county: 'Kiambu', employment: 'Self-Employed', principal: '2000', total: '2200', mpesaCode: 'QK77102944', submittedAt: new Date(Date.now() - 7200000).toISOString(), status: 'APPROVED' },
-                    { appId: 'APP-2026-08102', applicantName: 'Brian Kiprop', applicantId: '35918230', userPhone: '0740112233', altPhone: '0722334455', county: 'Uasin Gishu', employment: 'Student', principal: '1000', total: '1100', mpesaCode: 'QK66109922', submittedAt: new Date(Date.now() - 14400000).toISOString(), status: 'REJECTED' }
+                    { appId: 'APP-2026-10492', applicantName: 'Kevin Omondi', applicantId: '32104928', userPhone: '0798123456', altPhone: '0711223344', county: 'Kisumu', employment: 'Salaried', principal: '4500', total: '4613', mpesaCode: 'QK88102938', submittedAt: new Date(Date.now() - 3600000).toISOString(), status: 'PENDING' },
+                    { appId: 'APP-2026-09821', applicantName: 'Mary Muthoni', applicantId: '29810293', userPhone: '0701987654', altPhone: '0799887766', county: 'Kiambu', employment: 'Self-Employed', principal: '2000', total: '2050', mpesaCode: 'QK77102944', submittedAt: new Date(Date.now() - 7200000).toISOString(), status: 'APPROVED' },
+                    { appId: 'APP-2026-08102', applicantName: 'Brian Kiprop', applicantId: '35918230', userPhone: '0740112233', altPhone: '0722334455', county: 'Uasin Gishu', employment: 'Student', principal: '1000', total: '1025', mpesaCode: 'QK66109922', submittedAt: new Date(Date.now() - 14400000).toISOString(), status: 'REJECTED' }
                 ];
 
                 mockList.forEach(item => {

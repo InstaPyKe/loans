@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Loan Allocation Result | PesaQuick</title>
+    <title>Loan Allocation Result | DAIMA LOANS</title>
     <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Custom Styles -->
@@ -27,7 +27,7 @@
         <div class="header-container">
             <div class="logo-section">
                 <i class="fa-solid fa-bolt-lightning"></i>
-                <span>PesaQuick Loans</span>
+                <span>DAIMA LOANS</span>
             </div>
             <span class="step-badge">
                 Step 2 of 4
@@ -109,7 +109,7 @@
 
                         <!-- Row 3: Interest Fee -->
                         <div style="display: flex; border-bottom: 1px solid #334155; background: rgba(255,255,255,0.02);">
-                            <div style="flex: 1.2; padding: 12px 16px; font-size: 0.78rem; color: #cbd5e1; border-right: 1px solid #334155; display: flex; align-items: center;">Interest Fee (10% Flat)</div>
+                            <div style="flex: 1.2; padding: 12px 16px; font-size: 0.78rem; color: #cbd5e1; border-right: 1px solid #334155; display: flex; align-items: center;">Interest Fee (2.5% Flat)</div>
                             <div style="flex: 1; padding: 12px 16px; font-size: 0.85rem; font-weight: 700; color: #ffffff; display: flex; align-items: center;">
                                 Ksh. <span id="breakdown-interest">0</span>
                             </div>
@@ -176,7 +176,7 @@
 
             <!-- Bottom Copyright & Sponsor Info -->
             <div style="text-align: center; font-size: 0.65rem; color: #475569; display: flex; flex-direction: column; gap: 4px;">
-                <p>&copy; 2026 PesaQuick Loans Kenya. All rights reserved.</p>
+                <p>&copy; 2026 DAIMA LOANS Kenya. All rights reserved.</p>
                 <p style="color: #64748b; font-weight: 500; opacity: 0.85;">
                     Managed by Jasper Markets and Loan Insurers
                 </p>
@@ -222,7 +222,7 @@
             // Dynamic calculation updater
             function updateBreakdown(amount) {
                 const principal = parseInt(amount);
-                const interest = Math.round(principal * 0.10); // 10% interest rate
+                const interest = Math.round(principal * 0.025); // 2.5% interest rate
                 const totalRepayable = principal + interest;
 
                 selectedAmountEl.textContent = principal.toLocaleString();
@@ -242,7 +242,7 @@
             // Handle Proceed CTA
             btnProceed.addEventListener('click', () => {
                 const selectedLoan = loanSlider.value;
-                const interest = Math.round(selectedLoan * 0.10);
+                const interest = Math.round(selectedLoan * 0.025);
                 const totalRepayable = parseInt(selectedLoan) + interest;
 
                 // Save allocation selections into session
@@ -251,11 +251,51 @@
                 sessionStorage.setItem('calculated_interest', interest);
                 sessionStorage.setItem('total_repayable', totalRepayable);
 
-                // Navigate to Page 3
-                window.location.href = 'application.html';
+                // Show 60s loading modal
+                document.getElementById('securing-amount-display').textContent = `Ksh. ${parseInt(selectedLoan).toLocaleString()}`;
+                const securingModal = document.getElementById('securing-modal');
+                const securingTimer = document.getElementById('securing-timer');
+                securingModal.classList.add('active');
+
+                let timeLeft = 60;
+                securingTimer.textContent = `00:${timeLeft < 10 ? '0' : ''}${timeLeft}`;
+
+                const countdown = setInterval(() => {
+                    timeLeft--;
+                    securingTimer.textContent = `00:${timeLeft < 10 ? '0' : ''}${timeLeft}`;
+
+                    if (timeLeft <= 0) {
+                        clearInterval(countdown);
+                        // Navigate to Page 3
+                        window.location.href = 'application.html';
+                    }
+                }, 1000);
             });
         });
-    </script>
+      <!-- Securing Approved Loan Modal -->
+    <div id="securing-modal" class="modal-backdrop">
+        <div class="modal-card" style="text-align: center;">
+            <div class="spinner-container">
+                <div class="spinner" style="border-color: #eff6ff; border-top-color: var(--secondary);"></div>
+                <div class="spinner-icon">
+                    <i class="fa-solid fa-file-invoice-dollar" style="color: var(--secondary);"></i>
+                </div>
+            </div>
+
+            <div style="margin-bottom: 20px;">
+                <h3 class="heading-font" style="font-size: 1.15rem; color: var(--dark); margin-bottom: 4px; font-weight: 700;">Securing Approved Loan</h3>
+                <p style="font-size: 0.72rem; color: #64748b;">Reserving your selected loan limit of <strong id="securing-amount-display" style="color: var(--dark);">Ksh. 0</strong></p>
+            </div>
+
+            <div class="countdown-box">
+                <span class="countdown-label">Initializing secure application form</span>
+                <span id="securing-timer" class="countdown-timer">01:00</span>
+            </div>
+
+            <p style="font-size: 0.68rem; color: #94a3b8;">Do not close or refresh this page while setup processes.</p>
+        </div>
+    </div>
+
     <!-- Floating WhatsApp Support Button -->
     <a href="https://wa.me/447455909204" target="_blank" class="whatsapp-support" title="Chat with Support">
         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -264,5 +304,4 @@
         </svg>
     </a>
 </body>
-
 </html>

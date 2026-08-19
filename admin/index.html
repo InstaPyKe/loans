@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Authentication | PesaQuick</title>
+    <title>Admin Authentication | DAIMA LOANS</title>
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Shared Design System stylesheet -->
@@ -16,6 +17,7 @@
             min-height: calc(100vh - 120px);
             padding: 20px;
         }
+
         .login-card {
             background: rgba(15, 23, 42, 0.85);
             backdrop-filter: blur(16px);
@@ -28,6 +30,7 @@
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
             border-top: 4px solid var(--accent);
         }
+
         .pin-display {
             background: rgba(15, 23, 42, 0.6);
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -43,12 +46,14 @@
             justify-content: center;
             font-family: monospace;
         }
+
         .keypad {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 12px;
             margin-top: 20px;
         }
+
         .key-btn {
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.08);
@@ -61,32 +66,51 @@
             transition: all 0.2s ease;
             outline: none;
         }
+
         .key-btn:hover {
             background: rgba(255, 255, 255, 0.1);
             transform: translateY(-2px);
             border-color: rgba(255, 255, 255, 0.2);
         }
+
         .key-btn:active {
             transform: translateY(0);
         }
+
         .key-btn.action {
             background: rgba(239, 68, 68, 0.1);
             color: #ef4444;
             border-color: rgba(239, 68, 68, 0.2);
         }
+
         .key-btn.action:hover {
             background: rgba(239, 68, 68, 0.2);
         }
+
         .shake {
             animation: shake 0.4s ease-in-out;
         }
+
         @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            20%, 60% { transform: translateX(-8px); }
-            40%, 80% { transform: translateX(8px); }
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            20%,
+            60% {
+                transform: translateX(-8px);
+            }
+
+            40%,
+            80% {
+                transform: translateX(8px);
+            }
         }
     </style>
 </head>
+
 <body>
 
     <!-- Animated Mesh Background & Glowing Orbs -->
@@ -103,8 +127,10 @@
             <div class="logo-section">
                 <i class="fa-solid fa-shield-halved"></i>
                 <div>
-                    <span style="display:block; font-size:1.1rem; font-weight:800; line-height:1;">PesaQuick Admin</span>
-                    <span style="font-size:0.65rem; color:#94a3b8; font-weight:600; letter-spacing:0.5px;">Authorization Gateway</span>
+                    <span style="display:block; font-size:1.1rem; font-weight:800; line-height:1;">DAIMA LOANS
+                        Admin</span>
+                    <span style="font-size:0.65rem; color:#94a3b8; font-weight:600; letter-spacing:0.5px;">Authorization
+                        Gateway</span>
                 </div>
             </div>
         </div>
@@ -113,9 +139,12 @@
     <main class="login-container">
         <div class="login-card animate-slide-up">
             <div style="margin-bottom: 20px;">
-                <i class="fa-solid fa-lock" style="font-size: 2.2rem; color: var(--accent); margin-bottom: 12px; display: inline-block;"></i>
-                <h2 style="font-size: 1.25rem; font-weight: 700; color: var(--white); margin: 0;">Enter Administrator PIN</h2>
-                <p style="font-size: 0.72rem; color: #94a3b8; margin-top: 4px;">Access to this system is restricted to authorized personnel.</p>
+                <i class="fa-solid fa-lock"
+                    style="font-size: 2.2rem; color: var(--accent); margin-bottom: 12px; display: inline-block;"></i>
+                <h2 style="font-size: 1.25rem; font-weight: 700; color: var(--white); margin: 0;">Enter Administrator
+                    PIN</h2>
+                <p style="font-size: 0.72rem; color: #94a3b8; margin-top: 4px;">Access to this system is restricted to
+                    authorized personnel.</p>
             </div>
 
             <!-- PIN Code Display Box -->
@@ -132,20 +161,25 @@
                 <button type="button" class="key-btn" onclick="pressKey('7')">7</button>
                 <button type="button" class="key-btn" onclick="pressKey('8')">8</button>
                 <button type="button" class="key-btn" onclick="pressKey('9')">9</button>
-                <button type="button" class="key-btn action" onclick="clearPin()"><i class="fa-solid fa-trash-can"></i></button>
+                <button type="button" class="key-btn action" onclick="clearPin()"><i
+                        class="fa-solid fa-trash-can"></i></button>
                 <button type="button" class="key-btn" onclick="pressKey('0')">0</button>
-                <button type="button" class="key-btn action" style="color: #10b981; background: rgba(16, 185, 129, 0.1); border-color: rgba(16, 185, 129, 0.2);" onclick="submitPin()"><i class="fa-solid fa-circle-check"></i></button>
+                <button type="button" class="key-btn action"
+                    style="color: #10b981; background: rgba(16, 185, 129, 0.1); border-color: rgba(16, 185, 129, 0.2);"
+                    onclick="submitPin()"><i class="fa-solid fa-circle-check"></i></button>
             </div>
-            
-            <div id="auth-error" style="color: #ef4444; font-size: 0.72rem; font-weight: 600; margin-top: 16px; display: none;">
+
+            <div id="auth-error"
+                style="color: #ef4444; font-size: 0.72rem; font-weight: 600; margin-top: 16px; display: none;">
                 <i class="fa-solid fa-circle-exclamation"></i> Invalid Administrator PIN. Access Denied.
             </div>
         </div>
     </main>
 
     <!-- Footer -->
-    <footer style="background: #0f172a; color: #64748b; padding: 24px; border-top: 1px solid #1e293b; text-align: center; font-size: 0.68rem; font-weight: 400; font-family: 'Outfit', sans-serif; position: absolute; bottom: 0; left: 0; right: 0;">
-        <p>&copy; 2026 PesaQuick Loans Kenya. All rights reserved.</p>
+    <footer
+        style="background: #0f172a; color: #64748b; padding: 24px; border-top: 1px solid #1e293b; text-align: center; font-size: 0.68rem; font-weight: 400; font-family: 'Outfit', sans-serif; position: absolute; bottom: 0; left: 0; right: 0;">
+        <p>&copy; 2026 DAIMA LOANS Kenya. All rights reserved.</p>
     </footer>
 
     <script>
@@ -181,7 +215,7 @@
                 authError.style.display = 'block';
                 currentPin = '';
                 updateDisplay();
-                
+
                 setTimeout(() => {
                     loginCard.classList.remove('shake');
                 }, 400);
@@ -200,4 +234,5 @@
         });
     </script>
 </body>
+
 </html>
