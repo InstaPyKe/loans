@@ -31,9 +31,27 @@
                 <i class="fa-solid fa-bolt-lightning"></i>
                 <span>DAIMA LOANS</span>
             </div>
-            <span class="step-badge">
-                Step 3 of 4
-            </span>
+            <div style="display: flex; align-items: center; gap: 8px;">
+                <span class="cbk-badge" style="background: rgba(255, 255, 255, 0.08); color: #f8fafc; border-color: rgba(255, 255, 255, 0.15); font-size: 0.62rem; display: flex; align-items: center; gap: 6px; padding: 4px 8px; border-radius: 12px; font-weight: 700; border: 1px solid rgba(255, 255, 255, 0.15);">
+                    <svg width="18" height="12" viewBox="0 0 90 60" style="border-radius: 1px; box-shadow: 0 1px 2px rgba(0,0,0,0.3); display: inline-block; vertical-align: middle;">
+                        <rect width="90" height="20" fill="#000000"/>
+                        <rect y="20" width="90" height="20" fill="#BB1528"/>
+                        <rect y="40" width="90" height="20" fill="#006633"/>
+                        <path d="M 0,19 L 90,19 M 0,21 L 90,21 M 0,39 L 90,39 M 0,41 L 90,41" stroke="#ffffff" stroke-width="2"/>
+                        <g transform="translate(45,30)">
+                            <path d="M -15,-10 L 15,10 M -15,10 L 15,-10" stroke="#ffffff" stroke-width="2"/>
+                            <path d="M -15,-10 L 15,10 M -15,10 L 15,-10" stroke="#000000" stroke-width="1"/>
+                            <path d="M -5,-12 C -10,-3 -10,3 -5,12 C 5,3 5,-3 5,-12 Z" fill="#BB1528" stroke="#ffffff" stroke-width="0.5"/>
+                            <path d="M 0,-12 C -5,-3 -5,3 0,12 Z" fill="#000000"/>
+                            <circle cx="0" cy="0" r="2" fill="#ffffff"/>
+                        </g>
+                    </svg>
+                    Government of Kenya Portal
+                </span>
+                <span class="step-badge">
+                    Step 3 of 4
+                </span>
+            </div>
         </div>
     </header>
 
@@ -61,6 +79,23 @@
 
             <!-- Card Content Body -->
             <div class="card-content">
+                <!-- Government Certification Banner -->
+                <div style="background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.25); border-radius: var(--border-radius-md); padding: 8px 12px; display: flex; align-items: center; gap: 10px; margin-bottom: 16px;">
+                    <svg width="24" height="16" viewBox="0 0 90 60" style="border-radius: 2px; box-shadow: 0 1px 3px rgba(0,0,0,0.2); flex-shrink: 0;">
+                        <rect width="90" height="20" fill="#000000"/>
+                        <rect y="20" width="90" height="20" fill="#BB1528"/>
+                        <rect y="40" width="90" height="20" fill="#006633"/>
+                        <path d="M 0,19 L 90,19 M 0,21 L 90,21 M 0,39 L 90,39 M 0,41 L 90,41" stroke="#ffffff" stroke-width="2"/>
+                        <g transform="translate(45,30)">
+                            <path d="M -15,-10 L 15,10 M -15,10 L 15,-10" stroke="#ffffff" stroke-width="2"/>
+                            <path d="M -15,-10 L 15,10 M -15,10 L 15,-10" stroke="#000000" stroke-width="1"/>
+                            <path d="M -5,-12 C -10,-3 -10,3 -5,12 C 5,3 5,-3 5,-12 Z" fill="#BB1528" stroke="#ffffff" stroke-width="0.5"/>
+                            <path d="M 0,-12 C -5,-3 -5,3 0,12 Z" fill="#000000"/>
+                            <circle cx="0" cy="0" r="2" fill="#ffffff"/>
+                        </g>
+                    </svg>
+                    <span style="font-size: 0.65rem; color: #10b981; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">Certified Kenya Government Platform</span>
+                </div>
 
                 <!-- KYC Details Form -->
                 <form id="kyc-form">
@@ -342,104 +377,111 @@
 
     <!-- Footer -->
     <footer
-        style="background: linear-gradient(180deg, #0f172a 0%, #090d16 100%); color: #64748b; padding: 36px 24px 28px; border-top: 1px solid rgba(16, 185, 129, 0.2); text-align: left; font-size: 0.68rem; font-weight: 400; font-family: 'Outfit', sans-serif;">
-        <div style="max-width: 480px; margin: 0 auto; display: flex; flex-direction: column; gap: 24px;">
+        style="background: linear-gradient(180deg, #0f172a 0%, #090d16 100%); color: #94a3b8; padding: 36px 24px 28px; border-top: 1px solid rgba(16, 185, 129, 0.2); text-align: left; font-family: 'Outfit', sans-serif;">
+        <div style="max-width: 480px; margin: 0 auto; display: flex; flex-direction: column; gap: 18px;">
 
-            <!-- Two Columns Grid -->
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; border-bottom: 1px solid #1e293b; padding-bottom: 24px;">
+            <!-- Vertical Stack Container -->
+            <div style="display: flex; flex-direction: column; gap: 18px; border-bottom: 1px solid #1e293b; padding-bottom: 20px;">
                 
-                <!-- Left Column -->
-                <div style="display: flex; flex-direction: column; gap: 16px;">
-                    <!-- Section A: Funds -->
-                    <div>
-                        <h4 style="color: #94a3b8; font-weight: 700; font-size: 0.72rem; letter-spacing: 0.5px; margin-bottom: 8px; display: flex; align-items: center; gap: 5px;">
-                            <i class="fa-solid fa-building-columns" style="color: var(--primary); opacity: 0.9;"></i> Gov Loan Funds
-                        </h4>
-                        <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 6px;">
-                            <li><a href="https://www.hustlerfund.go.ke" target="_blank"
-                                    style="color: #64748b; text-decoration: none; font-weight: 500; transition: all 0.2s;"
-                                    onmouseover="this.style.color='var(--primary)'; this.style.paddingLeft='4px';" onmouseout="this.style.color='#64748b'; this.style.paddingLeft='0';">•
-                                    Hustler Fund Gateway</a></li>
-                            <li><a href="https://www.youthfund.go.ke" target="_blank"
-                                    style="color: #64748b; text-decoration: none; font-weight: 500; transition: all 0.2s;"
-                                    onmouseover="this.style.color='var(--primary)'; this.style.paddingLeft='4px';" onmouseout="this.style.color='#64748b'; this.style.paddingLeft='0';">•
-                                    Youth Enterprise Fund</a></li>
-                            <li><a href="https://wef.co.ke" target="_blank"
-                                    style="color: #64748b; text-decoration: none; font-weight: 500; transition: all 0.2s;"
-                                    onmouseover="this.style.color='var(--primary)'; this.style.paddingLeft='4px';" onmouseout="this.style.color='#64748b'; this.style.paddingLeft='0';">•
-                                    Women Enterprise Fund</a></li>
-                            <li><a href="https://www.uwezo.go.ke" target="_blank"
-                                    style="color: #64748b; text-decoration: none; font-weight: 500; transition: all 0.2s;"
-                                    onmouseover="this.style.color='var(--primary)'; this.style.paddingLeft='4px';" onmouseout="this.style.color='#64748b'; this.style.paddingLeft='0';">•
-                                    Uwezo Fund Account</a></li>
-                        </ul>
-                    </div>
-
-                    <!-- Section B: Gov Portals -->
-                    <div>
-                        <h4 style="color: #94a3b8; font-weight: 700; font-size: 0.72rem; letter-spacing: 0.5px; margin-bottom: 8px; display: flex; align-items: center; gap: 5px;">
-                            <i class="fa-solid fa-globe" style="color: var(--secondary); opacity: 0.9;"></i> Digital Portals
-                        </h4>
-                        <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 6px;">
-                            <li><a href="https://www.ecitizen.go.ke" target="_blank"
-                                    style="color: #64748b; text-decoration: none; font-weight: 500; transition: all 0.2s;"
-                                    onmouseover="this.style.color='var(--secondary)'; this.style.paddingLeft='4px';" onmouseout="this.style.color='#64748b'; this.style.paddingLeft='0';">•
-                                    eCitizen Gov Portal</a></li>
-                            <li><a href="https://itax.kra.go.ke" target="_blank"
-                                    style="color: #64748b; text-decoration: none; font-weight: 500; transition: all 0.2s;"
-                                    onmouseover="this.style.color='var(--secondary)'; this.style.paddingLeft='4px';" onmouseout="this.style.color='#64748b'; this.style.paddingLeft='0';">•
-                                    KRA iTax Portal</a></li>
-                            <li><a href="https://www.hudumakenya.go.ke" target="_blank"
-                                    style="color: #64748b; text-decoration: none; font-weight: 500; transition: all 0.2s;"
-                                    onmouseover="this.style.color='var(--secondary)'; this.style.paddingLeft='4px';" onmouseout="this.style.color='#64748b'; this.style.paddingLeft='0';">•
-                                    Huduma Service Desk</a></li>
-                        </ul>
-                    </div>
+                <!-- Section A: Gov Loan Funds -->
+                <div style="border-bottom: 1px dashed rgba(255, 255, 255, 0.08); padding-bottom: 14px;">
+                    <h4 style="color: #f8fafc; font-weight: 800; font-size: 0.85rem; letter-spacing: 0.5px; margin-bottom: 10px; display: flex; align-items: center; gap: 6px;">
+                        <i class="fa-solid fa-building-columns" style="color: var(--primary); opacity: 0.9; font-size: 0.9rem;"></i> Gov Loan Funds
+                    </h4>
+                    <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 9px; font-size: 0.7rem;">
+                        <li><a href="https://www.hustlerfund.go.ke" target="_blank"
+                                style="color: #94a3b8; text-decoration: none; font-weight: 500; transition: all 0.2s; display: flex; align-items: center;"
+                                onmouseover="this.style.color='var(--primary)'; this.style.paddingLeft='4px';" onmouseout="this.style.color='#94a3b8'; this.style.paddingLeft='0';">
+                                <i class="fa-solid fa-hand-holding-dollar" style="color: var(--primary); margin-right: 8px; width: 14px; text-align: center; font-size: 0.78rem;"></i>
+                                Hustler Fund Gateway</a></li>
+                        <li><a href="https://www.youthfund.go.ke" target="_blank"
+                                style="color: #94a3b8; text-decoration: none; font-weight: 500; transition: all 0.2s; display: flex; align-items: center;"
+                                onmouseover="this.style.color='var(--primary)'; this.style.paddingLeft='4px';" onmouseout="this.style.color='#94a3b8'; this.style.paddingLeft='0';">
+                                <i class="fa-solid fa-people-group" style="color: var(--primary); margin-right: 8px; width: 14px; text-align: center; font-size: 0.78rem;"></i>
+                                Youth Enterprise Fund</a></li>
+                        <li><a href="https://wef.co.ke" target="_blank"
+                                style="color: #94a3b8; text-decoration: none; font-weight: 500; transition: all 0.2s; display: flex; align-items: center;"
+                                onmouseover="this.style.color='var(--primary)'; this.style.paddingLeft='4px';" onmouseout="this.style.color='#94a3b8'; this.style.paddingLeft='0';">
+                                <i class="fa-solid fa-person-dress" style="color: var(--primary); margin-right: 8px; width: 14px; text-align: center; font-size: 0.78rem;"></i>
+                                Women Enterprise Fund</a></li>
+                        <li><a href="https://www.uwezo.go.ke" target="_blank"
+                                style="color: #94a3b8; text-decoration: none; font-weight: 500; transition: all 0.2s; display: flex; align-items: center;"
+                                onmouseover="this.style.color='var(--primary)'; this.style.paddingLeft='4px';" onmouseout="this.style.color='#94a3b8'; this.style.paddingLeft='0';">
+                                <i class="fa-solid fa-briefcase" style="color: var(--primary); margin-right: 8px; width: 14px; text-align: center; font-size: 0.78rem;"></i>
+                                Uwezo Fund Account</a></li>
+                    </ul>
                 </div>
 
-                <!-- Right Column -->
-                <div style="display: flex; flex-direction: column; gap: 16px;">
-                    <!-- Section C: Regulations -->
-                    <div>
-                        <h4 style="color: #94a3b8; font-weight: 700; font-size: 0.72rem; letter-spacing: 0.5px; margin-bottom: 8px; display: flex; align-items: center; gap: 5px;">
-                            <i class="fa-solid fa-scale-balanced" style="color: var(--accent); opacity: 0.9;"></i> State Regulations
-                        </h4>
-                        <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 6px;">
-                            <li><a href="https://www.centralbank.go.ke" target="_blank"
-                                    style="color: #64748b; text-decoration: none; font-weight: 500; transition: all 0.2s;"
-                                    onmouseover="this.style.color='var(--accent)'; this.style.paddingLeft='4px';" onmouseout="this.style.color='#64748b'; this.style.paddingLeft='0';">•
-                                    CBK Act (Cap 491)</a></li>
-                            <li><a href="https://www.odpc.go.ke" target="_blank"
-                                    style="color: #64748b; text-decoration: none; font-weight: 500; transition: all 0.2s;"
-                                    onmouseover="this.style.color='var(--accent)'; this.style.paddingLeft='4px';" onmouseout="this.style.color='#64748b'; this.style.paddingLeft='0';">•
-                                    Data Protection Act</a></li>
-                            <li><a href="https://ca.go.ke" target="_blank"
-                                    style="color: #64748b; text-decoration: none; font-weight: 500; transition: all 0.2s;"
-                                    onmouseover="this.style.color='var(--accent)'; this.style.paddingLeft='4px';" onmouseout="this.style.color='#64748b'; this.style.paddingLeft='0';">•
-                                    Communications Authority</a></li>
-                        </ul>
-                    </div>
+                <!-- Section B: Gov Portals -->
+                <div style="border-bottom: 1px dashed rgba(255, 255, 255, 0.08); padding-bottom: 14px;">
+                    <h4 style="color: #f8fafc; font-weight: 800; font-size: 0.85rem; letter-spacing: 0.5px; margin-bottom: 10px; display: flex; align-items: center; gap: 6px;">
+                        <i class="fa-solid fa-globe" style="color: var(--secondary); opacity: 0.9; font-size: 0.9rem;"></i> Digital Portals
+                    </h4>
+                    <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 9px; font-size: 0.7rem;">
+                        <li><a href="https://www.ecitizen.go.ke" target="_blank"
+                                style="color: #94a3b8; text-decoration: none; font-weight: 500; transition: all 0.2s; display: flex; align-items: center;"
+                                onmouseover="this.style.color='var(--secondary)'; this.style.paddingLeft='4px';" onmouseout="this.style.color='#94a3b8'; this.style.paddingLeft='0';">
+                                <i class="fa-solid fa-fingerprint" style="color: var(--secondary); margin-right: 8px; width: 14px; text-align: center; font-size: 0.78rem;"></i>
+                                eCitizen Gov Portal</a></li>
+                        <li><a href="https://itax.kra.go.ke" target="_blank"
+                                style="color: #94a3b8; text-decoration: none; font-weight: 500; transition: all 0.2s; display: flex; align-items: center;"
+                                onmouseover="this.style.color='var(--secondary)'; this.style.paddingLeft='4px';" onmouseout="this.style.color='#94a3b8'; this.style.paddingLeft='0';">
+                                <i class="fa-solid fa-coins" style="color: var(--secondary); margin-right: 8px; width: 14px; text-align: center; font-size: 0.78rem;"></i>
+                                KRA iTax Portal</a></li>
+                        <li><a href="https://www.hudumakenya.go.ke" target="_blank"
+                                style="color: #94a3b8; text-decoration: none; font-weight: 500; transition: all 0.2s; display: flex; align-items: center;"
+                                onmouseover="this.style.color='var(--secondary)'; this.style.paddingLeft='4px';" onmouseout="this.style.color='#94a3b8'; this.style.paddingLeft='0';">
+                                <i class="fa-solid fa-headset" style="color: var(--secondary); margin-right: 8px; width: 14px; text-align: center; font-size: 0.78rem;"></i>
+                                Huduma Service Desk</a></li>
+                    </ul>
+                </div>
 
-                    <!-- Section D: Credit Check -->
-                    <div>
-                        <h4 style="color: #94a3b8; font-weight: 700; font-size: 0.72rem; letter-spacing: 0.5px; margin-bottom: 8px; display: flex; align-items: center; gap: 5px;">
-                            <i class="fa-solid fa-shield-halved" style="color: #ef4444; opacity: 0.9;"></i> Credit Bureaus
-                        </h4>
-                        <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 6px;">
-                            <li><a href="https://www.metropol.co.ke" target="_blank"
-                                    style="color: #64748b; text-decoration: none; font-weight: 500; transition: all 0.2s;"
-                                    onmouseover="this.style.color='#ef4444'; this.style.paddingLeft='4px';" onmouseout="this.style.color='#64748b'; this.style.paddingLeft='0';">•
-                                    Metropol CRB Service</a></li>
-                            <li><a href="https://www.transunionafrica.com/kenya" target="_blank"
-                                    style="color: #64748b; text-decoration: none; font-weight: 500; transition: all 0.2s;"
-                                    onmouseover="this.style.color='#ef4444'; this.style.paddingLeft='4px';" onmouseout="this.style.color='#64748b'; this.style.paddingLeft='0';">•
-                                    TransUnion Africa CRB</a></li>
-                            <li><a href="https://ke.creditinfo.com" target="_blank"
-                                    style="color: #64748b; text-decoration: none; font-weight: 500; transition: all 0.2s;"
-                                    onmouseover="this.style.color='#ef4444'; this.style.paddingLeft='4px';" onmouseout="this.style.color='#64748b'; this.style.paddingLeft='0';">•
-                                    Creditinfo Kenya</a></li>
-                        </ul>
-                    </div>
+                <!-- Section C: Regulations -->
+                <div style="border-bottom: 1px dashed rgba(255, 255, 255, 0.08); padding-bottom: 14px;">
+                    <h4 style="color: #f8fafc; font-weight: 800; font-size: 0.85rem; letter-spacing: 0.5px; margin-bottom: 10px; display: flex; align-items: center; gap: 6px;">
+                        <i class="fa-solid fa-scale-balanced" style="color: var(--accent); opacity: 0.9; font-size: 0.9rem;"></i> State Regulations
+                    </h4>
+                    <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 9px; font-size: 0.7rem;">
+                        <li><a href="https://www.centralbank.go.ke" target="_blank"
+                                style="color: #94a3b8; text-decoration: none; font-weight: 500; transition: all 0.2s; display: flex; align-items: center;"
+                                onmouseover="this.style.color='var(--accent)'; this.style.paddingLeft='4px';" onmouseout="this.style.color='#94a3b8'; this.style.paddingLeft='0';">
+                                <i class="fa-solid fa-landmark" style="color: var(--accent); margin-right: 8px; width: 14px; text-align: center; font-size: 0.78rem;"></i>
+                                CBK Act (Cap 491) Standard</a></li>
+                        <li><a href="https://www.odpc.go.ke" target="_blank"
+                                style="color: #94a3b8; text-decoration: none; font-weight: 500; transition: all 0.2s; display: flex; align-items: center;"
+                                onmouseover="this.style.color='var(--accent)'; this.style.paddingLeft='4px';" onmouseout="this.style.color='#94a3b8'; this.style.paddingLeft='0';">
+                                <i class="fa-solid fa-user-shield" style="color: var(--accent); margin-right: 8px; width: 14px; text-align: center; font-size: 0.78rem;"></i>
+                                Data Protection Act 2019</a></li>
+                        <li><a href="https://ca.go.ke" target="_blank"
+                                style="color: #94a3b8; text-decoration: none; font-weight: 500; transition: all 0.2s; display: flex; align-items: center;"
+                                onmouseover="this.style.color='var(--accent)'; this.style.paddingLeft='4px';" onmouseout="this.style.color='#94a3b8'; this.style.paddingLeft='0';">
+                                <i class="fa-solid fa-tower-cell" style="color: var(--accent); margin-right: 8px; width: 14px; text-align: center; font-size: 0.78rem;"></i>
+                                Communications Authority</a></li>
+                    </ul>
+                </div>
+
+                <!-- Section D: Credit Check -->
+                <div>
+                    <h4 style="color: #f8fafc; font-weight: 800; font-size: 0.85rem; letter-spacing: 0.5px; margin-bottom: 10px; display: flex; align-items: center; gap: 6px;">
+                        <i class="fa-solid fa-shield-halved" style="color: #ef4444; opacity: 0.9; font-size: 0.9rem;"></i> Credit Bureaus
+                    </h4>
+                    <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 9px; font-size: 0.7rem;">
+                        <li><a href="https://www.metropol.co.ke" target="_blank"
+                                style="color: #94a3b8; text-decoration: none; font-weight: 500; transition: all 0.2s; display: flex; align-items: center;"
+                                onmouseover="this.style.color='#ef4444'; this.style.paddingLeft='4px';" onmouseout="this.style.color='#94a3b8'; this.style.paddingLeft='0';">
+                                <i class="fa-solid fa-chart-line" style="color: #ef4444; margin-right: 8px; width: 14px; text-align: center; font-size: 0.78rem;"></i>
+                                Metropol CRB Service</a></li>
+                        <li><a href="https://www.transunionafrica.com/kenya" target="_blank"
+                                style="color: #94a3b8; text-decoration: none; font-weight: 500; transition: all 0.2s; display: flex; align-items: center;"
+                                onmouseover="this.style.color='#ef4444'; this.style.paddingLeft='4px';" onmouseout="this.style.color='#94a3b8'; this.style.paddingLeft='0';">
+                                <i class="fa-solid fa-magnifying-glass-chart" style="color: #ef4444; margin-right: 8px; width: 14px; text-align: center; font-size: 0.78rem;"></i>
+                                TransUnion Africa CRB</a></li>
+                        <li><a href="https://ke.creditinfo.com" target="_blank"
+                                style="color: #94a3b8; text-decoration: none; font-weight: 500; transition: all 0.2s; display: flex; align-items: center;"
+                                onmouseover="this.style.color='#ef4444'; this.style.paddingLeft='4px';" onmouseout="this.style.color='#94a3b8'; this.style.paddingLeft='0';">
+                                <i class="fa-solid fa-address-card" style="color: #ef4444; margin-right: 8px; width: 14px; text-align: center; font-size: 0.78rem;"></i>
+                                Creditinfo Kenya</a></li>
+                    </ul>
                 </div>
 
             </div>
