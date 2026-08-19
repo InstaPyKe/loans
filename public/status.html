@@ -342,6 +342,117 @@
                 document.getElementById('submit-time-display').textContent = dateObj.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
             }
 
+            // Dynamic UI updates based on application status
+            function updateStatusUI() {
+                // Read from localStorage
+                let localApp = null;
+                try {
+                    const localApps = JSON.parse(localStorage.getItem('daima_loans_applications') || '[]');
+                    localApp = localApps.find(a => a.appId === appId);
+                } catch (e) {
+                    console.warn(e);
+                }
+
+                const queueIconBox = document.getElementById('queue-icon-box');
+                const queueHeader = document.getElementById('queue-header');
+                const queueDescription = document.getElementById('queue-description');
+                const progressPercent = document.getElementById('progress-percent');
+                const progressFill = document.getElementById('progress-fill');
+                const checklistContainer = document.getElementById('checklist-container');
+
+                // Default status: PENDING
+                let statusVal = 'PENDING';
+                if (localApp) {
+                    statusVal = localApp.status;
+                }
+
+                if (statusVal === 'PENDING') {
+                    queueIconBox.innerHTML = `<i class="fa-solid fa-hourglass-half fa-spin"></i>`;
+                    queueHeader.textContent = "Queued for Verification";
+                    queueHeader.style.color = "var(--white)";
+                    queueDescription.innerHTML = `Your application is in the admin review queue. Facilitation fee verification and disbursement will process concurrently once approved.`;
+                    progressPercent.textContent = "50% Complete";
+                    progressFill.style.width = "50%";
+                    progressFill.style.background = "var(--primary)";
+
+                    checklistContainer.innerHTML = `
+                        <div style="display: flex; align-items: center; gap: 10px; font-size: 0.72rem; color: #34d399; font-weight: 500;">
+                            <i class="fa-solid fa-circle-check" style="font-size: 0.8rem;"></i>
+                            <span>Step 1: Safaricom Line & Identity Check (Passed)</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 10px; font-size: 0.72rem; color: #fde047; font-weight: 600;">
+                            <i class="fa-solid fa-spinner fa-spin" style="font-size: 0.8rem;"></i>
+                            <span>Step 2: M-Pesa CRB Fee Validation (Awaiting Admin Verification)</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 10px; font-size: 0.72rem; color: #cbd5e1; font-weight: 400; opacity: 0.8;">
+                            <i class="fa-regular fa-clock" style="font-size: 0.8rem;"></i>
+                            <span>Step 3: Admin Queue CRB Verification & Audit Sign-Off (In Queue)</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 10px; font-size: 0.72rem; color: #cbd5e1; opacity: 0.6; font-weight: 400;">
+                            <i class="fa-regular fa-circle" style="font-size: 0.8rem;"></i>
+                            <span>Step 4: M-Pesa Disbursement & SMS Confirmation (Pending)</span>
+                        </div>
+                    `;
+                } else if (statusVal === 'APPROVED') {
+                    queueIconBox.innerHTML = `<i class="fa-solid fa-circle-check" style="color: #34d399; font-size: 2rem;"></i>`;
+                    queueHeader.textContent = "Disbursement Successful";
+                    queueHeader.style.color = "#34d399";
+                    queueDescription.innerHTML = `Congratulations! Your M-Pesa CRB fee has been verified and your loan limit of <strong>Ksh. ${parsedPrincipal.toLocaleString()}</strong> has been disbursed to <strong>${userPhone}</strong>.`;
+                    progressPercent.textContent = "100% Complete";
+                    progressFill.style.width = "100%";
+                    progressFill.style.background = "#34d399";
+
+                    checklistContainer.innerHTML = `
+                        <div style="display: flex; align-items: center; gap: 10px; font-size: 0.72rem; color: #34d399; font-weight: 500;">
+                            <i class="fa-solid fa-circle-check" style="font-size: 0.8rem;"></i>
+                            <span>Step 1: Safaricom Line & Identity Check (Passed)</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 10px; font-size: 0.72rem; color: #34d399; font-weight: 500;">
+                            <i class="fa-solid fa-circle-check" style="font-size: 0.8rem;"></i>
+                            <span>Step 2: M-Pesa CRB Fee Validation (Ksh. 50 Verified)</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 10px; font-size: 0.72rem; color: #34d399; font-weight: 500;">
+                            <i class="fa-solid fa-circle-check" style="font-size: 0.8rem;"></i>
+                            <span>Step 3: Admin Queue CRB Verification & Audit Sign-Off (Passed)</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 10px; font-size: 0.72rem; color: #34d399; font-weight: 500;">
+                            <i class="fa-solid fa-circle-check" style="font-size: 0.8rem;"></i>
+                            <span>Step 4: M-Pesa Disbursement & SMS Confirmation (Completed)</span>
+                        </div>
+                    `;
+                } else if (statusVal === 'REJECTED') {
+                    queueIconBox.innerHTML = `<i class="fa-solid fa-circle-xmark" style="color: var(--danger); font-size: 2rem;"></i>`;
+                    queueHeader.textContent = "Application Declined";
+                    queueHeader.style.color = "var(--danger)";
+                    queueDescription.innerHTML = `Your application was declined during admin review. Under Daima Terms, your Ksh. 50 fee refund has been initiated to your M-Pesa line.`;
+                    progressPercent.textContent = "0% (Declined)";
+                    progressFill.style.width = "0%";
+                    progressFill.style.background = "var(--danger)";
+
+                    checklistContainer.innerHTML = `
+                        <div style="display: flex; align-items: center; gap: 10px; font-size: 0.72rem; color: #34d399; font-weight: 500;">
+                            <i class="fa-solid fa-circle-check" style="font-size: 0.8rem;"></i>
+                            <span>Step 1: Safaricom Line & Identity Check (Passed)</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 10px; font-size: 0.72rem; color: var(--accent); font-weight: 500;">
+                            <i class="fa-solid fa-rotate-left" style="font-size: 0.8rem;"></i>
+                            <span>Step 2: M-Pesa CRB Fee Validation (Declined - Ksh. 50 Refund Initiated)</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 10px; font-size: 0.72rem; color: var(--danger); font-weight: 500;">
+                            <i class="fa-solid fa-circle-xmark" style="font-size: 0.8rem;"></i>
+                            <span>Step 3: Admin Queue CRB Verification & Audit Sign-Off (Declined)</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 10px; font-size: 0.72rem; color: #cbd5e1; opacity: 0.5; font-weight: 400;">
+                            <i class="fa-regular fa-circle-xmark" style="font-size: 0.8rem;"></i>
+                            <span>Step 4: M-Pesa Disbursement & SMS Confirmation (Cancelled)</span>
+                        </div>
+                    `;
+                }
+            }
+
+            // Initial UI Update
+            updateStatusUI();
+
             // Status Refresh Action
             const btnRefresh = document.getElementById('btn-refresh');
             btnRefresh.addEventListener('click', () => {
@@ -352,7 +463,23 @@
                 setTimeout(() => {
                     icon.classList.remove('fa-spin');
                     btnRefresh.disabled = false;
-                    alert('Queue Status: Application is currently at Position #4 in the admin review queue. Check back shortly!');
+
+                    // Fetch latest updates and refresh UI
+                    updateStatusUI();
+
+                    let localApp = null;
+                    try {
+                        const localApps = JSON.parse(localStorage.getItem('daima_loans_applications') || '[]');
+                        localApp = localApps.find(a => a.appId === appId);
+                    } catch (e) {}
+
+                    if (localApp && localApp.status === 'APPROVED') {
+                        alert('Queue Status: Your application has been approved and loan disbursed to your M-Pesa line!');
+                    } else if (localApp && localApp.status === 'REJECTED') {
+                        alert('Queue Status: Your application was declined. A refund of Ksh. 50 has been initiated.');
+                    } else {
+                        alert('Queue Status: Application is currently at Position #4 in the admin review queue. Check back shortly!');
+                    }
                 }, 1200);
             });
 
