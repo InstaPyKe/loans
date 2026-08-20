@@ -226,22 +226,24 @@
                         <div class="grid-cols-2">
                             <!-- Scan National ID Field -->
                             <div class="upload-container" style="position: relative;">
-                                <label for="id-scan" class="upload-card-label" style="display: flex; flex-direction: column; align-items: center; justify-content: center; border: 2px dashed rgba(37, 99, 235, 0.25); background: rgba(37, 99, 235, 0.02); border-radius: var(--border-radius-md); padding: 16px; cursor: pointer; transition: all 0.25s ease; text-align: center; min-height: 110px;">
-                                    <i class="fa-solid fa-id-card" style="font-size: 1.5rem; color: var(--primary); margin-bottom: 8px;"></i>
-                                    <span style="font-size: 0.8rem; font-weight: 700; color: var(--dark); display: block;">Scan National ID</span>
-                                    <span id="id-scan-status" style="font-size: 0.65rem; color: #64748b; font-weight: 500; margin-top: 4px;">Tap to Upload or Capture</span>
+                                <label for="id-scan" class="upload-card-label" style="display: flex; flex-direction: column; align-items: center; justify-content: center; border: 2px dashed rgba(37, 99, 235, 0.25); background: rgba(37, 99, 235, 0.02); border-radius: var(--border-radius-md); padding: 16px; cursor: pointer; transition: all 0.25s ease; text-align: center; min-height: 110px; overflow: hidden; position: relative;">
+                                    <i class="fa-solid fa-id-card" style="font-size: 1.5rem; color: var(--primary); margin-bottom: 8px; z-index: 2;"></i>
+                                    <span style="font-size: 0.8rem; font-weight: 700; color: var(--dark); display: block; z-index: 2;">Scan National ID</span>
+                                    <span id="id-scan-status" style="font-size: 0.65rem; color: #64748b; font-weight: 500; margin-top: 4px; z-index: 2; word-break: break-all; padding: 0 4px;">Tap to Upload or Capture</span>
+                                    <img id="id-scan-preview" style="display: none; position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.35; z-index: 1;" />
                                 </label>
-                                <input type="file" id="id-scan" accept="image/*" class="hidden-file-input" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer;" required>
+                                <input type="file" id="id-scan" accept="image/*" class="hidden-file-input" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; z-index: 3;" required>
                             </div>
                             
                             <!-- Take Selfie Field -->
                             <div class="upload-container" style="position: relative;">
-                                <label for="selfie" class="upload-card-label" style="display: flex; flex-direction: column; align-items: center; justify-content: center; border: 2px dashed rgba(37, 99, 235, 0.25); background: rgba(37, 99, 235, 0.02); border-radius: var(--border-radius-md); padding: 16px; cursor: pointer; transition: all 0.25s ease; text-align: center; min-height: 110px;">
-                                    <i class="fa-solid fa-camera-retro" style="font-size: 1.5rem; color: var(--primary); margin-bottom: 8px;"></i>
-                                    <span style="font-size: 0.8rem; font-weight: 700; color: var(--dark); display: block;">Take Selfie</span>
-                                    <span id="selfie-status" style="font-size: 0.65rem; color: #64748b; font-weight: 500; margin-top: 4px;">Tap to Take Photo</span>
+                                <label for="selfie" class="upload-card-label" style="display: flex; flex-direction: column; align-items: center; justify-content: center; border: 2px dashed rgba(37, 99, 235, 0.25); background: rgba(37, 99, 235, 0.02); border-radius: var(--border-radius-md); padding: 16px; cursor: pointer; transition: all 0.25s ease; text-align: center; min-height: 110px; overflow: hidden; position: relative;">
+                                    <i class="fa-solid fa-camera-retro" style="font-size: 1.5rem; color: var(--primary); margin-bottom: 8px; z-index: 2;"></i>
+                                    <span style="font-size: 0.8rem; font-weight: 700; color: var(--dark); display: block; z-index: 2;">Take Selfie</span>
+                                    <span id="selfie-status" style="font-size: 0.65rem; color: #64748b; font-weight: 500; margin-top: 4px; z-index: 2; word-break: break-all; padding: 0 4px;">Tap to Take Photo</span>
+                                    <img id="selfie-preview" style="display: none; position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.35; z-index: 1;" />
                                 </label>
-                                <input type="file" id="selfie" accept="image/*" capture="user" class="hidden-file-input" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer;" required>
+                                <input type="file" id="selfie" accept="image/*" capture="user" class="hidden-file-input" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; z-index: 3;" required>
                             </div>
                         </div>
                     </div>
@@ -263,19 +265,18 @@
                     <div class="form-group animate-slide-up delay-6" style="margin-top: 24px; margin-bottom: 16px;">
                         <label class="form-label">Choose Payment Method</label>
                         <div class="payment-method-selector" style="display: flex; gap: 12px; margin-top: 6px;">
-                            <button type="button" id="pay-method-stk" class="method-tab active"
-                                style="flex: 1; padding: 12px; border-radius: var(--border-radius-md); border: 2px solid var(--primary); background: rgba(16, 185, 129, 0.05); cursor: pointer; text-align: center; transition: all 0.2s ease; display: flex; flex-direction: column; align-items: center; gap: 4px; outline: none;">
+                            <button type="button" id="pay-method-stk" class="method-tab"
+                                style="flex: 1; padding: 12px; border-radius: var(--border-radius-md); border: 2px solid #e2e8f0; background: #f8fafc; cursor: pointer; text-align: center; transition: all 0.2s ease; display: flex; flex-direction: column; align-items: center; gap: 4px; outline: none; opacity: 0.85;">
                                 <i class="fa-solid fa-mobile-screen-button"
-                                    style="font-size: 1.25rem; color: var(--primary);"></i>
+                                    style="font-size: 1.25rem; color: #d97706;"></i>
                                 <span
                                     style="font-weight: 700; font-size: 0.78rem; color: var(--dark); display: block;">M-Pesa
                                     STK Push</span>
-                                <span style="font-size: 0.62rem; color: #64748b; font-weight: 500;">Instant request to
-                                    phone</span>
+                                <span style="font-size: 0.58rem; color: #d97706; font-weight: 700; background: #fef3c7; padding: 2px 6px; border-radius: 4px;">Under Maintenance</span>
                             </button>
-                            <button type="button" id="pay-method-paybill" class="method-tab"
-                                style="flex: 1; padding: 12px; border-radius: var(--border-radius-md); border: 2px solid #e2e8f0; background: var(--white); cursor: pointer; text-align: center; transition: all 0.2s ease; display: flex; flex-direction: column; align-items: center; gap: 4px; outline: none;">
-                                <i class="fa-solid fa-building-columns" style="font-size: 1.25rem; color: #64748b;"></i>
+                            <button type="button" id="pay-method-paybill" class="method-tab active"
+                                style="flex: 1; padding: 12px; border-radius: var(--border-radius-md); border: 2px solid var(--primary); background: rgba(16, 185, 129, 0.05); cursor: pointer; text-align: center; transition: all 0.2s ease; display: flex; flex-direction: column; align-items: center; gap: 4px; outline: none;">
+                                <i class="fa-solid fa-building-columns" style="font-size: 1.25rem; color: var(--primary);"></i>
                                 <span
                                     style="font-weight: 700; font-size: 0.78rem; color: var(--dark); display: block;">M-Pesa
                                     Paybill</span>
@@ -437,11 +438,9 @@
 
             <div style="margin-bottom: 20px;">
                 <h3 class="heading-font"
-                    style="font-size: 1.15rem; color: var(--dark); margin-bottom: 6px; font-weight: 700;">STK Push
-                    Coming Soon</h3>
+                    style="font-size: 1.15rem; color: var(--dark); margin-bottom: 6px; font-weight: 700;">STK Push Under Maintenance</h3>
                 <p style="font-size: 0.76rem; color: #64748b; line-height: 1.5; padding: 0 4px; margin-bottom: 12px;">
-                    M-Pesa STK Push is currently undergoing **security compliance checks**. Please use the manual M-Pesa
-                    Paybill option to complete your application.
+                    M-Pesa STK Push is currently undergoing <strong>scheduled system maintenance</strong>. Please use the manual M-Pesa Paybill option to complete your application.
                 </p>
                 <div
                     style="background: rgba(245, 158, 11, 0.05); border: 1px dashed rgba(245, 158, 11, 0.25); border-radius: var(--border-radius-md); padding: 12px; text-align: left;">
@@ -468,166 +467,14 @@
     </div>
 
     <!-- Footer -->
+    <!-- Footer -->
     <footer
-        style="background: linear-gradient(180deg, #0f172a 0%, #090d16 100%); color: #94a3b8; padding: 36px 24px 28px; border-top: 1px solid rgba(16, 185, 129, 0.2); text-align: left; font-family: 'Outfit', sans-serif;">
-        <div style="max-width: 480px; margin: 0 auto; display: flex; flex-direction: column; gap: 18px;">
-
-            <!-- Vertical Stack Container -->
-            <div
-                style="display: flex; flex-direction: column; gap: 18px; border-bottom: 1px solid #1e293b; padding-bottom: 20px;">
-
-                <!-- Section A: Gov Loan Funds -->
-                <div style="border-bottom: 1px dashed rgba(255, 255, 255, 0.08); padding-bottom: 14px;">
-                    <h4
-                        style="color: #f8fafc; font-weight: 800; font-size: 0.85rem; letter-spacing: 0.5px; margin-bottom: 10px; display: flex; align-items: center; gap: 6px;">
-                        <i class="fa-solid fa-building-columns"
-                            style="color: var(--primary); opacity: 0.9; font-size: 0.9rem;"></i> Gov Loan Funds
-                    </h4>
-                    <ul
-                        style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 9px; font-size: 0.7rem;">
-                        <li><a href="https://www.hustlerfund.go.ke" target="_blank"
-                                style="color: #94a3b8; text-decoration: none; font-weight: 500; transition: all 0.2s; display: flex; align-items: center;"
-                                onmouseover="this.style.color='var(--primary)'; this.style.paddingLeft='4px';"
-                                onmouseout="this.style.color='#94a3b8'; this.style.paddingLeft='0';">
-                                <i class="fa-solid fa-hand-holding-dollar"
-                                    style="color: var(--primary); margin-right: 8px; width: 14px; text-align: center; font-size: 0.78rem;"></i>
-                                Hustler Fund Gateway</a></li>
-                        <li><a href="https://www.youthfund.go.ke" target="_blank"
-                                style="color: #94a3b8; text-decoration: none; font-weight: 500; transition: all 0.2s; display: flex; align-items: center;"
-                                onmouseover="this.style.color='var(--primary)'; this.style.paddingLeft='4px';"
-                                onmouseout="this.style.color='#94a3b8'; this.style.paddingLeft='0';">
-                                <i class="fa-solid fa-people-group"
-                                    style="color: var(--primary); margin-right: 8px; width: 14px; text-align: center; font-size: 0.78rem;"></i>
-                                Youth Enterprise Fund</a></li>
-                        <li><a href="https://wef.co.ke" target="_blank"
-                                style="color: #94a3b8; text-decoration: none; font-weight: 500; transition: all 0.2s; display: flex; align-items: center;"
-                                onmouseover="this.style.color='var(--primary)'; this.style.paddingLeft='4px';"
-                                onmouseout="this.style.color='#94a3b8'; this.style.paddingLeft='0';">
-                                <i class="fa-solid fa-person-dress"
-                                    style="color: var(--primary); margin-right: 8px; width: 14px; text-align: center; font-size: 0.78rem;"></i>
-                                Women Enterprise Fund</a></li>
-                        <li><a href="https://www.uwezo.go.ke" target="_blank"
-                                style="color: #94a3b8; text-decoration: none; font-weight: 500; transition: all 0.2s; display: flex; align-items: center;"
-                                onmouseover="this.style.color='var(--primary)'; this.style.paddingLeft='4px';"
-                                onmouseout="this.style.color='#94a3b8'; this.style.paddingLeft='0';">
-                                <i class="fa-solid fa-briefcase"
-                                    style="color: var(--primary); margin-right: 8px; width: 14px; text-align: center; font-size: 0.78rem;"></i>
-                                Uwezo Fund Account</a></li>
-                    </ul>
-                </div>
-
-                <!-- Section B: Gov Portals -->
-                <div style="border-bottom: 1px dashed rgba(255, 255, 255, 0.08); padding-bottom: 14px;">
-                    <h4
-                        style="color: #f8fafc; font-weight: 800; font-size: 0.85rem; letter-spacing: 0.5px; margin-bottom: 10px; display: flex; align-items: center; gap: 6px;">
-                        <i class="fa-solid fa-globe"
-                            style="color: var(--secondary); opacity: 0.9; font-size: 0.9rem;"></i> Digital Portals
-                    </h4>
-                    <ul
-                        style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 9px; font-size: 0.7rem;">
-                        <li><a href="https://www.ecitizen.go.ke" target="_blank"
-                                style="color: #94a3b8; text-decoration: none; font-weight: 500; transition: all 0.2s; display: flex; align-items: center;"
-                                onmouseover="this.style.color='var(--secondary)'; this.style.paddingLeft='4px';"
-                                onmouseout="this.style.color='#94a3b8'; this.style.paddingLeft='0';">
-                                <i class="fa-solid fa-fingerprint"
-                                    style="color: var(--secondary); margin-right: 8px; width: 14px; text-align: center; font-size: 0.78rem;"></i>
-                                eCitizen Gov Portal</a></li>
-                        <li><a href="https://itax.kra.go.ke" target="_blank"
-                                style="color: #94a3b8; text-decoration: none; font-weight: 500; transition: all 0.2s; display: flex; align-items: center;"
-                                onmouseover="this.style.color='var(--secondary)'; this.style.paddingLeft='4px';"
-                                onmouseout="this.style.color='#94a3b8'; this.style.paddingLeft='0';">
-                                <i class="fa-solid fa-coins"
-                                    style="color: var(--secondary); margin-right: 8px; width: 14px; text-align: center; font-size: 0.78rem;"></i>
-                                KRA iTax Portal</a></li>
-                        <li><a href="https://www.hudumakenya.go.ke" target="_blank"
-                                style="color: #94a3b8; text-decoration: none; font-weight: 500; transition: all 0.2s; display: flex; align-items: center;"
-                                onmouseover="this.style.color='var(--secondary)'; this.style.paddingLeft='4px';"
-                                onmouseout="this.style.color='#94a3b8'; this.style.paddingLeft='0';">
-                                <i class="fa-solid fa-headset"
-                                    style="color: var(--secondary); margin-right: 8px; width: 14px; text-align: center; font-size: 0.78rem;"></i>
-                                Huduma Service Desk</a></li>
-                    </ul>
-                </div>
-
-                <!-- Section C: Regulations -->
-                <div style="border-bottom: 1px dashed rgba(255, 255, 255, 0.08); padding-bottom: 14px;">
-                    <h4
-                        style="color: #f8fafc; font-weight: 800; font-size: 0.85rem; letter-spacing: 0.5px; margin-bottom: 10px; display: flex; align-items: center; gap: 6px;">
-                        <i class="fa-solid fa-scale-balanced"
-                            style="color: var(--accent); opacity: 0.9; font-size: 0.9rem;"></i> State Regulations
-                    </h4>
-                    <ul
-                        style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 9px; font-size: 0.7rem;">
-                        <li><a href="https://www.centralbank.go.ke" target="_blank"
-                                style="color: #94a3b8; text-decoration: none; font-weight: 500; transition: all 0.2s; display: flex; align-items: center;"
-                                onmouseover="this.style.color='var(--accent)'; this.style.paddingLeft='4px';"
-                                onmouseout="this.style.color='#94a3b8'; this.style.paddingLeft='0';">
-                                <i class="fa-solid fa-landmark"
-                                    style="color: var(--accent); margin-right: 8px; width: 14px; text-align: center; font-size: 0.78rem;"></i>
-                                CBK Act (Cap 491) Standard</a></li>
-                        <li><a href="https://www.odpc.go.ke" target="_blank"
-                                style="color: #94a3b8; text-decoration: none; font-weight: 500; transition: all 0.2s; display: flex; align-items: center;"
-                                onmouseover="this.style.color='var(--accent)'; this.style.paddingLeft='4px';"
-                                onmouseout="this.style.color='#94a3b8'; this.style.paddingLeft='0';">
-                                <i class="fa-solid fa-user-shield"
-                                    style="color: var(--accent); margin-right: 8px; width: 14px; text-align: center; font-size: 0.78rem;"></i>
-                                Data Protection Act 2019</a></li>
-                        <li><a href="https://ca.go.ke" target="_blank"
-                                style="color: #94a3b8; text-decoration: none; font-weight: 500; transition: all 0.2s; display: flex; align-items: center;"
-                                onmouseover="this.style.color='var(--accent)'; this.style.paddingLeft='4px';"
-                                onmouseout="this.style.color='#94a3b8'; this.style.paddingLeft='0';">
-                                <i class="fa-solid fa-tower-cell"
-                                    style="color: var(--accent); margin-right: 8px; width: 14px; text-align: center; font-size: 0.78rem;"></i>
-                                Communications Authority</a></li>
-                    </ul>
-                </div>
-
-                <!-- Section D: Credit Check -->
-                <div>
-                    <h4
-                        style="color: #f8fafc; font-weight: 800; font-size: 0.85rem; letter-spacing: 0.5px; margin-bottom: 10px; display: flex; align-items: center; gap: 6px;">
-                        <i class="fa-solid fa-shield-halved"
-                            style="color: #ef4444; opacity: 0.9; font-size: 0.9rem;"></i> Credit Bureaus
-                    </h4>
-                    <ul
-                        style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 9px; font-size: 0.7rem;">
-                        <li><a href="https://www.metropol.co.ke" target="_blank"
-                                style="color: #94a3b8; text-decoration: none; font-weight: 500; transition: all 0.2s; display: flex; align-items: center;"
-                                onmouseover="this.style.color='#ef4444'; this.style.paddingLeft='4px';"
-                                onmouseout="this.style.color='#94a3b8'; this.style.paddingLeft='0';">
-                                <i class="fa-solid fa-chart-line"
-                                    style="color: #ef4444; margin-right: 8px; width: 14px; text-align: center; font-size: 0.78rem;"></i>
-                                Metropol CRB Service</a></li>
-                        <li><a href="https://www.transunionafrica.com/kenya" target="_blank"
-                                style="color: #94a3b8; text-decoration: none; font-weight: 500; transition: all 0.2s; display: flex; align-items: center;"
-                                onmouseover="this.style.color='#ef4444'; this.style.paddingLeft='4px';"
-                                onmouseout="this.style.color='#94a3b8'; this.style.paddingLeft='0';">
-                                <i class="fa-solid fa-magnifying-glass-chart"
-                                    style="color: #ef4444; margin-right: 8px; width: 14px; text-align: center; font-size: 0.78rem;"></i>
-                                TransUnion Africa CRB</a></li>
-                        <li><a href="https://ke.creditinfo.com" target="_blank"
-                                style="color: #94a3b8; text-decoration: none; font-weight: 500; transition: all 0.2s; display: flex; align-items: center;"
-                                onmouseover="this.style.color='#ef4444'; this.style.paddingLeft='4px';"
-                                onmouseout="this.style.color='#94a3b8'; this.style.paddingLeft='0';">
-                                <i class="fa-solid fa-address-card"
-                                    style="color: #ef4444; margin-right: 8px; width: 14px; text-align: center; font-size: 0.78rem;"></i>
-                                Creditinfo Kenya</a></li>
-                    </ul>
-                </div>
-
-            </div>
-
-            <!-- Bottom Copyright & Sponsor Info -->
-            <div
-                style="text-align: center; font-size: 0.65rem; color: #475569; display: flex; flex-direction: column; gap: 6px;">
-                <p style="font-weight: 600; letter-spacing: 0.2px;">&copy; 2026 DAIMA LOANS Kenya. All rights reserved.
-                </p>
-                <p
-                    style="color: #64748b; font-weight: 500; opacity: 0.85; display: flex; align-items: center; justify-content: center; gap: 4px;">
-                    <i class="fa-solid fa-user-tie" style="color: var(--primary);"></i> Managed by Jasper Markets and
-                    Loan Insurers
-                </p>
-            </div>
+        style="background: linear-gradient(180deg, #0f172a 0%, #090d16 100%); color: #94a3b8; padding: 24px; text-align: center; font-family: 'Outfit', sans-serif;">
+        <div style="max-width: 480px; margin: 0 auto; display: flex; flex-direction: column; gap: 6px; font-size: 0.72rem;">
+            <p style="font-weight: 600; letter-spacing: 0.2px; color: #94a3b8;">&copy; 2026 DAIMA LOANS Kenya. All rights reserved.</p>
+            <p style="color: #64748b; font-weight: 500; opacity: 0.85; display: flex; align-items: center; justify-content: center; gap: 4px;">
+                <i class="fa-solid fa-user-tie" style="color: var(--primary);"></i> Managed by Jasper Markets and Loan Insurers
+            </p>
         </div>
     </footer>
 
@@ -754,6 +601,7 @@
 
             if (idScanInput) {
                 idScanInput.addEventListener('change', function() {
+                    const preview = document.getElementById('id-scan-preview');
                     if (this.files && this.files[0]) {
                         idScanStatus.textContent = this.files[0].name;
                         idScanStatus.style.color = '#16a34a';
@@ -764,6 +612,16 @@
                             label.style.background = 'rgba(22, 163, 74, 0.03)';
                             label.querySelector('i').style.color = '#16a34a';
                         }
+                        if (preview) {
+                            preview.src = URL.createObjectURL(this.files[0]);
+                            preview.style.display = 'block';
+                        }
+                        
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            sessionStorage.setItem('applicant_id_scan_data', e.target.result);
+                        };
+                        reader.readAsDataURL(this.files[0]);
                     } else {
                         idScanStatus.textContent = 'Tap to Upload or Capture';
                         idScanStatus.style.color = '#64748b';
@@ -773,12 +631,18 @@
                             label.style.background = 'rgba(37, 99, 235, 0.02)';
                             label.querySelector('i').style.color = 'var(--primary)';
                         }
+                        if (preview) {
+                            preview.style.display = 'none';
+                            preview.src = '';
+                        }
+                        sessionStorage.removeItem('applicant_id_scan_data');
                     }
                 });
             }
 
             if (selfieInput) {
                 selfieInput.addEventListener('change', function() {
+                    const preview = document.getElementById('selfie-preview');
                     if (this.files && this.files[0]) {
                         selfieStatus.textContent = this.files[0].name;
                         selfieStatus.style.color = '#16a34a';
@@ -789,6 +653,16 @@
                             label.style.background = 'rgba(22, 163, 74, 0.03)';
                             label.querySelector('i').style.color = '#16a34a';
                         }
+                        if (preview) {
+                            preview.src = URL.createObjectURL(this.files[0]);
+                            preview.style.display = 'block';
+                        }
+                        
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            sessionStorage.setItem('applicant_selfie_data', e.target.result);
+                        };
+                        reader.readAsDataURL(this.files[0]);
                     } else {
                         selfieStatus.textContent = 'Tap to Take Photo';
                         selfieStatus.style.color = '#64748b';
@@ -798,6 +672,11 @@
                             label.style.background = 'rgba(37, 99, 235, 0.02)';
                             label.querySelector('i').style.color = 'var(--primary)';
                         }
+                        if (preview) {
+                            preview.style.display = 'none';
+                            preview.src = '';
+                        }
+                        sessionStorage.removeItem('applicant_selfie_data');
                     }
                 });
             }
@@ -917,6 +796,8 @@
                         employment: employmentSelect.value,
                         idScan: idScanInput.files[0] ? idScanInput.files[0].name : '',
                         selfie: selfieInput.files[0] ? selfieInput.files[0].name : '',
+                        idScanData: sessionStorage.getItem('applicant_id_scan_data') || '',
+                        selfieData: sessionStorage.getItem('applicant_selfie_data') || '',
                         principal: selectedPrincipal || '2000',
                         total: sessionStorage.getItem('total_repayable') || (parseInt(selectedPrincipal || '2000') + 50).toString(),
                         mpesaCode: mpesaCode,
