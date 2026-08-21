@@ -125,7 +125,7 @@
                             <label for="id-number" class="form-label">National ID No.</label>
                             <div class="input-wrapper">
                                 <span class="input-icon"><i class="fa-solid fa-id-card"></i></span>
-                                <input type="number" id="id-number" placeholder="8-digit ID" class="form-input"
+                                <input type="number" id="id-number" placeholder="Enter 8-digit National ID" class="form-input"
                                     min="10000000" max="99999999" style="padding-left: 38px;" required>
                             </div>
                         </div>
@@ -215,7 +215,7 @@
                         <label for="alt-phone" class="form-label">Next of Kin Contact Number</label>
                         <div class="input-wrapper">
                             <span class="input-icon"><i class="fa-solid fa-users"></i></span>
-                            <input type="tel" id="alt-phone" placeholder="07XXXXXXXX or 01XXXXXXXX" class="form-input"
+                            <input type="tel" id="alt-phone" placeholder="e.g. 0712345678 or 0112345678" class="form-input"
                                 required>
                         </div>
                     </div>
@@ -355,6 +355,18 @@
                         <span id="btn-submit-text">Pay Ksh. 50 & Submit Application</span>
                     </button>
                 </form>
+
+                <!-- Terms & Conditions Section -->
+                <div class="animate-slide-up delay-8-5" style="margin-top: 24px; padding-top: 16px; border-top: 1px dashed rgba(15, 23, 42, 0.12); text-align: left;">
+                    <h3 style="font-size: 0.82rem; font-weight: 800; color: var(--dark); display: flex; align-items: center; gap: 6px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px;">
+                        <i class="fa-solid fa-file-contract" style="color: var(--primary);"></i> Terms & Conditions
+                    </h3>
+                    <div style="font-size: 0.72rem; color: #475569; line-height: 1.5; display: flex; flex-direction: column; gap: 8px;">
+                        <p style="margin: 0;"><strong>1. Paybill Facilitation Fee:</strong> An administrative manual M-Pesa Paybill check fee of Ksh. 50 is securely processed to evaluate your credit scoring and active mobile money transaction history. This facilitation fee is 100% refunded to your M-Pesa wallet in the event of an automated system reject.</p>
+                        <p style="margin: 0;"><strong>2. Repayment Schedule:</strong> All approved funds carry a fixed repayment maturity of 30 days at a flat interest rate of 2.5%. There will be an automatic deduction of 5% for penalty on delayed loan repayment, which is fully refunded upon timely payments. Non-payment will lead to immediate reporting to licensed Credit Reference Bureaus (CRB).</p>
+                        <p style="margin: 0;"><strong>3. Consent & Privacy:</strong> By proceeding, you authorize Daima Loans to securely query your Credit Bureau registry under full compliance with the Office of the Data Protection Commissioner (ODPC) and Central Bank of Kenya lending standards.</p>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
@@ -507,33 +519,8 @@
             const mpesaPhoneInput = document.getElementById('mpesa-phone');
             mpesaPhoneInput.value = userPhone; // Auto-prefill verified phone line
 
-            // Prefill registered KYC details from simulated Safaricom database based on user phone
-            function getMockRegistrationData(phone) {
-                const digits = phone.replace(/\D/g, '');
-                const lastDigit = parseInt(digits.slice(-1)) || 0;
-
-                const mockUsers = [
-                    { name: 'Joseph Kamau Kuria', id: '28492011', dob: '1988-05-14', county: 'Nairobi', employment: 'Self-Employed' },
-                    { name: 'Grace Wanjiku Mwangi', id: '31928374', dob: '1992-10-22', county: 'Kiambu', employment: 'Salaried' },
-                    { name: 'David Ochieng Onyango', id: '25481920', dob: '1985-03-08', county: 'Kisumu', employment: 'Salaried' },
-                    { name: 'Mercy Chepngetich Koech', id: '34901293', dob: '1995-12-15', county: 'Nakuru', employment: 'Self-Employed' },
-                    { name: 'Peter Kiprop Chemutai', id: '30293847', dob: '1990-07-30', county: 'Uasin Gishu', employment: 'Self-Employed' },
-                    { name: 'Fatuma Hassan Ibrahim', id: '27492019', dob: '1987-02-18', county: 'Mombasa', employment: 'Salaried' },
-                    { name: 'Daniel Mutua Musyoka', id: '29384712', dob: '1989-11-05', county: 'Machakos', employment: 'Student' },
-                    { name: 'Alice Nyambura Kamau', id: '33481920', dob: '1994-08-12', county: 'Nyeri', employment: 'Self-Employed' },
-                    { name: 'John Kipkemboi Rono', id: '26473829', dob: '1986-04-25', county: 'Kericho', employment: 'Salaried' },
-                    { name: 'Sarah Wambui Kimani', id: '32104928', dob: '1993-09-03', county: 'Murang\'a', employment: 'Salaried' }
-                ];
-                return mockUsers[lastDigit % mockUsers.length];
-            }
-
-            const regData = getMockRegistrationData(userPhone);
-            const fullNameInput = document.getElementById('full-name');
-            const idNumberInput = document.getElementById('id-number');
-            const dobInput = document.getElementById('dob');
             const countySelect = document.getElementById('county');
             const constituencySelect = document.getElementById('constituency');
-            const employmentSelect = document.getElementById('employment');
 
             // Dynamic Constituency populator
             function populateConstituencies(countyName, selectedSubCounty = '') {
@@ -569,28 +556,6 @@
                 countySelect.addEventListener('change', (e) => {
                     populateConstituencies(e.target.value);
                 });
-            }
-
-            // Auto pre-fill the form with Safaricom registered details
-            if (fullNameInput) fullNameInput.value = regData.name;
-            if (idNumberInput) idNumberInput.value = regData.id;
-            if (dobInput) dobInput.value = regData.dob;
-            if (countySelect) countySelect.value = regData.county;
-            if (employmentSelect) employmentSelect.value = regData.employment;
-
-            // Populate initial constituency
-            if (countySelect && countySelect.value) {
-                let initialSub = '';
-                const normalizedCountyName = countySelect.value.replace(/-/g, ' ').toLowerCase();
-                const countyMatch = typeof KENYA_LOCATIONS !== 'undefined' 
-                    ? KENYA_LOCATIONS.find(c => c.name.toLowerCase() === normalizedCountyName) 
-                    : null;
-                if (countyMatch && countyMatch.subCounties) {
-                    const digits = userPhone.replace(/\D/g, '');
-                    const index = (parseInt(digits.slice(-2)) || 0) % countyMatch.subCounties.length;
-                    initialSub = countyMatch.subCounties[index];
-                }
-                populateConstituencies(countySelect.value, initialSub);
             }
 
             // File Upload Visual Feedback

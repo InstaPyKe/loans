@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Portal | DAIMA LOANS Management</title>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Shared Design System stylesheet -->
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        /* Mobile-Responsive Card Layout for Admin Tables */
+        @media (max-width: 768px) {
+            .admin-table, 
+            .admin-table thead, 
+            .admin-table tbody, 
+            .admin-table th, 
+            .admin-table td, 
+            .admin-table tr { 
+                display: block; 
+            }
+            
+            .admin-table thead tr { 
+                position: absolute;
+                top: -9999px;
+                left: -9999px;
+            }
+            
+            .admin-table tr { 
+                margin: 0 0 16px 0;
+                background: #ffffff;
+                border: 1px solid #e2e8f0;
+                border-radius: var(--border-radius-lg);
+                box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03);
+                overflow: hidden;
+                padding: 8px 0;
+            }
+            
+            .admin-table td { 
+                border: none;
+                border-bottom: 1px solid #f1f5f9; 
+                position: relative;
+                padding: 10px 16px !important;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                text-align: right;
+            }
+            
+            .admin-table td:last-child {
+                border-bottom: none;
+            }
+
+            #applications-tbody td::before,
+            #contacts-tbody td::before {
+                content: attr(data-label);
+                font-weight: 700;
+                font-size: 0.72rem;
+                color: #64748b;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                text-align: left;
+                margin-right: 12px;
+                flex-shrink: 0;
+            }
+
+            .admin-table td > * {
+                max-width: 60%;
+                text-align: right;
+            }
+            
+            .admin-table td[style*="text-align: right"] {
+                justify-content: space-between;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Animated Mesh Background & Glowing Orbs -->
+    <div class="bg-mesh"></div>
+    <div class="floating-orbs-container">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="header-container" style="max-width: 1200px;">
+            <div class="logo-section">
+                <i class="fa-solid fa-shield-halved"></i>
+                <div>
+                    <span style="display:block; font-size:1.1rem; font-weight:800; line-height:1;">DAIMA LOANS Control Panel</span>
+                    <span style="font-size:0.65rem; color:#94a3b8; font-weight:600; letter-spacing:0.5px;">Loan Application Queue Manager</span>
+                </div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 12px;">
+                <span class="cbk-badge" style="background: rgba(16, 185, 129, 0.1); border-color: rgba(16, 185, 129, 0.2); color: #34d399;">
+                    <span class="pulse-dot" style="background-color: #10b981; width:6px; height:6px; margin-right:3px;"></span> M-Pesa Gateway Active
+                </span>
+                <button id="btn-refresh-queue" class="btn-secondary" style="width: auto; padding: 6px 12px; font-size: 0.72rem;">
+                    <i class="fa-solid fa-rotate"></i>
+                    <span>Sync Queue</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Grid -->
+    <main class="dashboard-container" style="display: block;">
+        
+        <!-- Metrics Stats Grid -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <span class="stat-label">Pending Approvals</span>
+                <div id="stat-pending" class="stat-value pending">0</div>
+            </div>
+            <div class="stat-card">
+                <span class="stat-label">Approved Disbursements</span>
+                <div id="stat-approved" class="stat-value approved">142</div>
+            </div>
+            <div class="stat-card">
+                <span class="stat-label">Fees Collected (Ksh)</span>
+                <div id="stat-fees" class="stat-value" style="color: var(--dark);">Ksh. 12,155</div>
+            </div>
+            <div class="stat-card">
+                <span class="stat-label">Rejected Queue</span>
+                <div id="stat-rejected" class="stat-value rejected">8</div>
+            </div>
+        </div>
+
+        <!-- Tabs Navigation -->
+        <div style="display: flex; gap: 12px; margin-bottom: 20px; border-bottom: 1px solid rgba(255, 255, 255, 0.08); padding-bottom: 12px; flex-wrap: wrap;">
+            <button id="tab-applications" class="btn-primary" style="width: auto; padding: 8px 16px; font-size: 0.75rem; background: var(--primary); border: none; cursor: pointer;">
+                <i class="fa-solid fa-file-invoice-dollar" style="margin-right: 6px;"></i> Loan Applications (<span id="count-apps">0</span>)
+            </button>
+            <button id="tab-contacts" class="btn-secondary" style="width: auto; padding: 8px 16px; font-size: 0.75rem; border-color: rgba(255, 255, 255, 0.15); color: #94a3b8; background: transparent; cursor: pointer;">
+                <i class="fa-solid fa-envelope" style="margin-right: 6px;"></i> Contact Messages (<span id="count-contacts">0</span>)
+            </button>
+        </div>
+
+        <!-- Section 1: Applications Container -->
+        <div id="section-applications">
+            <!-- Filter & Search Toolbar -->
+            <div class="toolbar-card">
+                <div class="input-wrapper" style="width: 100%; max-width: 320px;">
+                    <span class="input-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
+                    <input 
+                        type="text" 
+                        id="search-input" 
+                        placeholder="Search ID, Name, Receipt, or Phone..." 
+                        class="form-input"
+                        style="padding-top: 10px; padding-bottom: 10px;"
+                    >
+                </div>
+                <div style="display: flex; gap: 12px; align-items: center; justify-content: flex-end; flex-wrap: wrap;">
+                    <select id="filter-status" class="form-select" style="width: auto; min-width: 180px; padding-top: 10px; padding-bottom: 10px;">
+                        <option value="ALL">All Applications</option>
+                        <option value="PENDING" selected>Pending Review</option>
+                        <option value="APPROVED">Approved</option>
+                        <option value="REJECTED">Rejected</option>
+                    </select>
+                    <button id="btn-load-mock" class="btn-tertiary" style="width: auto; padding: 10px 16px;">
+                        <i class="fa-solid fa-plus" style="margin-right: 4px;"></i> Load Mock Data
+                    </button>
+                </div>
+            </div>
+
+            <!-- Applications Table Container -->
+            <div class="table-wrapper">
+                <div class="table-responsive">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>App Ref / Time</th>
+                                <th>Applicant Name & ID</th>
+                                <th>Phone Line</th>
+                                <th>Loan Amount</th>
+                                <th>M-Pesa Fee Code</th>
+                                <th>Status</th>
+                                <th style="text-align: right; padding-right: 24px;">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="applications-tbody">
+                            <!-- Table rows populated dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Empty Queue Slate -->
+                <div id="empty-state" style="padding: 60px 24px; text-align: center; display: none;">
+                    <i class="fa-solid fa-folder-open" style="font-size: 2.5rem; color: #94a3b8; margin-bottom: 12px; display: block;"></i>
+                    <p style="font-size: 0.9rem; font-weight: 600; color: #64748b;">No applications match the current criteria.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 2: Contact Messages Container -->
+        <div id="section-contacts" style="display: none;">
+            <div class="table-wrapper">
+                <div class="table-responsive">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Submitted Time</th>
+                                <th>Sender Details</th>
+                                <th>Message</th>
+                                <th style="text-align: right; padding-right: 24px;">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="contacts-tbody">
+                            <!-- Populated dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+                <div id="contacts-empty-state" style="padding: 60px 24px; text-align: center; display: none;">
+                    <i class="fa-solid fa-envelope-open" style="font-size: 2.5rem; color: #94a3b8; margin-bottom: 12px; display: block;"></i>
+                    <p style="font-size: 0.9rem; font-weight: 600; color: #64748b;">No contact messages received.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Document Viewer Modal -->
+    <div id="doc-modal" class="modal-backdrop" onclick="closeDocModal()">
+        <div class="modal-card" style="text-align: center; max-width: 440px;" onclick="event.stopPropagation()">
+            <div class="modal-header" id="doc-modal-title" style="font-weight: 800; text-transform: uppercase; font-size: 1.1rem; color: var(--dark); border-bottom: 1px solid #e2e8f0; padding-bottom: 12px; margin-bottom: 16px;">
+                Document Preview
+            </div>
+            <div class="modal-body" style="max-height: 400px; display: flex; align-items: center; justify-content: center; overflow: hidden; background: #f8fafc; border-radius: var(--border-radius-md); padding: 10px; margin-bottom: 20px;">
+                <div id="doc-modal-preview-placeholder" style="width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 260px; color: #64748b; font-weight: 600;">
+                    <!-- Preview image loads dynamically -->
+                </div>
+            </div>
+            <button type="button" class="btn-modal-close" onclick="closeDocModal()" style="width: 100%; padding: 12px; background: var(--dark); color: #ffffff; border: none; border-radius: var(--border-radius-md); font-size: 0.8rem; font-weight: 700; cursor: pointer; transition: background 0.2s ease;">
+                Close Preview
+            </button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <!-- Footer -->
+    <footer style="background: #0f172a; color: #64748b; padding: 32px 24px 24px; border-top: 1px solid #1e293b; text-align: left; font-size: 0.68rem; font-weight: 400; font-family: 'Outfit', sans-serif; margin-top: 40px;">
+        <div style="max-width: 480px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px;">
+            
+            <!-- Two Columns Section -->
+            <div style="display: grid; grid-template-cols: 1fr 1fr; gap: 20px; border-bottom: 1px solid #1e293b; padding-bottom: 20px;">
+                <!-- Column 1: Government Affiliated Funds -->
+                <div>
+                    <h4 style="color: #94a3b8; font-weight: 600; font-size: 0.7rem; letter-spacing: 0.5px; margin-bottom: 8px; display: flex; align-items: center; gap: 4px;">
+                        <i class="fa-solid fa-building" style="opacity: 0.8;"></i> National Loan Funds
+                    </h4>
+                    <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 5px;">
+                        <li><a href="https://www.hustlerfund.go.ke" target="_blank" style="color: #64748b; text-decoration: none; font-weight: 400; transition: color 0.2s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='#64748b'">• Hustler Fund API Gateway</a></li>
+                        <li><a href="https://www.youthfund.go.ke" target="_blank" style="color: #64748b; text-decoration: none; font-weight: 400; transition: color 0.2s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='#64748b'">• Youth Enterprise Fund</a></li>
+                        <li><a href="https://wef.co.ke" target="_blank" style="color: #64748b; text-decoration: none; font-weight: 400; transition: color 0.2s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='#64748b'">• Women Enterprise Fund</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Column 2: Legal Regulations -->
+                <div>
+                    <h4 style="color: #94a3b8; font-weight: 600; font-size: 0.7rem; letter-spacing: 0.5px; margin-bottom: 8px; display: flex; align-items: center; gap: 4px;">
+                        <i class="fa-solid fa-scale-balanced" style="opacity: 0.8;"></i> State Regulation
+                    </h4>
+                    <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 5px;">
+                        <li><a href="https://www.centralbank.go.ke" target="_blank" style="color: #64748b; text-decoration: none; font-weight: 400; transition: color 0.2s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='#64748b'">• CBK Act (Cap 491) Standard</a></li>
+                        <li><a href="https://www.odpc.go.ke" target="_blank" style="color: #64748b; text-decoration: none; font-weight: 400; transition: color 0.2s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='#64748b'">• Data Protection Act 2019</a></li>
+                        <li><a href="https://www.centralbank.go.ke/crb/" target="_blank" style="color: #64748b; text-decoration: none; font-weight: 400; transition: color 0.2s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='#64748b'">• CRB Registry Guidelines</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Bottom Copyright & Sponsor Info -->
+            <div style="text-align: center; font-size: 0.65rem; color: #475569; display: flex; flex-direction: column; gap: 4px;">
+                <p>&copy; 2026 DAIMA LOANS Kenya. All rights reserved.</p>
+                <p style="color: #64748b; font-weight: 500; opacity: 0.85;">
+                    Managed by Jasper Markets and Loan Insurers
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Detailed Applicant Modal -->
+    <div id="details-modal" class="modal-backdrop">
+        <div class="modal-card" style="max-width: 520px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #e2e8f0; padding-bottom: 12px; margin-bottom: 16px;">
+                <h3 class="heading-font" style="font-size: 1.1rem; color: var(--dark);">Application KYC Verification</h3>
+                <button id="close-modal" style="background:none; border:none; font-size:1.5rem; color:#94a3b8; cursor:pointer; line-height:1;">&times;</button>
+            </div>
+
+            <div id="modal-content" style="display: flex; flex-direction: column; gap: 16px;">
+                <!-- Dynamically populated via JS -->
+            </div>
+
+            <div style="border-top: 1px solid #e2e8f0; padding-top: 16px; margin-top: 20px; display: flex; gap: 12px; justify-content: flex-end;" id="modal-actions">
+                <!-- Action buttons appended dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Interactive Script -->
+    <script>
+        // Secure redirect: Check if admin is authorized before loading page resources
+        if (sessionStorage.getItem('admin_auth') !== 'true') {
+            window.location.href = 'index.html';
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            let applications = [];
+            let contacts = [];
+
+            // DOM Elements
+            const tbody = document.getElementById('applications-tbody');
+            const emptyState = document.getElementById('empty-state');
+            const searchInput = document.getElementById('search-input');
+            const filterStatus = document.getElementById('filter-status');
+            const detailsModal = document.getElementById('details-modal');
+            const modalContent = document.getElementById('modal-content');
+            const modalActions = document.getElementById('modal-actions');
+            const closeModal = document.getElementById('close-modal');
+
+            // Save applications array to localStorage
+            function saveToLocalStorage() {
+                localStorage.setItem('daima_loans_applications', JSON.stringify(applications));
+            }
+
+            function loadContacts() {
+                contacts = JSON.parse(localStorage.getItem('daima_loans_contacts') || '[]');
+            }
+
+            function saveContacts() {
+                localStorage.setItem('daima_loans_contacts', JSON.stringify(contacts));
+            }
+
+            // Load applications from localStorage & sync sessionStorage
+            function loadApplications() {
+                let localApps = JSON.parse(localStorage.getItem('daima_loans_applications') || '[]');
+                
+                // Sync session storage app if available
+                const appId = sessionStorage.getItem('app_id');
+                if (appId) {
+                    const sessionApp = {
+                        appId: appId,
+                        applicantName: sessionStorage.getItem('applicant_name') || 'Jane Wanjiku',
+                        applicantId: sessionStorage.getItem('applicant_id') || '38492011',
+                        userPhone: sessionStorage.getItem('user_phone') || '0712345678',
+                        altPhone: sessionStorage.getItem('applicant_alt_phone') || '0722000111',
+                        county: sessionStorage.getItem('applicant_county') || 'Nairobi',
+                        constituency: sessionStorage.getItem('applicant_constituency') || 'Westlands',
+                        employment: sessionStorage.getItem('applicant_employment') || 'Self-Employed',
+                        idScan: sessionStorage.getItem('applicant_id_scan') || 'id_card_scan.jpg',
+                        selfie: sessionStorage.getItem('applicant_selfie') || 'selfie_capture.png',
+                        principal: sessionStorage.getItem('selected_principal') || '3000',
+                        total: sessionStorage.getItem('total_repayable') || '3075',
+                        mpesaCode: sessionStorage.getItem('mpesa_code') || 'QK99823101',
+                        submittedAt: sessionStorage.getItem('submitted_at') || new Date().toISOString(),
+                        status: 'PENDING'
+                    };
+                    if (!localApps.some(a => a.appId === appId)) {
+                        localApps.unshift(sessionApp);
+                        localStorage.setItem('daima_loans_applications', JSON.stringify(localApps));
+                    }
+                }
+                
+                applications = localApps;
+            }
+
+            // Populate mock applications into applications list and localStorage
+            function loadMockData() {
+                const mockList = [
+                    { appId: 'APP-2026-10492', applicantName: 'Kevin Omondi', applicantId: '32104928', userPhone: '0798123456', altPhone: '0711223344', county: 'Kisumu', employment: 'Salaried', principal: '4500', total: '4613', mpesaCode: 'QK88102938', submittedAt: new Date(Date.now() - 3600000).toISOString(), status: 'PENDING' },
+                    { appId: 'APP-2026-09821', applicantName: 'Mary Muthoni', applicantId: '29810293', userPhone: '0701987654', altPhone: '0799887766', county: 'Kiambu', employment: 'Self-Employed', principal: '2000', total: '2050', mpesaCode: 'QK77102944', submittedAt: new Date(Date.now() - 7200000).toISOString(), status: 'APPROVED' },
+                    { appId: 'APP-2026-08102', applicantName: 'Brian Kiprop', applicantId: '35918230', userPhone: '0740112233', altPhone: '0722334455', county: 'Uasin Gishu', employment: 'Student', principal: '1000', total: '1025', mpesaCode: 'QK66109922', submittedAt: new Date(Date.now() - 14400000).toISOString(), status: 'REJECTED' }
+                ];
+
+                mockList.forEach(item => {
+                    if (!applications.some(a => a.appId === item.appId)) {
+                        applications.push(item);
+                    }
+                });
+
+                saveToLocalStorage();
+                renderTable();
+            }
+
+            // Render Applications Table
+            function renderTable() {
+                loadContacts();
+                document.getElementById('count-apps').textContent = applications.length;
+                document.getElementById('count-contacts').textContent = contacts.length;
+
+                const query = searchInput.value.toLowerCase();
+                const statusFilter = filterStatus.value;
+
+                const filtered = applications.filter(app => {
+                    const matchesQuery = 
+                        app.appId.toLowerCase().includes(query) ||
+                        app.applicantName.toLowerCase().includes(query) ||
+                        app.applicantId.includes(query) ||
+                        app.mpesaCode.toLowerCase().includes(query) ||
+                        app.userPhone.includes(query);
+
+                    const matchesStatus = statusFilter === 'ALL' || app.status === statusFilter;
+
+                    return matchesQuery && matchesStatus;
+                });
+
+                tbody.innerHTML = '';
+
+                if (filtered.length === 0) {
+                    emptyState.style.display = 'block';
+                } else {
+                    emptyState.style.display = 'none';
+
+                    filtered.forEach(app => {
+                        const tr = document.createElement('tr');
+
+                        let statusBadge = '';
+                        if (app.status === 'PENDING') {
+                            statusBadge = `<span class="status-pill pending">Pending Review</span>`;
+                        } else if (app.status === 'APPROVED') {
+                            statusBadge = `<span class="status-pill approved">Disbursed</span>`;
+                        } else {
+                            statusBadge = `<span class="status-pill rejected">Rejected</span>`;
+                        }
+
+                        tr.innerHTML = `
+                            <td data-label="Ref" style="font-family: monospace; font-weight: 800; color: var(--dark);">${app.appId}</td>
+                            <td data-label="Applicant">
+                                <div style="font-weight: 700; color: var(--dark);">${app.applicantName}</div>
+                                <div style="font-size: 0.68rem; color: #94a3b8;">ID: ${app.applicantId}</div>
+                            </td>
+                            <td data-label="Phone" style="font-family: monospace; font-weight: 600;">${app.userPhone}</td>
+                            <td data-label="Amount" style="font-weight: 800; color: var(--secondary-hover);">Ksh. ${parseInt(app.principal).toLocaleString()}</td>
+                            <td data-label="Receipt Code" style="font-family: monospace; color: #047857; font-weight: 700;">${app.mpesaCode}</td>
+                            <td data-label="Status">${statusBadge}</td>
+                            <td data-label="Actions" style="text-align: right; padding-right: 24px;">
+                                <button class="btn-view btn-secondary" style="width: auto; padding: 6px 12px; font-size: 0.72rem; display: inline-flex;" data-id="${app.appId}">
+                                    Inspect KYC
+                                </button>
+                            </td>
+                        `;
+
+                        tbody.appendChild(tr);
+                    });
+                }
+
+                // Attach modal handlers
+                document.querySelectorAll('.btn-view').forEach(btn => {
+                    btn.addEventListener('click', () => openModal(btn.dataset.id));
+                });
+
+                updateStats();
+            }
+
+            // Modal Display Handler
+            function openModal(appId) {
+                const app = applications.find(a => a.appId === appId);
+                if (!app) return;
+
+                modalContent.innerHTML = `
+                    <div style="display: grid; grid-template-cols: repeat(2, 1fr); gap: 12px; background: #f8fafc; padding: 16px; border-radius: var(--border-radius-md); border: 1px solid #e2e8f0; font-size: 0.78rem;">
+                        <div><span style="color: #94a3b8; display: block; font-size: 0.65rem; text-transform: uppercase; font-weight: 700;">Full Name</span><strong style="color: var(--dark);">${app.applicantName}</strong></div>
+                        <div><span style="color: #94a3b8; display: block; font-size: 0.65rem; text-transform: uppercase; font-weight: 700;">National ID</span><strong style="color: var(--dark);">${app.applicantId}</strong></div>
+                        <div><span style="color: #94a3b8; display: block; font-size: 0.65rem; text-transform: uppercase; font-weight: 700;">Residence</span><strong style="color: var(--dark);">${app.county} County ${app.constituency ? ' - ' + app.constituency : ''}</strong></div>
+                        <div><span style="color: #94a3b8; display: block; font-size: 0.65rem; text-transform: uppercase; font-weight: 700;">Employment</span><strong style="color: var(--dark);">${app.employment}</strong></div>
+                        <div><span style="color: #94a3b8; display: block; font-size: 0.65rem; text-transform: uppercase; font-weight: 700;">Primary Phone</span><strong style="font-family: monospace; color: var(--dark);">${app.userPhone}</strong></div>
+                        <div><span style="color: #94a3b8; display: block; font-size: 0.65rem; text-transform: uppercase; font-weight: 700;">Next of Kin</span><strong style="font-family: monospace; color: var(--dark);">${app.altPhone}</strong></div>
+                    </div>
+
+                    <div style="display: grid; grid-template-cols: repeat(2, 1fr); gap: 12px; background: #f0f9ff; padding: 14px; border-radius: var(--border-radius-md); border: 1px solid rgba(37, 99, 235, 0.15); font-size: 0.78rem; margin-top: 12px; margin-bottom: 12px;">
+                        <div style="cursor: pointer;" onclick="window.viewDocument('${app.idScan || 'id_card_front.jpg'}', 'National ID Scan', '${app.appId}')">
+                            <span style="color: #64748b; display: block; font-size: 0.65rem; text-transform: uppercase; font-weight: 700;">National ID Scan</span>
+                            <strong style="color: var(--primary); display: flex; align-items: center; gap: 4px;"><i class="fa-solid fa-file-image" style="color: var(--primary);"></i> View ID Card <i class="fa-solid fa-up-right-from-square" style="font-size: 0.6rem;"></i></strong>
+                        </div>
+                        <div style="cursor: pointer;" onclick="window.viewDocument('${app.selfie || 'selfie_photo.png'}', 'Selfie Verification', '${app.appId}')">
+                            <span style="color: #64748b; display: block; font-size: 0.65rem; text-transform: uppercase; font-weight: 700;">Selfie Verification</span>
+                            <strong style="color: var(--primary); display: flex; align-items: center; gap: 4px;"><i class="fa-solid fa-circle-user" style="color: var(--primary);"></i> View Selfie <i class="fa-solid fa-up-right-from-square" style="font-size: 0.6rem;"></i></strong>
+                        </div>
+                    </div>
+
+                    <div style="background: #ecfdf5; border: 1px solid #a7f3d0; padding: 14px; border-radius: var(--border-radius-md); font-size: 0.78rem; display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <span style="color: #065f46; font-weight: 800; display: block;">M-Pesa Facilitation Fee Paid</span>
+                            <span style="font-size: 0.68rem; color: #047857;">Daraja STK push settled instantly.</span>
+                        </div>
+                        <strong style="font-family: monospace; font-size: 0.85rem; color: #065f46; background: rgba(16,185,129,0.15); padding: 4px 10px; border-radius: 50px;">${app.mpesaCode}</strong>
+                    </div>
+
+                    <div style="background: var(--dark); color: var(--white); padding: 16px; border-radius: var(--border-radius-md); font-size: 0.78rem;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                            <span style="color: #94a3b8;">Allocated Loan Principal:</span>
+                            <strong style="font-size: 0.85rem;">Ksh. ${parseInt(app.principal).toLocaleString()}</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span style="color: #94a3b8;">Total Repayable (30 Days):</span>
+                            <strong style="font-size: 0.85rem; color: var(--accent);">Ksh. ${parseInt(app.total).toLocaleString()}</strong>
+                        </div>
+                    </div>
+                `;
+
+                modalActions.innerHTML = `
+                    <button class="btn-reject btn-tertiary" style="width: auto; border-color: #fca5a5; color: #b91c1c; background: #fef2f2; padding: 10px 20px;" data-id="${app.appId}">
+                        Reject Application
+                    </button>
+                    <button class="btn-approve btn-primary" style="width: auto; padding: 10px 24px; background: linear-gradient(135deg, #10b981 0%, #059669 100%);" data-id="${app.appId}">
+                        Approve & Disburse
+                    </button>
+                `;
+
+                // Show modal with active transition class
+                detailsModal.classList.add('active');
+
+                // Action Listeners
+                modalActions.querySelector('.btn-approve').addEventListener('click', () => {
+                    app.status = 'APPROVED';
+                    saveToLocalStorage();
+                    detailsModal.classList.remove('active');
+                    renderTable();
+                });
+
+                modalActions.querySelector('.btn-reject').addEventListener('click', () => {
+                    app.status = 'REJECTED';
+                    saveToLocalStorage();
+                    detailsModal.classList.remove('active');
+                    renderTable();
+                });
+            }
+
+            function updateStats() {
+                const pending = applications.filter(a => a.status === 'PENDING').length;
+                const approved = applications.filter(a => a.status === 'APPROVED').length;
+                const rejected = applications.filter(a => a.status === 'REJECTED').length;
+
+                document.getElementById('stat-pending').textContent = pending;
+                document.getElementById('stat-approved').textContent = approved + 142;
+                document.getElementById('stat-rejected').textContent = rejected + 8;
+            }
+
+            // Close Modal Listeners
+            closeModal.addEventListener('click', () => detailsModal.classList.remove('active'));
+            detailsModal.addEventListener('click', (e) => {
+                if (e.target === detailsModal) detailsModal.classList.remove('active');
+            });
+
+            // Filter & Search Handlers
+            searchInput.addEventListener('input', renderTable);
+            filterStatus.addEventListener('change', renderTable);
+            document.getElementById('btn-load-mock').addEventListener('click', loadMockData);
+            document.getElementById('btn-refresh-queue').addEventListener('click', () => {
+                loadApplications();
+                renderTable();
+            });
+
+            // Tab Switching Listeners
+            const tabApps = document.getElementById('tab-applications');
+            const tabContacts = document.getElementById('tab-contacts');
+            const secApps = document.getElementById('section-applications');
+            const secContacts = document.getElementById('section-contacts');
+            const countApps = document.getElementById('count-apps');
+            const countContacts = document.getElementById('count-contacts');
+
+            tabApps.addEventListener('click', () => {
+                tabApps.className = 'btn-primary';
+                tabApps.style.background = 'var(--primary)';
+                tabApps.style.color = 'var(--white)';
+                tabContacts.className = 'btn-secondary';
+                tabContacts.style.background = 'transparent';
+                tabContacts.style.color = '#94a3b8';
+                secApps.style.display = 'block';
+                secContacts.style.display = 'none';
+            });
+
+            tabContacts.addEventListener('click', () => {
+                tabContacts.className = 'btn-primary';
+                tabContacts.style.background = 'var(--primary)';
+                tabContacts.style.color = 'var(--white)';
+                tabApps.className = 'btn-secondary';
+                tabApps.style.background = 'transparent';
+                tabApps.style.color = '#94a3b8';
+                secApps.style.display = 'none';
+                secContacts.style.display = 'block';
+                renderContacts();
+            });
+
+            // Render Contacts Table
+            const contactsTbody = document.getElementById('contacts-tbody');
+            const contactsEmptyState = document.getElementById('contacts-empty-state');
+
+            function renderContacts() {
+                loadContacts();
+                contactsTbody.innerHTML = '';
+                
+                countContacts.textContent = contacts.length;
+                countApps.textContent = applications.length;
+
+                if (contacts.length === 0) {
+                    contactsEmptyState.style.display = 'block';
+                } else {
+                    contactsEmptyState.style.display = 'none';
+
+                    contacts.forEach((c, idx) => {
+                        const tr = document.createElement('tr');
+                        const dateObj = c.submittedAt ? new Date(c.submittedAt) : new Date();
+                        const timeString = dateObj.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+                        const dateString = dateObj.toLocaleDateString([], {month: 'short', day: 'numeric'});
+                        
+                        tr.innerHTML = `
+                            <td data-label="Submitted">
+                                <strong style="color: var(--dark); font-size: 0.76rem;">${timeString}</strong>
+                                <span style="display: block; font-size: 0.65rem; color: #94a3b8;">${dateString}</span>
+                            </td>
+                            <td data-label="Sender">
+                                <div style="font-weight: 700; color: var(--dark); font-size: 0.76rem;">${c.name || 'Anonymous Member'}</div>
+                                <div style="font-size: 0.65rem; color: #64748b;">Email: ${c.email}</div>
+                                ${c.phone ? `<div style="font-size: 0.65rem; color: #64748b; font-family: monospace;">Tel: ${c.phone}</div>` : ''}
+                            </td>
+                            <td data-label="Message" style="max-width: 280px; white-space: normal; word-break: break-all; font-size: 0.72rem; color: #64748b; line-height: 1.3;">${c.message}</td>
+                            <td data-label="Actions" style="text-align: right; padding-right: 24px;">
+                                <button class="btn-dismiss btn-secondary" style="width: auto; padding: 6px 12px; font-size: 0.72rem; display: inline-flex; border-color: #fca5a5; color: #b91c1c; background: #fef2f2; cursor: pointer;" data-idx="${idx}">
+                                    Dismiss Message
+                                </button>
+                            </td>
+                        `;
+                        contactsTbody.appendChild(tr);
+                    });
+
+                    // Add click listeners to dismiss buttons
+                    contactsTbody.querySelectorAll('.btn-dismiss').forEach(btn => {
+                        btn.addEventListener('click', (e) => {
+                            const index = parseInt(btn.dataset.idx);
+                            contacts.splice(index, 1);
+                            saveContacts();
+                            renderContacts();
+                        });
+                    });
+                }
+            }
+
+            // Global Document Preview Handler
+            window.viewDocument = function(fileName, title, appId) {
+                const docModal = document.getElementById('doc-modal');
+                const docTitle = document.getElementById('doc-modal-title');
+                const placeholder = document.getElementById('doc-modal-preview-placeholder');
+                
+                docTitle.textContent = title;
+                docModal.classList.add('active');
+                
+                let appData = null;
+                try {
+                    const apps = JSON.parse(localStorage.getItem('daima_loans_applications') || '[]');
+                    appData = apps.find(a => a.appId === appId);
+                } catch(e) {}
+                
+                let base64 = '';
+                if (appData) {
+                    if (title.includes('ID')) {
+                        base64 = appData.idScanData;
+                    } else {
+                        base64 = appData.selfieData;
+                    }
+                }
+                
+                if (base64) {
+                    placeholder.innerHTML = `<img src="${base64}" style="max-width: 100%; max-height: 250px; border-radius: var(--border-radius-md); object-fit: contain; box-shadow: 0 4px 12px rgba(0,0,0,0.15);" />`;
+                } else {
+                    placeholder.innerHTML = `
+                        <i class="fa-solid fa-file-image" style="font-size: 2.5rem; color: var(--primary); margin-bottom: 12px;"></i>
+                        <span style="font-size: 0.8rem; font-family: monospace; display: block; word-break: break-all; padding: 0 16px; color: var(--dark);">${fileName}</span>
+                        <span style="font-size: 0.65rem; color: #94a3b8; display: block; margin-top: 6px;">(No image data stored)</span>
+                    `;
+                }
+            };
+
+            window.closeDocModal = function() {
+                const docModal = document.getElementById('doc-modal');
+                if (docModal) {
+                    docModal.classList.remove('active');
+                }
+            };
+
+            // Initial load
+            loadApplications();
+            if (applications.length === 0) {
+                loadMockData();
+            } else {
+                renderTable();
+            }
+        });
+    </script>
+</body>
+</html>
