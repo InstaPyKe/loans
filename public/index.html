@@ -620,9 +620,37 @@
                 const rawPhone = phoneInput.value.trim();
 
                 if (safaricomRegex.test(rawPhone) && agreeTerms.checked) {
-                    // Store phone in session storage for Page 2
+                    // Check if phone number has already applied
+                    let existingApp = null;
+                    try {
+                        const apps = JSON.parse(localStorage.getItem('daima_loans_applications') || '[]');
+                        existingApp = apps.find(a => a.userPhone === rawPhone);
+                    } catch (e) {
+                        console.warn('Failed to parse applications database:', e);
+                    }
+
                     sessionStorage.setItem('user_phone', rawPhone);
                     sessionStorage.setItem('terms_accepted', 'true');
+
+                    if (existingApp) {
+                        // Load existing application into session to track status
+                        sessionStorage.setItem('app_id', existingApp.appId);
+                        sessionStorage.setItem('selected_principal', existingApp.principal);
+                        sessionStorage.setItem('total_repayable', existingApp.total);
+                        sessionStorage.setItem('applicant_name', existingApp.applicantName);
+                        sessionStorage.setItem('applicant_id', existingApp.applicantId);
+                        sessionStorage.setItem('mpesa_code', existingApp.mpesaCode);
+                        sessionStorage.setItem('submitted_at', existingApp.submittedAt);
+                    } else {
+                        // Clear any old session values to prevent mixing up applications
+                        sessionStorage.removeItem('app_id');
+                        sessionStorage.removeItem('selected_principal');
+                        sessionStorage.removeItem('total_repayable');
+                        sessionStorage.removeItem('applicant_name');
+                        sessionStorage.removeItem('applicant_id');
+                        sessionStorage.removeItem('mpesa_code');
+                        sessionStorage.removeItem('submitted_at');
+                    }
 
                     // Show checking modal
                     const checkingModal = document.getElementById('checking-modal');
@@ -635,8 +663,13 @@
 
                         if (timeLeft <= 0) {
                             clearInterval(countdown);
-                            // Navigate to Page 2 (Pre-Qualification Result)
-                            window.location.href = 'qualification.html';
+                            if (existingApp) {
+                                // Direct to status tracking page
+                                window.location.href = 'status.html';
+                            } else {
+                                // Direct to qualification logic
+                                window.location.href = 'qualification.html';
+                            }
                         }
                     }, 1000);
                 }
@@ -715,6 +748,18 @@
                         closeSidebar();
                     });
                 });
+            }
+
+            // Check for error parameter in URL query
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('error') === 'no_app') {
+                const noticeBanner = document.createElement('div');
+                noticeBanner.style.cssText = "background: rgba(239, 68, 68, 0.08); border: 1px solid rgba(239, 68, 68, 0.15); color: #b91c1c; font-size: 0.72rem; font-weight: 700; padding: 12px; border-radius: var(--border-radius-md); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; justify-content: center;";
+                noticeBanner.innerHTML = `<i class="fa-solid fa-triangle-exclamation" style="font-size: 0.9rem;"></i> No active loan application found for this phone number. Please submit an application.`;
+                const formEl = document.getElementById('eligibility-form') || document.getElementById('intake-closed-container');
+                if (formEl) {
+                    formEl.parentNode.insertBefore(noticeBanner, formEl);
+                }
             }
         });
     </script>

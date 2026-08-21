@@ -307,7 +307,7 @@
                         <i class="fa-solid fa-file-contract" style="color: var(--primary);"></i> Terms & Conditions
                     </h3>
                     <div style="font-size: 0.72rem; color: #475569; line-height: 1.5; display: flex; flex-direction: column; gap: 8px;">
-                        <p style="margin: 0;"><strong>1. Paybill Facilitation Fee:</strong> An administrative manual M-Pesa Paybill check fee of Ksh. 95 is securely processed to evaluate your credit scoring and active mobile money transaction history. This facilitation fee is 100% refunded to your M-Pesa wallet in the event of an automated system reject.</p>
+                        <p style="margin: 0;"><strong>1. Paybill Facilitation Fee:</strong> An administrative manual M-Pesa Paybill check fee of Ksh. <span class="dynamic-crb-fee-text">95</span> is securely processed to evaluate your credit scoring and active mobile money transaction history. This facilitation fee is 100% refunded to your M-Pesa wallet in the event of an automated system reject.</p>
                         <p style="margin: 0;"><strong>2. Repayment Schedule:</strong> All approved funds carry a fixed repayment maturity of 30 days at a flat interest rate of 2.5%. There will be an automatic deduction of 5% for penalty on delayed loan repayment, which is fully refunded upon timely payments. Non-payment will lead to immediate reporting to licensed Credit Reference Bureaus (CRB).</p>
                         <p style="margin: 0;"><strong>3. Consent & Privacy:</strong> By proceeding, you authorize Daima Loans to securely query your Credit Bureau registry under full compliance with the Office of the Data Protection Commissioner (ODPC) and Central Bank of Kenya lending standards.</p>
                     </div>
@@ -333,7 +333,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             let hasSession = false;
             try {
-                hasSession = sessionStorage.getItem('app_id') && sessionStorage.getItem('selected_principal');
+                hasSession = sessionStorage.getItem('user_phone');
             } catch (e) {
                 console.warn('Session storage check failed:', e);
             }
@@ -349,8 +349,50 @@
                     sessionStorage.setItem('applicant_name', 'Jane Wanjiku');
                     sessionStorage.setItem('applicant_id', '23334555');
                     sessionStorage.setItem('submitted_at', new Date().toISOString());
-                } catch (e) {
-                    console.warn('Could not write fallback session storage data:', e);
+
+                    // Add fallback app to localStorage database if not already present
+                    const apps = JSON.parse(localStorage.getItem('daima_loans_applications') || '[]');
+                    if (!apps.some(a => a.userPhone === '0758777554')) {
+                        apps.push({
+                            appId: 'APP-2026-98102',
+                            applicantName: 'Jane Wanjiku',
+                            applicantId: '23334555',
+                            userPhone: '0758777554',
+                            altPhone: '0722000111',
+                            county: 'Nairobi',
+                            constituency: 'Westlands',
+                            employment: 'Self-Employed',
+                            idScan: 'id_card_scan.jpg',
+                            selfie: 'selfie_capture.png',
+                            principal: '4500',
+                            total: '4613',
+                            mpesaCode: 'RQYWGUUERT',
+                            submittedAt: new Date().toISOString(),
+                            status: 'PENDING'
+                        });
+                        localStorage.setItem('daima_loans_applications', JSON.stringify(apps));
+                    }
+            // Dynamically load fee from localStorage
+            const activeFee = localStorage.getItem('daima_loans_crb_fee') || '95';
+            document.querySelectorAll('.dynamic-crb-fee-text').forEach(el => {
+                el.textContent = activeFee;
+            });
+
+            // Redirection guard: Verify user phone has applied
+            let hasApplied = false;
+            try {
+                const apps = JSON.parse(localStorage.getItem('daima_loans_applications') || '[]');
+                const sessionPhone = sessionStorage.getItem('user_phone');
+                hasApplied = apps.some(a => a.userPhone === sessionPhone);
+            } catch (e) {
+                console.warn('Failed to read applications list:', e);
+            }
+
+            if (!hasApplied) {
+                // If it is file:// protocol and preview is on search, we can bypass, but otherwise redirect
+                if (window.location.protocol !== 'file:' && !window.location.search.includes('preview')) {
+                    window.location.href = 'index.html?error=no_app';
+                    return;
                 }
             }
 
@@ -365,14 +407,27 @@
             let submittedAt = new Date().toISOString();
 
             try {
-                appId = sessionStorage.getItem('app_id') || appId;
-                mpesaCode = sessionStorage.getItem('mpesa_code') || mpesaCode;
                 userPhone = sessionStorage.getItem('user_phone') || userPhone;
-                selectedPrincipal = sessionStorage.getItem('selected_principal') || selectedPrincipal;
-                totalRepayable = sessionStorage.getItem('total_repayable') || totalRepayable;
-                applicantName = sessionStorage.getItem('applicant_name') || applicantName;
-                applicantId = sessionStorage.getItem('applicant_id') || applicantId;
-                submittedAt = sessionStorage.getItem('submitted_at') || submittedAt;
+                // Query application list by userPhone
+                const localApps = JSON.parse(localStorage.getItem('daima_loans_applications') || '[]');
+                const activeApp = localApps.find(a => a.userPhone === userPhone);
+                if (activeApp) {
+                    appId = activeApp.appId;
+                    mpesaCode = activeApp.mpesaCode;
+                    selectedPrincipal = activeApp.principal;
+                    totalRepayable = activeApp.total;
+                    applicantName = activeApp.applicantName;
+                    applicantId = activeApp.applicantId;
+                    submittedAt = activeApp.submittedAt;
+                } else {
+                    appId = sessionStorage.getItem('app_id') || appId;
+                    mpesaCode = sessionStorage.getItem('mpesa_code') || mpesaCode;
+                    selectedPrincipal = sessionStorage.getItem('selected_principal') || selectedPrincipal;
+                    totalRepayable = sessionStorage.getItem('total_repayable') || totalRepayable;
+                    applicantName = sessionStorage.getItem('applicant_name') || applicantName;
+                    applicantId = sessionStorage.getItem('applicant_id') || applicantId;
+                    submittedAt = sessionStorage.getItem('submitted_at') || submittedAt;
+                }
             } catch (e) {
                 console.warn('Session storage read failed:', e);
             }
@@ -548,7 +603,7 @@
                         </div>
                         <div style="display: flex; align-items: center; gap: 10px; font-size: 0.72rem; color: #16a34a; background: #f0fdf4; border: 1px solid #dcfce7; padding: 8px 12px; border-radius: var(--border-radius-md); font-weight: 600;">
                             <i class="fa-solid fa-circle-check" style="font-size: 0.85rem;"></i>
-                            <span>Step 2: M-Pesa CRB Fee Validation (Ksh. 95 Verified)</span>
+                            <span>Step 2: M-Pesa CRB Fee Validation (Ksh. <span class="dynamic-crb-fee-text">95</span> Verified)</span>
                         </div>
                         <div style="display: flex; align-items: center; gap: 10px; font-size: 0.72rem; color: #16a34a; background: #f0fdf4; border: 1px solid #dcfce7; padding: 8px 12px; border-radius: var(--border-radius-md); font-weight: 600;">
                             <i class="fa-solid fa-circle-check" style="font-size: 0.85rem;"></i>
@@ -587,7 +642,7 @@
                     
                     queueHeader.textContent = "Application Declined";
                     queueHeader.style.color = "var(--danger)";
-                    queueDescription.innerHTML = `Your application was declined during admin review. Under Daima Terms, your Ksh. 95 fee refund has been initiated to your M-Pesa line.`;
+                    queueDescription.innerHTML = `Your application was declined during admin review. Under Daima Terms, your Ksh. <span class="dynamic-crb-fee-text">95</span> fee refund has been initiated to your M-Pesa line.`;
                     progressPercent.textContent = "0% (Declined)";
                     progressFill.style.width = "0%";
                     progressFill.style.background = "linear-gradient(90deg, #ef4444 0%, #fca5a5 100%)";
@@ -657,7 +712,7 @@
                     if (localApp && localApp.status === 'APPROVED') {
                         alert('Queue Status: Your application has been approved and loan disbursed to your M-Pesa line!');
                     } else if (localApp && localApp.status === 'REJECTED') {
-                        alert('Queue Status: Your application was declined. A refund of Ksh. 95 has been initiated.');
+                        alert('Queue Status: Your application was declined. A refund of Ksh. ' + activeFee + ' has been initiated.');
                     } else {
                         alert('Queue Status: Application is currently at Position #4 in the admin review queue. Check back shortly!');
                     }
