@@ -74,6 +74,48 @@
             transform: translateY(0) scale(1);
             filter: blur(0);
         }
+
+        /* Section Watermark Styles */
+        .watermarked-section {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-watermark-container {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            opacity: 0.035;
+            z-index: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 4px;
+        }
+
+        .watermark-marquee {
+            white-space: nowrap;
+            font-size: 0.65rem;
+            font-weight: 900;
+            letter-spacing: 3px;
+            display: inline-block;
+            width: 300%;
+        }
+
+        .watermark-marquee.primary {
+            color: var(--primary);
+            animation: slideMarquee 25s linear infinite;
+        }
+
+        .watermark-marquee.accent {
+            color: var(--accent);
+            animation: slideMarqueeReverse 30s linear infinite;
+        }
+
+        .watermarked-section > *:not(.section-watermark-container) {
+            position: relative;
+            z-index: 1;
+        }
     </style>
 </head>
 
@@ -151,7 +193,17 @@
             </div>
 
             <!-- Card Content Body -->
-            <div class="card-content">
+            <div class="card-content watermarked-section">
+                <!-- Animated Multiple Daima Text Background Watermark -->
+                <div class="section-watermark-container" style="opacity: 0.025;">
+                    <div class="watermark-marquee primary">
+                        DAIMA • DAIMA • DAIMA • DAIMA • DAIMA • DAIMA • DAIMA • DAIMA • DAIMA • DAIMA • DAIMA • DAIMA
+                    </div>
+                    <div class="watermark-marquee accent">
+                        DAIMA • DAIMA • DAIMA • DAIMA • DAIMA • DAIMA • DAIMA • DAIMA • DAIMA • DAIMA • DAIMA • DAIMA
+                    </div>
+                </div>
+
                 <!-- Compliance Header Row -->
                 <div
                     style="display: flex; align-items: center; justify-content: center; gap: 8px; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.15); padding: 8px 12px; border-radius: var(--border-radius-md); margin-top: 4px; margin-bottom: 12px;">
@@ -363,165 +415,189 @@
                 </div>
 
                 <!-- Bank Partnerships Section -->
-                <div id="partners" class="partnerships-section animate-slide-up delay-5 emerge-element"
-                    style="margin-top: 24px; padding-top: 4px; text-align: center;">
-                    <!-- Splashing Gradient Borderline -->
-                    <div
-                        style="height: 2px; width: 100%; background: linear-gradient(90deg, rgba(16,185,129,0) 0%, rgba(16,185,129,0.3) 20%, rgba(16,185,129,0.6) 50%, rgba(16,185,129,0.3) 80%, rgba(16,185,129,0) 100%); margin-bottom: 20px;">
+                <div id="partners" class="partnerships-section animate-slide-up delay-5 emerge-element watermarked-section"
+                    style="margin-top: 24px; padding-top: 24px; padding-bottom: 20px; text-align: center;">
+                    <!-- Animated Multiple Daima Text Background Watermark -->
+                    <div class="section-watermark-container">
+                        <div class="watermark-marquee primary">
+                            DAIMA • DAIMA • DAIMA • DAIMA • DAIMA • DAIMA • DAIMA • DAIMA • DAIMA • DAIMA • DAIMA • DAIMA
+                        </div>
+                        <div class="watermark-marquee accent">
+                            DAIMA • DAIMA • DAIMA • DAIMA • DAIMA • DAIMA • DAIMA • DAIMA • DAIMA • DAIMA • DAIMA • DAIMA
+                        </div>
                     </div>
 
-                    <h4
-                        style="font-size: 0.8rem; font-weight: 800; color: var(--dark); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 14px; display: flex; align-items: center; justify-content: center; gap: 6px;">
-                        <i class="fa-solid fa-circle-check" style="color: #10b981;"></i> CBK Integrated Loaning Channels
-                    </h4>
-                    <div class="partners-grid"
-                        style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 12px;">
+                    <div style="position: relative; z-index: 1;">
+                        <!-- Splashing Gradient Borderline -->
+                        <div
+                            style="height: 2px; width: 100%; background: linear-gradient(90deg, rgba(16,185,129,0) 0%, rgba(16,185,129,0.3) 20%, rgba(16,185,129,0.6) 50%, rgba(16,185,129,0.3) 80%, rgba(16,185,129,0) 100%); margin-bottom: 20px;">
+                        </div>
 
-                        <!-- KCB M-Pesa -->
-                        <a href="https://ke.kcbgroup.com" target="_blank" class="partner-card"
-                            style="display: flex; flex-direction: column; align-items: center; gap: 8px; background: rgba(16, 185, 129, 0.04); padding: 14px 10px; border: 1px solid rgba(16, 185, 129, 0.15); border-radius: var(--border-radius-md); box-shadow: 0 4px 12px rgba(16, 185, 129, 0.03); transition: all 0.25s ease-in-out; text-decoration: none;"
-                            onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 8px 20px rgba(16, 185, 129, 0.12)'; this.style.background='rgba(16, 185, 129, 0.08)';"
-                            onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(16, 185, 129, 0.03)'; this.style.background='rgba(16, 185, 129, 0.04)';">
-                            <div class="partner-icon-badge"
-                                style="width: 38px; height: 38px; background: rgba(16, 185, 129, 0.1); border-radius: 50%; display: grid; place-content: center; color: #059669; font-size: 1.1rem; flex-shrink: 0;">
-                                <i class="fa-solid fa-mobile-screen-button"></i>
-                            </div>
-                            <div class="partner-text-wrapper" style="text-align: center;">
-                                <span class="partner-name"
-                                    style="display: block; font-family: 'Space Grotesk', sans-serif; font-weight: 800; font-size: 0.78rem; color: var(--dark); line-height: 1.2;">KCB
-                                    M-Pesa</span>
-                                <span class="partner-type"
-                                    style="display: block; font-size: 0.55rem; color: #64748b; margin-top: 1px; font-weight: 600;">Lending
-                                    Utility</span>
-                            </div>
-                        </a>
+                        <h4
+                            style="font-size: 0.8rem; font-weight: 800; color: var(--dark); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 14px; display: flex; align-items: center; justify-content: center; gap: 6px;">
+                            <i class="fa-solid fa-circle-check" style="color: #10b981;"></i> CBK Integrated Loaning Channels
+                        </h4>
+                        <div class="partners-grid"
+                            style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 12px;">
 
-                        <!-- Eazzy Loan -->
-                        <a href="https://equitygroupholdings.com/ke/" target="_blank" class="partner-card"
-                            style="display: flex; flex-direction: column; align-items: center; gap: 8px; background: rgba(16, 185, 129, 0.04); padding: 14px 10px; border: 1px solid rgba(16, 185, 129, 0.15); border-radius: var(--border-radius-md); box-shadow: 0 4px 12px rgba(16, 185, 129, 0.03); transition: all 0.25s ease-in-out; text-decoration: none;"
-                            onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 8px 20px rgba(16, 185, 129, 0.12)'; this.style.background='rgba(16, 185, 129, 0.08)';"
-                            onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(16, 185, 129, 0.03)'; this.style.background='rgba(16, 185, 129, 0.04)';">
-                            <div class="partner-icon-badge"
-                                style="width: 38px; height: 38px; background: rgba(16, 185, 129, 0.1); border-radius: 50%; display: grid; place-content: center; color: #059669; font-size: 1.1rem; flex-shrink: 0;">
-                                <i class="fa-solid fa-building-columns"></i>
-                            </div>
-                            <div class="partner-text-wrapper" style="text-align: center;">
-                                <span class="partner-name"
-                                    style="display: block; font-family: 'Space Grotesk', sans-serif; font-weight: 800; font-size: 0.78rem; color: var(--dark); line-height: 1.2;">Eazzy
-                                    Loan</span>
-                                <span class="partner-type"
-                                    style="display: block; font-size: 0.55rem; color: #64748b; margin-top: 1px; font-weight: 600;">Equity
-                                    Bank</span>
-                            </div>
-                        </a>
+                            <!-- KCB M-Pesa -->
+                            <a href="https://ke.kcbgroup.com" target="_blank" class="partner-card"
+                                style="display: flex; flex-direction: column; align-items: center; gap: 8px; background: rgba(16, 185, 129, 0.04); padding: 14px 10px; border: 1px solid rgba(16, 185, 129, 0.15); border-radius: var(--border-radius-md); box-shadow: 0 4px 12px rgba(16, 185, 129, 0.03); transition: all 0.25s ease-in-out; text-decoration: none;"
+                                onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 8px 20px rgba(16, 185, 129, 0.12)'; this.style.background='rgba(16, 185, 129, 0.08)';"
+                                onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(16, 185, 129, 0.03)'; this.style.background='rgba(16, 185, 129, 0.04)';">
+                                <div class="partner-icon-badge"
+                                    style="width: 38px; height: 38px; background: rgba(16, 185, 129, 0.1); border-radius: 50%; display: grid; place-content: center; color: #059669; font-size: 1.1rem; flex-shrink: 0;">
+                                    <i class="fa-solid fa-mobile-screen-button"></i>
+                                </div>
+                                <div class="partner-text-wrapper" style="text-align: center;">
+                                    <span class="partner-name"
+                                        style="display: block; font-family: 'Space Grotesk', sans-serif; font-weight: 800; font-size: 0.78rem; color: var(--dark); line-height: 1.2;">KCB
+                                        M-Pesa</span>
+                                    <span class="partner-type"
+                                        style="display: block; font-size: 0.55rem; color: #64748b; margin-top: 1px; font-weight: 600;">Lending
+                                        Utility</span>
+                                </div>
+                            </a>
 
-                        <!-- M-Shwari -->
-                        <a href="https://ncbagroup.com" target="_blank" class="partner-card"
-                            style="display: flex; flex-direction: column; align-items: center; gap: 8px; background: rgba(16, 185, 129, 0.04); padding: 14px 10px; border: 1px solid rgba(16, 185, 129, 0.15); border-radius: var(--border-radius-md); box-shadow: 0 4px 12px rgba(16, 185, 129, 0.03); transition: all 0.25s ease-in-out; text-decoration: none;"
-                            onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 8px 20px rgba(16, 185, 129, 0.12)'; this.style.background='rgba(16, 185, 129, 0.08)';"
-                            onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(16, 185, 129, 0.03)'; this.style.background='rgba(16, 185, 129, 0.04)';">
-                            <div class="partner-icon-badge"
-                                style="width: 38px; height: 38px; background: rgba(16, 185, 129, 0.1); border-radius: 50%; display: grid; place-content: center; color: #059669; font-size: 1.1rem; flex-shrink: 0;">
-                                <i class="fa-solid fa-wallet"></i>
-                            </div>
-                            <div class="partner-text-wrapper" style="text-align: center;">
-                                <span class="partner-name"
-                                    style="display: block; font-family: 'Space Grotesk', sans-serif; font-weight: 800; font-size: 0.78rem; color: var(--dark); line-height: 1.2;">M-Shwari</span>
-                                <span class="partner-type"
-                                    style="display: block; font-size: 0.55rem; color: #64748b; margin-top: 1px; font-weight: 600;">NCBA
-                                    Mobile</span>
-                            </div>
-                        </a>
+                            <!-- Eazzy Loan -->
+                            <a href="https://equitygroupholdings.com/ke/" target="_blank" class="partner-card"
+                                style="display: flex; flex-direction: column; align-items: center; gap: 8px; background: rgba(16, 185, 129, 0.04); padding: 14px 10px; border: 1px solid rgba(16, 185, 129, 0.15); border-radius: var(--border-radius-md); box-shadow: 0 4px 12px rgba(16, 185, 129, 0.03); transition: all 0.25s ease-in-out; text-decoration: none;"
+                                onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 8px 20px rgba(16, 185, 129, 0.12)'; this.style.background='rgba(16, 185, 129, 0.08)';"
+                                onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(16, 185, 129, 0.03)'; this.style.background='rgba(16, 185, 129, 0.04)';">
+                                <div class="partner-icon-badge"
+                                    style="width: 38px; height: 38px; background: rgba(16, 185, 129, 0.1); border-radius: 50%; display: grid; place-content: center; color: #059669; font-size: 1.1rem; flex-shrink: 0;">
+                                    <i class="fa-solid fa-building-columns"></i>
+                                </div>
+                                <div class="partner-text-wrapper" style="text-align: center;">
+                                    <span class="partner-name"
+                                        style="display: block; font-family: 'Space Grotesk', sans-serif; font-weight: 800; font-size: 0.78rem; color: var(--dark); line-height: 1.2;">Eazzy
+                                        Loan</span>
+                                    <span class="partner-type"
+                                        style="display: block; font-size: 0.55rem; color: #64748b; margin-top: 1px; font-weight: 600;">Equity
+                                        Bank</span>
+                                </div>
+                            </a>
+
+                            <!-- M-Shwari -->
+                            <a href="https://ncbagroup.com" target="_blank" class="partner-card"
+                                style="display: flex; flex-direction: column; align-items: center; gap: 8px; background: rgba(16, 185, 129, 0.04); padding: 14px 10px; border: 1px solid rgba(16, 185, 129, 0.15); border-radius: var(--border-radius-md); box-shadow: 0 4px 12px rgba(16, 185, 129, 0.03); transition: all 0.25s ease-in-out; text-decoration: none;"
+                                onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 8px 20px rgba(16, 185, 129, 0.12)'; this.style.background='rgba(16, 185, 129, 0.08)';"
+                                onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(16, 185, 129, 0.03)'; this.style.background='rgba(16, 185, 129, 0.04)';">
+                                <div class="partner-icon-badge"
+                                    style="width: 38px; height: 38px; background: rgba(16, 185, 129, 0.1); border-radius: 50%; display: grid; place-content: center; color: #059669; font-size: 1.1rem; flex-shrink: 0;">
+                                    <i class="fa-solid fa-wallet"></i>
+                                </div>
+                                <div class="partner-text-wrapper" style="text-align: center;">
+                                    <span class="partner-name"
+                                        style="display: block; font-family: 'Space Grotesk', sans-serif; font-weight: 800; font-size: 0.78rem; color: var(--dark); line-height: 1.2;">M-Shwari</span>
+                                    <span class="partner-type"
+                                        style="display: block; font-size: 0.55rem; color: #64748b; margin-top: 1px; font-weight: 600;">NCBA
+                                        Mobile</span>
+                                </div>
+                            </a>
+                        </div>
+
+                        <p
+                            style="font-size: 0.62rem; color: #64748b; margin-top: 14px; line-height: 1.4; font-weight: 500;">
+                            Automated scoring and real-time pre-approvals processed securely via NCBA Bank, KCB Bank, and
+                            Equity Bank systems.
+                        </p>
                     </div>
-
-                    <p
-                        style="font-size: 0.62rem; color: #64748b; margin-top: 14px; line-height: 1.4; font-weight: 500;">
-                        Automated scoring and real-time pre-approvals processed securely via NCBA Bank, KCB Bank, and
-                        Equity Bank systems.
-                    </p>
                 </div>
 
                 <!-- About Us Section -->
-                <div id="about-us" class="animate-slide-up delay-6 emerge-element"
-                    style="border-top: 1px dashed rgba(15, 23, 42, 0.12); margin-top: 24px; padding-top: 20px; text-align: left;">
-                    <h3
-                        style="font-size: 0.85rem; font-weight: 800; color: var(--dark); display: flex; align-items: center; justify-content: center; gap: 6px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px;">
-                        <i class="fa-solid fa-circle-info" style="color: var(--primary);"></i> About Daima Loans
-                    </h3>
-                    <p
-                        style="font-size: 0.72rem; color: #475569; line-height: 1.5; margin-bottom: 14px; text-align: center;">
-                        Daima Loans is built on the <strong>Daima Foundation Theory</strong>—which states that digital
-                        financial empowerment is a fundamental right. By providing low-barrier micro-credit with
-                        flexible repayments, we cultivate long-term credit health and financial resilience for all
-                        Kenyans.
-                    </p>
-
-                    <!-- Advantages Section -->
-                    <div
-                        style="margin-top: 14px; margin-bottom: 16px; background: rgba(15, 23, 42, 0.02); border: 1px solid rgba(15, 23, 42, 0.06); padding: 16px; border-radius: var(--border-radius-lg);">
-                        <h4
-                            style="font-size: 0.78rem; font-weight: 800; color: var(--dark); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px; display: flex; align-items: center; gap: 6px;">
-                            <i class="fa-solid fa-award" style="color: var(--primary);"></i> Why choose Daima?
-                        </h4>
-                        <div
-                            style="display: flex; flex-direction: column; gap: 10px; font-size: 0.7rem; color: #475569; line-height: 1.45;">
-                            <p style="margin: 0;"><strong>1. High-Speed Processing:</strong> Unlike traditional banking
-                                that requires days of manual review, Daima operates on a 100% automated credit scoring
-                                engine. Pre-approved limits are credited directly to your Safaricom M-Pesa line in under
-                                10 minutes, eliminating stressful queues.</p>
-                            <p style="margin: 0;"><strong>2. Transparent Pricing:</strong> We charge a flat interest
-                                rate of 5% with absolute fee transparency. There are no compounding interests, hidden
-                                monthly account maintenance fees, or sudden rollover penalties. What you see on your
-                                dashboard is exactly what you pay back.</p>
-                            <p style="margin: 0;"><strong>3. Credit Building Incentives:</strong> Timely repayments
-                                dynamically unlock higher loan limits up to Ksh. 50,000. Additionally, our automated
-                                systems fully refund the 5% delayed payment penalty back to your wallet upon timely
-                                settlement, protecting and boosting your CRB rating.</p>
-                            <p style="margin: 0;"><strong>4. Secure Data Protection:</strong> Your personal information,
-                                ID card uploads, and selfie captures are safely compiled and stored using robust local
-                                encryption algorithms in strict accordance with the Office of the Data Protection
-                                Commissioner (ODPC) guidelines.</p>
-                            <p style="margin: 0;"><strong>5. Community-First Inclusion:</strong> Driven by the Jasper
-                                Markets development initiative, Daima Loans focus on empowering small-scale traders,
-                                farmers, and youth entrepreneurs across Kenya to meet urgent business cashflow or family
-                                emergency bills with accessible capital.</p>
+                <div id="about-us" class="animate-slide-up delay-6 emerge-element watermarked-section"
+                    style="border-top: 1px dashed rgba(15, 23, 42, 0.12); margin-top: 24px; padding-top: 24px; padding-bottom: 16px; text-align: left;">
+                    <!-- Animated Multiple Daima Text Background Watermark -->
+                    <div class="section-watermark-container">
+                        <div class="watermark-marquee primary">
+                            DAIMA • DAIMA • DAIMA • DAIMA • DAIMA • DAIMA • DAIMA • DAIMA • DAIMA • DAIMA • DAIMA • DAIMA
+                        </div>
+                        <div class="watermark-marquee accent">
+                            DAIMA • DAIMA • DAIMA • DAIMA • DAIMA • DAIMA • DAIMA • DAIMA • DAIMA • DAIMA • DAIMA • DAIMA
                         </div>
                     </div>
 
-                    <div style="display: flex; flex-direction: column; gap: 10px;">
+                    <div style="position: relative; z-index: 1;">
+                        <h3
+                            style="font-size: 0.85rem; font-weight: 800; color: var(--dark); display: flex; align-items: center; justify-content: center; gap: 6px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px;">
+                            <i class="fa-solid fa-circle-info" style="color: var(--primary);"></i> About Daima Loans
+                        </h3>
+                        <p
+                            style="font-size: 0.72rem; color: #475569; line-height: 1.5; margin-bottom: 14px; text-align: center;">
+                            Daima Loans is built on the <strong>Daima Foundation Theory</strong>—which states that digital
+                            financial empowerment is a fundamental right. By providing low-barrier micro-credit with
+                            flexible repayments, we cultivate long-term credit health and financial resilience for all
+                            Kenyans.
+                        </p>
+
+                        <!-- Advantages Section -->
                         <div
-                            style="display: flex; gap: 12px; align-items: flex-start; background: rgba(37, 99, 235, 0.03); padding: 12px; border-radius: var(--border-radius-md); border: 1px solid rgba(37, 99, 235, 0.08);">
-                            <i class="fa-solid fa-shield-check"
-                                style="font-size: 1.1rem; color: var(--primary); margin-top: 2px;"></i>
-                            <div>
-                                <h4
-                                    style="font-size: 0.76rem; font-weight: 800; color: var(--dark); margin-bottom: 2px;">
-                                    Licensed Compliance</h4>
-                                <p style="font-size: 0.68rem; color: #64748b; line-height: 1.4;">Fully compliant with
-                                    the Central Bank of Kenya lending framework and ODPC data protection acts.</p>
+                            style="margin-top: 14px; margin-bottom: 16px; background: rgba(15, 23, 42, 0.02); border: 1px solid rgba(15, 23, 42, 0.06); padding: 16px; border-radius: var(--border-radius-lg);">
+                            <h4
+                                style="font-size: 0.78rem; font-weight: 800; color: var(--dark); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px; display: flex; align-items: center; gap: 6px;">
+                                <i class="fa-solid fa-award" style="color: var(--primary);"></i> Why choose Daima?
+                            </h4>
+                            <div
+                                style="display: flex; flex-direction: column; gap: 10px; font-size: 0.7rem; color: #475569; line-height: 1.45;">
+                                <p style="margin: 0;"><strong>1. High-Speed Processing:</strong> Unlike traditional banking
+                                    that requires days of manual review, Daima operates on a 100% automated credit scoring
+                                    engine. Pre-approved limits are credited directly to your Safaricom M-Pesa line in under
+                                    10 minutes, eliminating stressful queues.</p>
+                                <p style="margin: 0;"><strong>2. Transparent Pricing:</strong> We charge a flat interest
+                                    rate of 5% with absolute fee transparency. There are no compounding interests, hidden
+                                    monthly account maintenance fees, or sudden rollover penalties. What you see on your
+                                    dashboard is exactly what you pay back.</p>
+                                <p style="margin: 0;"><strong>3. Credit Building Incentives:</strong> Timely repayments
+                                    dynamically unlock higher loan limits up to Ksh. 50,000. Additionally, our automated
+                                    systems fully refund the 5% delayed payment penalty back to your wallet upon timely
+                                    settlement, protecting and boosting your CRB rating.</p>
+                                <p style="margin: 0;"><strong>4. Secure Data Protection:</strong> Your personal information,
+                                    ID card uploads, and selfie captures are safely compiled and stored using robust local
+                                    encryption algorithms in strict accordance with the Office of the Data Protection
+                                    Commissioner (ODPC) guidelines.</p>
+                                <p style="margin: 0;"><strong>5. Community-First Inclusion:</strong> Driven by the Jasper
+                                    Markets development initiative, Daima Loans focus on empowering small-scale traders,
+                                    farmers, and youth entrepreneurs across Kenya to meet urgent business cashflow or family
+                                    emergency bills with accessible capital.</p>
                             </div>
                         </div>
-                        <div
-                            style="display: flex; gap: 12px; align-items: flex-start; background: rgba(16, 185, 129, 0.03); padding: 12px; border-radius: var(--border-radius-md); border: 1px solid rgba(16, 185, 129, 0.08);">
-                            <i class="fa-solid fa-bolt" style="font-size: 1.1rem; color: #10b981; margin-top: 2px;"></i>
-                            <div>
-                                <h4
-                                    style="font-size: 0.76rem; font-weight: 800; color: var(--dark); margin-bottom: 2px;">
-                                    Instant Scoring</h4>
-                                <p style="font-size: 0.68rem; color: #64748b; line-height: 1.4;">Automated credit
-                                    evaluation processes pre-approvals and disbursements in under 10 minutes.</p>
+
+                        <div style="display: flex; flex-direction: column; gap: 10px;">
+                            <div
+                                style="display: flex; gap: 12px; align-items: flex-start; background: rgba(37, 99, 235, 0.03); padding: 12px; border-radius: var(--border-radius-md); border: 1px solid rgba(37, 99, 235, 0.08);">
+                                <i class="fa-solid fa-shield-check"
+                                    style="font-size: 1.1rem; color: var(--primary); margin-top: 2px;"></i>
+                                <div>
+                                    <h4
+                                        style="font-size: 0.76rem; font-weight: 800; color: var(--dark); margin-bottom: 2px;">
+                                        Licensed Compliance</h4>
+                                    <p style="font-size: 0.68rem; color: #64748b; line-height: 1.4;">Fully compliant with
+                                        the Central Bank of Kenya lending framework and ODPC data protection acts.</p>
+                                </div>
                             </div>
-                        </div>
-                        <div
-                            style="display: flex; gap: 12px; align-items: flex-start; background: rgba(251, 191, 36, 0.03); padding: 12px; border-radius: var(--border-radius-md); border: 1px solid rgba(251, 191, 36, 0.08);">
-                            <i class="fa-solid fa-building"
-                                style="font-size: 1.1rem; color: #d97706; margin-top: 2px;"></i>
-                            <div>
-                                <h4
-                                    style="font-size: 0.76rem; font-weight: 800; color: var(--dark); margin-bottom: 2px;">
-                                    Jasper Markets Portfolio</h4>
-                                <p style="font-size: 0.68rem; color: #64748b; line-height: 1.4;">Proudly managed by
-                                    Jasper Markets, driving smart economic development across East Africa.</p>
+                            <div
+                                style="display: flex; gap: 12px; align-items: flex-start; background: rgba(16, 185, 129, 0.03); padding: 12px; border-radius: var(--border-radius-md); border: 1px solid rgba(16, 185, 129, 0.08);">
+                                <i class="fa-solid fa-bolt" style="font-size: 1.1rem; color: #10b981; margin-top: 2px;"></i>
+                                <div>
+                                    <h4
+                                        style="font-size: 0.76rem; font-weight: 800; color: var(--dark); margin-bottom: 2px;">
+                                        Instant Scoring</h4>
+                                    <p style="font-size: 0.68rem; color: #64748b; line-height: 1.4;">Automated credit
+                                        evaluation processes pre-approvals and disbursements in under 10 minutes.</p>
+                                </div>
+                            </div>
+                            <div
+                                style="display: flex; gap: 12px; align-items: flex-start; background: rgba(251, 191, 36, 0.03); padding: 12px; border-radius: var(--border-radius-md); border: 1px solid rgba(251, 191, 36, 0.08);">
+                                <i class="fa-solid fa-building"
+                                    style="font-size: 1.1rem; color: #d97706; margin-top: 2px;"></i>
+                                <div>
+                                    <h4
+                                        style="font-size: 0.76rem; font-weight: 800; color: var(--dark); margin-bottom: 2px;">
+                                        Jasper Markets Portfolio</h4>
+                                    <p style="font-size: 0.68rem; color: #64748b; line-height: 1.4;">Proudly managed by
+                                        Jasper Markets, driving smart economic development across East Africa.</p>
+                                </div>
                             </div>
                         </div>
                     </div>
