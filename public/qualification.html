@@ -27,35 +27,14 @@
     <!-- Header Navigation -->
     <header>
         <div class="header-container">
-            <div class="logo-section">
+            <div class="logo-section" style="cursor: pointer;" onclick="window.location.href='index.html'">
                 <i class="fa-solid fa-bolt-lightning"></i>
                 <span>DAIMA LOANS</span>
             </div>
-            <div style="display: flex; align-items: center; gap: 8px;">
-                <span class="cbk-badge"
-                    style="background: rgba(255, 255, 255, 0.08); color: #f8fafc; border-color: rgba(255, 255, 255, 0.15); font-size: 0.62rem; display: flex; align-items: center; gap: 6px; padding: 4px 8px; border-radius: 12px; font-weight: 700; border: 1px solid rgba(255, 255, 255, 0.15);">
-                    <svg width="18" height="12" viewBox="0 0 90 60"
-                        style="border-radius: 1px; box-shadow: 0 1px 2px rgba(0,0,0,0.3); display: inline-block; vertical-align: middle;">
-                        <rect width="90" height="20" fill="#000000" />
-                        <rect y="20" width="90" height="20" fill="#BB1528" />
-                        <rect y="40" width="90" height="20" fill="#006633" />
-                        <path d="M 0,19 L 90,19 M 0,21 L 90,21 M 0,39 L 90,39 M 0,41 L 90,41" stroke="#ffffff"
-                            stroke-width="2" />
-                        <g transform="translate(45,30)">
-                            <path d="M -15,-10 L 15,10 M -15,10 L 15,-10" stroke="#ffffff" stroke-width="2" />
-                            <path d="M -15,-10 L 15,10 M -15,10 L 15,-10" stroke="#000000" stroke-width="1" />
-                            <path d="M -5,-12 C -10,-3 -10,3 -5,12 C 5,3 5,-3 5,-12 Z" fill="#BB1528" stroke="#ffffff"
-                                stroke-width="0.5" />
-                            <path d="M 0,-12 C -5,-3 -5,3 0,12 Z" fill="#000000" />
-                            <circle cx="0" cy="0" r="2" fill="#ffffff" />
-                        </g>
-                    </svg>
-                    CBK
-                </span>
-                <span class="step-badge">
-                    Step 2 of 4
-                </span>
-            </div>
+            <button id="menu-toggle-btn" aria-label="Toggle Menu"
+                style="background: rgba(15, 23, 42, 0.06); border: none; color: var(--dark); font-size: 1.15rem; cursor: pointer; display: flex; align-items: center; justify-content: center; outline: none; width: 34px; height: 34px; border-radius: 50%; transition: all 0.2s ease;">
+                <i class="fa-solid fa-bars"></i>
+            </button>
         </div>
     </header>
 
@@ -228,6 +207,17 @@
                     </div>
                 </div>
 
+                <!-- Loan Terms & Agreement Section -->
+                <div class="animate-slide-up delay-3-5" style="margin: 20px 0 24px; padding-top: 16px; border-top: 1px dashed rgba(15, 23, 42, 0.12); text-align: left;">
+                    <h3 style="font-size: 0.82rem; font-weight: 800; color: var(--dark); display: flex; align-items: center; gap: 6px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px;">
+                        <i class="fa-solid fa-file-contract" style="color: var(--primary);"></i> Loan Terms & Agreement
+                    </h3>
+                    <div style="font-size: 0.72rem; color: #475569; line-height: 1.5; display: flex; flex-direction: column; gap: 8px;">
+                        <p style="margin: 0;"><strong>1. Repayment Schedule:</strong> All approved funds carry a fixed repayment maturity of 60 days (2 months) at a flat interest rate of 5%. There will be an automatic deduction of 5% for penalty on delayed loan repayment, which is fully refunded upon timely payments. Non-payment will lead to immediate reporting to licensed Credit Reference Bureaus (CRB).</p>
+                        <p style="margin: 0;"><strong>2. Consent & Privacy:</strong> By proceeding, you authorize Daima Loans to securely query your Credit Bureau registry under full compliance with the Office of the Data Protection Commissioner (ODPC) and Central Bank of Kenya lending standards.</p>
+                    </div>
+                </div>
+
                 <!-- Submit Action -->
                 <button type="button" id="btn-proceed" class="btn-primary animate-slide-up delay-4">
                     <span>Proceed to Verification & Fee Checkout</span>
@@ -239,18 +229,6 @@
                     <i class="fa-solid fa-arrow-left"></i>
                     <span>Cancel & Return Home</span>
                 </a>
-
-                <!-- Terms & Conditions Section -->
-                <div class="animate-slide-up delay-5" style="margin-top: 24px; padding-top: 16px; border-top: 1px dashed rgba(15, 23, 42, 0.12); text-align: left;">
-                    <h3 style="font-size: 0.82rem; font-weight: 800; color: var(--dark); display: flex; align-items: center; gap: 6px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px;">
-                        <i class="fa-solid fa-file-contract" style="color: var(--primary);"></i> Terms & Conditions
-                    </h3>
-                    <div style="font-size: 0.72rem; color: #475569; line-height: 1.5; display: flex; flex-direction: column; gap: 8px;">
-                        <p style="margin: 0;"><strong>1. Paybill Facilitation Fee:</strong> An administrative manual M-Pesa Paybill check fee of Ksh. <span class="dynamic-crb-fee-text">95</span> is securely processed to evaluate your credit scoring and active mobile money transaction history. This facilitation fee is 100% refunded to your M-Pesa wallet in the event of an automated system reject.</p>
-                        <p style="margin: 0;"><strong>2. Repayment Schedule:</strong> All approved funds carry a fixed repayment maturity of 60 days (2 months) at a flat interest rate of 5%. There will be an automatic deduction of 5% for penalty on delayed loan repayment, which is fully refunded upon timely payments. Non-payment will lead to immediate reporting to licensed Credit Reference Bureaus (CRB).</p>
-                        <p style="margin: 0;"><strong>3. Consent & Privacy:</strong> By proceeding, you authorize Daima Loans to securely query your Credit Bureau registry under full compliance with the Office of the Data Protection Commissioner (ODPC) and Central Bank of Kenya lending standards.</p>
-                    </div>
-                </div>
             </div>
         </div>
     </main>
@@ -365,10 +343,30 @@
                 const securingModal = document.getElementById('securing-modal');
                 securingModal.classList.add('active');
 
-                let timeLeft = 10;
+                let timeLeft = 5;
+                const progressEl = document.getElementById('loading-progress-qualification');
+                const stageTextEl = document.getElementById('loading-stage-text-qualification');
+                
+                const stages = [
+                    "Initializing secure allocation channels...",
+                    "Securing collateral-free insurance coverage...",
+                    "Generating Safaricom Paybill routing code...",
+                    "Verifying local secure memory buffers...",
+                    "Redirecting to payout checkout form..."
+                ];
+
+                if (progressEl) progressEl.style.width = '0%';
+                if (stageTextEl) stageTextEl.textContent = stages[0];
 
                 const countdown = setInterval(() => {
                     timeLeft--;
+                    const stageIndex = 5 - timeLeft;
+                    if (progressEl) {
+                        progressEl.style.width = (stageIndex * 20) + '%';
+                    }
+                    if (stageTextEl && stageIndex < stages.length) {
+                        stageTextEl.textContent = stages[stageIndex];
+                    }
 
                     if (timeLeft <= 0) {
                         clearInterval(countdown);
@@ -377,34 +375,151 @@
                     }
                 }, 1000);
             });
+
+            // Hamburger Sidebar Drawer Toggle
+            const menuToggleBtn = document.getElementById('menu-toggle-btn');
+            const menuCloseBtn = document.getElementById('menu-close-btn');
+            const sidebarDrawer = document.getElementById('sidebar-drawer');
+            const sidebarContent = document.getElementById('sidebar-content');
+
+            const openSidebar = () => {
+                if (sidebarDrawer && sidebarContent) {
+                    sidebarDrawer.classList.add('active');
+                    setTimeout(() => {
+                        sidebarContent.style.transform = 'translateX(0)';
+                    }, 50);
+                }
+            };
+
+            const closeSidebar = () => {
+                if (sidebarDrawer && sidebarContent) {
+                    sidebarContent.style.transform = 'translateX(-100%)';
+                    setTimeout(() => {
+                        sidebarDrawer.classList.remove('active');
+                    }, 300);
+                }
+            };
+
+            if (menuToggleBtn) menuToggleBtn.addEventListener('click', openSidebar);
+            if (menuCloseBtn) menuCloseBtn.addEventListener('click', closeSidebar);
+            if (sidebarDrawer) {
+                sidebarDrawer.addEventListener('click', (e) => {
+                    if (e.target === sidebarDrawer) closeSidebar();
+                });
+            }
         });
     </script>
     <!-- Securing Approved Loan Modal -->
     <div id="securing-modal" class="modal-backdrop">
-        <div class="modal-card" style="text-align: center;">
-            <div class="spinner-container">
-                <div class="spinner" style="border-color: #eff6ff; border-top-color: var(--secondary);"></div>
-                <div class="spinner-icon">
-                    <i class="fa-solid fa-file-invoice-dollar" style="color: var(--secondary);"></i>
+        <div class="modal-card" style="max-width: 320px; padding: 20px; border-radius: var(--border-radius-xl); text-align: center; border: 1px solid rgba(16,185,129,0.15); box-shadow: 0 20px 40px rgba(0,0,0,0.12); transform: scale(0.9);">
+            <div class="spinner-container" style="margin-bottom: 12px; height: 50px;">
+                <div class="spinner" style="border-color: #eff6ff; border-top-color: #10b981; width: 40px; height: 40px; border-width: 3px;"></div>
+                <div class="spinner-icon" style="font-size: 1rem;">
+                    <i class="fa-solid fa-file-invoice-dollar" style="color: #10b981;"></i>
                 </div>
             </div>
 
-            <div style="margin-bottom: 20px;">
-                <h3 class="heading-font"
-                    style="font-size: 1.15rem; color: var(--dark); margin-bottom: 4px; font-weight: 700;">Securing
-                    Approved Loan</h3>
-                <p style="font-size: 0.72rem; color: #64748b;">Reserving your selected loan limit of <strong
-                        id="securing-amount-display" style="color: var(--dark);">Ksh. 0</strong></p>
+            <div style="margin-bottom: 12px;">
+                <h3 class="heading-font" style="font-size: 0.95rem; font-weight: 800; background: linear-gradient(135deg, #059669, #0ea5e9); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px;">Securing Allocation</h3>
+                <p style="font-size: 0.68rem; color: #475569; font-weight: 500; line-height: 1.4;">Reserving your selected loan limit of <strong id="securing-amount-display" style="color: var(--dark);">Ksh. 0</strong></p>
             </div>
 
-            <div class="countdown-box" style="padding: 14px 16px;">
-                <span class="countdown-label"
-                    style="margin-bottom: 0; color: #93c5fd; font-weight: 500; font-size: 0.78rem; text-transform: none; letter-spacing: normal;">
-                    Initializing secure application form...
+            <!-- Dynamic Progress Bar -->
+            <div style="width: 100%; height: 5px; background: rgba(15, 23, 42, 0.05); border-radius: 10px; overflow: hidden; margin: 8px 0 12px;">
+                <div id="loading-progress-qualification" style="width: 0%; height: 100%; background: linear-gradient(90deg, #10b981, #3b82f6); border-radius: 10px; transition: width 1s linear; will-change: width;"></div>
+            </div>
+
+            <div style="padding: 10px; background: rgba(16, 185, 129, 0.04); border: 1px dashed rgba(16, 185, 129, 0.18); border-radius: var(--border-radius-md); margin-bottom: 12px;">
+                <span id="loading-stage-text-qualification" style="color: #065f46; font-weight: 700; font-size: 0.65rem; display: block; text-align: center;">
+                    Initializing secure approved amount allocation...
                 </span>
             </div>
 
-            <p style="font-size: 0.68rem; color: #94a3b8;">Do not close or refresh this page while setup processes.</p>
+            <p style="font-size: 0.58rem; color: #94a3b8; font-weight: 600; text-transform: uppercase; letter-spacing: 0.3px; margin: 0;">Do not close or refresh this page</p>
+        </div>
+    </div>
+
+    <!-- Sidebar Drawer Menu -->
+    <div id="sidebar-drawer" class="modal-backdrop"
+        style="justify-content: flex-start; padding: 0; backdrop-filter: blur(4px); transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1); z-index: 999;">
+        <div id="sidebar-content"
+            style="background: var(--white); height: 100vh; width: 280px; max-width: 80%; padding: 24px; box-shadow: 10px 0 30px rgba(15, 23, 42, 0.15); display: flex; flex-direction: column; justify-content: space-between; transform: translateX(-100%); transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1); border-right: 1px solid rgba(15,23,42,0.08);">
+
+            <div>
+                <!-- Sidebar Header -->
+                <div
+                    style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f1f5f9; padding-bottom: 16px; margin-bottom: 24px;">
+                    <div
+                        style="display: flex; align-items: center; gap: 8px; font-weight: 800; font-size: 1.15rem; color: var(--dark); cursor: pointer;"
+                        onclick="window.location.href='index.html'">
+                        <i class="fa-solid fa-bolt-lightning" style="color: var(--accent);"></i>
+                        <span>DAIMA LOANS</span>
+                    </div>
+                    <button id="menu-close-btn"
+                        style="background: #f1f5f9; border: none; color: #64748b; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 0.9rem;">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+
+                <!-- Sidebar Links -->
+                <div style="display: flex; flex-direction: column; gap: 12px;">
+                    <a href="index.html#limit-checker" class="sidebar-link"
+                        style="display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-radius: var(--border-radius-md); text-decoration: none; color: #2563eb; background: linear-gradient(135deg, #eff6ff, #dbeafe); font-weight: 700; font-size: 0.85rem; transition: all 0.25s ease; border: 1px solid rgba(37,99,235,0.12);">
+                        <i class="fa-solid fa-calculator"
+                            style="font-size: 1.1rem; width: 22px; text-align: center;"></i>
+                        <span>Check Loan Limit</span>
+                    </a>
+
+                    <a href="index.html#partners" class="sidebar-link"
+                        style="display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-radius: var(--border-radius-md); text-decoration: none; color: #7c3aed; background: linear-gradient(135deg, #f5f3ff, #ede9fe); font-weight: 700; font-size: 0.85rem; transition: all 0.25s ease; border: 1px solid rgba(124,58,237,0.12);">
+                        <i class="fa-solid fa-building-columns"
+                            style="font-size: 1.1rem; width: 22px; text-align: center;"></i>
+                        <span>Official Partners</span>
+                    </a>
+
+                    <a href="index.html#about-us" class="sidebar-link"
+                        style="display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-radius: var(--border-radius-md); text-decoration: none; color: #d97706; background: linear-gradient(135deg, #fffbeb, #fef3c7); font-weight: 700; font-size: 0.85rem; transition: all 0.25s ease; border: 1px solid rgba(217,119,6,0.12);">
+                        <i class="fa-solid fa-circle-info"
+                            style="font-size: 1.1rem; width: 22px; text-align: center;"></i>
+                        <span>About Daima Loans</span>
+                    </a>
+
+                    <a href="status.html" class="sidebar-link"
+                        style="display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-radius: var(--border-radius-md); text-decoration: none; color: #059669; background: linear-gradient(135deg, #ecfdf5, #d1fae5); font-weight: 700; font-size: 0.85rem; transition: all 0.25s ease; border: 1px solid rgba(16,185,129,0.12);">
+                        <i class="fa-solid fa-magnifying-glass"
+                            style="font-size: 1.1rem; width: 22px; text-align: center;"></i>
+                        <span>Track Status</span>
+                    </a>
+
+                    <a href="https://wa.me/447455909204" target="_blank" class="sidebar-link"
+                        style="display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-radius: var(--border-radius-md); text-decoration: none; color: #16a34a; background: linear-gradient(135deg, #f0fdf4, #dcfce7); font-weight: 700; font-size: 0.85rem; transition: all 0.25s ease; border: 1px solid rgba(22,163,74,0.12);">
+                        <i class="fa-brands fa-whatsapp"
+                            style="font-size: 1.25rem; width: 22px; text-align: center;"></i>
+                        <span>WhatsApp Support</span>
+                    </a>
+
+                    <a href="index.html#careers" class="sidebar-link"
+                        style="display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-radius: var(--border-radius-md); text-decoration: none; color: #db2777; background: linear-gradient(135deg, #fdf2f8, #fce7f3); font-weight: 700; font-size: 0.85rem; transition: all 0.25s ease; border: 1px solid rgba(219,39,119,0.12);">
+                        <i class="fa-solid fa-briefcase"
+                            style="font-size: 1.1rem; width: 22px; text-align: center;"></i>
+                        <span>Careers at Daima</span>
+                    </a>
+
+                    <a href="admin/index.html" class="sidebar-link"
+                        style="display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-radius: var(--border-radius-md); text-decoration: none; color: #0f172a; background: linear-gradient(135deg, #f8fafc, #e2e8f0); font-weight: 700; font-size: 0.85rem; transition: all 0.25s ease; border: 1px solid rgba(15,23,42,0.12);">
+                        <i class="fa-solid fa-user-shield"
+                            style="font-size: 1.1rem; width: 22px; text-align: center;"></i>
+                        <span>Daima Staff</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Sidebar Footer -->
+            <div
+                style="border-top: 1px solid #f1f5f9; padding-top: 16px; font-size: 0.65rem; color: #94a3b8; font-weight: 500; text-align: center; line-height: 1.4;">
+                <p>Jasper Markets &copy; 2026</p>
+                <p style="color: #059669; font-weight: 600; margin-top: 2px;">CBK Compliant Platform</p>
+            </div>
         </div>
     </div>
 

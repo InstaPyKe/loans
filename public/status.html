@@ -9,6 +9,118 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Custom Style Sheet -->
     <link rel="stylesheet" href="style.css">
+    <style>
+        .particles-container {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+        .particle {
+            position: absolute;
+            background: radial-gradient(circle, rgba(16, 185, 129, 0.12) 0%, rgba(16, 185, 129, 0) 70%);
+            border-radius: 50%;
+            animation: rise 15s infinite linear;
+        }
+        .p-1 { left: 10%; width: 150px; height: 150px; animation-duration: 16s; animation-delay: 0s; }
+        .p-2 { left: 35%; width: 220px; height: 220px; animation-duration: 22s; animation-delay: 2s; }
+        .p-3 { left: 55%; width: 120px; height: 120px; animation-duration: 12s; animation-delay: 4s; }
+        .p-4 { left: 75%; width: 280px; height: 280px; animation-duration: 26s; animation-delay: 1s; }
+        .p-5 { left: 90%; width: 180px; height: 180px; animation-duration: 20s; animation-delay: 3s; }
+        .p-6 { left: 22%; width: 160px; height: 160px; animation-duration: 18s; animation-delay: 5s; }
+
+        @keyframes rise {
+            0% { transform: translateY(105vh) scale(0.7); opacity: 0; }
+            15% { opacity: 0.7; }
+            85% { opacity: 0.7; }
+            100% { transform: translateY(-25vh) scale(1.3); opacity: 0; }
+        }
+
+        /* Custom Large Animated Shooting Comets */
+        .status-comet {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(16, 185, 129, 0.4) 50%, rgba(16, 185, 129, 0) 100%);
+            border-radius: 50%;
+            filter: drop-shadow(0 0 10px #10b981);
+            transform: rotate(-35deg);
+            opacity: 0;
+            pointer-events: none;
+            z-index: -1;
+        }
+        .status-comet::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 250px;
+            height: 2px;
+            background: linear-gradient(90deg, rgba(16, 185, 129, 0.95), transparent);
+        }
+        .s-comet-1 {
+            top: 15%;
+            left: 90%;
+            animation: status-shoot-1 10s infinite ease-in-out;
+            animation-delay: 0s;
+        }
+        .s-comet-2 {
+            top: 35%;
+            left: 95%;
+            animation: status-shoot-2 14s infinite ease-in-out;
+            animation-delay: 2.5s;
+        }
+        .s-comet-3 {
+            top: 55%;
+            left: 85%;
+            animation: status-shoot-3 12s infinite ease-in-out;
+            animation-delay: 5s;
+        }
+        .s-comet-4 {
+            top: 5%;
+            left: 80%;
+            animation: status-shoot-4 16s infinite ease-in-out;
+            animation-delay: 7s;
+        }
+        .s-comet-5 {
+            top: 75%;
+            left: 95%;
+            animation: status-shoot-5 13s infinite ease-in-out;
+            animation-delay: 4s;
+        }
+
+        @keyframes status-shoot-1 {
+            0% { transform: translate(0, 0) rotate(-35deg) scale(0); opacity: 0; }
+            5% { transform: translate(0, 0) rotate(-35deg) scale(1.2); opacity: 1; }
+            35% { transform: translate(-1000px, 700px) rotate(-35deg) scale(1.2); opacity: 0; }
+            100% { transform: translate(-1000px, 700px) rotate(-35deg) scale(0); opacity: 0; }
+        }
+        @keyframes status-shoot-2 {
+            0% { transform: translate(0, 0) rotate(-35deg) scale(0); opacity: 0; }
+            4% { transform: translate(0, 0) rotate(-35deg) scale(1.4); opacity: 1; }
+            30% { transform: translate(-1100px, 770px) rotate(-35deg) scale(1.4); opacity: 0; }
+            100% { transform: translate(-1100px, 770px) rotate(-35deg) scale(0); opacity: 0; }
+        }
+        @keyframes status-shoot-3 {
+            0% { transform: translate(0, 0) rotate(-35deg) scale(0); opacity: 0; }
+            6% { transform: translate(0, 0) rotate(-35deg) scale(1.3); opacity: 1; }
+            32% { transform: translate(-950px, 665px) rotate(-35deg) scale(1.3); opacity: 0; }
+            100% { transform: translate(-950px, 665px) rotate(-35deg) scale(0); opacity: 0; }
+        }
+        @keyframes status-shoot-4 {
+            0% { transform: translate(0, 0) rotate(-35deg) scale(0); opacity: 0; }
+            5% { transform: translate(0, 0) rotate(-35deg) scale(1.5); opacity: 1; }
+            28% { transform: translate(-1200px, 840px) rotate(-35deg) scale(1.5); opacity: 0; }
+            100% { transform: translate(-1200px, 840px) rotate(-35deg) scale(0); opacity: 0; }
+        }
+        @keyframes status-shoot-5 {
+            0% { transform: translate(0, 0) rotate(-35deg) scale(0); opacity: 0; }
+            5% { transform: translate(0, 0) rotate(-35deg) scale(1.1); opacity: 1; }
+            35% { transform: translate(-900px, 630px) rotate(-35deg) scale(1.1); opacity: 0; }
+            100% { transform: translate(-900px, 630px) rotate(-35deg) scale(0); opacity: 0; }
+        }
+    </style>
 </head>
 
 <body>
@@ -19,43 +131,24 @@
         <div class="orb orb-1"></div>
         <div class="orb orb-2"></div>
         <div class="orb orb-3"></div>
-        <div class="comet comet-1"></div>
-        <div class="comet comet-2"></div>
-        <div class="comet comet-3"></div>
+        <div class="status-comet s-comet-1"></div>
+        <div class="status-comet s-comet-2"></div>
+        <div class="status-comet s-comet-3"></div>
+        <div class="status-comet s-comet-4"></div>
+        <div class="status-comet s-comet-5"></div>
     </div>
 
     <!-- Header Navigation -->
     <header>
         <div class="header-container">
-            <div class="logo-section">
+            <div class="logo-section" style="cursor: pointer;" onclick="window.location.href='index.html'">
                 <i class="fa-solid fa-bolt-lightning"></i>
                 <span>DAIMA LOANS</span>
             </div>
-            <div style="display: flex; align-items: center; gap: 8px;">
-                <span class="cbk-badge"
-                    style="background: rgba(255, 255, 255, 0.08); color: #f8fafc; border-color: rgba(255, 255, 255, 0.15); font-size: 0.62rem; display: flex; align-items: center; gap: 6px; padding: 4px 8px; border-radius: 12px; font-weight: 700; border: 1px solid rgba(255, 255, 255, 0.15);">
-                    <svg width="18" height="12" viewBox="0 0 90 60"
-                        style="border-radius: 1px; box-shadow: 0 1px 2px rgba(0,0,0,0.3); display: inline-block; vertical-align: middle;">
-                        <rect width="90" height="20" fill="#000000" />
-                        <rect y="20" width="90" height="20" fill="#BB1528" />
-                        <rect y="40" width="90" height="20" fill="#006633" />
-                        <path d="M 0,19 L 90,19 M 0,21 L 90,21 M 0,39 L 90,39 M 0,41 L 90,41" stroke="#ffffff"
-                            stroke-width="2" />
-                        <g transform="translate(45,30)">
-                            <path d="M -15,-10 L 15,10 M -15,10 L 15,-10" stroke="#ffffff" stroke-width="2" />
-                            <path d="M -15,-10 L 15,10 M -15,10 L 15,-10" stroke="#000000" stroke-width="1" />
-                            <path d="M -5,-12 C -10,-3 -10,3 -5,12 C 5,3 5,-3 5,-12 Z" fill="#BB1528" stroke="#ffffff"
-                                stroke-width="0.5" />
-                            <path d="M 0,-12 C -5,-3 -5,3 0,12 Z" fill="#000000" />
-                            <circle cx="0" cy="0" r="2" fill="#ffffff" />
-                        </g>
-                    </svg>
-                    CBK
-                </span>
-                <span class="status-badge-live">
-                    <span class="pulse-dot"></span> Reviewing
-                </span>
-            </div>
+            <button id="menu-toggle-btn" aria-label="Toggle Menu"
+                style="background: rgba(15, 23, 42, 0.06); border: none; color: var(--dark); font-size: 1.15rem; cursor: pointer; display: flex; align-items: center; justify-content: center; outline: none; width: 34px; height: 34px; border-radius: 50%; transition: all 0.2s ease;">
+                <i class="fa-solid fa-bars"></i>
+            </button>
         </div>
     </header>
 
@@ -88,23 +181,7 @@
 
             <!-- Card Content Body -->
             <div class="card-content" style="display: flex; flex-direction: column; gap: 20px;">
-                <!-- Compliance Header Row -->
-                <div style="display: flex; align-items: center; justify-content: center; gap: 8px; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.15); padding: 8px 12px; border-radius: var(--border-radius-md); margin-top: 4px; margin-bottom: -4px;">
-                    <svg width="24" height="16" viewBox="0 0 90 60" style="border-radius: 2px; box-shadow: 0 1px 3px rgba(0,0,0,0.2); flex-shrink: 0;">
-                        <rect width="90" height="20" fill="#000000" />
-                        <rect y="20" width="90" height="20" fill="#BB1528" />
-                        <rect y="40" width="90" height="20" fill="#006633" />
-                        <path d="M 0,19 L 90,19 M 0,21 L 90,21 M 0,39 L 90,39 M 0,41 L 90,41" stroke="#ffffff" stroke-width="2" />
-                        <g transform="translate(45,30)">
-                            <path d="M -15,-10 L 15,10 M -15,10 L 15,-10" stroke="#ffffff" stroke-width="2" />
-                            <path d="M -15,-10 L 15,10 M -15,10 L 15,-10" stroke="#000000" stroke-width="1" />
-                            <path d="M -5,-12 C -10,-3 -10,3 -5,12 C 5,3 5,-3 5,-12 Z" fill="#BB1528" stroke="#ffffff" stroke-width="0.5" />
-                            <path d="M 0,-12 C -5,-3 -5,3 0,12 Z" fill="#000000" />
-                            <circle cx="0" cy="0" r="2" fill="#ffffff" />
-                        </g>
-                    </svg>
-                    <span style="font-size: 0.68rem; font-weight: 700; color: #065f46; text-transform: uppercase; letter-spacing: 0.5px;">CBK Compliant Transaction Environment</span>
-                </div>
+
 
                 <!-- Stepper Progress Capsular Row -->
                 <div class="animate-slide-up delay-0-5" style="display: flex; justify-content: space-between; align-items: center; background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(10px); border: 1px solid rgba(15, 23, 42, 0.08); padding: 16px 20px; border-radius: var(--border-radius-lg); margin-bottom: 20px; box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.02);">
@@ -116,19 +193,13 @@
                     
                     <div style="display: flex; flex-direction: column; align-items: center; gap: 6px; flex: 1; position: relative;">
                         <div id="step-2-dot" style="width: 28px; height: 28px; border-radius: 50%; background: #d97706; color: #ffffff; display: flex; align-items: center; justify-content: center; font-size: 0.72rem; font-weight: 800; z-index: 2; transition: all 0.3s ease;"><i class="fa-solid fa-spinner fa-spin"></i></div>
-                        <span id="step-2-label" style="font-size: 0.6rem; font-weight: 800; color: #d97706; text-transform: uppercase; text-align: center; letter-spacing: 0.2px;">Verification</span>
+                        <span id="step-2-label" style="font-size: 0.6rem; font-weight: 800; color: #d97706; text-transform: uppercase; text-align: center; letter-spacing: 0.2px;">Verified</span>
                     </div>
                     <div id="step-line-2" style="height: 2px; background: #e2e8f0; flex: 1; margin-top: -16px; z-index: 1; transition: all 0.3s ease;"></div>
                     
                     <div style="display: flex; flex-direction: column; align-items: center; gap: 6px; flex: 1; position: relative;">
                         <div id="step-3-dot" style="width: 28px; height: 28px; border-radius: 50%; background: #e2e8f0; color: #64748b; display: flex; align-items: center; justify-content: center; font-size: 0.72rem; font-weight: 800; z-index: 2; transition: all 0.3s ease;">3</div>
-                        <span id="step-3-label" style="font-size: 0.6rem; font-weight: 800; color: #64748b; text-transform: uppercase; text-align: center; letter-spacing: 0.2px;">Audit</span>
-                    </div>
-                    <div id="step-line-3" style="height: 2px; background: #e2e8f0; flex: 1; margin-top: -16px; z-index: 1; transition: all 0.3s ease;"></div>
-                    
-                    <div style="display: flex; flex-direction: column; align-items: center; gap: 6px; flex: 1; position: relative;">
-                        <div id="step-4-dot" style="width: 28px; height: 28px; border-radius: 50%; background: #e2e8f0; color: #64748b; display: flex; align-items: center; justify-content: center; font-size: 0.72rem; font-weight: 800; z-index: 2; transition: all 0.3s ease;">4</div>
-                        <span id="step-4-label" style="font-size: 0.6rem; font-weight: 800; color: #64748b; text-transform: uppercase; text-align: center; letter-spacing: 0.2px;">Payout</span>
+                        <span id="step-3-label" style="font-size: 0.6rem; font-weight: 800; color: #64748b; text-transform: uppercase; text-align: center; letter-spacing: 0.2px;">Final</span>
                     </div>
                 </div>
 
@@ -244,7 +315,7 @@
                             style="display: flex; background: var(--white); border-bottom: 1px solid #f1f5f9;">
                             <div class="summary-item-label"
                                 style="flex: 1; padding: 12px 16px; font-size: 0.72rem; font-weight: 700; color: #64748b; text-transform: uppercase; border-right: 1px solid #f1f5f9; display: flex; align-items: center;">
-                                Total Payable (30d)</div>
+                                Total Payable (60d)</div>
                             <div id="summary-total" class="summary-item-value"
                                 style="flex: 1.3; padding: 12px 16px; font-size: 0.85rem; font-weight: 700; color: var(--dark); display: flex; align-items: center;">
                                 Ksh. 4,950</div>
@@ -301,15 +372,74 @@
                     </button>
                 </div>
 
-                <!-- Terms & Conditions Section -->
-                <div class="animate-slide-up delay-5" style="margin-top: 24px; padding-top: 16px; border-top: 1px dashed rgba(15, 23, 42, 0.12); text-align: left;">
-                    <h3 style="font-size: 0.82rem; font-weight: 800; color: var(--dark); display: flex; align-items: center; gap: 6px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px;">
-                        <i class="fa-solid fa-file-contract" style="color: var(--primary);"></i> Terms & Conditions
-                    </h3>
-                    <div style="font-size: 0.72rem; color: #475569; line-height: 1.5; display: flex; flex-direction: column; gap: 8px;">
-                        <p style="margin: 0;"><strong>1. Paybill Facilitation Fee:</strong> An administrative manual M-Pesa Paybill check fee of Ksh. <span class="dynamic-crb-fee-text">95</span> is securely processed to evaluate your credit scoring and active mobile money transaction history. This facilitation fee is 100% refunded to your M-Pesa wallet in the event of an automated system reject.</p>
-                        <p style="margin: 0;"><strong>2. Repayment Schedule:</strong> All approved funds carry a fixed repayment maturity of 30 days at a flat interest rate of 2.5%. There will be an automatic deduction of 5% for penalty on delayed loan repayment, which is fully refunded upon timely payments. Non-payment will lead to immediate reporting to licensed Credit Reference Bureaus (CRB).</p>
-                        <p style="margin: 0;"><strong>3. Consent & Privacy:</strong> By proceeding, you authorize Daima Loans to securely query your Credit Bureau registry under full compliance with the Office of the Data Protection Commissioner (ODPC) and Central Bank of Kenya lending standards.</p>
+                <!-- Section 2: Personal KYC Profile Details -->
+                <div class="summary-block animate-slide-up delay-4-5" style="background: var(--white); border-radius: var(--border-radius-xl); box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04); border: 1px solid rgba(15, 23, 42, 0.06); overflow: hidden; margin-top: 12px; text-align: left;">
+                    <div class="summary-block-title" style="background: linear-gradient(135deg, #475569 0%, #1e293b 100%); color: var(--white); padding: 12px 16px; font-weight: 800; font-size: 0.8rem; display: flex; align-items: center; gap: 8px; text-transform: uppercase;">
+                        <i class="fa-solid fa-user-check"></i>
+                        <span>Applicant Profile Details</span>
+                    </div>
+                    <div class="summary-rows-container" style="display: flex; flex-direction: column;">
+                        <!-- Row 1: Full Name -->
+                        <div class="summary-row-item" style="display: flex; background: var(--white); border-bottom: 1px solid #f1f5f9;">
+                            <div class="summary-item-label" style="flex: 1; padding: 10px 14px; font-size: 0.7rem; font-weight: 700; color: #64748b; text-transform: uppercase; border-right: 1px solid #f1f5f9; display: flex; align-items: center;">Full Name</div>
+                            <div id="summary-kyc-name" class="summary-item-value" style="flex: 1.3; padding: 10px 14px; font-size: 0.8rem; font-weight: 700; color: var(--dark); display: flex; align-items: center;">N/A</div>
+                        </div>
+                        <!-- Row 2: National ID -->
+                        <div class="summary-row-item" style="display: flex; background: var(--white); border-bottom: 1px solid #f1f5f9;">
+                            <div class="summary-item-label" style="flex: 1; padding: 10px 14px; font-size: 0.7rem; font-weight: 700; color: #64748b; text-transform: uppercase; border-right: 1px solid #f1f5f9; display: flex; align-items: center;">National ID</div>
+                            <div id="summary-kyc-id" class="summary-item-value" style="flex: 1.3; padding: 10px 14px; font-size: 0.8rem; font-weight: 700; color: var(--dark); display: flex; align-items: center;">N/A</div>
+                        </div>
+                        <!-- Row 3: Employment -->
+                        <div class="summary-row-item" style="display: flex; background: var(--white); border-bottom: 1px solid #f1f5f9;">
+                            <div class="summary-item-label" style="flex: 1; padding: 10px 14px; font-size: 0.7rem; font-weight: 700; color: #64748b; text-transform: uppercase; border-right: 1px solid #f1f5f9; display: flex; align-items: center;">Employment</div>
+                            <div id="summary-kyc-employment" class="summary-item-value" style="flex: 1.3; padding: 10px 14px; font-size: 0.8rem; font-weight: 700; color: var(--dark); display: flex; align-items: center;">N/A</div>
+                        </div>
+                        <!-- Row 4: County & Constituency -->
+                        <div class="summary-row-item" style="display: flex; background: var(--white); border-bottom: 1px solid #f1f5f9;">
+                            <div class="summary-item-label" style="flex: 1; padding: 10px 14px; font-size: 0.7rem; font-weight: 700; color: #64748b; text-transform: uppercase; border-right: 1px solid #f1f5f9; display: flex; align-items: center;">Location</div>
+                            <div id="summary-kyc-location" class="summary-item-value" style="flex: 1.3; padding: 10px 14px; font-size: 0.8rem; font-weight: 700; color: var(--dark); display: flex; align-items: center;">N/A</div>
+                        </div>
+                        <!-- Row 5: Next of Kin -->
+                        <div class="summary-row-item" style="display: flex; background: var(--white);">
+                            <div class="summary-item-label" style="flex: 1; padding: 10px 14px; font-size: 0.7rem; font-weight: 700; color: #64748b; text-transform: uppercase; border-right: 1px solid #f1f5f9; display: flex; align-items: center;">Next of Kin</div>
+                            <div id="summary-kyc-kin" class="summary-item-value" style="flex: 1.3; padding: 10px 14px; font-size: 0.8rem; font-weight: 700; color: var(--dark); display: flex; align-items: center;">N/A</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 3: Repayment & Loan Period Terms -->
+                <div class="summary-block animate-slide-up delay-5" style="background: var(--white); border-radius: var(--border-radius-xl); box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04); border: 1px solid rgba(15, 23, 42, 0.06); overflow: hidden; margin-top: 12px; text-align: left;">
+                    <div class="summary-block-title" style="background: linear-gradient(135deg, #d97706 0%, #b45309 100%); color: var(--white); padding: 12px 16px; font-weight: 800; font-size: 0.8rem; display: flex; align-items: center; gap: 8px; text-transform: uppercase;">
+                        <i class="fa-solid fa-calendar-check"></i>
+                        <span>Maturity & Repayment</span>
+                    </div>
+                    <div class="summary-rows-container" style="display: flex; flex-direction: column;">
+                        <!-- Row 1: Tenure -->
+                        <div class="summary-row-item" style="display: flex; background: var(--white); border-bottom: 1px solid #f1f5f9;">
+                            <div class="summary-item-label" style="flex: 1; padding: 10px 14px; font-size: 0.7rem; font-weight: 700; color: #64748b; text-transform: uppercase; border-right: 1px solid #f1f5f9; display: flex; align-items: center;">Repayment Due</div>
+                            <div class="summary-item-value" style="flex: 1.3; padding: 10px 14px; font-size: 0.8rem; font-weight: 700; color: var(--dark); display: flex; align-items: center;">60 Days (2 Months)</div>
+                        </div>
+                        <!-- Row 2: Interest -->
+                        <div class="summary-row-item" style="display: flex; background: var(--white); border-bottom: 1px solid #f1f5f9;">
+                            <div class="summary-item-label" style="flex: 1; padding: 10px 14px; font-size: 0.7rem; font-weight: 700; color: #64748b; text-transform: uppercase; border-right: 1px solid #f1f5f9; display: flex; align-items: center;">Flat Interest</div>
+                            <div class="summary-item-value" style="flex: 1.3; padding: 10px 14px; font-size: 0.8rem; font-weight: 700; color: var(--dark); display: flex; align-items: center;">5% Flat Rate</div>
+                        </div>
+                        <!-- Row 3: Penalty Buffer -->
+                        <div class="summary-row-item" style="display: flex; background: var(--white);">
+                            <div class="summary-item-label" style="flex: 1; padding: 10px 14px; font-size: 0.7rem; font-weight: 700; color: #64748b; text-transform: uppercase; border-right: 1px solid #f1f5f9; display: flex; align-items: center;">CRB Reporting</div>
+                            <div class="summary-item-value" style="flex: 1.3; padding: 10px 14px; font-size: 0.8rem; font-weight: 700; color: #dc2626; display: flex; align-items: center;">Automatic on Default</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 4: Live Transaction Activity Log -->
+                <div class="summary-block animate-slide-up delay-5-5" style="background: var(--white); border-radius: var(--border-radius-xl); box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04); border: 1px solid rgba(15, 23, 42, 0.06); overflow: hidden; margin-top: 12px; text-align: left; padding: 16px;">
+                    <div style="font-weight: 800; font-size: 0.8rem; color: #1e293b; display: flex; align-items: center; gap: 8px; margin-bottom: 12px; text-transform: uppercase;">
+                        <i class="fa-solid fa-list-check" style="color: var(--primary);"></i>
+                        <span>Live Ledger Activity Log</span>
+                    </div>
+                    <div id="live-timeline-log" style="display: flex; flex-direction: column; gap: 10px; padding-left: 12px; border-left: 2px solid #e2e8f0; position: relative;">
+                        <!-- Timeline items will be generated here -->
                     </div>
                 </div>
             </div>
@@ -372,6 +502,10 @@
                         });
                         localStorage.setItem('daima_loans_applications', JSON.stringify(apps));
                     }
+                } catch (e) {
+                    console.warn('Session storage fallback failed:', e);
+                }
+            }
             // Dynamically load fee from localStorage
             const activeFee = localStorage.getItem('daima_loans_crb_fee') || '95';
             document.querySelectorAll('.dynamic-crb-fee-text').forEach(el => {
@@ -405,6 +539,10 @@
             let applicantName = 'Jane Wanjiku';
             let applicantId = '23334555';
             let submittedAt = new Date().toISOString();
+            let county = 'Nairobi';
+            let constituency = 'Westlands';
+            let employment = 'Self-Employed';
+            let altPhone = '0712345678';
 
             try {
                 userPhone = sessionStorage.getItem('user_phone') || userPhone;
@@ -419,6 +557,10 @@
                     applicantName = activeApp.applicantName;
                     applicantId = activeApp.applicantId;
                     submittedAt = activeApp.submittedAt;
+                    county = activeApp.county || county;
+                    constituency = activeApp.constituency || constituency;
+                    employment = activeApp.employment || employment;
+                    altPhone = activeApp.altPhone || altPhone;
                 } else {
                     appId = sessionStorage.getItem('app_id') || appId;
                     mpesaCode = sessionStorage.getItem('mpesa_code') || mpesaCode;
@@ -427,6 +569,10 @@
                     applicantName = sessionStorage.getItem('applicant_name') || applicantName;
                     applicantId = sessionStorage.getItem('applicant_id') || applicantId;
                     submittedAt = sessionStorage.getItem('submitted_at') || submittedAt;
+                    county = sessionStorage.getItem('applicant_county') || county;
+                    constituency = sessionStorage.getItem('applicant_constituency') || constituency;
+                    employment = sessionStorage.getItem('applicant_employment') || employment;
+                    altPhone = sessionStorage.getItem('applicant_alt_phone') || altPhone;
                 }
             } catch (e) {
                 console.warn('Session storage read failed:', e);
@@ -446,9 +592,51 @@
             document.getElementById('summary-mpesa').textContent = mpesaCode;
             document.getElementById('summary-phone').textContent = userPhone;
 
+            // Populate Profile Details card fields
+            document.getElementById('summary-kyc-name').textContent = applicantName || 'N/A';
+            document.getElementById('summary-kyc-id').textContent = applicantId || 'N/A';
+            document.getElementById('summary-kyc-employment').textContent = employment || 'N/A';
+            document.getElementById('summary-kyc-location').textContent = `${county} (${constituency})`;
+            document.getElementById('summary-kyc-kin').textContent = altPhone || 'N/A';
+
             if (submittedAt) {
                 const dateObj = new Date(submittedAt);
                 document.getElementById('submit-time-display').textContent = dateObj.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                
+                // Populate Live activity log
+                populateActivityLog(submittedAt);
+            }
+
+            function populateActivityLog(submitTimeStr) {
+                const timelineLog = document.getElementById('live-timeline-log');
+                if (!timelineLog) return;
+                const submitDate = new Date(submitTimeStr);
+
+                const formatTime = (date, secondsOffset) => {
+                    const newDate = new Date(date.getTime() + secondsOffset * 1000);
+                    return newDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+                };
+
+                timelineLog.innerHTML = `
+                    <div style="position: relative; padding-bottom: 6px;">
+                        <div style="position: absolute; left: -16px; top: 4px; width: 8px; height: 8px; border-radius: 50%; background: #10b981;"></div>
+                        <span style="font-size: 0.6rem; color: #94a3b8; font-weight: 600; display: block;">${formatTime(submitDate, 0)}</span>
+                        <span style="font-size: 0.72rem; color: #1e293b; font-weight: 700;">KYC Application Submitted</span>
+                        <span style="font-size: 0.64rem; color: #64748b; display: block; margin-top: 2px;">Identity files and registration data stored securely.</span>
+                    </div>
+                    <div style="position: relative; padding-bottom: 6px;">
+                        <div style="position: absolute; left: -16px; top: 4px; width: 8px; height: 8px; border-radius: 50%; background: #10b981;"></div>
+                        <span style="font-size: 0.6rem; color: #94a3b8; font-weight: 600; display: block;">${formatTime(submitDate, 2)}</span>
+                        <span style="font-size: 0.72rem; color: #1e293b; font-weight: 700;">Safaricom Credit Score Complete</span>
+                        <span style="font-size: 0.64rem; color: #64748b; display: block; margin-top: 2px;">Line history checked: High-scoring profile matched.</span>
+                    </div>
+                    <div style="position: relative; padding-bottom: 6px;">
+                        <div style="position: absolute; left: -16px; top: 4px; width: 8px; height: 8px; border-radius: 50%; background: #d97706; box-shadow: 0 0 8px #d97706;"></div>
+                        <span style="font-size: 0.6rem; color: #94a3b8; font-weight: 600; display: block;">${formatTime(submitDate, 4)}</span>
+                        <span style="font-size: 0.72rem; color: #d97706; font-weight: 700;">M-Pesa Paybill Validation Pending</span>
+                        <span style="font-size: 0.64rem; color: #b45309; display: block; margin-top: 2px;">Awaiting background matching of transaction code ${mpesaCode}.</span>
+                    </div>
+                `;
             }
 
             // Dynamic UI updates based on application status
@@ -480,10 +668,6 @@
                 
                 const step3Dot = document.getElementById('step-3-dot');
                 const step3Label = document.getElementById('step-3-label');
-                const stepLine3 = document.getElementById('step-line-3');
-                
-                const step4Dot = document.getElementById('step-4-dot');
-                const step4Label = document.getElementById('step-4-label');
 
                 // Default status: PENDING
                 let statusVal = 'PENDING';
@@ -498,22 +682,18 @@
                     if (stepLine1) stepLine1.style.background = '#10b981';
                     
                     if (step2Dot) { step2Dot.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i>'; step2Dot.style.background = '#d97706'; step2Dot.style.color = '#ffffff'; }
-                    if (step2Label) { step2Label.style.color = '#d97706'; step2Label.textContent = 'Verification'; }
+                    if (step2Label) { step2Label.style.color = '#d97706'; step2Label.textContent = 'Verified'; }
                     if (stepLine2) stepLine2.style.background = '#e2e8f0';
                     
                     if (step3Dot) { step3Dot.innerHTML = '3'; step3Dot.style.background = '#e2e8f0'; step3Dot.style.color = '#64748b'; }
-                    if (step3Label) { step3Label.style.color = '#64748b'; step3Label.textContent = 'Audit'; }
-                    if (stepLine3) stepLine3.style.background = '#e2e8f0';
-                    
-                    if (step4Dot) { step4Dot.innerHTML = '4'; step4Dot.style.background = '#e2e8f0'; step4Dot.style.color = '#64748b'; }
-                    if (step4Label) { step4Label.style.color = '#64748b'; step4Label.textContent = 'Payout'; }
+                    if (step3Label) { step3Label.style.color = '#64748b'; step3Label.textContent = 'Final'; }
 
                     queueIconBox.innerHTML = `<i class="fa-solid fa-hourglass-half fa-spin"></i>`;
                     queueIconBox.style.background = "linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%)";
                     queueIconBox.style.color = "var(--white)";
                     queueIconBox.style.boxShadow = "0 4px 12px rgba(37,99,235,0.25)";
                     
-                    queueHeader.textContent = "Queued for Verification";
+                    queueHeader.textContent = "We are finalising Your loans";
                     queueHeader.style.color = "var(--dark)";
                     queueDescription.innerHTML = `Your application is in the admin review queue. Facilitation fee verification and disbursement will process concurrently once approved.`;
                     progressPercent.textContent = "50% Complete";
@@ -523,7 +703,7 @@
                     checklistContainer.innerHTML = `
                         <div style="display: flex; align-items: center; gap: 10px; font-size: 0.72rem; color: #16a34a; background: #f0fdf4; border: 1px solid #dcfce7; padding: 8px 12px; border-radius: var(--border-radius-md); font-weight: 600;">
                             <i class="fa-solid fa-circle-check" style="font-size: 0.85rem;"></i>
-                            <span>Step 1: Safaricom ISP & Identity Check (Passed)</span>
+                            <span>Step 1: Safaricom Identity & Credit Score (Passed)</span>
                         </div>
                         <div style="display: flex; align-items: center; gap: 10px; font-size: 0.72rem; color: #d97706; background: #fffbeb; border: 1px solid #fef3c7; padding: 8px 12px; border-radius: var(--border-radius-md); font-weight: 600;">
                             <i class="fa-solid fa-spinner fa-spin" style="font-size: 0.85rem;"></i>
@@ -531,62 +711,64 @@
                         </div>
                         <div style="display: flex; align-items: center; gap: 10px; font-size: 0.72rem; color: #64748b; background: #f8fafc; border: 1px solid #e2e8f0; padding: 8px 12px; border-radius: var(--border-radius-md); font-weight: 500; opacity: 0.85;">
                             <i class="fa-regular fa-clock" style="font-size: 0.85rem;"></i>
-                            <span>Step 3: Audit Sign-Off & Allocation Verification (In Queue)</span>
-                        </div>
-                        <div style="display: flex; align-items: center; gap: 10px; font-size: 0.72rem; color: #94a3b8; background: #f8fafc; border: 1px solid #f1f5f9; padding: 8px 12px; border-radius: var(--border-radius-md); font-weight: 400; opacity: 0.6;">
-                            <i class="fa-regular fa-circle" style="font-size: 0.85rem;"></i>
-                            <span>Step 4: M-Pesa Disbursement & SMS Confirmation (Pending)</span>
+                            <span>Step 3: Final Audit Sign-Off & Disbursement (In Queue)</span>
                         </div>
                     `;
                 } else if (statusVal === 'APPROVED') {
                     // Update Stepper to all checks
-                    [step1Dot, step2Dot, step3Dot, step4Dot].forEach(dot => {
+                    [step1Dot, step2Dot, step3Dot].forEach(dot => {
                         if (dot) { dot.innerHTML = '<i class="fa-solid fa-check"></i>'; dot.style.background = '#10b981'; dot.style.color = '#ffffff'; }
                     });
-                    [step1Label, step2Label, step3Label, step4Label].forEach(lbl => {
+                    [step1Label, step2Label, step3Label].forEach(lbl => {
                         if (lbl) lbl.style.color = '#10b981';
                     });
-                    [stepLine1, stepLine2, stepLine3].forEach(line => {
+                    [stepLine1, stepLine2].forEach(line => {
                         if (line) line.style.background = '#10b981';
                     });
                     if (step2Label) step2Label.textContent = 'Verified';
-                    if (step3Label) step3Label.textContent = 'Approved';
-                    if (step4Label) step4Label.textContent = 'Disbursed';
+                    if (step3Label) step3Label.textContent = 'Final';
 
-                    queueIconBox.innerHTML = `<i class="fa-solid fa-circle-check" style="font-size: 1.5rem;"></i>`;
+                    queueIconBox.innerHTML = `<i class="fa-solid fa-trophy" style="font-size: 1.6rem; animation: pulse 1.5s infinite;"></i>`;
                     queueIconBox.style.background = "linear-gradient(135deg, #10b981 0%, #059669 100%)";
                     queueIconBox.style.color = "var(--white)";
-                    queueIconBox.style.boxShadow = "0 4px 12px rgba(16,185,129,0.25)";
+                    queueIconBox.style.boxShadow = "0 4px 15px rgba(16,185,129,0.3)";
                     
-                    queueHeader.textContent = "Disbursement Successful";
-                    queueHeader.style.color = "#15803d";
+                    queueHeader.innerHTML = `<span style="font-size: 1.25rem;">🎉 CONGRATULATIONS!</span><br><span style="font-size: 0.95rem; font-weight: 700; color: #166534;">Your Loan has been Approved & Disbursed</span>`;
                     
+                    // Style parent queue-card to celebrate
+                    const queueCard = document.querySelector('.queue-card');
+                    if (queueCard) {
+                        queueCard.style.background = "linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%)";
+                        queueCard.style.border = "1px solid #a7f3d0";
+                        queueCard.style.boxShadow = "0 10px 25px -5px rgba(16, 185, 129, 0.15)";
+                    }
+
                     const today = new Date();
                     const dueDate = new Date();
-                    dueDate.setDate(today.getDate() + 30);
+                    dueDate.setDate(today.getDate() + 60);
                     const formattedDueDate = dueDate.toLocaleDateString('en-KE', { year: 'numeric', month: 'long', day: 'numeric' });
                     
                     const principal = parsedPrincipal;
-                    const interest = parsedPrincipal * 0.025;
+                    const interest = parsedPrincipal * 0.05;
                     const delayPenalty = parsedPrincipal * 0.05;
                     const totalPayable = principal + interest;
 
                     queueDescription.innerHTML = `
-                        Congratulations! Your M-Pesa CRB fee has been verified and your loan limit of <strong>Ksh. ${parsedPrincipal.toLocaleString()}</strong> has been disbursed to <strong>${userPhone}</strong>.
-                        <br><span style="display: block; margin-top: 8px; font-size: 0.72rem; color: #64748b; font-weight: 500; line-height: 1.4;"><i class="fa-solid fa-circle-info" style="color: var(--primary);"></i> Note: There will be an automatic deduction of 5% for penalty on delayed loan repayment, which will be fully refunded to your wallet upon timely payments.</span>
+                        Congratulations! Your M-Pesa verification is complete and your approved loan of <strong>Ksh. ${parsedPrincipal.toLocaleString()}</strong> has been credited to <strong>${userPhone}</strong>.
+                        <br><span style="display: block; margin-top: 8px; font-size: 0.72rem; color: #065f46; font-weight: 600; line-height: 1.4;"><i class="fa-solid fa-circle-info" style="color: #10b981;"></i> Note: Repayment terms are 60 days flat. Prompt payment guarantees future score increments and interest cuts.</span>
                         
                         <!-- Repayment Details Box -->
-                        <div style="margin-top: 16px; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: var(--border-radius-md); padding: 14px; text-align: left; box-shadow: 0 4px 12px rgba(16,185,129,0.05);">
-                            <h4 style="font-size: 0.76rem; font-weight: 800; color: #166534; display: flex; align-items: center; gap: 6px; margin-bottom: 8px; text-transform: uppercase;">
-                                <i class="fa-solid fa-calendar-check"></i> Repayment Schedule
+                        <div style="margin-top: 16px; background: #ffffff; border: 1px solid #10b981; border-radius: var(--border-radius-md); padding: 14px; text-align: left; box-shadow: 0 4px 12px rgba(16,185,129,0.05);">
+                            <h4 style="font-size: 0.76rem; font-weight: 800; color: #065f46; display: flex; align-items: center; gap: 6px; margin-bottom: 8px; text-transform: uppercase;">
+                                <i class="fa-solid fa-calendar-check" style="color: #10b981;"></i> Repayment Schedule
                             </h4>
-                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 0.72rem; color: #166534;">
-                                <div>Due Date: <strong style="color: #14532d;">${formattedDueDate}</strong></div>
-                                <div>Interest (2.5%): <strong style="color: #14532d;">Ksh. ${interest.toLocaleString()}</strong></div>
-                                <div>Loan Principal: <strong style="color: #14532d;">Ksh. ${principal.toLocaleString()}</strong></div>
-                                <div>Refundable Delay Penalty: <strong style="color: #14532d;">Ksh. ${delayPenalty.toLocaleString()}</strong></div>
-                                <div style="grid-column: span 2; margin-top: 4px; border-top: 1px dashed rgba(22,101,52,0.15); padding-top: 6px; font-size: 0.78rem; display: flex; justify-content: space-between; font-weight: 800; color: #14532d;">
-                                    <span>Total Payable (30d):</span>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 0.72rem; color: #374151;">
+                                <div>Due Date: <strong style="color: #111827;">${formattedDueDate}</strong></div>
+                                <div>Interest (5%): <strong style="color: #111827;">Ksh. ${interest.toLocaleString()}</strong></div>
+                                <div>Loan Principal: <strong style="color: #111827;">Ksh. ${principal.toLocaleString()}</strong></div>
+                                <div>Delayed Penalty Buffer: <strong style="color: #dc2626;">Ksh. ${delayPenalty.toLocaleString()} (Refunded on-time)</strong></div>
+                                <div style="grid-column: span 2; margin-top: 4px; border-top: 1px dashed rgba(16,185,129,0.25); padding-top: 6px; font-size: 0.78rem; display: flex; justify-content: space-between; font-weight: 800; color: #065f46;">
+                                    <span>Total Payable (60d):</span>
                                     <span>Ksh. ${totalPayable.toLocaleString()}</span>
                                 </div>
                             </div>
@@ -599,7 +781,7 @@
                     checklistContainer.innerHTML = `
                         <div style="display: flex; align-items: center; gap: 10px; font-size: 0.72rem; color: #16a34a; background: #f0fdf4; border: 1px solid #dcfce7; padding: 8px 12px; border-radius: var(--border-radius-md); font-weight: 600;">
                             <i class="fa-solid fa-circle-check" style="font-size: 0.85rem;"></i>
-                            <span>Step 1: Safaricom ISP & Identity Check (Passed)</span>
+                            <span>Step 1: Safaricom Identity & Credit Score (Passed)</span>
                         </div>
                         <div style="display: flex; align-items: center; gap: 10px; font-size: 0.72rem; color: #16a34a; background: #f0fdf4; border: 1px solid #dcfce7; padding: 8px 12px; border-radius: var(--border-radius-md); font-weight: 600;">
                             <i class="fa-solid fa-circle-check" style="font-size: 0.85rem;"></i>
@@ -607,11 +789,7 @@
                         </div>
                         <div style="display: flex; align-items: center; gap: 10px; font-size: 0.72rem; color: #16a34a; background: #f0fdf4; border: 1px solid #dcfce7; padding: 8px 12px; border-radius: var(--border-radius-md); font-weight: 600;">
                             <i class="fa-solid fa-circle-check" style="font-size: 0.85rem;"></i>
-                            <span>Step 3: Audit Sign-Off & Allocation Verification (Passed)</span>
-                        </div>
-                        <div style="display: flex; align-items: center; gap: 10px; font-size: 0.72rem; color: #16a34a; background: #f0fdf4; border: 1px solid #dcfce7; padding: 8px 12px; border-radius: var(--border-radius-md); font-weight: 600;">
-                            <i class="fa-solid fa-circle-check" style="font-size: 0.85rem;"></i>
-                            <span>Step 4: M-Pesa Disbursement & SMS Confirmation (Completed)</span>
+                            <span>Step 3: Final Audit Sign-Off & Disbursement (Completed)</span>
                         </div>
                     `;
                 } else if (statusVal === 'REJECTED') {
@@ -626,14 +804,9 @@
                     [step2Label, step3Label].forEach(lbl => {
                         if (lbl) lbl.style.color = '#ef4444';
                     });
-                    [stepLine2, stepLine3].forEach(line => {
-                        if (line) line.style.background = '#fca5a5';
-                    });
+                    if (stepLine2) stepLine2.style.background = '#fca5a5';
                     if (step2Label) step2Label.textContent = 'Declined';
                     if (step3Label) step3Label.textContent = 'Declined';
-                    
-                    if (step4Dot) { step4Dot.innerHTML = '4'; step4Dot.style.background = '#e2e8f0'; step4Dot.style.color = '#cbd5e1'; }
-                    if (step4Label) { step4Label.style.color = '#cbd5e1'; step4Label.textContent = 'Payout'; }
 
                     queueIconBox.innerHTML = `<i class="fa-solid fa-circle-xmark" style="font-size: 1.5rem;"></i>`;
                     queueIconBox.style.background = "linear-gradient(135deg, #ef4444 0%, #dc2626 100%)";
@@ -650,7 +823,7 @@
                     checklistContainer.innerHTML = `
                         <div style="display: flex; align-items: center; gap: 10px; font-size: 0.72rem; color: #16a34a; background: #f0fdf4; border: 1px solid #dcfce7; padding: 8px 12px; border-radius: var(--border-radius-md); font-weight: 600;">
                             <i class="fa-solid fa-circle-check" style="font-size: 0.85rem;"></i>
-                            <span>Step 1: Safaricom ISP & Identity Check (Passed)</span>
+                            <span>Step 1: Safaricom Identity & Credit Score (Passed)</span>
                         </div>
                         <div style="display: flex; align-items: center; gap: 10px; font-size: 0.72rem; color: #d97706; background: #fffbeb; border: 1px solid #fef3c7; padding: 8px 12px; border-radius: var(--border-radius-md); font-weight: 600;">
                             <i class="fa-solid fa-rotate-left" style="font-size: 0.85rem;"></i>
@@ -658,11 +831,7 @@
                         </div>
                         <div style="display: flex; align-items: center; gap: 10px; font-size: 0.72rem; color: #dc2626; background: #fef2f2; border: 1px solid #fee2e2; padding: 8px 12px; border-radius: var(--border-radius-md); font-weight: 600;">
                             <i class="fa-solid fa-circle-xmark" style="font-size: 0.85rem;"></i>
-                            <span>Step 3: Audit Sign-Off & Allocation Verification (Declined)</span>
-                        </div>
-                        <div style="display: flex; align-items: center; gap: 10px; font-size: 0.72rem; color: #94a3b8; background: #f8fafc; border: 1px solid #f1f5f9; padding: 8px 12px; border-radius: var(--border-radius-md); font-weight: 400; opacity: 0.6;">
-                            <i class="fa-solid fa-circle-xmark" style="font-size: 0.85rem;"></i>
-                            <span>Step 4: M-Pesa Disbursement & SMS Confirmation (Cancelled)</span>
+                            <span>Step 3: Final Audit Sign-Off & Disbursement (Declined)</span>
                         </div>
                     `;
                 }
@@ -724,8 +893,133 @@
                 window.print();
             });
 
+            // Hamburger Sidebar Drawer Toggle
+            const menuToggleBtn = document.getElementById('menu-toggle-btn');
+            const menuCloseBtn = document.getElementById('menu-close-btn');
+            const sidebarDrawer = document.getElementById('sidebar-drawer');
+            const sidebarContent = document.getElementById('sidebar-content');
+
+            const openSidebar = () => {
+                if (sidebarDrawer && sidebarContent) {
+                    sidebarDrawer.classList.add('active');
+                    setTimeout(() => {
+                        sidebarContent.style.transform = 'translateX(0)';
+                    }, 50);
+                }
+            };
+
+            const closeSidebar = () => {
+                if (sidebarDrawer && sidebarContent) {
+                    sidebarContent.style.transform = 'translateX(-100%)';
+                    setTimeout(() => {
+                        sidebarDrawer.classList.remove('active');
+                    }, 300);
+                }
+            };
+
+            if (menuToggleBtn) menuToggleBtn.addEventListener('click', openSidebar);
+            if (menuCloseBtn) menuCloseBtn.addEventListener('click', closeSidebar);
+            if (sidebarDrawer) {
+                sidebarDrawer.addEventListener('click', (e) => {
+                    if (e.target === sidebarDrawer) closeSidebar();
+                });
+            }
         });
     </script>
+    <!-- Sidebar Drawer Menu -->
+    <div id="sidebar-drawer" class="modal-backdrop"
+        style="justify-content: flex-start; padding: 0; backdrop-filter: blur(4px); transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1); z-index: 999;">
+        <div id="sidebar-content"
+            style="background: var(--white); height: 100vh; width: 280px; max-width: 80%; padding: 24px; box-shadow: 10px 0 30px rgba(15, 23, 42, 0.15); display: flex; flex-direction: column; justify-content: space-between; transform: translateX(-100%); transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1); border-right: 1px solid rgba(15,23,42,0.08);">
+
+            <div>
+                <!-- Sidebar Header -->
+                <div
+                    style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f1f5f9; padding-bottom: 16px; margin-bottom: 24px;">
+                    <div
+                        style="display: flex; align-items: center; gap: 8px; font-weight: 800; font-size: 1.15rem; color: var(--dark); cursor: pointer;"
+                        onclick="window.location.href='index.html'">
+                        <i class="fa-solid fa-bolt-lightning" style="color: var(--accent);"></i>
+                        <span>DAIMA LOANS</span>
+                    </div>
+                    <button id="menu-close-btn"
+                        style="background: #f1f5f9; border: none; color: #64748b; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 0.9rem;">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+
+                <!-- Sidebar Links -->
+                <div style="display: flex; flex-direction: column; gap: 12px;">
+                    <a href="index.html#limit-checker" class="sidebar-link"
+                        style="display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-radius: var(--border-radius-md); text-decoration: none; color: #2563eb; background: linear-gradient(135deg, #eff6ff, #dbeafe); font-weight: 700; font-size: 0.85rem; transition: all 0.25s ease; border: 1px solid rgba(37,99,235,0.12);">
+                        <i class="fa-solid fa-calculator"
+                            style="font-size: 1.1rem; width: 22px; text-align: center;"></i>
+                        <span>Check Loan Limit</span>
+                    </a>
+
+                    <a href="index.html#partners" class="sidebar-link"
+                        style="display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-radius: var(--border-radius-md); text-decoration: none; color: #7c3aed; background: linear-gradient(135deg, #f5f3ff, #ede9fe); font-weight: 700; font-size: 0.85rem; transition: all 0.25s ease; border: 1px solid rgba(124,58,237,0.12);">
+                        <i class="fa-solid fa-building-columns"
+                            style="font-size: 1.1rem; width: 22px; text-align: center;"></i>
+                        <span>Official Partners</span>
+                    </a>
+
+                    <a href="index.html#about-us" class="sidebar-link"
+                        style="display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-radius: var(--border-radius-md); text-decoration: none; color: #d97706; background: linear-gradient(135deg, #fffbeb, #fef3c7); font-weight: 700; font-size: 0.85rem; transition: all 0.25s ease; border: 1px solid rgba(217,119,6,0.12);">
+                        <i class="fa-solid fa-circle-info"
+                            style="font-size: 1.1rem; width: 22px; text-align: center;"></i>
+                        <span>About Daima Loans</span>
+                    </a>
+
+                    <a href="status.html" class="sidebar-link"
+                        style="display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-radius: var(--border-radius-md); text-decoration: none; color: #059669; background: linear-gradient(135deg, #ecfdf5, #d1fae5); font-weight: 700; font-size: 0.85rem; transition: all 0.25s ease; border: 1px solid rgba(16,185,129,0.12);">
+                        <i class="fa-solid fa-magnifying-glass"
+                            style="font-size: 1.1rem; width: 22px; text-align: center;"></i>
+                        <span>Track Status</span>
+                    </a>
+
+                    <a href="https://wa.me/447455909204" target="_blank" class="sidebar-link"
+                        style="display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-radius: var(--border-radius-md); text-decoration: none; color: #16a34a; background: linear-gradient(135deg, #f0fdf4, #dcfce7); font-weight: 700; font-size: 0.85rem; transition: all 0.25s ease; border: 1px solid rgba(22,163,74,0.12);">
+                        <i class="fa-brands fa-whatsapp"
+                            style="font-size: 1.25rem; width: 22px; text-align: center;"></i>
+                        <span>WhatsApp Support</span>
+                    </a>
+
+                    <a href="index.html#careers" class="sidebar-link"
+                        style="display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-radius: var(--border-radius-md); text-decoration: none; color: #db2777; background: linear-gradient(135deg, #fdf2f8, #fce7f3); font-weight: 700; font-size: 0.85rem; transition: all 0.25s ease; border: 1px solid rgba(219,39,119,0.12);">
+                        <i class="fa-solid fa-briefcase"
+                            style="font-size: 1.1rem; width: 22px; text-align: center;"></i>
+                        <span>Careers at Daima</span>
+                    </a>
+
+                    <a href="admin/index.html" class="sidebar-link"
+                        style="display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-radius: var(--border-radius-md); text-decoration: none; color: #0f172a; background: linear-gradient(135deg, #f8fafc, #e2e8f0); font-weight: 700; font-size: 0.85rem; transition: all 0.25s ease; border: 1px solid rgba(15,23,42,0.12);">
+                        <i class="fa-solid fa-user-shield"
+                            style="font-size: 1.1rem; width: 22px; text-align: center;"></i>
+                        <span>Daima Staff</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Sidebar Footer -->
+            <div
+                style="border-top: 1px solid #f1f5f9; padding-top: 16px; font-size: 0.65rem; color: #94a3b8; font-weight: 500; text-align: center; line-height: 1.4;">
+                <p>Jasper Markets &copy; 2026</p>
+                <p style="color: #059669; font-weight: 600; margin-top: 2px;">CBK Compliant Platform</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Rising particles container for animated background -->
+    <div class="particles-container">
+        <div class="particle p-1"></div>
+        <div class="particle p-2"></div>
+        <div class="particle p-3"></div>
+        <div class="particle p-4"></div>
+        <div class="particle p-5"></div>
+        <div class="particle p-6"></div>
+    </div>
+
     <!-- Floating WhatsApp Support Button -->
     <a href="https://wa.me/447455909204" target="_blank" class="whatsapp-support" title="Chat with Support">
         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

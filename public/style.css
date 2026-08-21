@@ -50,6 +50,20 @@ body {
     justify-content: space-between;
     overflow-x: hidden;
     position: relative;
+    
+    /* Disable text selection sitewide to prevent copying */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Allow selection inside inputs/editable areas for usability */
+input, textarea, select, [contenteditable="true"] {
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
 }
 
 /* Background Mesh & Floating Animated Orbs */

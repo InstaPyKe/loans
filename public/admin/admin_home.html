@@ -260,6 +260,9 @@
                     <button id="btn-load-mock" class="btn-tertiary" style="width: auto; padding: 10px 16px;">
                         <i class="fa-solid fa-plus" style="margin-right: 4px;"></i> Load Mock Data
                     </button>
+                    <button id="btn-clear-verified" class="btn-tertiary" style="width: auto; padding: 10px 16px; border-color: #fca5a5; color: #b91c1c; background: #fef2f2;">
+                        <i class="fa-solid fa-trash-can" style="margin-right: 4px;"></i> Clear Approved & Rejected
+                    </button>
                 </div>
             </div>
 
@@ -632,38 +635,85 @@
                     </div>
                 `;
 
-                modalActions.innerHTML = `
-                    <button class="btn-reject btn-tertiary" style="width: auto; border-color: #fca5a5; color: #b91c1c; background: #fef2f2; padding: 10px 20px;" data-id="${app.appId}">
-                        Reject Application
-                    </button>
-                    <button class="btn-approve btn-primary" style="width: auto; padding: 10px 24px; background: linear-gradient(135deg, #10b981 0%, #059669 100%);" data-id="${app.appId}">
-                        Approve & Disburse
-                    </button>
-                `;
+                let actionButtonsHTML = '';
+                let statusHeaderHTML = '';
+
+                if (app.status === 'PENDING') {
+                    actionButtonsHTML = `
+                        <button class="btn-reject btn-tertiary" style="width: auto; border-color: #fca5a5; color: #b91c1c; background: #fef2f2; padding: 10px 20px;" data-id="${app.appId}">
+                            Reject Application
+                        </button>
+                        <button class="btn-approve btn-primary" style="width: auto; padding: 10px 24px; background: linear-gradient(135deg, #10b981 0%, #059669 100%);" data-id="${app.appId}">
+                            Approve & Disburse
+                        </button>
+                    `;
+                } else {
+                    statusHeaderHTML = `
+                        <div style="background: ${app.status === 'APPROVED' ? '#ecfdf5' : '#fef2f2'}; border: 1px solid ${app.status === 'APPROVED' ? '#a7f3d0' : '#fca5a5'}; padding: 10px 14px; border-radius: var(--border-radius-md); font-size: 0.76rem; font-weight: 700; color: ${app.status === 'APPROVED' ? '#065f46' : '#b91c1c'}; margin-bottom: 12px; display: flex; align-items: center; gap: 6px;">
+                            <i class="${app.status === 'APPROVED' ? 'fa-solid fa-circle-check' : 'fa-solid fa-circle-xmark'}"></i>
+                            <span>Current Status: ${app.status === 'APPROVED' ? 'DISBURSED / APPROVED' : 'DECLINED / REJECTED'}</span>
+                        </div>
+                    `;
+                    actionButtonsHTML = `
+                        <button class="btn-reset btn-secondary" style="width: auto; padding: 10px 20px;" data-id="${app.appId}">
+                            <i class="fa-solid fa-rotate-left"></i> Reset to Pending
+                        </button>
+                        <button class="btn-delete btn-tertiary" style="width: auto; border-color: #fca5a5; color: #b91c1c; background: #fef2f2; padding: 10px 20px;" data-id="${app.appId}">
+                            <i class="fa-solid fa-trash-can"></i> Delete Record
+                        </button>
+                    `;
+                }
+
+                modalContent.innerHTML = statusHeaderHTML + modalContent.innerHTML;
+                modalActions.innerHTML = actionButtonsHTML;
 
                 // Show modal with active transition class
                 detailsModal.classList.add('active');
 
                 // Action Listeners
-                modalActions.querySelector('.btn-approve').addEventListener('click', () => {
-                    app.status = 'APPROVED';
-                    saveToLocalStorage();
-                    if (typeof addAuditLog === 'function') {
-                        addAuditLog('APPROVE_APPLICATION', `Approved loan reference ${app.appId} for ${app.applicantName} (Principal: Ksh. ${parseInt(app.principal).toLocaleString()}).`);
-                    }
-                    detailsModal.classList.remove('active');
-                    renderTable();
-                });
+                if (app.status === 'PENDING') {
+                    modalActions.querySelector('.btn-approve').addEventListener('click', () => {
+                        app.status = 'APPROVED';
+                        saveToLocalStorage();
+                        if (typeof addAuditLog === 'function') {
+                            addAuditLog('APPROVE_APPLICATION', `Approved loan reference ${app.appId} for ${app.applicantName} (Principal: Ksh. ${parseInt(app.principal).toLocaleString()}).`);
+                        }
+                        detailsModal.classList.remove('active');
+                        renderTable();
+                    });
 
-                modalActions.querySelector('.btn-reject').addEventListener('click', () => {
-                    app.status = 'REJECTED';
-                    saveToLocalStorage();
-                    if (typeof addAuditLog === 'function') {
-                        addAuditLog('REJECT_APPLICATION', `Rejected loan reference ${app.appId} for ${app.applicantName}.`);
-                    }
-                    detailsModal.classList.remove('active');
-                    renderTable();
-                });
+                    modalActions.querySelector('.btn-reject').addEventListener('click', () => {
+                        app.status = 'REJECTED';
+                        saveToLocalStorage();
+                        if (typeof addAuditLog === 'function') {
+                            addAuditLog('REJECT_APPLICATION', `Rejected loan reference ${app.appId} for ${app.applicantName}.`);
+                        }
+                        detailsModal.classList.remove('active');
+                        renderTable();
+                    });
+                } else {
+                    modalActions.querySelector('.btn-reset').addEventListener('click', () => {
+                        app.status = 'PENDING';
+                        saveToLocalStorage();
+                        if (typeof addAuditLog === 'function') {
+                            addAuditLog('RESET_PENDING', `Reset application status for ${app.appId} (${app.applicantName}) back to pending.`);
+                        }
+                        detailsModal.classList.remove('active');
+                        renderTable();
+                    });
+
+                    modalActions.querySelector('.btn-delete').addEventListener('click', () => {
+                        if (confirm(`Are you sure you want to permanently delete application ${app.appId}?`)) {
+                            applications = applications.filter(a => a.appId !== app.appId);
+                            saveToLocalStorage();
+                            if (typeof addAuditLog === 'function') {
+                                addAuditLog('DELETE_APPLICATION', `Permanently deleted application reference ${app.appId} (${app.applicantName}).`);
+                            }
+                            detailsModal.classList.remove('active');
+                            renderTable();
+                        }
+                    });
+                }
             }
 
             function updateStats() {
@@ -692,6 +742,27 @@
             searchInput.addEventListener('input', renderTable);
             filterStatus.addEventListener('change', renderTable);
             document.getElementById('btn-load-mock').addEventListener('click', loadMockData);
+
+            // Clear Approved & Rejected Bulk Action
+            const btnClearVerified = document.getElementById('btn-clear-verified');
+            if (btnClearVerified) {
+                btnClearVerified.addEventListener('click', () => {
+                    const verifiedApps = applications.filter(a => a.status === 'APPROVED' || a.status === 'REJECTED');
+                    if (verifiedApps.length === 0) {
+                        alert('No approved or rejected applications found to clear.');
+                        return;
+                    }
+                    if (confirm(`Are you sure you want to permanently clear all ${verifiedApps.length} approved and rejected applications from the ledger?`)) {
+                        applications = applications.filter(a => a.status === 'PENDING');
+                        saveToLocalStorage();
+                        if (typeof addAuditLog === 'function') {
+                            addAuditLog('CLEAR_ARCHIVES', `Cleared all ${verifiedApps.length} approved/rejected applications from the storage registry.`);
+                        }
+                        alert(`Successfully cleared ${verifiedApps.length} applications from the ledger.`);
+                        renderTable();
+                    }
+                });
+            }
             
             // Sync/Refresh queue animation
             document.getElementById('btn-refresh-queue').addEventListener('click', () => {
