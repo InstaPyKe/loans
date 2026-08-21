@@ -232,6 +232,41 @@
                     </div>
                 </div>
 
+                <!-- Daima Network Live Metrics Section -->
+                <div class="metrics-section animate-slide-up delay-4-5" style="margin-top: 20px; padding: 18px; background: rgba(37, 99, 235, 0.02); border: 1px solid rgba(37, 99, 235, 0.08); border-radius: var(--border-radius-lg); text-align: center;">
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
+                        <span style="font-size: 0.72rem; font-weight: 800; color: var(--dark); text-transform: uppercase; letter-spacing: 0.8px; display: flex; align-items: center; gap: 6px;">
+                            <i class="fa-solid fa-chart-line" style="color: var(--primary);"></i> Daima Network Telemetry
+                        </span>
+                        <span style="font-size: 0.62rem; font-weight: 700; color: #10b981; background: rgba(16, 185, 129, 0.08); padding: 3px 8px; border-radius: 50px; display: inline-flex; align-items: center; gap: 4px;">
+                            <span class="pulse-dot" style="background-color: #10b981; width:5px; height:5px; margin-right: 0;"></span> Live Feed
+                        </span>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
+                        <!-- Stat 1: Network Visits -->
+                        <div style="background: #ffffff; border: 1px solid rgba(15,23,42,0.04); padding: 10px 6px; border-radius: var(--border-radius-md); box-shadow: 0 4px 10px rgba(0,0,0,0.015);">
+                            <span style="display: block; font-size: 0.58rem; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 0.3px; margin-bottom: 4px;">Network Visits</span>
+                            <strong id="metric-visits" style="display: block; font-size: 1.05rem; font-weight: 800; color: var(--dark); font-family: 'Space Grotesk', sans-serif;">1,284,200</strong>
+                            <span style="display: block; font-size: 0.52rem; color: #10b981; font-weight: 600; margin-top: 2px;">+14 active now</span>
+                        </div>
+
+                        <!-- Stat 2: Disbursed / Networth -->
+                        <div style="background: #ffffff; border: 1px solid rgba(15,23,42,0.04); padding: 10px 6px; border-radius: var(--border-radius-md); box-shadow: 0 4px 10px rgba(0,0,0,0.015);">
+                            <span style="display: block; font-size: 0.58rem; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 0.3px; margin-bottom: 4px;">Disbursed Vol.</span>
+                            <strong id="metric-volume" style="display: block; font-size: 1.05rem; font-weight: 800; color: var(--primary); font-family: 'Space Grotesk', sans-serif;">Ksh. 84.2M</strong>
+                            <span style="display: block; font-size: 0.52rem; color: #0284c7; font-weight: 600; margin-top: 2px;">Jasper Insured</span>
+                        </div>
+
+                        <!-- Stat 3: Avg Speed -->
+                        <div style="background: #ffffff; border: 1px solid rgba(15,23,42,0.04); padding: 10px 6px; border-radius: var(--border-radius-md); box-shadow: 0 4px 10px rgba(0,0,0,0.015);">
+                            <span style="display: block; font-size: 0.58rem; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 0.3px; margin-bottom: 4px;">Avg. Approval</span>
+                            <strong id="metric-speed" style="display: block; font-size: 1.05rem; font-weight: 800; color: var(--accent-dark); font-family: 'Space Grotesk', sans-serif;">3.8m</strong>
+                            <span style="display: block; font-size: 0.52rem; color: #b45309; font-weight: 600; margin-top: 2px;">Daraja Gateway</span>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Bank Partnerships Section -->
                 <div id="partners" class="partnerships-section animate-slide-up delay-5"
                     style="margin-top: 24px; padding-top: 4px; text-align: center;">
@@ -760,6 +795,47 @@
                 if (formEl) {
                     formEl.parentNode.insertBefore(noticeBanner, formEl);
                 }
+            }
+
+            // Telemetry Metric Count Up Animations
+            const visitsEl = document.getElementById('metric-visits');
+            const volumeEl = document.getElementById('metric-volume');
+            const speedEl = document.getElementById('metric-speed');
+
+            function animateValue(obj, start, end, duration, prefix = '', suffix = '') {
+                let startTimestamp = null;
+                const step = (timestamp) => {
+                    if (!startTimestamp) startTimestamp = timestamp;
+                    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                    const value = Math.floor(progress * (end - start) + start);
+                    obj.innerHTML = prefix + value.toLocaleString() + suffix;
+                    if (progress < 1) {
+                        window.requestAnimationFrame(step);
+                    }
+                };
+                window.requestAnimationFrame(step);
+            }
+
+            function animateFloatValue(obj, start, end, duration, suffix = '') {
+                let startTimestamp = null;
+                const step = (timestamp) => {
+                    if (!startTimestamp) startTimestamp = timestamp;
+                    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                    const value = (progress * (end - start) + start).toFixed(1);
+                    obj.innerHTML = value + suffix;
+                    if (progress < 1) {
+                        window.requestAnimationFrame(step);
+                    }
+                };
+                window.requestAnimationFrame(step);
+            }
+
+            if (visitsEl && volumeEl && speedEl) {
+                setTimeout(() => {
+                    animateValue(visitsEl, 1284200, 1284592, 1800);
+                    animateValue(volumeEl, 84290000, 84295000, 1800, 'Ksh. ');
+                    animateFloatValue(speedEl, 10.0, 3.8, 1800, 'm');
+                }, 400);
             }
         });
     </script>
