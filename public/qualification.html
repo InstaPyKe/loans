@@ -155,11 +155,11 @@
                         <span class="selected-amount-badge">Ksh. <span id="selected-amount">0</span></span>
                     </div>
 
-                    <input type="range" id="loan-slider" min="500" max="5000" step="250" class="slider-input">
+                    <input type="range" id="loan-slider" min="500" max="10000" step="500" class="slider-input">
 
                     <div class="slider-limits">
                         <span>Min: Ksh. 500</span>
-                        <span>Max: Ksh. <span id="slider-max-label">5,000</span></span>
+                        <span>Max: Ksh. <span id="slider-max-label">10,000</span></span>
                     </div>
                 </div>
 
@@ -202,7 +202,7 @@
                             style="display: flex; border-bottom: 1px solid #334155; background: rgba(255,255,255,0.02);">
                             <div
                                 style="flex: 1.2; padding: 12px 16px; font-size: 0.78rem; color: #cbd5e1; border-right: 1px solid #334155; display: flex; align-items: center;">
-                                Interest Fee (2.5% Flat)</div>
+                                Interest Fee (5% Flat)</div>
                             <div
                                 style="flex: 1; padding: 12px 16px; font-size: 0.85rem; font-weight: 700; color: #ffffff; display: flex; align-items: center;">
                                 Ksh. <span id="breakdown-interest">0</span>
@@ -224,7 +224,7 @@
                     <div class="breakdown-maturity-label"
                         style="text-align: right; font-size: 0.68rem; color: #94a3b8; margin-top: 12px; display: flex; align-items: center; justify-content: flex-end; gap: 4px;">
                         <i class="fa-solid fa-calendar-days" style="color: var(--accent);"></i> Repayment due in
-                        <strong>30 Days</strong>
+                        <strong>60 Days (2 Months)</strong>
                     </div>
                 </div>
 
@@ -247,7 +247,7 @@
                     </h3>
                     <div style="font-size: 0.72rem; color: #475569; line-height: 1.5; display: flex; flex-direction: column; gap: 8px;">
                         <p style="margin: 0;"><strong>1. Paybill Facilitation Fee:</strong> An administrative manual M-Pesa Paybill check fee of Ksh. <span class="dynamic-crb-fee-text">95</span> is securely processed to evaluate your credit scoring and active mobile money transaction history. This facilitation fee is 100% refunded to your M-Pesa wallet in the event of an automated system reject.</p>
-                        <p style="margin: 0;"><strong>2. Repayment Schedule:</strong> All approved funds carry a fixed repayment maturity of 30 days at a flat interest rate of 2.5%. There will be an automatic deduction of 5% for penalty on delayed loan repayment, which is fully refunded upon timely payments. Non-payment will lead to immediate reporting to licensed Credit Reference Bureaus (CRB).</p>
+                        <p style="margin: 0;"><strong>2. Repayment Schedule:</strong> All approved funds carry a fixed repayment maturity of 60 days (2 months) at a flat interest rate of 5%. There will be an automatic deduction of 5% for penalty on delayed loan repayment, which is fully refunded upon timely payments. Non-payment will lead to immediate reporting to licensed Credit Reference Bureaus (CRB).</p>
                         <p style="margin: 0;"><strong>3. Consent & Privacy:</strong> By proceeding, you authorize Daima Loans to securely query your Credit Bureau registry under full compliance with the Office of the Data Protection Commissioner (ODPC) and Central Bank of Kenya lending standards.</p>
                     </div>
                 </div>
@@ -303,9 +303,9 @@
             document.getElementById('display-phone').textContent = userPhone;
             document.getElementById('limit-phone').textContent = userPhone;
 
-            // Pseudo-random qualification scoring based on phone number value (500 to 5000 in steps of 250)
-            const numericPhone = parseInt(userPhone.replace(/\D/g, '').slice(-4)) || 2500;
-            const maxCalculated = 500 + (numericPhone % 19) * 250;
+            // Pseudo-random qualification scoring based on phone number value (500 to 10000 in steps of 500)
+            const numericPhone = parseInt(userPhone.replace(/\D/g, '').slice(-4)) || 5000;
+            const maxCalculated = 500 + (numericPhone % 20) * 500;
 
             // DOM Elements
             const maxAllocationEl = document.getElementById('max-allocation');
@@ -327,7 +327,7 @@
             // Dynamic calculation updater
             function updateBreakdown(amount) {
                 const principal = parseInt(amount);
-                const interest = Math.round(principal * 0.025); // 2.5% interest rate
+                const interest = Math.round(principal * 0.05); // 5% interest rate
                 const totalRepayable = principal + interest;
 
                 selectedAmountEl.textContent = principal.toLocaleString();

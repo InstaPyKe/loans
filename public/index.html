@@ -18,6 +18,35 @@
             0% { transform: translate3d(-33.333%, 0, 0); }
             100% { transform: translate3d(0, 0, 0); }
         }
+        @keyframes livePulse {
+            0% { transform: scale(0.9); opacity: 0.6; }
+            50% { transform: scale(1.25); opacity: 1; }
+            100% { transform: scale(0.9); opacity: 0.6; }
+        }
+        .telemetry-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .telemetry-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 20px -8px rgba(37, 99, 235, 0.15);
+            background: #ffffff !important;
+            border-color: rgba(37, 99, 235, 0.25) !important;
+        }
+        /* Scroll Reveal Emerge from Blank classes */
+        .emerge-element {
+            opacity: 0;
+            transform: translateY(35px) scale(0.97);
+            filter: blur(3px);
+            transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), 
+                        transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), 
+                        filter 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: transform, opacity, filter;
+        }
+        .emerge-element.visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            filter: blur(0);
+        }
     </style>
 </head>
 
@@ -169,11 +198,11 @@
                             style="border-bottom: 1px dashed rgba(255, 255, 255, 0.15); padding-bottom: 12px; margin-bottom: 12px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 0.72rem; color: #94a3b8;">
                             <div style="display: flex; align-items: center; gap: 6px;"><i class="fa-solid fa-percent"
                                     style="color: var(--accent); font-size: 0.75rem;"></i> Interest Rate: <strong
-                                    style="color: #ffffff; margin-left: 2px;">2.5% Flat</strong></div>
+                                    style="color: #ffffff; margin-left: 2px;">5% Flat</strong></div>
                             <div style="display: flex; align-items: center; gap: 6px;"><i
                                     class="fa-solid fa-calendar-days"
                                     style="color: var(--accent); font-size: 0.75rem;"></i> Tenure: <strong
-                                    style="color: #ffffff; margin-left: 2px;">14 – 30 Days</strong></div>
+                                    style="color: #ffffff; margin-left: 2px;">60 Days (2 Months)</strong></div>
                         </div>
                         <!-- Important Applicant Info -->
                         <div style="font-size: 0.68rem; line-height: 1.45; color: #cbd5e1; font-weight: 400;">
@@ -232,43 +261,52 @@
                     </div>
                 </div>
 
-                <!-- Daima Network Live Metrics Section -->
-                <div class="metrics-section animate-slide-up delay-4-5" style="margin-top: 20px; padding: 18px; background: rgba(37, 99, 235, 0.02); border: 1px solid rgba(37, 99, 235, 0.08); border-radius: var(--border-radius-lg); text-align: center;">
-                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
-                        <span style="font-size: 0.72rem; font-weight: 800; color: var(--dark); text-transform: uppercase; letter-spacing: 0.8px; display: flex; align-items: center; gap: 6px;">
-                            <i class="fa-solid fa-chart-line" style="color: var(--primary);"></i> Daima Network Telemetry
+                <!-- Daima Network Live Telemetry Section -->
+                <div class="metrics-section animate-slide-up delay-4-5 emerge-element" style="margin-top: 24px; padding: 22px; background: linear-gradient(rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0.88)), url('https://tse1.mm.bing.net/th/id/OIP.evnMFvPktao2VVqd-FmTBAHaE7?r=0&amp;pid=Api&amp;h=220&amp;P=0'); background-size: cover; background-position: center; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(37, 99, 235, 0.12); border-radius: var(--border-radius-xl); box-shadow: 0 12px 30px rgba(37, 99, 235, 0.05); position: relative; overflow: hidden; text-align: center;">
+                    <!-- Top accent glowing bar -->
+                    <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, #3b82f6, #0ea5e9, #10b981);"></div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
+                        <span style="font-size: 0.75rem; font-weight: 800; color: var(--dark); text-transform: uppercase; letter-spacing: 1px; display: flex; align-items: center; gap: 8px;">
+                            <i class="fa-solid fa-chart-line fa-bounce" style="color: #2563eb; --fa-bounce-start-y-multiplier: -0.5; --fa-bounce-height: 2px;"></i> Daima network
                         </span>
-                        <span style="font-size: 0.62rem; font-weight: 700; color: #10b981; background: rgba(16, 185, 129, 0.08); padding: 3px 8px; border-radius: 50px; display: inline-flex; align-items: center; gap: 4px;">
-                            <span class="pulse-dot" style="background-color: #10b981; width:5px; height:5px; margin-right: 0;"></span> Live Feed
+                        <span style="font-size: 0.62rem; font-weight: 700; color: #10b981; background: rgba(16, 185, 129, 0.1); padding: 4px 10px; border-radius: 50px; display: inline-flex; align-items: center; gap: 6px; border: 1px solid rgba(16,185,129,0.15);">
+                            <span style="background-color: #10b981; width: 6px; height: 6px; border-radius: 50%; display: inline-block; animation: livePulse 2s infinite ease-in-out;"></span> Live Feed
                         </span>
                     </div>
 
-                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;">
                         <!-- Stat 1: Network Visits -->
-                        <div style="background: #ffffff; border: 1px solid rgba(15,23,42,0.04); padding: 10px 6px; border-radius: var(--border-radius-md); box-shadow: 0 4px 10px rgba(0,0,0,0.015);">
-                            <span style="display: block; font-size: 0.58rem; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 0.3px; margin-bottom: 4px;">Network Visits</span>
-                            <strong id="metric-visits" style="display: block; font-size: 1.05rem; font-weight: 800; color: var(--dark); font-family: 'Space Grotesk', sans-serif;">1,284,200</strong>
-                            <span style="display: block; font-size: 0.52rem; color: #10b981; font-weight: 600; margin-top: 2px;">+14 active now</span>
+                        <div class="telemetry-card" style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.03) 0%, rgba(37, 99, 235, 0.03) 100%); border: 1px solid rgba(59, 130, 246, 0.1); padding: 16px 8px; border-radius: var(--border-radius-lg); box-shadow: 0 4px 15px rgba(0,0,0,0.01); display: flex; flex-direction: column; align-items: center; gap: 4px;">
+                            <div style="background: rgba(59, 130, 246, 0.1); width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #2563eb; font-size: 0.9rem; margin-bottom: 2px;">
+                                <i class="fa-solid fa-users"></i>
+                            </div>
+                            <span style="display: block; font-size: 0.58rem; font-weight: 800; color: #64748b; text-transform: uppercase; letter-spacing: 0.4px;">Network Visits</span>
+                            <strong id="metric-visits" style="display: block; font-size: 1.15rem; font-weight: 800; color: #1e3a8a; font-family: 'Space Grotesk', sans-serif;">1.2M</strong>
                         </div>
 
                         <!-- Stat 2: Disbursed / Networth -->
-                        <div style="background: #ffffff; border: 1px solid rgba(15,23,42,0.04); padding: 10px 6px; border-radius: var(--border-radius-md); box-shadow: 0 4px 10px rgba(0,0,0,0.015);">
-                            <span style="display: block; font-size: 0.58rem; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 0.3px; margin-bottom: 4px;">Disbursed Vol.</span>
-                            <strong id="metric-volume" style="display: block; font-size: 1.05rem; font-weight: 800; color: var(--primary); font-family: 'Space Grotesk', sans-serif;">Ksh. 84.2M</strong>
-                            <span style="display: block; font-size: 0.52rem; color: #0284c7; font-weight: 600; margin-top: 2px;">Jasper Insured</span>
+                        <div class="telemetry-card" style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.03) 0%, rgba(5, 150, 105, 0.03) 100%); border: 1px solid rgba(16, 185, 129, 0.1); padding: 14px 8px; border-radius: var(--border-radius-lg); box-shadow: 0 4px 15px rgba(0,0,0,0.01); display: flex; flex-direction: column; align-items: center; gap: 4px;">
+                            <div style="background: rgba(16, 185, 129, 0.1); width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #059669; font-size: 0.9rem; margin-bottom: 2px;">
+                                <i class="fa-solid fa-sack-dollar"></i>
+                            </div>
+                            <span style="display: block; font-size: 0.58rem; font-weight: 800; color: #64748b; text-transform: uppercase; letter-spacing: 0.4px;">Disbursed Vol.</span>
+                            <strong id="metric-volume" style="display: block; font-size: 1.15rem; font-weight: 800; color: #065f46; font-family: 'Space Grotesk', sans-serif;">84M</strong>
                         </div>
 
                         <!-- Stat 3: Avg Speed -->
-                        <div style="background: #ffffff; border: 1px solid rgba(15,23,42,0.04); padding: 10px 6px; border-radius: var(--border-radius-md); box-shadow: 0 4px 10px rgba(0,0,0,0.015);">
-                            <span style="display: block; font-size: 0.58rem; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 0.3px; margin-bottom: 4px;">Avg. Approval</span>
-                            <strong id="metric-speed" style="display: block; font-size: 1.05rem; font-weight: 800; color: var(--accent-dark); font-family: 'Space Grotesk', sans-serif;">3.8m</strong>
-                            <span style="display: block; font-size: 0.52rem; color: #b45309; font-weight: 600; margin-top: 2px;">Daraja Gateway</span>
+                        <div class="telemetry-card" style="background: linear-gradient(135deg, rgba(245, 158, 11, 0.03) 0%, rgba(217, 119, 6, 0.03) 100%); border: 1px solid rgba(245, 158, 11, 0.1); padding: 14px 8px; border-radius: var(--border-radius-lg); box-shadow: 0 4px 15px rgba(0,0,0,0.01); display: flex; flex-direction: column; align-items: center; gap: 4px;">
+                            <div style="background: rgba(245, 158, 11, 0.1); width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #d97706; font-size: 0.9rem; margin-bottom: 2px;">
+                                <i class="fa-solid fa-bolt-lightning"></i>
+                            </div>
+                            <span style="display: block; font-size: 0.58rem; font-weight: 800; color: #64748b; text-transform: uppercase; letter-spacing: 0.4px;">Avg. Approval</span>
+                            <strong id="metric-speed" style="display: block; font-size: 1.15rem; font-weight: 800; color: #9a3412; font-family: 'Space Grotesk', sans-serif;">3.8m</strong>
                         </div>
                     </div>
                 </div>
 
                 <!-- Bank Partnerships Section -->
-                <div id="partners" class="partnerships-section animate-slide-up delay-5"
+                <div id="partners" class="partnerships-section animate-slide-up delay-5 emerge-element"
                     style="margin-top: 24px; padding-top: 4px; text-align: center;">
                     <!-- Splashing Gradient Borderline -->
                     <div
@@ -347,7 +385,7 @@
                 </div>
 
                 <!-- About Us Section -->
-                <div id="about-us" class="animate-slide-up delay-6"
+                <div id="about-us" class="animate-slide-up delay-6 emerge-element"
                     style="border-top: 1px dashed rgba(15, 23, 42, 0.12); margin-top: 24px; padding-top: 20px; text-align: left;">
                     <h3
                         style="font-size: 0.85rem; font-weight: 800; color: var(--dark); display: flex; align-items: center; justify-content: center; gap: 6px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px;">
@@ -375,7 +413,7 @@
                                 engine. Pre-approved limits are credited directly to your Safaricom M-Pesa line in under
                                 10 minutes, eliminating stressful queues.</p>
                             <p style="margin: 0;"><strong>2. Transparent Pricing:</strong> We charge a flat interest
-                                rate of 2.5% with absolute fee transparency. There are no compounding interests, hidden
+                                rate of 5% with absolute fee transparency. There are no compounding interests, hidden
                                 monthly account maintenance fees, or sudden rollover penalties. What you see on your
                                 dashboard is exactly what you pay back.</p>
                             <p style="margin: 0;"><strong>3. Credit Building Incentives:</strong> Timely repayments
@@ -503,7 +541,7 @@
                             <h4 style="font-size: 0.78rem; font-weight: 800; color: var(--dark); margin-bottom: 2px;">
                                 Repayment & Processing Fees</h4>
                             <p style="font-size: 0.68rem; color: #64748b; line-height: 1.45;">All loans carry a fixed
-                                30-day maturity with a flat 2.5% rate. Delayed payments incur a 5% penalty (fully
+                                60-day (2 months) maturity with a flat 5% rate. Delayed payments incur a 5% penalty (fully
                                 refunded on timely payment). Submission requires a Ksh. <span class="dynamic-crb-fee-text">95</span> manual Paybill check fee,
                                 which is 100% refunded if rejected.</p>
                         </div>
@@ -520,6 +558,57 @@
                             <p style="font-size: 0.68rem; color: #64748b; line-height: 1.45;">By checking your limit,
                                 you authorize Daima to query your credit registry. All transmissions are fully compliant
                                 with the ODPC guidelines and Central Bank of Kenya lending standards.</p>
+                        </div>
+                    </div>
+
+                    <!-- Careers Section -->
+                    <div id="careers" class="animate-slide-up delay-6 emerge-element" style="border-top: 1px dashed rgba(15, 23, 42, 0.12); margin-top: 24px; padding-top: 20px; text-align: left;">
+                        <h3 style="font-size: 0.85rem; font-weight: 800; color: var(--dark); display: flex; align-items: center; justify-content: center; gap: 6px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px;">
+                            <i class="fa-solid fa-briefcase" style="color: #db2777;"></i> Careers at Daima
+                        </h3>
+                        <p style="font-size: 0.72rem; color: #475569; line-height: 1.5; margin-bottom: 14px; text-align: center;">
+                            Daima is growing! Join us in our mission to empower millions of Kenyans through accessible micro-credit. Explore our current open roles:
+                        </p>
+
+                        <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 16px;">
+                            <!-- Job 1 -->
+                            <div style="background: rgba(219, 39, 119, 0.02); border: 1px solid rgba(219, 39, 119, 0.08); padding: 14px; border-radius: var(--border-radius-md); display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap;">
+                                <div>
+                                    <strong style="font-size: 0.76rem; color: var(--dark); display: block;">Customer Operations Agent</strong>
+                                    <span style="font-size: 0.62rem; color: #64748b; font-weight: 600; display: inline-flex; align-items: center; gap: 4px; margin-top: 2px;">
+                                        <i class="fa-solid fa-location-dot"></i> Remote / Full-Time
+                                    </span>
+                                </div>
+                                <button type="button" class="btn-primary btn-apply-career" style="width: auto; padding: 6px 12px; font-size: 0.65rem; background: var(--dark); border: none;" data-role="Customer Operations Agent">
+                                    Apply Now
+                                </button>
+                            </div>
+
+                            <!-- Job 2 -->
+                            <div style="background: rgba(219, 39, 119, 0.02); border: 1px solid rgba(219, 39, 119, 0.08); padding: 14px; border-radius: var(--border-radius-md); display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap;">
+                                <div>
+                                    <strong style="font-size: 0.76rem; color: var(--dark); display: block;">Micro-Finance System Developer</strong>
+                                    <span style="font-size: 0.62rem; color: #64748b; font-weight: 600; display: inline-flex; align-items: center; gap: 4px; margin-top: 2px;">
+                                        <i class="fa-solid fa-location-dot"></i> Hybrid (Nairobi) / Contract
+                                    </span>
+                                </div>
+                                <button type="button" class="btn-primary btn-apply-career" style="width: auto; padding: 6px 12px; font-size: 0.65rem; background: var(--dark); border: none;" data-role="Micro-Finance System Developer">
+                                    Apply Now
+                                </button>
+                            </div>
+
+                            <!-- Job 3 -->
+                            <div style="background: rgba(219, 39, 119, 0.02); border: 1px solid rgba(219, 39, 119, 0.08); padding: 14px; border-radius: var(--border-radius-md); display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap;">
+                                <div>
+                                    <strong style="font-size: 0.76rem; color: var(--dark); display: block;">Regional Credit Assessment Lead</strong>
+                                    <span style="font-size: 0.62rem; color: #64748b; font-weight: 600; display: inline-flex; align-items: center; gap: 4px; margin-top: 2px;">
+                                        <i class="fa-solid fa-location-dot"></i> Nairobi HQ / Full-Time
+                                    </span>
+                                </div>
+                                <button type="button" class="btn-primary btn-apply-career" style="width: auto; padding: 6px 12px; font-size: 0.65rem; background: var(--dark); border: none;" data-role="Regional Credit Assessment Lead">
+                                    Apply Now
+                                </button>
+                            </div>
                         </div>
                     </div>
 
@@ -547,6 +636,89 @@
         </div>
     </footer>
 
+    <!-- Careers Modal Backdrop & Card -->
+    <div id="careers-modal" class="modal-backdrop">
+        <div class="modal-card" style="max-width: 460px; overflow: hidden; border-radius: var(--border-radius-xl); padding: 0; border: 1px solid rgba(219, 39, 119, 0.15); text-align: left;">
+            <!-- Modal Header Wrapper with vibrant pink background -->
+            <div style="background: linear-gradient(135deg, #db2777 0%, #be185d 100%); padding: 20px 24px; color: #ffffff; position: relative;">
+                <h3 id="careers-modal-title" style="margin: 0; font-weight: 800; font-size: 1.05rem; display: flex; align-items: center; gap: 8px; font-family: 'Outfit', sans-serif;">
+                    <i class="fa-solid fa-briefcase"></i> Apply for Position
+                </h3>
+                <p style="margin: 4px 0 0 0; font-size: 0.68rem; color: #fce7f3; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px;">Daima Talents Hub</p>
+            </div>
+
+            <!-- Form Content Box -->
+            <div id="careers-form-body" style="padding: 24px;">
+                <form id="careers-form">
+                    <input type="hidden" id="career-job-role">
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px;">
+                        <div class="form-group" style="text-align: left; margin-bottom: 0;">
+                            <label class="form-label" style="font-size: 0.65rem; font-weight: 700; color: #64748b; text-transform: uppercase; margin-bottom: 4px; display: block;">Full Name</label>
+                            <input type="text" id="career-name" class="form-input" placeholder="e.g. John Doe" required style="padding: 10px 12px; font-size: 0.76rem; border-radius: var(--border-radius-md);">
+                        </div>
+                        <div class="form-group" style="text-align: left; margin-bottom: 0;">
+                            <label class="form-label" style="font-size: 0.65rem; font-weight: 700; color: #64748b; text-transform: uppercase; margin-bottom: 4px; display: block;">Phone Number</label>
+                            <input type="tel" id="career-phone" class="form-input" placeholder="e.g. 07XXXXXXXX" required style="padding: 10px 12px; font-size: 0.76rem; border-radius: var(--border-radius-md);">
+                        </div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px;">
+                        <div class="form-group" style="text-align: left; margin-bottom: 0;">
+                            <label class="form-label" style="font-size: 0.65rem; font-weight: 700; color: #64748b; text-transform: uppercase; margin-bottom: 4px; display: block;">Email Address</label>
+                            <input type="email" id="career-email" class="form-input" placeholder="name@domain.com" required style="padding: 10px 12px; font-size: 0.76rem; border-radius: var(--border-radius-md);">
+                        </div>
+                        <div class="form-group" style="text-align: left; margin-bottom: 0;">
+                            <label class="form-label" style="font-size: 0.65rem; font-weight: 700; color: #64748b; text-transform: uppercase; margin-bottom: 4px; display: block;">LinkedIn Profile URL</label>
+                            <div style="position: relative; display: flex; align-items: center;">
+                                <i class="fa-brands fa-linkedin" style="position: absolute; left: 10px; color: #0077b5; font-size: 0.9rem;"></i>
+                                <input type="url" id="career-linkedin" class="form-input" placeholder="https://linkedin.com/in/..." required style="padding: 10px 12px 10px 28px; font-size: 0.76rem; border-radius: var(--border-radius-md);">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group" style="text-align: left; margin-bottom: 12px;">
+                        <label class="form-label" style="font-size: 0.65rem; font-weight: 700; color: #64748b; text-transform: uppercase; margin-bottom: 4px; display: block;">Your Biography (Bio)</label>
+                        <textarea id="career-bio" class="form-input" rows="2" placeholder="Tell us briefly about your background and achievements..." required style="padding: 10px 12px; font-size: 0.76rem; border-radius: var(--border-radius-md); resize: none;"></textarea>
+                    </div>
+
+                    <div class="form-group" style="text-align: left; margin-bottom: 20px;">
+                        <label class="form-label" style="font-size: 0.65rem; font-weight: 700; color: #64748b; text-transform: uppercase; margin-bottom: 4px; display: block;">Upload CV / Resume (PDF, DOCX)</label>
+                        <label for="career-cv" style="display: flex; flex-direction: column; align-items: center; justify-content: center; border: 2px dashed rgba(219, 39, 119, 0.25); background: rgba(219, 39, 119, 0.02); padding: 14px 10px; border-radius: var(--border-radius-md); cursor: pointer; text-align: center; transition: all 0.25s ease;">
+                            <i id="cv-upload-icon" class="fa-solid fa-cloud-arrow-up" style="font-size: 1.4rem; color: #db2777; margin-bottom: 4px;"></i>
+                            <span id="cv-upload-text" style="font-size: 0.7rem; font-weight: 700; color: var(--dark);">Drag & Drop or Click to Upload CV</span>
+                            <span style="font-size: 0.58rem; color: #64748b; margin-top: 2px;">Maximum size: 5MB</span>
+                            <input type="file" id="career-cv" accept=".pdf,.doc,.docx" required style="display: none;">
+                        </label>
+                    </div>
+                    
+                    <div style="display: flex; gap: 10px; justify-content: flex-end; border-top: 1px solid #f1f5f9; padding-top: 16px;">
+                        <button type="button" id="close-careers-modal" class="btn-secondary" style="width: auto; padding: 8px 16px; font-size: 0.72rem; cursor: pointer; border-radius: var(--border-radius-md);">
+                            Cancel
+                        </button>
+                        <button type="submit" class="btn-primary" style="width: auto; padding: 8px 24px; font-size: 0.72rem; background: linear-gradient(135deg, #db2777 0%, #be185d 100%); border: none; cursor: pointer; border-radius: var(--border-radius-md); box-shadow: 0 4px 10px rgba(219, 39, 119, 0.2);">
+                            Submit Application
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Beautiful Dynamic Success Status Screen -->
+            <div id="careers-success-body" style="display: none; padding: 32px 24px; text-align: center; background: #ffffff;">
+                <div style="background: linear-gradient(135deg, #10b981 0%, #059669 100%); width: 64px; height: 64px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; color: #ffffff; font-size: 1.8rem; box-shadow: 0 10px 20px rgba(16, 185, 129, 0.25);">
+                    <i class="fa-solid fa-check"></i>
+                </div>
+                <h4 style="font-size: 1.05rem; font-weight: 800; color: #059669; margin-bottom: 8px; font-family: 'Outfit', sans-serif;">Submission Successful!</h4>
+                <p id="careers-success-msg" style="font-size: 0.76rem; color: #475569; line-height: 1.5; margin-bottom: 24px;">
+                    Thank you for applying. We will reach you as soon as possible.
+                </p>
+                <button type="button" id="btn-close-careers-success" class="btn-primary" style="width: auto; padding: 8px 28px; font-size: 0.72rem; background: var(--dark); border: none; border-radius: var(--border-radius-md);">
+                    Done & Close
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- Terms Modal Backdrop & Card -->
     <div id="terms-modal" class="modal-backdrop">
         <div class="modal-card">
@@ -554,7 +726,7 @@
             <div class="modal-body">
                 <p><strong>1. Facilitation Fee:</strong> An administrative fee of Ksh. <span class="dynamic-crb-fee-text">95</span> is charged to verify credit
                     worthiness via mobile operator parameters and CRB registries.</p>
-                <p><strong>2. Qualification:</strong> Pre-approval amounts between Ksh. 500 and Ksh. 5,000 do not
+                <p><strong>2. Qualification:</strong> Pre-approval amounts between Ksh. 500 and Ksh. 10,000 do not
                     guarantee final disbursement until background review is finalized.</p>
                 <p><strong>3. Review Window:</strong> Submitted applications remain queued for up to 24 hours for
                     administrator approval.</p>
@@ -832,11 +1004,151 @@
 
             if (visitsEl && volumeEl && speedEl) {
                 setTimeout(() => {
-                    animateValue(visitsEl, 1284200, 1284592, 1800);
-                    animateValue(volumeEl, 84290000, 84295000, 1800, 'Ksh. ');
+                    animateFloatValue(visitsEl, 1.0, 1.2, 1800, 'M');
+                    animateValue(volumeEl, 80, 84, 1800, '', 'M');
                     animateFloatValue(speedEl, 10.0, 3.8, 1800, 'm');
                 }, 400);
             }
+
+            // Careers Modal Logic
+            const careersModal = document.getElementById('careers-modal');
+            const careersForm = document.getElementById('careers-form');
+            const careerRoleInput = document.getElementById('career-job-role');
+            const careerModalTitle = document.getElementById('careers-modal-title');
+            const closeCareers = document.getElementById('close-careers-modal');
+            const formBody = document.getElementById('careers-form-body');
+            const successBody = document.getElementById('careers-success-body');
+            const successMsg = document.getElementById('careers-success-msg');
+            const closeSuccessBtn = document.getElementById('btn-close-careers-success');
+
+            // CV Upload elements
+            const cvInput = document.getElementById('career-cv');
+            const cvLabel = cvInput ? cvInput.closest('label') : null;
+            const cvText = document.getElementById('cv-upload-text');
+            const cvIcon = document.getElementById('cv-upload-icon');
+
+            if (cvInput && cvText && cvIcon && cvLabel) {
+                cvInput.addEventListener('change', () => {
+                    if (cvInput.files.length > 0) {
+                        const filename = cvInput.files[0].name;
+                        cvText.textContent = filename;
+                        cvText.style.color = '#059669';
+                        cvIcon.className = 'fa-solid fa-circle-check';
+                        cvIcon.style.color = '#10b981';
+                        cvLabel.style.borderColor = '#10b981';
+                        cvLabel.style.background = 'rgba(16, 185, 129, 0.02)';
+                    } else {
+                        cvText.textContent = 'Drag & Drop or Click to Upload CV';
+                        cvText.style.color = 'var(--dark)';
+                        cvIcon.className = 'fa-solid fa-cloud-arrow-up';
+                        cvIcon.style.color = '#db2777';
+                        cvLabel.style.borderColor = 'rgba(219, 39, 119, 0.25)';
+                        cvLabel.style.background = 'rgba(219, 39, 119, 0.02)';
+                    }
+                });
+            }
+
+            const resetCareersFormState = () => {
+                if (careersForm) careersForm.reset();
+                if (formBody) formBody.style.display = 'block';
+                if (successBody) successBody.style.display = 'none';
+                
+                // Reset CV label styles
+                if (cvText && cvIcon && cvLabel) {
+                    cvText.textContent = 'Drag & Drop or Click to Upload CV';
+                    cvText.style.color = 'var(--dark)';
+                    cvIcon.className = 'fa-solid fa-cloud-arrow-up';
+                    cvIcon.style.color = '#db2777';
+                    cvLabel.style.borderColor = 'rgba(219, 39, 119, 0.25)';
+                    cvLabel.style.background = 'rgba(219, 39, 119, 0.02)';
+                }
+            };
+
+            document.querySelectorAll('.btn-apply-career').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    resetCareersFormState();
+                    const role = btn.dataset.role;
+                    if (careerRoleInput && careerModalTitle) {
+                        careerRoleInput.value = role;
+                        careerModalTitle.textContent = `Apply: ${role}`;
+                    }
+                    if (careersModal) {
+                        careersModal.classList.add('active');
+                    }
+                });
+            });
+
+            if (closeCareers && careersModal) {
+                closeCareers.addEventListener('click', () => {
+                    careersModal.classList.remove('active');
+                });
+            }
+
+            if (closeSuccessBtn && careersModal) {
+                closeSuccessBtn.addEventListener('click', () => {
+                    careersModal.classList.remove('active');
+                });
+            }
+
+            if (careersForm && careersModal) {
+                careersForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    
+                    const role = document.getElementById('career-job-role').value;
+                    const name = document.getElementById('career-name').value.trim();
+                    const email = document.getElementById('career-email').value.trim();
+                    const phone = document.getElementById('career-phone').value.trim();
+                    const linkedin = document.getElementById('career-linkedin').value.trim();
+                    const bio = document.getElementById('career-bio').value.trim();
+                    const cvFile = cvInput.files.length > 0 ? cvInput.files[0].name : 'N/A';
+
+                    // Save career application to Contacts database in localStorage
+                    try {
+                        const contacts = JSON.parse(localStorage.getItem('daima_loans_contacts') || '[]');
+                        contacts.unshift({
+                            name: name,
+                            email: email,
+                            phone: phone,
+                            message: `[CAREERS APPLICATION - ${role}] LinkedIn: ${linkedin} | Bio: ${bio} | CV File: ${cvFile}`,
+                            submittedAt: new Date().toISOString()
+                        });
+                        localStorage.setItem('daima_loans_contacts', JSON.stringify(contacts));
+                    } catch(err) {
+                        console.warn('Failed to save career application:', err);
+                    }
+
+                    // Render custom success feedback message
+                    if (successMsg) {
+                        successMsg.innerHTML = `Thank you, <strong style="color: var(--dark); font-weight: 800;">${name}</strong>, for applying for the <strong style="color: var(--dark); font-weight: 800;">${role}</strong> role.<br><br>We have successfully received your biography details, LinkedIn profile link, and CV upload file (<span style="color: #059669; font-weight: 700;">${cvFile}</span>).<br><br>Our talent acquisition team will review your qualifications and contact you at <strong style="color: var(--dark);">${email} / ${phone}</strong> as soon as possible.`;
+                    }
+
+                    // Toggle visibility of panels
+                    if (formBody) formBody.style.display = 'none';
+                    if (successBody) successBody.style.display = 'block';
+                });
+            }
+
+            // Intersection Observer for Scroll Reveal (Emerge from blank)
+            const emergeElements = document.querySelectorAll('.emerge-element');
+            const observerOptions = {
+                root: null,
+                threshold: 0.08,
+                rootMargin: '0px 0px -50px 0px' // Trigger slightly before entering viewport
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    } else {
+                        entry.target.classList.remove('visible');
+                    }
+                });
+            }, observerOptions);
+
+            emergeElements.forEach(el => {
+                observer.observe(el);
+            });
         });
     </script>
     <!-- Checking Eligibility Modal -->
@@ -924,6 +1236,13 @@
                         <i class="fa-brands fa-whatsapp"
                             style="font-size: 1.25rem; width: 22px; text-align: center;"></i>
                         <span>WhatsApp Support</span>
+                    </a>
+
+                    <a href="#careers" class="sidebar-link"
+                        style="display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-radius: var(--border-radius-md); text-decoration: none; color: #db2777; background: linear-gradient(135deg, #fdf2f8, #fce7f3); font-weight: 700; font-size: 0.85rem; transition: all 0.25s ease; border: 1px solid rgba(219,39,119,0.12);">
+                        <i class="fa-solid fa-briefcase"
+                            style="font-size: 1.1rem; width: 22px; text-align: center;"></i>
+                        <span>Careers at Daima</span>
                     </a>
 
                     <a href="admin/index.html" class="sidebar-link"
