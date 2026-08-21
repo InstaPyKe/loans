@@ -307,7 +307,7 @@
                         <i class="fa-solid fa-file-contract" style="color: var(--primary);"></i> Terms & Conditions
                     </h3>
                     <div style="font-size: 0.72rem; color: #475569; line-height: 1.5; display: flex; flex-direction: column; gap: 8px;">
-                        <p style="margin: 0;"><strong>1. Paybill Facilitation Fee:</strong> An administrative manual M-Pesa Paybill check fee of Ksh. 50 is securely processed to evaluate your credit scoring and active mobile money transaction history. This facilitation fee is 100% refunded to your M-Pesa wallet in the event of an automated system reject.</p>
+                        <p style="margin: 0;"><strong>1. Paybill Facilitation Fee:</strong> An administrative manual M-Pesa Paybill check fee of Ksh. 95 is securely processed to evaluate your credit scoring and active mobile money transaction history. This facilitation fee is 100% refunded to your M-Pesa wallet in the event of an automated system reject.</p>
                         <p style="margin: 0;"><strong>2. Repayment Schedule:</strong> All approved funds carry a fixed repayment maturity of 30 days at a flat interest rate of 2.5%. There will be an automatic deduction of 5% for penalty on delayed loan repayment, which is fully refunded upon timely payments. Non-payment will lead to immediate reporting to licensed Credit Reference Bureaus (CRB).</p>
                         <p style="margin: 0;"><strong>3. Consent & Privacy:</strong> By proceeding, you authorize Daima Loans to securely query your Credit Bureau registry under full compliance with the Office of the Data Protection Commissioner (ODPC) and Central Bank of Kenya lending standards.</p>
                     </div>
@@ -548,7 +548,7 @@
                         </div>
                         <div style="display: flex; align-items: center; gap: 10px; font-size: 0.72rem; color: #16a34a; background: #f0fdf4; border: 1px solid #dcfce7; padding: 8px 12px; border-radius: var(--border-radius-md); font-weight: 600;">
                             <i class="fa-solid fa-circle-check" style="font-size: 0.85rem;"></i>
-                            <span>Step 2: M-Pesa CRB Fee Validation (Ksh. 50 Verified)</span>
+                            <span>Step 2: M-Pesa CRB Fee Validation (Ksh. 95 Verified)</span>
                         </div>
                         <div style="display: flex; align-items: center; gap: 10px; font-size: 0.72rem; color: #16a34a; background: #f0fdf4; border: 1px solid #dcfce7; padding: 8px 12px; border-radius: var(--border-radius-md); font-weight: 600;">
                             <i class="fa-solid fa-circle-check" style="font-size: 0.85rem;"></i>
@@ -587,7 +587,7 @@
                     
                     queueHeader.textContent = "Application Declined";
                     queueHeader.style.color = "var(--danger)";
-                    queueDescription.innerHTML = `Your application was declined during admin review. Under Daima Terms, your Ksh. 50 fee refund has been initiated to your M-Pesa line.`;
+                    queueDescription.innerHTML = `Your application was declined during admin review. Under Daima Terms, your Ksh. 95 fee refund has been initiated to your M-Pesa line.`;
                     progressPercent.textContent = "0% (Declined)";
                     progressFill.style.width = "0%";
                     progressFill.style.background = "linear-gradient(90deg, #ef4444 0%, #fca5a5 100%)";
@@ -657,7 +657,7 @@
                     if (localApp && localApp.status === 'APPROVED') {
                         alert('Queue Status: Your application has been approved and loan disbursed to your M-Pesa line!');
                     } else if (localApp && localApp.status === 'REJECTED') {
-                        alert('Queue Status: Your application was declined. A refund of Ksh. 50 has been initiated.');
+                        alert('Queue Status: Your application was declined. A refund of Ksh. 95 has been initiated.');
                     } else {
                         alert('Queue Status: Application is currently at Position #4 in the admin review queue. Check back shortly!');
                     }

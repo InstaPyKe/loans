@@ -85,6 +85,33 @@
 
             <!-- Card Content Body -->
             <div class="card-content">
+                
+                <!-- Stepper Progress Capsular Row -->
+                <div class="animate-slide-up delay-0-5" style="display: flex; justify-content: space-between; align-items: center; background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(10px); border: 1px solid rgba(15, 23, 42, 0.08); padding: 16px 20px; border-radius: var(--border-radius-lg); margin-bottom: 20px; box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.02);">
+                    <div style="display: flex; flex-direction: column; align-items: center; gap: 6px; flex: 1; position: relative;">
+                        <div style="width: 28px; height: 28px; border-radius: 50%; background: #10b981; color: #ffffff; display: flex; align-items: center; justify-content: center; font-size: 0.72rem; font-weight: 800; z-index: 2;"><i class="fa-solid fa-check"></i></div>
+                        <span style="font-size: 0.6rem; font-weight: 800; color: #10b981; text-transform: uppercase; text-align: center; letter-spacing: 0.2px;">Limit Check</span>
+                    </div>
+                    <div style="height: 2px; background: var(--primary); flex: 1; margin-top: -16px; z-index: 1;"></div>
+                    
+                    <div style="display: flex; flex-direction: column; align-items: center; gap: 6px; flex: 1; position: relative;">
+                        <div style="width: 28px; height: 28px; border-radius: 50%; background: var(--primary); color: #ffffff; display: flex; align-items: center; justify-content: center; font-size: 0.72rem; font-weight: 800; z-index: 2; box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15);"><i class="fa-solid fa-spinner fa-spin"></i></div>
+                        <span style="font-size: 0.6rem; font-weight: 800; color: var(--primary); text-transform: uppercase; text-align: center; letter-spacing: 0.2px;">Secure Limit</span>
+                    </div>
+                    <div style="height: 2px; background: #e2e8f0; flex: 1; margin-top: -16px; z-index: 1;"></div>
+                    
+                    <div style="display: flex; flex-direction: column; align-items: center; gap: 6px; flex: 1; position: relative;">
+                        <div style="width: 28px; height: 28px; border-radius: 50%; background: #e2e8f0; color: #64748b; display: flex; align-items: center; justify-content: center; font-size: 0.72rem; font-weight: 800; z-index: 2;">3</div>
+                        <span style="font-size: 0.6rem; font-weight: 800; color: #64748b; text-transform: uppercase; text-align: center; letter-spacing: 0.2px;">KYC Upload</span>
+                    </div>
+                    <div style="height: 2px; background: #e2e8f0; flex: 1; margin-top: -16px; z-index: 1;"></div>
+                    
+                    <div style="display: flex; flex-direction: column; align-items: center; gap: 6px; flex: 1; position: relative;">
+                        <div style="width: 28px; height: 28px; border-radius: 50%; background: #e2e8f0; color: #64748b; display: flex; align-items: center; justify-content: center; font-size: 0.72rem; font-weight: 800; z-index: 2;">4</div>
+                        <span style="font-size: 0.6rem; font-weight: 800; color: #64748b; text-transform: uppercase; text-align: center; letter-spacing: 0.2px;">Payout</span>
+                    </div>
+                </div>
+
                 <!-- Government Certification Flag -->
                 <div
                     style="display: flex; align-items: center; justify-content: center; margin-bottom: 16px; padding: 4px 0;">
@@ -164,10 +191,10 @@
                             <div
                                 style="flex: 1.2; padding: 12px 16px; font-size: 0.78rem; font-weight: 700; color: var(--accent); border-right: 1px solid #334155; display: flex; align-items: center;">
                                 Facilitation Fee (Payable Now)</div>
-                            <div
-                                style="flex: 1; padding: 12px 16px; font-size: 0.85rem; font-weight: 800; color: var(--accent); display: flex; align-items: center;">
-                                Ksh. 50
-                            </div>
+                             <div
+                                 style="flex: 1; padding: 12px 16px; font-size: 0.85rem; font-weight: 800; color: var(--accent); display: flex; align-items: center;">
+                                 Ksh. <span class="dynamic-crb-fee-text">95</span>
+                             </div>
                         </div>
 
                         <!-- Row 3: Interest Fee -->
@@ -206,6 +233,12 @@
                     <span>Proceed to Verification & Fee Checkout</span>
                     <i class="fa-solid fa-arrow-right"></i>
                 </button>
+                
+                <!-- Navigation / Cancellation Link -->
+                <a href="index.html" class="btn-secondary animate-slide-up delay-4" style="margin-top: 8px; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 8px; box-sizing: border-box; width: 100%;">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    <span>Cancel & Return Home</span>
+                </a>
 
                 <!-- Terms & Conditions Section -->
                 <div class="animate-slide-up delay-5" style="margin-top: 24px; padding-top: 16px; border-top: 1px dashed rgba(15, 23, 42, 0.12); text-align: left;">
@@ -213,7 +246,7 @@
                         <i class="fa-solid fa-file-contract" style="color: var(--primary);"></i> Terms & Conditions
                     </h3>
                     <div style="font-size: 0.72rem; color: #475569; line-height: 1.5; display: flex; flex-direction: column; gap: 8px;">
-                        <p style="margin: 0;"><strong>1. Paybill Facilitation Fee:</strong> An administrative manual M-Pesa Paybill check fee of Ksh. 50 is securely processed to evaluate your credit scoring and active mobile money transaction history. This facilitation fee is 100% refunded to your M-Pesa wallet in the event of an automated system reject.</p>
+                        <p style="margin: 0;"><strong>1. Paybill Facilitation Fee:</strong> An administrative manual M-Pesa Paybill check fee of Ksh. <span class="dynamic-crb-fee-text">95</span> is securely processed to evaluate your credit scoring and active mobile money transaction history. This facilitation fee is 100% refunded to your M-Pesa wallet in the event of an automated system reject.</p>
                         <p style="margin: 0;"><strong>2. Repayment Schedule:</strong> All approved funds carry a fixed repayment maturity of 30 days at a flat interest rate of 2.5%. There will be an automatic deduction of 5% for penalty on delayed loan repayment, which is fully refunded upon timely payments. Non-payment will lead to immediate reporting to licensed Credit Reference Bureaus (CRB).</p>
                         <p style="margin: 0;"><strong>3. Consent & Privacy:</strong> By proceeding, you authorize Daima Loans to securely query your Credit Bureau registry under full compliance with the Office of the Data Protection Commissioner (ODPC) and Central Bank of Kenya lending standards.</p>
                     </div>
@@ -236,6 +269,18 @@
     <!-- Script Logic -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // Redirect if application intake is paused
+            if (localStorage.getItem('daima_loans_enabled') === 'false') {
+                window.location.href = 'index.html';
+                return;
+            }
+
+            // Dynamically load fee from localStorage
+            const activeFee = localStorage.getItem('daima_loans_crb_fee') || '95';
+            document.querySelectorAll('.dynamic-crb-fee-text').forEach(el => {
+                el.textContent = activeFee;
+            });
+
             // Retrieve session data safely
             let userPhone = '';
             try {

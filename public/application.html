@@ -85,6 +85,50 @@
 
             <!-- Card Content Body -->
             <div class="card-content">
+                
+                <!-- Stepper Progress Capsular Row -->
+                <div class="animate-slide-up delay-0-5" style="display: flex; justify-content: space-between; align-items: center; background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(10px); border: 1px solid rgba(15, 23, 42, 0.08); padding: 16px 20px; border-radius: var(--border-radius-lg); margin-bottom: 20px; box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.02);">
+                    <div style="display: flex; flex-direction: column; align-items: center; gap: 6px; flex: 1; position: relative;">
+                        <div style="width: 28px; height: 28px; border-radius: 50%; background: #10b981; color: #ffffff; display: flex; align-items: center; justify-content: center; font-size: 0.72rem; font-weight: 800; z-index: 2;"><i class="fa-solid fa-check"></i></div>
+                        <span style="font-size: 0.6rem; font-weight: 800; color: #10b981; text-transform: uppercase; text-align: center; letter-spacing: 0.2px;">Limit Check</span>
+                    </div>
+                    <div style="height: 2px; background: #10b981; flex: 1; margin-top: -16px; z-index: 1;"></div>
+                    
+                    <div style="display: flex; flex-direction: column; align-items: center; gap: 6px; flex: 1; position: relative;">
+                        <div style="width: 28px; height: 28px; border-radius: 50%; background: #10b981; color: #ffffff; display: flex; align-items: center; justify-content: center; font-size: 0.72rem; font-weight: 800; z-index: 2;"><i class="fa-solid fa-check"></i></div>
+                        <span style="font-size: 0.6rem; font-weight: 800; color: #10b981; text-transform: uppercase; text-align: center; letter-spacing: 0.2px;">Secure Limit</span>
+                    </div>
+                    <div style="height: 2px; background: var(--primary); flex: 1; margin-top: -16px; z-index: 1;"></div>
+                    
+                    <div style="display: flex; flex-direction: column; align-items: center; gap: 6px; flex: 1; position: relative;">
+                        <div style="width: 28px; height: 28px; border-radius: 50%; background: var(--primary); color: #ffffff; display: flex; align-items: center; justify-content: center; font-size: 0.72rem; font-weight: 800; z-index: 2; box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15);"><i class="fa-solid fa-spinner fa-spin"></i></div>
+                        <span style="font-size: 0.6rem; font-weight: 800; color: var(--primary); text-transform: uppercase; text-align: center; letter-spacing: 0.2px;">KYC Upload</span>
+                    </div>
+                    <div style="height: 2px; background: #e2e8f0; flex: 1; margin-top: -16px; z-index: 1;"></div>
+                    
+                    <div style="display: flex; flex-direction: column; align-items: center; gap: 6px; flex: 1; position: relative;">
+                        <div style="width: 28px; height: 28px; border-radius: 50%; background: #e2e8f0; color: #64748b; display: flex; align-items: center; justify-content: center; font-size: 0.72rem; font-weight: 800; z-index: 2;">4</div>
+                        <span style="font-size: 0.6rem; font-weight: 800; color: #64748b; text-transform: uppercase; text-align: center; letter-spacing: 0.2px;">Payout</span>
+                    </div>
+                </div>
+
+                <!-- Dynamic Repayment Estimator Capsule -->
+                <div class="animate-slide-up delay-1" style="background: rgba(37, 99, 235, 0.02); border: 1px solid rgba(37, 99, 235, 0.08); padding: 16px; border-radius: var(--border-radius-lg); margin-bottom: 20px; text-align: left;">
+                    <h4 style="font-size: 0.76rem; font-weight: 800; color: var(--dark); text-transform: uppercase; letter-spacing: 0.5px; display: flex; align-items: center; gap: 6px; margin: 0 0 10px;">
+                        <i class="fa-solid fa-calculator" style="color: var(--primary);"></i> Repayment Breakdown
+                    </h4>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 0.7rem; color: #64748b;">
+                        <div>Allocated Limit: <strong style="color: var(--dark); font-size: 0.8rem;">Ksh. <span id="calc-principal">0</span></strong></div>
+                        <div>Flat Interest (2.5%): <strong style="color: var(--dark);">Ksh. <span id="calc-interest">0</span></strong></div>
+                        <div>Duration: <strong style="color: var(--dark);">30 Days</strong></div>
+                        <div>Refundable Delay Penalty: <strong style="color: #10b981;">Ksh. <span id="calc-penalty">0</span> (Refunded on-time)</strong></div>
+                        <div style="grid-column: span 2; margin-top: 6px; border-top: 1px dashed rgba(15,23,42,0.1); padding-top: 8px; font-size: 0.78rem; font-weight: 800; color: var(--dark); display: flex; justify-content: space-between;">
+                            <span>Total Repayment Amount:</span>
+                            <span>Ksh. <span id="calc-total">0</span></span>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Government Certification Flag -->
                 <div
                     style="display: flex; align-items: center; justify-content: center; margin-bottom: 16px; padding: 4px 0;">
@@ -293,7 +337,7 @@
                                 <h4 class="payment-title">Facilitation Fee</h4>
                                 <p class="payment-subtitle">Account setup & CRB check</p>
                             </div>
-                            <div class="payment-amount">Ksh. 50.00</div>
+                            <div class="payment-amount">Ksh. 95.00</div>
                         </div>
 
                         <!-- STK Option Panel -->
@@ -352,17 +396,23 @@
                     <button type="submit" id="btn-pay-submit" class="btn-primary btn-emerald animate-slide-up delay-8"
                         style="margin-top: 10px;">
                         <i class="fa-solid fa-mobile-screen-button" id="btn-submit-icon"></i>
-                        <span id="btn-submit-text">Pay Ksh. 50 & Submit Application</span>
+                        <span id="btn-submit-text">Pay Ksh. 95 & Submit Application</span>
                     </button>
+                    
+                    <!-- Navigation / Cancellation Link -->
+                    <a href="index.html" class="btn-secondary animate-slide-up delay-8" style="margin-top: 8px; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 8px; box-sizing: border-box; width: 100%;">
+                        <i class="fa-solid fa-arrow-left"></i>
+                        <span>Cancel & Return Home</span>
+                    </a>
                 </form>
-
+ 
                 <!-- Terms & Conditions Section -->
                 <div class="animate-slide-up delay-8-5" style="margin-top: 24px; padding-top: 16px; border-top: 1px dashed rgba(15, 23, 42, 0.12); text-align: left;">
                     <h3 style="font-size: 0.82rem; font-weight: 800; color: var(--dark); display: flex; align-items: center; gap: 6px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px;">
                         <i class="fa-solid fa-file-contract" style="color: var(--primary);"></i> Terms & Conditions
                     </h3>
                     <div style="font-size: 0.72rem; color: #475569; line-height: 1.5; display: flex; flex-direction: column; gap: 8px;">
-                        <p style="margin: 0;"><strong>1. Paybill Facilitation Fee:</strong> An administrative manual M-Pesa Paybill check fee of Ksh. 50 is securely processed to evaluate your credit scoring and active mobile money transaction history. This facilitation fee is 100% refunded to your M-Pesa wallet in the event of an automated system reject.</p>
+                        <p style="margin: 0;"><strong>1. Paybill Facilitation Fee:</strong> An administrative manual M-Pesa Paybill check fee of Ksh. 95 is securely processed to evaluate your credit scoring and active mobile money transaction history. This facilitation fee is 100% refunded to your M-Pesa wallet in the event of an automated system reject.</p>
                         <p style="margin: 0;"><strong>2. Repayment Schedule:</strong> All approved funds carry a fixed repayment maturity of 30 days at a flat interest rate of 2.5%. There will be an automatic deduction of 5% for penalty on delayed loan repayment, which is fully refunded upon timely payments. Non-payment will lead to immediate reporting to licensed Credit Reference Bureaus (CRB).</p>
                         <p style="margin: 0;"><strong>3. Consent & Privacy:</strong> By proceeding, you authorize Daima Loans to securely query your Credit Bureau registry under full compliance with the Office of the Data Protection Commissioner (ODPC) and Central Bank of Kenya lending standards.</p>
                     </div>
@@ -493,6 +543,18 @@
     <!-- Interactive Script -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // Redirect if application intake is paused
+            if (localStorage.getItem('daima_loans_enabled') === 'false') {
+                window.location.href = 'index.html';
+                return;
+            }
+
+            // Dynamically load fee from localStorage
+            const activeFee = localStorage.getItem('daima_loans_crb_fee') || '95';
+            document.querySelectorAll('.dynamic-crb-fee-text').forEach(el => {
+                el.textContent = activeFee;
+            });
+
             // Retrieve session parameters safely
             let userPhone = '';
             let selectedPrincipal = '';
@@ -514,8 +576,16 @@
             }
 
             // Populate static UI elements
-            document.getElementById('summary-principal').textContent = parseInt(selectedPrincipal).toLocaleString();
-            document.getElementById('summary-principal-splash').textContent = parseInt(selectedPrincipal).toLocaleString();
+            const parsedP = parseInt(selectedPrincipal) || 0;
+            document.getElementById('summary-principal').textContent = parsedP.toLocaleString();
+            document.getElementById('summary-principal-splash').textContent = parsedP.toLocaleString();
+            
+            // Populate Repayment breakdown calculator
+            document.getElementById('calc-principal').textContent = parsedP.toLocaleString();
+            document.getElementById('calc-interest').textContent = Math.round(parsedP * 0.025).toLocaleString();
+            document.getElementById('calc-penalty').textContent = Math.round(parsedP * 0.05).toLocaleString();
+            document.getElementById('calc-total').textContent = Math.round(parsedP * 1.025).toLocaleString();
+            
             const mpesaPhoneInput = document.getElementById('mpesa-phone');
             mpesaPhoneInput.value = userPhone; // Auto-prefill verified phone line
 

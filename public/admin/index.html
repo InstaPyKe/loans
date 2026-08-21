@@ -25,28 +25,20 @@
             border: 1px solid var(--glass-border);
             border-radius: var(--border-radius-lg);
             width: 100%;
-            max-width: 380px;
+            max-width: 360px;
             padding: 32px 24px;
             text-align: center;
             box-shadow: var(--glass-shadow);
             border-top: 4px solid var(--primary);
         }
 
-        .pin-display {
-            background: rgba(37, 99, 235, 0.05);
-            border: 2px solid rgba(37, 99, 235, 0.2);
-            border-radius: var(--border-radius-md);
-            padding: 12px;
-            margin: 20px 0;
-            font-size: 2.1rem; /* Magnified */
-            letter-spacing: 6px;
-            color: var(--dark);
-            height: 56px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: monospace;
-            font-weight: 700;
+        .pin-dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            border: 2px solid rgba(37, 99, 235, 0.25);
+            background: transparent;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .keypad {
@@ -57,24 +49,42 @@
         }
 
         .key-btn {
-            background: rgba(255, 255, 255, 0.65);
-            border: 1px solid rgba(37, 99, 235, 0.15);
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(37, 99, 235, 0.08);
             color: var(--dark);
-            font-size: 1.4rem; /* Magnified */
-            font-weight: 700;
-            padding: 16px;
             border-radius: var(--border-radius-md);
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
             outline: none;
-            box-shadow: 0 2px 4px rgba(37, 99, 235, 0.05);
+            box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.02);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 8px;
+            min-height: 58px;
+        }
+
+        .key-btn .key-num {
+            font-size: 1.35rem;
+            font-weight: 800;
+            line-height: 1.1;
+        }
+
+        .key-btn .key-alpha {
+            font-size: 0.52rem;
+            color: #94a3b8;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-top: 2px;
         }
 
         .key-btn:hover {
             background: rgba(37, 99, 235, 0.08);
             transform: translateY(-2px);
-            border-color: rgba(37, 99, 235, 0.3);
-            box-shadow: 0 4px 8px rgba(37, 99, 235, 0.1);
+            border-color: rgba(37, 99, 235, 0.25);
+            box-shadow: 0 6px 12px rgba(37, 99, 235, 0.08);
         }
 
         .key-btn:active {
@@ -82,13 +92,13 @@
         }
 
         .key-btn.action {
-            background: rgba(239, 68, 68, 0.08);
+            background: rgba(239, 68, 68, 0.06);
             color: #ef4444;
-            border-color: rgba(239, 68, 68, 0.2);
+            border-color: rgba(239, 68, 68, 0.15);
         }
 
         .key-btn.action:hover {
-            background: rgba(239, 68, 68, 0.15);
+            background: rgba(239, 68, 68, 0.12);
         }
 
         .shake {
@@ -96,21 +106,9 @@
         }
 
         @keyframes shake {
-
-            0%,
-            100% {
-                transform: translateX(0);
-            }
-
-            20%,
-            60% {
-                transform: translateX(-8px);
-            }
-
-            40%,
-            80% {
-                transform: translateX(8px);
-            }
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-8px); }
+            40%, 80% { transform: translateX(8px); }
         }
     </style>
 </head>
@@ -126,17 +124,18 @@
     </div>
 
     <!-- Header Navigation -->
-    <header>
-        <div class="header-container" style="max-width: 1200px;">
-            <div class="logo-section">
-                <i class="fa-solid fa-shield-halved"></i>
+    <header style="background: rgba(255,255,255,0.7); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(15,23,42,0.06); position: sticky; top: 0; z-index: 100; font-family: 'Outfit', sans-serif;">
+        <div class="header-container" style="max-width: 480px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 12px 16px;">
+            <div class="logo-section" style="display: flex; align-items: center; gap: 8px;">
+                <i class="fa-solid fa-shield-halved" style="color: var(--primary); font-size: 1.25rem;"></i>
                 <div>
-                    <span style="display:block; font-size:1.1rem; font-weight:800; line-height:1;">DAIMA LOANS
-                        Admin</span>
-                    <span style="font-size:0.65rem; color:#94a3b8; font-weight:600; letter-spacing:0.5px;">Authorization
-                        Gateway</span>
+                    <span style="display:block; font-size:0.85rem; font-weight:900; line-height:1; color: var(--dark);">DAIMA STAFF</span>
+                    <span style="font-size:0.58rem; color:#64748b; font-weight:700; letter-spacing:0.5px; text-transform: uppercase;">Gateway</span>
                 </div>
             </div>
+            <a href="../index.html" style="text-decoration: none; font-size: 0.68rem; font-weight: 800; color: #475569; background: #f1f5f9; border: 1px solid #e2e8f0; padding: 6px 12px; border-radius: var(--border-radius-md); display: flex; align-items: center; gap: 6px; transition: all 0.2s ease;">
+                <i class="fa-solid fa-arrow-left"></i> Back to Site
+            </a>
         </div>
     </header>
 
@@ -145,37 +144,80 @@
             <div style="margin-bottom: 20px;">
                 <i class="fa-solid fa-lock"
                     style="font-size: 2.2rem; color: var(--accent); margin-bottom: 12px; display: inline-block;"></i>
-                <h2 style="font-size: 1.25rem; font-weight: 700; color: var(--dark); margin: 0;">Enter Administrator
-                    PIN</h2>
-                <p style="font-size: 0.72rem; color: #94a3b8; margin-top: 4px;">Access to this system is restricted to
-                    authorized personnel.</p>
+                <h2 style="font-size: 1.25rem; font-weight: 700; color: var(--dark); margin: 0;">Enter Staff PIN</h2>
+                <p style="font-size: 0.72rem; color: #94a3b8; margin-top: 4px;">Access to this system is restricted to authorized personnel.</p>
             </div>
 
-            <!-- PIN Code Display Box -->
-            <div id="pin-box" class="pin-display"></div>
+            <!-- PIN Code Display Dots -->
+            <div style="display: flex; justify-content: center; gap: 12px; margin: 24px 0 16px;">
+                <div class="pin-dot" id="dot-0"></div>
+                <div class="pin-dot" id="dot-1"></div>
+                <div class="pin-dot" id="dot-2"></div>
+                <div class="pin-dot" id="dot-3"></div>
+                <div class="pin-dot" id="dot-4"></div>
+                <div class="pin-dot" id="dot-5"></div>
+            </div>
 
-            <!-- Custom Numeric Keypad -->
+            <!-- Custom Numeric Keypad with Alphabetic Sub-labeling -->
             <div class="keypad">
-                <button type="button" class="key-btn" onclick="pressKey('1')">1</button>
-                <button type="button" class="key-btn" onclick="pressKey('2')">2</button>
-                <button type="button" class="key-btn" onclick="pressKey('3')">3</button>
-                <button type="button" class="key-btn" onclick="pressKey('4')">4</button>
-                <button type="button" class="key-btn" onclick="pressKey('5')">5</button>
-                <button type="button" class="key-btn" onclick="pressKey('6')">6</button>
-                <button type="button" class="key-btn" onclick="pressKey('7')">7</button>
-                <button type="button" class="key-btn" onclick="pressKey('8')">8</button>
-                <button type="button" class="key-btn" onclick="pressKey('9')">9</button>
-                <button type="button" class="key-btn action" onclick="clearPin()"><i
-                        class="fa-solid fa-trash-can"></i></button>
-                <button type="button" class="key-btn" onclick="pressKey('0')">0</button>
-                <button type="button" class="key-btn action"
-                    style="color: #10b981; background: rgba(16, 185, 129, 0.1); border-color: rgba(16, 185, 129, 0.2);"
-                    onclick="submitPin()"><i class="fa-solid fa-circle-check"></i></button>
+                <button type="button" class="key-btn" onclick="pressKey('1')">
+                    <span class="key-num">1</span>
+                    <span class="key-alpha">&nbsp;</span>
+                </button>
+                <button type="button" class="key-btn" onclick="pressKey('2')">
+                    <span class="key-num">2</span>
+                    <span class="key-alpha">abc</span>
+                </button>
+                <button type="button" class="key-btn" onclick="pressKey('3')">
+                    <span class="key-num">3</span>
+                    <span class="key-alpha">def</span>
+                </button>
+                <button type="button" class="key-btn" onclick="pressKey('4')">
+                    <span class="key-num">4</span>
+                    <span class="key-alpha">ghi</span>
+                </button>
+                <button type="button" class="key-btn" onclick="pressKey('5')">
+                    <span class="key-num">5</span>
+                    <span class="key-alpha">jkl</span>
+                </button>
+                <button type="button" class="key-btn" onclick="pressKey('6')">
+                    <span class="key-num">6</span>
+                    <span class="key-alpha">mno</span>
+                </button>
+                <button type="button" class="key-btn" onclick="pressKey('7')">
+                    <span class="key-num">7</span>
+                    <span class="key-alpha">pqrs</span>
+                </button>
+                <button type="button" class="key-btn" onclick="pressKey('8')">
+                    <span class="key-num">8</span>
+                    <span class="key-alpha">tuv</span>
+                </button>
+                <button type="button" class="key-btn" onclick="pressKey('9')">
+                    <span class="key-num">9</span>
+                    <span class="key-alpha">wxyz</span>
+                </button>
+                <button type="button" class="key-btn action" onclick="clearPin()" style="justify-content: center;">
+                    <i class="fa-solid fa-trash-can" style="font-size: 1.1rem;"></i>
+                </button>
+                <button type="button" class="key-btn" onclick="pressKey('0')">
+                    <span class="key-num">0</span>
+                    <span class="key-alpha">&nbsp;</span>
+                </button>
+                <button type="button" class="key-btn action" style="color: #10b981; background: rgba(16, 185, 129, 0.05); border-color: rgba(16, 185, 129, 0.15); justify-content: center;" onclick="submitPin()">
+                    <i class="fa-solid fa-circle-check" style="font-size: 1.15rem;"></i>
+                </button>
             </div>
 
             <div id="auth-error"
                 style="color: #ef4444; font-size: 0.72rem; font-weight: 600; margin-top: 16px; display: none;">
-                <i class="fa-solid fa-circle-exclamation"></i> Invalid Administrator PIN. Access Denied.
+                <i class="fa-solid fa-circle-exclamation"></i> Invalid Staff PIN. Access Denied.
+            </div>
+
+            <!-- Home Page CTA stack -->
+            <div style="margin-top: 20px; border-top: 1px dashed rgba(15, 23, 42, 0.1); padding-top: 16px; display: flex; flex-direction: column; gap: 8px;">
+                <a href="../index.html" class="btn-secondary" style="text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 0.76rem; font-weight: 700; padding: 10px; width: 100%; box-sizing: border-box; background: transparent; border-color: rgba(15, 23, 42, 0.15); color: #475569;">
+                    <i class="fa-solid fa-house"></i> Return to Homepage
+                </a>
             </div>
         </div>
     </main>
@@ -188,12 +230,24 @@
 
     <script>
         let currentPin = '';
-        const pinBox = document.getElementById('pin-box');
         const authError = document.getElementById('auth-error');
         const loginCard = document.querySelector('.login-card');
 
         function updateDisplay() {
-            pinBox.textContent = '•'.repeat(currentPin.length);
+            for (let i = 0; i < 6; i++) {
+                const dotElement = document.getElementById(`dot-${i}`);
+                if (dotElement) {
+                    if (i < currentPin.length) {
+                        dotElement.style.background = 'var(--primary)';
+                        dotElement.style.borderColor = 'var(--primary)';
+                        dotElement.style.transform = 'scale(1.25)';
+                    } else {
+                        dotElement.style.background = 'transparent';
+                        dotElement.style.borderColor = 'rgba(37, 99, 235, 0.25)';
+                        dotElement.style.transform = 'scale(1)';
+                    }
+                }
+            }
         }
 
         function pressKey(num) {

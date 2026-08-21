@@ -9,6 +9,26 @@
     <!-- Shared Design System stylesheet -->
     <link rel="stylesheet" href="../style.css">
     <style>
+        /* Premium Toggle Switch */
+        .switch-toggle input:checked + .slider-toggle {
+            background-color: #10b981;
+        }
+        .switch-toggle input:checked + .slider-toggle:before {
+            transform: translateX(20px);
+        }
+        .slider-toggle:before {
+            position: absolute;
+            content: "";
+            height: 14px;
+            width: 14px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .3s;
+            border-radius: 50%;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+        }
+
         /* Mobile-Responsive Card Layout for Admin Tables */
         @media (max-width: 768px) {
             .admin-table, 
@@ -86,22 +106,26 @@
     </div>
 
     <!-- Header Navigation -->
-    <header>
-        <div class="header-container" style="max-width: 1200px;">
+    <header style="background: rgba(255,255,255,0.75); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(15,23,42,0.06); sticky; top: 0; z-index: 100;">
+        <div class="header-container" style="max-width: 1200px; display: flex; justify-content: space-between; align-items: center;">
             <div class="logo-section">
-                <i class="fa-solid fa-shield-halved"></i>
+                <i class="fa-solid fa-shield-halved" style="color: var(--primary);"></i>
                 <div>
-                    <span style="display:block; font-size:1.1rem; font-weight:800; line-height:1;">DAIMA LOANS Control Panel</span>
-                    <span style="font-size:0.65rem; color:#94a3b8; font-weight:600; letter-spacing:0.5px;">Loan Application Queue Manager</span>
+                    <span style="display:block; font-size:1.1rem; font-weight:800; line-height:1; color: var(--dark);">DAIMA Control Panel</span>
+                    <span style="font-size:0.65rem; color:#64748b; font-weight:600; letter-spacing:0.5px;">Loan Application Queue Manager</span>
                 </div>
             </div>
             <div style="display: flex; align-items: center; gap: 12px;">
-                <span class="cbk-badge" style="background: rgba(16, 185, 129, 0.1); border-color: rgba(16, 185, 129, 0.2); color: #34d399;">
-                    <span class="pulse-dot" style="background-color: #10b981; width:6px; height:6px; margin-right:3px;"></span> M-Pesa Gateway Active
+                <span class="cbk-badge" style="background: rgba(16, 185, 129, 0.08); border-color: rgba(16, 185, 129, 0.15); color: #059669; font-weight: 700;">
+                    <span class="pulse-dot" style="background-color: #10b981; width:6px; height:6px; margin-right:4px;"></span> M-Pesa Live
                 </span>
-                <button id="btn-refresh-queue" class="btn-secondary" style="width: auto; padding: 6px 12px; font-size: 0.72rem;">
+                <button id="btn-refresh-queue" class="btn-secondary" style="width: auto; padding: 6px 12px; font-size: 0.72rem; display: flex; align-items: center; gap: 6px;">
                     <i class="fa-solid fa-rotate"></i>
                     <span>Sync Queue</span>
+                </button>
+                <button id="btn-logout" class="btn-secondary" style="width: auto; padding: 6px 12px; font-size: 0.72rem; border-color: rgba(239, 68, 68, 0.2); color: #ef4444; background: rgba(239, 68, 68, 0.02); display: flex; align-items: center; gap: 6px;">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <span>Logout</span>
                 </button>
             </div>
         </div>
@@ -111,22 +135,91 @@
     <main class="dashboard-container" style="display: block;">
         
         <!-- Metrics Stats Grid -->
-        <div class="stats-grid">
-            <div class="stat-card">
-                <span class="stat-label">Pending Approvals</span>
-                <div id="stat-pending" class="stat-value pending">0</div>
+        <div class="stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 24px;">
+            <div class="stat-card" style="display: flex; justify-content: space-between; align-items: center; padding: 20px; background: rgba(255,255,255,0.7); backdrop-filter: blur(10px); border: 1px solid rgba(15,23,42,0.06); border-radius: var(--border-radius-lg); box-shadow: 0 4px 15px -3px rgba(15,23,42,0.03);">
+                <div>
+                    <span class="stat-label" style="display: block; font-size: 0.72rem; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;">Pending Review</span>
+                    <div id="stat-pending" class="stat-value pending" style="font-size: 1.8rem; font-weight: 800; color: var(--accent);">0</div>
+                </div>
+                <div style="width: 42px; height: 42px; border-radius: var(--border-radius-md); background: rgba(245, 158, 11, 0.1); display: grid; place-content: center; color: #d97706; font-size: 1.25rem;">
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+                </div>
             </div>
-            <div class="stat-card">
-                <span class="stat-label">Approved Disbursements</span>
-                <div id="stat-approved" class="stat-value approved">142</div>
+            
+            <div class="stat-card" style="display: flex; justify-content: space-between; align-items: center; padding: 20px; background: rgba(255,255,255,0.7); backdrop-filter: blur(10px); border: 1px solid rgba(15,23,42,0.06); border-radius: var(--border-radius-lg); box-shadow: 0 4px 15px -3px rgba(15,23,42,0.03);">
+                <div>
+                    <span class="stat-label" style="display: block; font-size: 0.72rem; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;">Approved Loans</span>
+                    <div id="stat-approved" class="stat-value approved" style="font-size: 1.8rem; font-weight: 800; color: #10b981;">142</div>
+                </div>
+                <div style="width: 42px; height: 42px; border-radius: var(--border-radius-md); background: rgba(16, 185, 129, 0.1); display: grid; place-content: center; color: #10b981; font-size: 1.25rem;">
+                    <i class="fa-solid fa-circle-check"></i>
+                </div>
             </div>
-            <div class="stat-card">
-                <span class="stat-label">Fees Collected (Ksh)</span>
-                <div id="stat-fees" class="stat-value" style="color: var(--dark);">Ksh. 12,155</div>
+            
+            <div class="stat-card" style="display: flex; justify-content: space-between; align-items: center; padding: 20px; background: rgba(255,255,255,0.7); backdrop-filter: blur(10px); border: 1px solid rgba(15,23,42,0.06); border-radius: var(--border-radius-lg); box-shadow: 0 4px 15px -3px rgba(15,23,42,0.03);">
+                <div>
+                    <span class="stat-label" style="display: block; font-size: 0.72rem; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;">Fees Collected</span>
+                    <div id="stat-fees" class="stat-value" style="font-size: 1.8rem; font-weight: 800; color: var(--dark);">Ksh. 12,155</div>
+                </div>
+                <div style="width: 42px; height: 42px; border-radius: var(--border-radius-md); background: rgba(59, 130, 246, 0.1); display: grid; place-content: center; color: var(--primary); font-size: 1.25rem;">
+                    <i class="fa-solid fa-sack-dollar"></i>
+                </div>
             </div>
-            <div class="stat-card">
-                <span class="stat-label">Rejected Queue</span>
-                <div id="stat-rejected" class="stat-value rejected">8</div>
+            
+            <div class="stat-card" style="display: flex; justify-content: space-between; align-items: center; padding: 20px; background: rgba(255,255,255,0.7); backdrop-filter: blur(10px); border: 1px solid rgba(15,23,42,0.06); border-radius: var(--border-radius-lg); box-shadow: 0 4px 15px -3px rgba(15,23,42,0.03);">
+                <div>
+                    <span class="stat-label" style="display: block; font-size: 0.72rem; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;">Declined Queue</span>
+                    <div id="stat-rejected" class="stat-value rejected" style="font-size: 1.8rem; font-weight: 800; color: #ef4444;">8</div>
+                </div>
+                <div style="width: 42px; height: 42px; border-radius: var(--border-radius-md); background: rgba(239, 68, 68, 0.1); display: grid; place-content: center; color: #ef4444; font-size: 1.25rem;">
+                    <i class="fa-solid fa-ban"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- System Settings & Intake Control Panel Card -->
+        <div class="toolbar-card animate-slide-up" style="margin-bottom: 24px; background: rgba(15, 23, 42, 0.015); border: 1px solid rgba(15, 23, 42, 0.06); padding: 20px; border-radius: var(--border-radius-lg); box-shadow: 0 4px 20px rgba(0,0,0,0.02); display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+            <!-- Left Panel: Intake Toggle Switch & Reopening Message -->
+            <div style="border-right: 1px solid #f1f5f9; padding-right: 20px;">
+                <h4 style="font-size: 0.78rem; font-weight: 800; color: var(--dark); text-transform: uppercase; letter-spacing: 0.5px; margin: 0 0 8px; display: flex; align-items: center; gap: 6px;">
+                    <i class="fa-solid fa-power-off" style="color: var(--accent);"></i> Application Intake Switch
+                </h4>
+                <p style="font-size: 0.68rem; color: #64748b; margin-bottom: 12px; line-height: 1.4;">Toggle on/off new application processing and schedule reopening details.</p>
+                
+                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                    <span style="font-size: 0.74rem; font-weight: 700; color: var(--dark);">Intake Status:</span>
+                    <label class="switch-toggle" style="position: relative; display: inline-block; width: 44px; height: 22px;">
+                        <input type="checkbox" id="toggle-intake-status" checked style="opacity: 0; width: 0; height: 0;">
+                        <span class="slider-toggle" style="position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #cbd5e1; transition: .3s; border-radius: 34px;"></span>
+                    </label>
+                    <strong id="label-intake-status" style="font-size: 0.72rem; color: #10b981; font-weight: 800;">ACTIVE</strong>
+                </div>
+
+                <div style="display: flex; flex-direction: column; gap: 6px;">
+                    <label style="font-size: 0.68rem; font-weight: 700; color: #64748b;">Intake Reopen Notice Message:</label>
+                    <input type="text" id="input-reopen-msg" class="form-input" style="padding: 6px 10px; font-size: 0.72rem;" placeholder="e.g. Applications open Sept 1st at 8:00 AM">
+                </div>
+            </div>
+
+            <!-- Right Panel: Fee Settings -->
+            <div style="display: flex; flex-direction: column; justify-content: space-between;">
+                <div>
+                    <h4 style="font-size: 0.78rem; font-weight: 800; color: var(--dark); text-transform: uppercase; letter-spacing: 0.5px; margin: 0 0 8px; display: flex; align-items: center; gap: 6px;">
+                        <i class="fa-solid fa-gears" style="color: var(--primary);"></i> Fee Settings (Daraja Gateway)
+                    </h4>
+                    <p style="font-size: 0.68rem; color: #64748b; margin-bottom: 12px; line-height: 1.4;">Adjust the mandatory check fee for client applications verification.</p>
+                    
+                    <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 12px;">
+                        <span style="font-size: 0.74rem; font-weight: 700; color: var(--dark);">Ksh.</span>
+                        <input type="number" id="input-crb-fee" min="10" max="1000" class="form-input" style="width: 90px; padding: 6px 10px; font-weight: 800; text-align: center; color: var(--primary); border-color: rgba(37, 99, 235, 0.2);" value="95">
+                    </div>
+                </div>
+
+                <div style="display: flex; justify-content: flex-end;">
+                    <button type="button" id="btn-save-settings" class="btn-primary btn-emerald" style="width: auto; padding: 8px 18px; font-size: 0.74rem; display: flex; align-items: center; gap: 6px;">
+                        <i class="fa-solid fa-floppy-disk"></i> Save System Settings
+                    </button>
+                </div>
             </div>
         </div>
 
@@ -137,6 +230,9 @@
             </button>
             <button id="tab-contacts" class="btn-secondary" style="width: auto; padding: 8px 16px; font-size: 0.75rem; border-color: rgba(255, 255, 255, 0.15); color: #94a3b8; background: transparent; cursor: pointer;">
                 <i class="fa-solid fa-envelope" style="margin-right: 6px;"></i> Contact Messages (<span id="count-contacts">0</span>)
+            </button>
+            <button id="tab-audit" class="btn-secondary" style="width: auto; padding: 8px 16px; font-size: 0.75rem; border-color: rgba(255, 255, 255, 0.15); color: #94a3b8; background: transparent; cursor: pointer;">
+                <i class="fa-solid fa-list-check" style="margin-right: 6px;"></i> Audit Logs (<span id="count-logs">0</span>)
             </button>
         </div>
 
@@ -217,6 +313,39 @@
                 <div id="contacts-empty-state" style="padding: 60px 24px; text-align: center; display: none;">
                     <i class="fa-solid fa-envelope-open" style="font-size: 2.5rem; color: #94a3b8; margin-bottom: 12px; display: block;"></i>
                     <p style="font-size: 0.9rem; font-weight: 600; color: #64748b;">No contact messages received.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 3: Audit Activity Logs Container -->
+        <div id="section-audit" style="display: none;">
+            <div class="toolbar-card" style="justify-content: space-between; display: flex; align-items: center; flex-wrap: wrap; gap: 10px; background: rgba(15, 23, 42, 0.02); border: 1px solid rgba(15,23,42,0.06); padding: 12px 16px; border-radius: var(--border-radius-md); margin-bottom: 16px;">
+                <span style="font-size: 0.76rem; font-weight: 800; color: var(--dark); display: flex; align-items: center; gap: 6px; text-transform: uppercase; letter-spacing: 0.5px;">
+                    <i class="fa-solid fa-gavel" style="color: var(--accent); font-size: 0.95rem;"></i> Immutable Compliance Log History
+                </span>
+                <button id="btn-clear-logs" class="btn-tertiary" style="width: auto; padding: 6px 12px; font-size: 0.72rem; border-color: rgba(239, 68, 68, 0.25); color: #ef4444; background: rgba(239, 68, 68, 0.02); display: flex; align-items: center; gap: 4px;">
+                    <i class="fa-solid fa-circle-minus"></i> Reset Log DB
+                </button>
+            </div>
+            <div class="table-wrapper">
+                <div class="table-responsive">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Timestamp</th>
+                                <th>Action Event</th>
+                                <th>Details / Target</th>
+                                <th>Operator</th>
+                            </tr>
+                        </thead>
+                        <tbody id="audit-tbody">
+                            <!-- Populated dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+                <div id="audit-empty-state" style="padding: 60px 24px; text-align: center; display: none;">
+                    <i class="fa-solid fa-clipboard-list" style="font-size: 2.5rem; color: #94a3b8; margin-bottom: 12px; display: block;"></i>
+                    <p style="font-size: 0.9rem; font-weight: 600; color: #64748b;">No activities logged yet.</p>
                 </div>
             </div>
         </div>
@@ -381,6 +510,9 @@
                 });
 
                 saveToLocalStorage();
+                if (typeof addAuditLog === 'function') {
+                    addAuditLog('LOAD_MOCK_DATA', 'Loaded 3 mock applicant records into application registry.');
+                }
                 renderTable();
             }
 
@@ -516,6 +648,9 @@
                 modalActions.querySelector('.btn-approve').addEventListener('click', () => {
                     app.status = 'APPROVED';
                     saveToLocalStorage();
+                    if (typeof addAuditLog === 'function') {
+                        addAuditLog('APPROVE_APPLICATION', `Approved loan reference ${app.appId} for ${app.applicantName} (Principal: Ksh. ${parseInt(app.principal).toLocaleString()}).`);
+                    }
                     detailsModal.classList.remove('active');
                     renderTable();
                 });
@@ -523,6 +658,9 @@
                 modalActions.querySelector('.btn-reject').addEventListener('click', () => {
                     app.status = 'REJECTED';
                     saveToLocalStorage();
+                    if (typeof addAuditLog === 'function') {
+                        addAuditLog('REJECT_APPLICATION', `Rejected loan reference ${app.appId} for ${app.applicantName}.`);
+                    }
                     detailsModal.classList.remove('active');
                     renderTable();
                 });
@@ -533,9 +671,15 @@
                 const approved = applications.filter(a => a.status === 'APPROVED').length;
                 const rejected = applications.filter(a => a.status === 'REJECTED').length;
 
+                const baseApproved = 142;
+                const totalApproved = approved + baseApproved;
+                const activeCrbFee = parseInt(localStorage.getItem('daima_loans_crb_fee') || '95') || 95;
+                const totalFees = totalApproved * activeCrbFee;
+
                 document.getElementById('stat-pending').textContent = pending;
-                document.getElementById('stat-approved').textContent = approved + 142;
+                document.getElementById('stat-approved').textContent = totalApproved;
                 document.getElementById('stat-rejected').textContent = rejected + 8;
+                document.getElementById('stat-fees').textContent = 'Ksh. ' + totalFees.toLocaleString();
             }
 
             // Close Modal Listeners
@@ -548,18 +692,93 @@
             searchInput.addEventListener('input', renderTable);
             filterStatus.addEventListener('change', renderTable);
             document.getElementById('btn-load-mock').addEventListener('click', loadMockData);
+            
+            // Sync/Refresh queue animation
             document.getElementById('btn-refresh-queue').addEventListener('click', () => {
-                loadApplications();
-                renderTable();
+                const btn = document.getElementById('btn-refresh-queue');
+                const icon = btn.querySelector('i');
+                icon.classList.add('fa-spin');
+                btn.disabled = true;
+                setTimeout(() => {
+                    icon.classList.remove('fa-spin');
+                    btn.disabled = false;
+                    loadApplications();
+                    if (typeof addAuditLog === 'function') {
+                        addAuditLog('SYNC_QUEUE', 'Synchronized active applications queue database.');
+                    }
+                    renderTable();
+                }, 1000);
+            });
+
+            // Logout Handler
+            document.getElementById('btn-logout').addEventListener('click', () => {
+                sessionStorage.removeItem('admin_auth');
+                window.location.href = 'index.html';
+            });
+
+            // System Settings Handler (Fee, Intake Status, Reopen Message)
+            const toggleIntake = document.getElementById('toggle-intake-status');
+            const labelIntake = document.getElementById('label-intake-status');
+            const inputReopen = document.getElementById('input-reopen-msg');
+            const inputFee = document.getElementById('input-crb-fee');
+
+            toggleIntake.addEventListener('change', () => {
+                if (toggleIntake.checked) {
+                    labelIntake.textContent = 'ACTIVE';
+                    labelIntake.style.color = '#10b981';
+                } else {
+                    labelIntake.textContent = 'PAUSED';
+                    labelIntake.style.color = '#ef4444';
+                }
+            });
+
+            function loadSystemSettings() {
+                const fee = localStorage.getItem('daima_loans_crb_fee') || '95';
+                const intakeEnabled = localStorage.getItem('daima_loans_enabled') !== 'false';
+                const reopenMsg = localStorage.getItem('daima_loans_reopen_msg') || 'Applications will reopen soon. Processing queue.';
+
+                if (inputFee) inputFee.value = fee;
+                if (toggleIntake) {
+                    toggleIntake.checked = intakeEnabled;
+                    labelIntake.textContent = intakeEnabled ? 'ACTIVE' : 'PAUSED';
+                    labelIntake.style.color = intakeEnabled ? '#10b981' : '#ef4444';
+                }
+                if (inputReopen) inputReopen.value = reopenMsg;
+            }
+
+            document.getElementById('btn-save-settings').addEventListener('click', () => {
+                const newFee = inputFee.value;
+                if (!newFee || isNaN(newFee) || parseInt(newFee) < 10) {
+                    alert('Please enter a valid check fee (minimum Ksh. 10).');
+                    return;
+                }
+                
+                const oldFee = localStorage.getItem('daima_loans_crb_fee') || '95';
+                const oldIntake = localStorage.getItem('daima_loans_enabled') !== 'false';
+                const newIntake = toggleIntake.checked;
+                const newReopen = inputReopen.value.trim() || 'Intake currently paused.';
+
+                localStorage.setItem('daima_loans_crb_fee', newFee);
+                localStorage.setItem('daima_loans_enabled', newIntake ? 'true' : 'false');
+                localStorage.setItem('daima_loans_reopen_msg', newReopen);
+
+                if (typeof addAuditLog === 'function') {
+                    addAuditLog('UPDATE_SYSTEM_SETTINGS', `Updated settings: Fee: Ksh. ${newFee} (was ${oldFee}), Intake: ${newIntake ? 'Active' : 'Paused'} (was ${oldIntake ? 'Active' : 'Paused'}), Notice Msg: "${newReopen}".`);
+                }
+                alert('System settings successfully saved and applied globally!');
+                updateStats();
             });
 
             // Tab Switching Listeners
             const tabApps = document.getElementById('tab-applications');
             const tabContacts = document.getElementById('tab-contacts');
+            const tabAudit = document.getElementById('tab-audit');
             const secApps = document.getElementById('section-applications');
             const secContacts = document.getElementById('section-contacts');
+            const secAudit = document.getElementById('section-audit');
             const countApps = document.getElementById('count-apps');
             const countContacts = document.getElementById('count-contacts');
+            const countLogs = document.getElementById('count-logs');
 
             tabApps.addEventListener('click', () => {
                 tabApps.className = 'btn-primary';
@@ -568,8 +787,12 @@
                 tabContacts.className = 'btn-secondary';
                 tabContacts.style.background = 'transparent';
                 tabContacts.style.color = '#94a3b8';
+                tabAudit.className = 'btn-secondary';
+                tabAudit.style.background = 'transparent';
+                tabAudit.style.color = '#94a3b8';
                 secApps.style.display = 'block';
                 secContacts.style.display = 'none';
+                secAudit.style.display = 'none';
             });
 
             tabContacts.addEventListener('click', () => {
@@ -579,9 +802,29 @@
                 tabApps.className = 'btn-secondary';
                 tabApps.style.background = 'transparent';
                 tabApps.style.color = '#94a3b8';
+                tabAudit.className = 'btn-secondary';
+                tabAudit.style.background = 'transparent';
+                tabAudit.style.color = '#94a3b8';
                 secApps.style.display = 'none';
                 secContacts.style.display = 'block';
+                secAudit.style.display = 'none';
                 renderContacts();
+            });
+
+            tabAudit.addEventListener('click', () => {
+                tabAudit.className = 'btn-primary';
+                tabAudit.style.background = 'var(--primary)';
+                tabAudit.style.color = 'var(--white)';
+                tabApps.className = 'btn-secondary';
+                tabApps.style.background = 'transparent';
+                tabApps.style.color = '#94a3b8';
+                tabContacts.className = 'btn-secondary';
+                tabContacts.style.background = 'transparent';
+                tabContacts.style.color = '#94a3b8';
+                secApps.style.display = 'none';
+                secContacts.style.display = 'none';
+                secAudit.style.display = 'block';
+                renderAuditLogs();
             });
 
             // Render Contacts Table
@@ -630,8 +873,12 @@
                     contactsTbody.querySelectorAll('.btn-dismiss').forEach(btn => {
                         btn.addEventListener('click', (e) => {
                             const index = parseInt(btn.dataset.idx);
+                            const c = contacts[index];
                             contacts.splice(index, 1);
                             saveContacts();
+                            if (c && typeof addAuditLog === 'function') {
+                                addAuditLog('DISMISS_CONTACT', `Dismissed customer message inquiry from ${c.name} (${c.email}).`);
+                            }
                             renderContacts();
                         });
                     });
@@ -673,6 +920,73 @@
                 }
             };
 
+            // Audit Logging Helper Functions
+            function addAuditLog(action, details) {
+                const logs = JSON.parse(localStorage.getItem('daima_loans_audit_logs') || '[]');
+                const newLog = {
+                    timestamp: new Date().toISOString(),
+                    action: action,
+                    details: details,
+                    operator: 'Daima Staff Agent'
+                };
+                logs.unshift(newLog);
+                localStorage.setItem('daima_loans_audit_logs', JSON.stringify(logs));
+                updateLogCount();
+            }
+
+            function updateLogCount() {
+                const logs = JSON.parse(localStorage.getItem('daima_loans_audit_logs') || '[]');
+                const countBadge = document.getElementById('count-logs');
+                if (countBadge) countBadge.textContent = logs.length;
+            }
+
+            // Render Audit Logs Table
+            const auditTbody = document.getElementById('audit-tbody');
+            const auditEmptyState = document.getElementById('audit-empty-state');
+
+            function renderAuditLogs() {
+                updateLogCount();
+                auditTbody.innerHTML = '';
+                const logs = JSON.parse(localStorage.getItem('daima_loans_audit_logs') || '[]');
+
+                if (logs.length === 0) {
+                    auditEmptyState.style.display = 'block';
+                } else {
+                    auditEmptyState.style.display = 'none';
+
+                    logs.forEach(log => {
+                        const tr = document.createElement('tr');
+                        const dateObj = new Date(log.timestamp);
+                        const timeStr = dateObj.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+                        const dateStr = dateObj.toLocaleDateString([], {month: 'short', day: 'numeric'});
+
+                        tr.innerHTML = `
+                            <td data-label="Timestamp">
+                                <strong style="color: var(--dark); font-size: 0.74rem;">${timeStr}</strong>
+                                <span style="display: block; font-size: 0.62rem; color: #94a3b8;">${dateStr}</span>
+                            </td>
+                            <td data-label="Event">
+                                <span class="status-pill ${log.action.includes('APPROVE') ? 'approved' : log.action.includes('REJECT') || log.action.includes('RESET') ? 'rejected' : 'pending'}" style="font-size: 0.65rem;">
+                                    ${log.action}
+                                </span>
+                            </td>
+                            <td data-label="Details" style="font-size: 0.72rem; color: #475569; line-height: 1.3;">${log.details}</td>
+                            <td data-label="Operator" style="font-size: 0.72rem; font-weight: 600; color: var(--dark);">${log.operator}</td>
+                        `;
+                        auditTbody.appendChild(tr);
+                    });
+                }
+            }
+
+            // Clear compliance log action
+            document.getElementById('btn-clear-logs').addEventListener('click', () => {
+                if (confirm('Are you absolutely sure you want to clear the compliance audit history? This action is logged for accountability.')) {
+                    localStorage.removeItem('daima_loans_audit_logs');
+                    addAuditLog('RESET_AUDIT_LOGS', 'Requested system audit logs reset sequence. Local storage DB cleared.');
+                    renderAuditLogs();
+                }
+            });
+
             window.closeDocModal = function() {
                 const docModal = document.getElementById('doc-modal');
                 if (docModal) {
@@ -682,6 +996,10 @@
 
             // Initial load
             loadApplications();
+            updateLogCount();
+            if (typeof loadSystemSettings === 'function') {
+                loadSystemSettings();
+            }
             if (applications.length === 0) {
                 loadMockData();
             } else {

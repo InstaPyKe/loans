@@ -9,6 +9,16 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Custom Style Sheet -->
     <link rel="stylesheet" href="style.css">
+    <style>
+        @keyframes slideMarquee {
+            0% { transform: translate3d(0, 0, 0); }
+            100% { transform: translate3d(-33.333%, 0, 0); }
+        }
+        @keyframes slideMarqueeReverse {
+            0% { transform: translate3d(-33.333%, 0, 0); }
+            100% { transform: translate3d(0, 0, 0); }
+        }
+    </style>
 </head>
 
 <body>
@@ -25,8 +35,18 @@
     </div>
 
     <!-- Header Navigation -->
-    <header>
-        <div class="header-container" style="display: flex; justify-content: space-between; align-items: center;">
+    <header style="position: sticky; top: 0; z-index: 100; background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(15, 23, 42, 0.06); overflow: hidden;">
+        <!-- Animated Multiple Daima Text Background -->
+        <div style="position: absolute; inset: 0; pointer-events: none; opacity: 0.05; z-index: 0; display: flex; flex-direction: column; justify-content: center; gap: 2px;">
+            <div style="white-space: nowrap; font-size: 0.65rem; font-weight: 900; color: var(--primary); letter-spacing: 3px; display: inline-block; animation: slideMarquee 25s linear infinite; width: 300%;">
+                DAIMA • DAIMA • DAIMA • DAIMA • DAIMA • DAIMA • DAIMA • DAIMA • DAIMA • DAIMA • DAIMA • DAIMA
+            </div>
+            <div style="white-space: nowrap; font-size: 0.65rem; font-weight: 900; color: var(--accent); letter-spacing: 3px; display: inline-block; animation: slideMarqueeReverse 30s linear infinite; width: 300%;">
+                DAIMA • DAIMA • DAIMA • DAIMA • DAIMA • DAIMA • DAIMA • DAIMA • DAIMA • DAIMA • DAIMA • DAIMA
+            </div>
+        </div>
+        
+        <div class="header-container" style="display: flex; justify-content: space-between; align-items: center; position: relative; z-index: 1;">
             <div class="logo-section">
                 <i class="fa-solid fa-bolt-lightning"></i>
                 <span>DAIMA LOANS</span>
@@ -65,7 +85,7 @@
                         LOANS</h1>
                     <p class="hero-subtitle" style="font-size: 0.95rem; font-weight: 700; color: #ffffff;">Just with a
                         Tap!
-                        now available to our customers!</p>
+                        Get instant loans up to KES 50,000</p>
                 </div>
             </div>
 
@@ -91,8 +111,23 @@
                         </g>
                     </svg>
                     <span
-                        style="font-size: 0.68rem; font-weight: 700; color: #065f46; text-transform: uppercase; letter-spacing: 0.5px;">MINDING
-                        YOUR BUSSINESSES immediately</span>
+                        style="font-size: 0.68rem; font-weight: 700; color: #065f46; text-transform: uppercase; letter-spacing: 0.5px;">daima
+                        tuko mbele!
+                    </span>
+                </div>
+
+                <!-- Intake Closed Notice Card -->
+                <div id="intake-closed-container" style="display: none; padding: 24px 16px; background: rgba(239, 68, 68, 0.02); border: 1px solid rgba(239, 68, 68, 0.1); border-radius: var(--border-radius-lg); text-align: center; margin-top: 10px; margin-bottom: 20px;">
+                    <div style="width: 50px; height: 50px; border-radius: 50%; background: rgba(239, 68, 68, 0.08); color: #ef4444; display: grid; place-content: center; font-size: 1.5rem; margin: 0 auto 14px;">
+                        <i class="fa-solid fa-lock"></i>
+                    </div>
+                    <h3 style="font-size: 0.95rem; font-weight: 800; color: var(--dark); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;">Applications Suspended</h3>
+                    <p style="font-size: 0.74rem; color: #64748b; line-height: 1.45; margin-bottom: 14px;" id="text-reopen-notice-msg">
+                        Processing active loan queue. Please check back later.
+                    </p>
+                    <span style="font-size: 0.65rem; font-weight: 700; color: #b91c1c; background: rgba(239, 68, 68, 0.08); padding: 4px 10px; border-radius: 50px; text-transform: uppercase; display: inline-flex; align-items: center; gap: 4px;">
+                        <span class="pulse-dot" style="background-color: #ef4444; width:5px; height:5px; margin-right: 2px;"></span> Intake Queue Paused
+                    </span>
                 </div>
 
                 <!-- Eligibility Check Form -->
@@ -127,7 +162,7 @@
                         <p
                             style="font-size: 0.74rem; font-weight: 500; margin-bottom: 12px; line-height: 1.5; color: #cbd5e1;">
                             A refundable facilitation and CRB verification fee of <strong
-                                style="color: var(--accent);">Ksh. 50</strong> applies upon submitting your full
+                                style="color: var(--accent);">Ksh. <span class="dynamic-crb-fee-text">95</span></strong> applies upon submitting your full
                             application.
                         </p>
                         <div class="disclosure-stats"
@@ -296,7 +331,7 @@
                         style="margin-top: 14px; margin-bottom: 16px; background: rgba(15, 23, 42, 0.02); border: 1px solid rgba(15, 23, 42, 0.06); padding: 16px; border-radius: var(--border-radius-lg);">
                         <h4
                             style="font-size: 0.78rem; font-weight: 800; color: var(--dark); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px; display: flex; align-items: center; gap: 6px;">
-                            <i class="fa-solid fa-award" style="color: var(--primary);"></i> The Daima Advantage
+                            <i class="fa-solid fa-award" style="color: var(--primary);"></i> Why choose Daima?
                         </h4>
                         <div
                             style="display: flex; flex-direction: column; gap: 10px; font-size: 0.7rem; color: #475569; line-height: 1.45;">
@@ -434,7 +469,7 @@
                                 Repayment & Processing Fees</h4>
                             <p style="font-size: 0.68rem; color: #64748b; line-height: 1.45;">All loans carry a fixed
                                 30-day maturity with a flat 2.5% rate. Delayed payments incur a 5% penalty (fully
-                                refunded on timely payment). Submission requires a Ksh. 50 manual Paybill check fee,
+                                refunded on timely payment). Submission requires a Ksh. <span class="dynamic-crb-fee-text">95</span> manual Paybill check fee,
                                 which is 100% refunded if rejected.</p>
                         </div>
                     </div>
@@ -482,7 +517,7 @@
         <div class="modal-card">
             <h3 class="modal-header">Terms & Conditions Summary</h3>
             <div class="modal-body">
-                <p><strong>1. Facilitation Fee:</strong> An administrative fee of Ksh. 50 is charged to verify credit
+                <p><strong>1. Facilitation Fee:</strong> An administrative fee of Ksh. <span class="dynamic-crb-fee-text">95</span> is charged to verify credit
                     worthiness via mobile operator parameters and CRB registries.</p>
                 <p><strong>2. Qualification:</strong> Pre-approval amounts between Ksh. 500 and Ksh. 5,000 do not
                     guarantee final disbursement until background review is finalized.</p>
@@ -498,6 +533,30 @@
     <!-- Client Script -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // Dynamically load fee from localStorage
+            const activeFee = localStorage.getItem('daima_loans_crb_fee') || '95';
+            document.querySelectorAll('.dynamic-crb-fee-text').forEach(el => {
+                el.textContent = activeFee;
+            });
+
+            // Check dynamic Application Intake Status (Active vs Paused)
+            const intakeEnabled = localStorage.getItem('daima_loans_enabled') !== 'false';
+            const reopenMsg = localStorage.getItem('daima_loans_reopen_msg') || 'Applications will reopen soon. Processing active queue.';
+            const formContainer = document.getElementById('eligibility-form');
+            const closedContainer = document.getElementById('intake-closed-container');
+            const reopenText = document.getElementById('text-reopen-notice-msg');
+
+            if (!intakeEnabled) {
+                if (formContainer) formContainer.style.display = 'none';
+                if (closedContainer) {
+                    closedContainer.style.display = 'block';
+                    if (reopenText) reopenText.textContent = reopenMsg;
+                }
+            } else {
+                if (formContainer) formContainer.style.display = 'block';
+                if (closedContainer) closedContainer.style.display = 'none';
+            }
+
             // Auto-sliding Hero Background Slideshow
             const slides = document.querySelectorAll('.hero-slide');
             if (slides.length > 0) {
@@ -750,7 +809,7 @@
                         style="display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-radius: var(--border-radius-md); text-decoration: none; color: #0f172a; background: linear-gradient(135deg, #f8fafc, #e2e8f0); font-weight: 700; font-size: 0.85rem; transition: all 0.25s ease; border: 1px solid rgba(15,23,42,0.12);">
                         <i class="fa-solid fa-user-shield"
                             style="font-size: 1.1rem; width: 22px; text-align: center;"></i>
-                        <span>Contact Admin</span>
+                        <span>Daima Staff</span>
                     </a>
                 </div>
             </div>
