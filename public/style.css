@@ -142,7 +142,7 @@ header {
 }
 
 .header-container {
-    max-w: 480px;
+    max-width: 530px;
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
@@ -215,7 +215,7 @@ main {
 }
 
 .card-container {
-    max-w: 480px;
+    max-width: 530px;
     width: 100%;
     background: var(--glass-bg);
     backdrop-filter: blur(16px);

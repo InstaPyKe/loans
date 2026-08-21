@@ -277,30 +277,27 @@
 
                     <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;">
                         <!-- Stat 1: Network Visits -->
-                        <div class="telemetry-card" style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.03) 0%, rgba(37, 99, 235, 0.03) 100%); border: 1px solid rgba(59, 130, 246, 0.1); padding: 16px 8px; border-radius: var(--border-radius-lg); box-shadow: 0 4px 15px rgba(0,0,0,0.01); display: flex; flex-direction: column; align-items: center; gap: 4px;">
-                            <div style="background: rgba(59, 130, 246, 0.1); width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #2563eb; font-size: 0.9rem; margin-bottom: 2px;">
+                        <div class="telemetry-card" style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.03) 0%, rgba(37, 99, 235, 0.03) 100%); border: 1px solid rgba(59, 130, 246, 0.1); padding: 18px 8px; border-radius: var(--border-radius-lg); box-shadow: 0 4px 15px rgba(0,0,0,0.01); display: flex; flex-direction: column; align-items: center; gap: 8px;">
+                            <div style="background: rgba(59, 130, 246, 0.1); width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #2563eb; font-size: 1.05rem;">
                                 <i class="fa-solid fa-users"></i>
                             </div>
-                            <span style="display: block; font-size: 0.58rem; font-weight: 800; color: #64748b; text-transform: uppercase; letter-spacing: 0.4px;">Network Visits</span>
-                            <strong id="metric-visits" style="display: block; font-size: 1.15rem; font-weight: 800; color: #1e3a8a; font-family: 'Space Grotesk', sans-serif;">1.2M</strong>
+                            <strong id="metric-visits" style="display: block; font-size: 1.85rem; font-weight: 800; color: #1e3a8a; font-family: 'Space Grotesk', sans-serif;">1.2M</strong>
                         </div>
 
                         <!-- Stat 2: Disbursed / Networth -->
-                        <div class="telemetry-card" style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.03) 0%, rgba(5, 150, 105, 0.03) 100%); border: 1px solid rgba(16, 185, 129, 0.1); padding: 14px 8px; border-radius: var(--border-radius-lg); box-shadow: 0 4px 15px rgba(0,0,0,0.01); display: flex; flex-direction: column; align-items: center; gap: 4px;">
-                            <div style="background: rgba(16, 185, 129, 0.1); width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #059669; font-size: 0.9rem; margin-bottom: 2px;">
+                        <div class="telemetry-card" style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.03) 0%, rgba(5, 150, 105, 0.03) 100%); border: 1px solid rgba(16, 185, 129, 0.1); padding: 18px 8px; border-radius: var(--border-radius-lg); box-shadow: 0 4px 15px rgba(0,0,0,0.01); display: flex; flex-direction: column; align-items: center; gap: 8px;">
+                            <div style="background: rgba(16, 185, 129, 0.1); width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #059669; font-size: 1.05rem;">
                                 <i class="fa-solid fa-sack-dollar"></i>
                             </div>
-                            <span style="display: block; font-size: 0.58rem; font-weight: 800; color: #64748b; text-transform: uppercase; letter-spacing: 0.4px;">Disbursed Vol.</span>
-                            <strong id="metric-volume" style="display: block; font-size: 1.15rem; font-weight: 800; color: #065f46; font-family: 'Space Grotesk', sans-serif;">84M</strong>
+                            <strong id="metric-volume" style="display: block; font-size: 1.85rem; font-weight: 800; color: #065f46; font-family: 'Space Grotesk', sans-serif;">84M</strong>
                         </div>
 
                         <!-- Stat 3: Avg Speed -->
-                        <div class="telemetry-card" style="background: linear-gradient(135deg, rgba(245, 158, 11, 0.03) 0%, rgba(217, 119, 6, 0.03) 100%); border: 1px solid rgba(245, 158, 11, 0.1); padding: 14px 8px; border-radius: var(--border-radius-lg); box-shadow: 0 4px 15px rgba(0,0,0,0.01); display: flex; flex-direction: column; align-items: center; gap: 4px;">
-                            <div style="background: rgba(245, 158, 11, 0.1); width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #d97706; font-size: 0.9rem; margin-bottom: 2px;">
+                        <div class="telemetry-card" style="background: linear-gradient(135deg, rgba(245, 158, 11, 0.03) 0%, rgba(217, 119, 6, 0.03) 100%); border: 1px solid rgba(245, 158, 11, 0.1); padding: 18px 8px; border-radius: var(--border-radius-lg); box-shadow: 0 4px 15px rgba(0,0,0,0.01); display: flex; flex-direction: column; align-items: center; gap: 8px;">
+                            <div style="background: rgba(245, 158, 11, 0.1); width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #d97706; font-size: 1.05rem;">
                                 <i class="fa-solid fa-bolt-lightning"></i>
                             </div>
-                            <span style="display: block; font-size: 0.58rem; font-weight: 800; color: #64748b; text-transform: uppercase; letter-spacing: 0.4px;">Avg. Approval</span>
-                            <strong id="metric-speed" style="display: block; font-size: 1.15rem; font-weight: 800; color: #9a3412; font-family: 'Space Grotesk', sans-serif;">3.8m</strong>
+                            <strong id="metric-speed" style="display: block; font-size: 1.85rem; font-weight: 800; color: #9a3412; font-family: 'Space Grotesk', sans-serif;">3.8m</strong>
                         </div>
                     </div>
                 </div>
@@ -625,7 +622,7 @@
     <footer
         style="background: linear-gradient(180deg, #0f172a 0%, #090d16 100%); color: #94a3b8; padding: 24px; text-align: center; font-family: 'Outfit', sans-serif;">
         <div
-            style="max-width: 480px; margin: 0 auto; display: flex; flex-direction: column; gap: 6px; font-size: 0.72rem;">
+            style="max-width: 530px; margin: 0 auto; display: flex; flex-direction: column; gap: 6px; font-size: 0.72rem;">
             <p style="font-weight: 600; letter-spacing: 0.2px; color: #94a3b8;">&copy; 2026 DAIMA LOANS Kenya. All
                 rights reserved.</p>
             <p
