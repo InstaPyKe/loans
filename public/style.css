@@ -1801,5 +1801,114 @@ footer {
     z-index: 1;
 }
 
+/* Global Fixed Background Marquee Animations */
+.fixed-watermark-container {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.04;
+    z-index: -1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 24px 0;
+    gap: 24px;
+    overflow: hidden;
+}
+
+@keyframes slideMarquee {
+    0% {
+        transform: translate3d(0, 0, 0);
+    }
+    100% {
+        transform: translate3d(-33.333%, 0, 0);
+    }
+}
+
+@keyframes slideMarqueeReverse {
+    0% {
+        transform: translate3d(-33.333%, 0, 0);
+    }
+    100% {
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.watermark-marquee {
+    white-space: nowrap;
+    font-size: 2.2rem;
+    font-weight: 900;
+    letter-spacing: 6px;
+    display: inline-block;
+    width: 300%;
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.watermark-marquee.slide-left {
+    animation: slideMarquee var(--speed, 25s) linear infinite, gradientShift var(--grad-speed, 8s) linear infinite;
+}
+
+.watermark-marquee.slide-right {
+    animation: slideMarqueeReverse var(--speed, 30s) linear infinite, gradientShift var(--grad-speed, 8s) linear infinite;
+}
+
+.watermark-marquee.color-blue-cyan {
+    background-image: linear-gradient(90deg, #2563eb, #0ea5e9, #3b82f6, #06b6d4, #2563eb);
+}
+
+.watermark-marquee.color-green-emerald {
+    background-image: linear-gradient(90deg, #10b981, #34d399, #059669, #10b981);
+}
+
+.watermark-marquee.color-indigo-royal {
+    background-image: linear-gradient(90deg, #4f46e5, #6366f1, #818cf8, #4f46e5);
+}
+
+.watermark-marquee.color-pink-rose {
+    background-image: linear-gradient(90deg, #ec4899, #f43f5e, #db2777, #ec4899);
+}
+
+.watermark-marquee.color-amber-orange {
+    background-image: linear-gradient(90deg, #fbbf24, #f59e0b, #d97706, #fbbf24);
+}
+
+/* Card-based Watermark Layouts */
+.watermarked-section {
+    position: relative;
+    overflow: hidden;
+}
+
+.section-watermark-container {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.085;
+    z-index: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 12px 0;
+    gap: 12px;
+}
+
+.watermarked-section>*:not(.section-watermark-container) {
+    position: relative;
+    z-index: 1;
+}
+
 
 
