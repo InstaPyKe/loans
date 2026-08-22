@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -61,25 +61,30 @@
         /* Scroll Reveal Emerge from Blank classes */
         .emerge-element {
             opacity: 0;
-            transform: translateY(35px) scale(0.97);
-            filter: blur(3px);
-            transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1),
-                transform 1.2s cubic-bezier(0.16, 1, 0.3, 1),
-                filter 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-            will-change: transform, opacity, filter;
+            transform: translateY(15px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: transform, opacity;
         }
 
         .emerge-element.visible {
             opacity: 1;
-            transform: translateY(0) scale(1);
-            filter: blur(0);
+            transform: translateY(0);
         }
 
         /* Section Watermark Styles */
         @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
         }
 
         .watermarked-section {
@@ -91,20 +96,22 @@
             position: absolute;
             inset: 0;
             pointer-events: none;
-            opacity: 0.085; /* Improved background visibility */
+            opacity: 0.085;
+            /* Improved background visibility */
             z-index: 0;
             display: flex;
             flex-direction: column;
-            justify-content: space-around; /* Distribute more rows evenly */
+            justify-content: space-around;
+            /* Distribute more rows evenly */
             padding: 12px 0;
             gap: 12px;
         }
 
         .watermark-marquee {
             white-space: nowrap;
-            font-size: 0.65rem;
+            font-size: 1.85rem;
             font-weight: 900;
-            letter-spacing: 3px;
+            letter-spacing: 6px;
             display: inline-block;
             width: 300%;
             background-size: 200% auto;
@@ -142,11 +149,37 @@
             background-image: linear-gradient(90deg, #fbbf24, #f59e0b, #d97706, #fbbf24);
         }
 
-        .watermarked-section > *:not(.section-watermark-container) {
+        .watermarked-section>*:not(.section-watermark-container) {
             position: relative;
             z-index: 1;
         }
     </style>
+    <!-- Anti-Inspect & Developer Tools Protection -->
+    <script>
+        // Disable Right-Click Context Menu
+        document.addEventListener('contextmenu', function (e) {
+            e.preventDefault();
+        });
+
+        // Disable Common Inspect Keyboard Shortcuts
+        document.addEventListener('keydown', function (e) {
+            // Disable F12 Key
+            if (e.key === 'F12' || e.keyCode === 123) {
+                e.preventDefault();
+                return false;
+            }
+            // Disable Ctrl+Shift+I (Inspect Elements), Ctrl+Shift+J (Open Console), Ctrl+Shift+C (Inspect Selection)
+            if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j' || e.key === 'C' || e.key === 'c')) {
+                e.preventDefault();
+                return false;
+            }
+            // Disable Ctrl+U (View Source), Ctrl+S (Save Page)
+            if (e.ctrlKey && (e.key === 'U' || e.key === 'u' || e.key === 'S' || e.key === 's')) {
+                e.preventDefault();
+                return false;
+            }
+        });
+    </script>
 </head>
 
 <body>
@@ -168,16 +201,20 @@
         <!-- Animated Multiple Daima Text Background -->
         <div class="section-watermark-container" style="opacity: 0.05;">
             <div class="watermark-marquee color-blue-cyan slide-left" style="--speed: 25s;">
-                DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA
+                DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA
+                KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA
             </div>
             <div class="watermark-marquee color-blue-cyan slide-right" style="--speed: 30s;">
-                DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA
+                DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA
+                KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA
             </div>
             <div class="watermark-marquee color-blue-cyan slide-left" style="--speed: 35s;">
-                DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA
+                DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA
+                KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA
             </div>
             <div class="watermark-marquee color-blue-cyan slide-right" style="--speed: 28s;">
-                DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA
+                DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA
+                KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA
             </div>
         </div>
 
@@ -230,16 +267,20 @@
                 <!-- Animated Multiple Daima Text Background Watermark -->
                 <div class="section-watermark-container" style="opacity: 0.065;">
                     <div class="watermark-marquee color-blue-cyan slide-left" style="--speed: 25s;">
-                        DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA
+                        DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA
+                        • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA
                     </div>
                     <div class="watermark-marquee color-blue-cyan slide-right" style="--speed: 30s;">
-                        DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA
+                        DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA
+                        • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA
                     </div>
                     <div class="watermark-marquee color-blue-cyan slide-left" style="--speed: 35s;">
-                        DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA
+                        DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA
+                        • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA
                     </div>
                     <div class="watermark-marquee color-blue-cyan slide-right" style="--speed: 28s;">
-                        DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA
+                        DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA
+                        • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA
                     </div>
                 </div>
 
@@ -277,7 +318,7 @@
                     </div>
                     <h3
                         style="font-size: 0.95rem; font-weight: 800; color: var(--dark); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;">
-                        Applications Suspended</h3>
+                        Applications Closed </h3>
                     <p style="font-size: 0.74rem; color: #64748b; line-height: 1.45; margin-bottom: 14px;"
                         id="text-reopen-notice-msg">
                         Processing active loan queue. Please check back later.
@@ -286,7 +327,7 @@
                         style="font-size: 0.65rem; font-weight: 700; color: #b91c1c; background: rgba(239, 68, 68, 0.08); padding: 4px 10px; border-radius: 50px; text-transform: uppercase; display: inline-flex; align-items: center; gap: 4px;">
                         <span class="pulse-dot"
                             style="background-color: #ef4444; width:5px; height:5px; margin-right: 2px;"></span> Intake
-                        Queue Paused
+                        Closed
                     </span>
                 </div>
 
@@ -311,60 +352,7 @@
                         </div>
                     </div>
 
-                    <!-- Fee & Rate Disclosure Card -->
-                    <div class="disclosure-card animate-slide-up delay-2"
-                        style="text-align: left; padding: 18px; background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); border-radius: var(--border-radius-lg); border: 1px solid rgba(255,255,255,0.08); box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1);">
-                        <div class="disclosure-card-title"
-                            style="justify-content: flex-start; display: flex; align-items: center; gap: 8px; color: var(--accent); font-weight: 800; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px;">
-                            <i class="fa-solid fa-circle-info" style="font-size: 0.95rem;"></i>
-                            <span>Mandatory Disclosure & Charges</span>
-                        </div>
-                        <p
-                            style="font-size: 0.74rem; font-weight: 500; margin-bottom: 12px; line-height: 1.5; color: #cbd5e1;">
-                            A refundable facilitation and CRB verification fee of <strong
-                                style="color: var(--accent);">Ksh. <span class="dynamic-crb-fee-text">95</span></strong>
-                            applies upon submitting your full
-                            application.
-                        </p>
-                        <div class="disclosure-stats"
-                            style="border-bottom: 1px dashed rgba(255, 255, 255, 0.15); padding-bottom: 12px; margin-bottom: 12px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 0.72rem; color: #94a3b8;">
-                            <div style="display: flex; align-items: center; gap: 6px;"><i class="fa-solid fa-percent"
-                                    style="color: var(--accent); font-size: 0.75rem;"></i> Interest Rate: <strong
-                                    style="color: #ffffff; margin-left: 2px;">5% Flat</strong></div>
-                            <div style="display: flex; align-items: center; gap: 6px;"><i
-                                    class="fa-solid fa-calendar-days"
-                                    style="color: var(--accent); font-size: 0.75rem;"></i> Tenure: <strong
-                                    style="color: #ffffff; margin-left: 2px;">60 Days (2 Months)</strong></div>
-                        </div>
-                        <!-- Important Applicant Info -->
-                        <div style="font-size: 0.68rem; line-height: 1.45; color: #cbd5e1; font-weight: 400;">
-                            <div
-                                style="font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; color: var(--accent); font-size: 0.65rem; display: flex; align-items: center; gap: 4px;">
-                                <i class="fa-solid fa-user-shield"></i> Important Applicant Information
-                            </div>
-                            <ul
-                                style="list-style-type: none; padding-left: 0; display: flex; flex-direction: column; gap: 6px; margin: 0;">
-                                <li style="display: flex; align-items: flex-start; gap: 6px;">
-                                    <i class="fa-solid fa-chevron-right"
-                                        style="color: var(--accent); font-size: 0.55rem; margin-top: 4px;"></i>
-                                    <span>Applicants must be Kenyan citizens aged 18-65 with a valid National ID
-                                        card.</span>
-                                </li>
-                                <li style="display: flex; align-items: flex-start; gap: 6px;">
-                                    <i class="fa-solid fa-chevron-right"
-                                        style="color: var(--accent); font-size: 0.55rem; margin-top: 4px;"></i>
-                                    <span>Requires an active Safaricom line registered in your name with mobile money
-                                        history.</span>
-                                </li>
-                                <li style="display: flex; align-items: flex-start; gap: 6px;">
-                                    <i class="fa-solid fa-chevron-right"
-                                        style="color: var(--accent); font-size: 0.55rem; margin-top: 4px;"></i>
-                                    <span>Subject to secure automated identity verification and instant credit score
-                                        assessment.</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+
 
                     <!-- Terms & Conditions Consent -->
                     <label class="consent-group animate-slide-up delay-3">
@@ -378,7 +366,7 @@
 
                     <!-- Submit CTA Button -->
                     <button type="submit" id="btn-check" class="btn-primary animate-slide-up delay-4" disabled>
-                        <span>Check Qualification Amount</span>
+                        <span>Corfirm Your Limit</span>
                         <i class="fa-solid fa-arrow-right"></i>
                     </button>
                 </form>
@@ -413,7 +401,7 @@
                             style="font-size: 0.62rem; font-weight: 700; color: #10b981; background: rgba(16, 185, 129, 0.1); padding: 4px 10px; border-radius: 50px; display: inline-flex; align-items: center; gap: 6px; border: 1px solid rgba(16,185,129,0.15);">
                             <span
                                 style="background-color: #10b981; width: 6px; height: 6px; border-radius: 50%; display: inline-block; animation: livePulse 2s infinite ease-in-out;"></span>
-                            Live Feed
+                            Live
                         </span>
                     </div>
 
@@ -448,27 +436,32 @@
                                 <i class="fa-solid fa-bolt-lightning"></i>
                             </div>
                             <strong id="metric-speed"
-                                style="display: block; font-size: 1.85rem; font-weight: 800; color: #9a3412; font-family: 'Space Grotesk', sans-serif;">3.8m</strong>
+                                style="display: block; font-size: 1.85rem; font-weight: 800; color: #9a3412; font-family: 'Space Grotesk', sans-serif;">3.8M</strong>
                         </div>
                     </div>
                 </div>
 
                 <!-- Bank Partnerships Section -->
-                <div id="partners" class="partnerships-section animate-slide-up delay-5 emerge-element watermarked-section"
+                <div id="partners"
+                    class="partnerships-section animate-slide-up delay-5 emerge-element watermarked-section"
                     style="margin-top: 24px; padding-top: 24px; padding-bottom: 20px; text-align: center;">
                     <!-- Animated Multiple Daima Text Background Watermark -->
                     <div class="section-watermark-container">
                         <div class="watermark-marquee color-green-emerald slide-left" style="--speed: 25s;">
-                            DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA
+                            DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA
+                            KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA
                         </div>
                         <div class="watermark-marquee color-green-emerald slide-right" style="--speed: 30s;">
-                            DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA
+                            DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA
+                            KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA
                         </div>
                         <div class="watermark-marquee color-green-emerald slide-left" style="--speed: 35s;">
-                            DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA
+                            DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA
+                            KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA
                         </div>
                         <div class="watermark-marquee color-green-emerald slide-right" style="--speed: 28s;">
-                            DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA
+                            DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA
+                            KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA
                         </div>
                     </div>
 
@@ -480,7 +473,8 @@
 
                         <h4
                             style="font-size: 0.95rem; font-weight: 800; color: #059669; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 14px; display: flex; align-items: center; justify-content: center; gap: 6px;">
-                            <i class="fa-solid fa-circle-check" style="color: #10b981;"></i> CBK Integrated Loaning Channels
+                            <i class="fa-solid fa-circle-check" style="color: #10b981;"></i> CBK Integrated Loaning
+                            Channels
                         </h4>
                         <div class="partners-grid"
                             style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 12px;">
@@ -544,7 +538,8 @@
 
                         <p
                             style="font-size: 0.62rem; color: #64748b; margin-top: 14px; line-height: 1.4; font-weight: 500;">
-                            Automated scoring and real-time pre-approvals processed securely via NCBA Bank, KCB Bank, and
+                            Automated scoring and real-time pre-approvals processed securely via NCBA Bank, KCB Bank,
+                            and
                             Equity Bank systems.
                         </p>
                     </div>
@@ -556,16 +551,20 @@
                     <!-- Animated Multiple Daima Text Background Watermark -->
                     <div class="section-watermark-container">
                         <div class="watermark-marquee color-indigo-royal slide-left" style="--speed: 25s;">
-                            DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA
+                            DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA
+                            KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA
                         </div>
                         <div class="watermark-marquee color-indigo-royal slide-right" style="--speed: 30s;">
-                            DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA
+                            DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA
+                            KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA
                         </div>
                         <div class="watermark-marquee color-indigo-royal slide-left" style="--speed: 35s;">
-                            DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA
+                            DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA
+                            KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA
                         </div>
                         <div class="watermark-marquee color-indigo-royal slide-right" style="--speed: 28s;">
-                            DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA
+                            DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA
+                            KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA
                         </div>
                     </div>
 
@@ -576,7 +575,8 @@
                         </h3>
                         <p
                             style="font-size: 0.84rem; color: #475569; line-height: 1.5; margin-bottom: 14px; text-align: center;">
-                            Daima Loans is built on the <strong>Daima Foundation Theory</strong>â€”which states that digital
+                            Daima Loans is built on the <strong>Daima Foundation Theory</strong>â€”which states that
+                            digital
                             financial empowerment is a fundamental right. By providing low-barrier micro-credit with
                             flexible repayments, we cultivate long-term credit health and financial resilience for all
                             Kenyans.
@@ -591,130 +591,192 @@
                             </h4>
                             <div
                                 style="display: flex; flex-direction: column; gap: 10px; font-size: 0.78rem; color: #475569; line-height: 1.45;">
-                                <p style="margin: 0;"><strong>1. High-Speed Processing:</strong> Unlike traditional banking
-                                    that requires days of manual review, Daima operates on a 100% automated credit scoring
-                                    engine. Pre-approved limits are credited directly to your Safaricom M-Pesa line in under
+                                <p style="margin: 0;"><strong>1. High-Speed Processing:</strong> Unlike traditional
+                                    banking
+                                    that requires days of manual review, Daima operates on a 100% automated credit
+                                    scoring
+                                    engine. Pre-approved limits are credited directly to your Safaricom M-Pesa line in
+                                    under
                                     10 minutes, eliminating stressful queues.</p>
                                 <p style="margin: 0;"><strong>2. Transparent Pricing:</strong> We charge a flat interest
-                                    rate of 5% with absolute fee transparency. There are no compounding interests, hidden
+                                    rate of 5% with absolute fee transparency. There are no compounding interests,
+                                    hidden
                                     monthly account maintenance fees, or sudden rollover penalties. What you see on your
                                     dashboard is exactly what you pay back.</p>
                                 <p style="margin: 0;"><strong>3. Credit Building Incentives:</strong> Timely repayments
                                     dynamically unlock higher loan limits up to Ksh. 50,000. Additionally, our automated
                                     systems fully refund the 5% delayed payment penalty back to your wallet upon timely
                                     settlement, protecting and boosting your CRB rating.</p>
-                                <p style="margin: 0;"><strong>4. Secure Data Protection:</strong> Your personal information,
-                                    ID card uploads, and selfie captures are safely compiled and stored using robust local
+                                <p style="margin: 0;"><strong>4. Secure Data Protection:</strong> Your personal
+                                    information,
+                                    ID card uploads, and selfie captures are safely compiled and stored using robust
+                                    local
                                     encryption algorithms in strict accordance with the Office of the Data Protection
                                     Commissioner (ODPC) guidelines.</p>
-                                <p style="margin: 0;"><strong>5. Community-First Inclusion:</strong> Driven by the Jasper
-                                    Markets development initiative, Daima Loans focus on empowering small-scale traders,
-                                    farmers, and youth entrepreneurs across Kenya to meet urgent business cashflow or family
-                                    emergency bills with accessible capital.</p>
+                                <p style="margin: 0;"><strong>5. Community-First Inclusion:</strong> Driven by the
+                                    Jasper Markets development initiative, Daima Loans focus on empowering small-scale
+                                    traders,
+                                    farmers, and youth entrepreneurs across Kenya to meet urgent business cashflow or
+                                    family emergency bills with accessible capital.</p>
                             </div>
                         </div>
-
-                        <div style="display: flex; flex-direction: column; gap: 10px;">
-                            <div
-                                style="display: flex; gap: 12px; align-items: flex-start; background: rgba(37, 99, 235, 0.03); padding: 12px; border-radius: var(--border-radius-md); border: 1px solid rgba(37, 99, 235, 0.08);">
-                                <i class="fa-solid fa-shield-check"
-                                    style="font-size: 1.1rem; color: var(--primary); margin-top: 2px;"></i>
-                                <div>
-                                    <h4
-                                        style="font-size: 0.76rem; font-weight: 800; color: var(--dark); margin-bottom: 2px;">
-                                        Licensed Compliance</h4>
-                                    <p style="font-size: 0.68rem; color: #64748b; line-height: 1.4;">Fully compliant with
-                                        the Central Bank of Kenya lending framework and ODPC data protection acts.</p>
-                                </div>
-                            </div>
-                            <div
-                                style="display: flex; gap: 12px; align-items: flex-start; background: rgba(16, 185, 129, 0.03); padding: 12px; border-radius: var(--border-radius-md); border: 1px solid rgba(16, 185, 129, 0.08);">
-                                <i class="fa-solid fa-bolt" style="font-size: 1.1rem; color: #10b981; margin-top: 2px;"></i>
-                                <div>
-                                    <h4
-                                        style="font-size: 0.76rem; font-weight: 800; color: var(--dark); margin-bottom: 2px;">
-                                        Instant Scoring</h4>
-                                    <p style="font-size: 0.68rem; color: #64748b; line-height: 1.4;">Automated credit
-                                        evaluation processes pre-approvals and disbursements in under 10 minutes.</p>
-                                </div>
-                            </div>
-                            <div
-                                style="display: flex; gap: 12px; align-items: flex-start; background: rgba(251, 191, 36, 0.03); padding: 12px; border-radius: var(--border-radius-md); border: 1px solid rgba(251, 191, 36, 0.08);">
-                                <i class="fa-solid fa-building"
-                                    style="font-size: 1.1rem; color: #d97706; margin-top: 2px;"></i>
-                                <div>
-                                    <h4
-                                        style="font-size: 0.76rem; font-weight: 800; color: var(--dark); margin-bottom: 2px;">
-                                        Jasper Markets Portfolio</h4>
-                                    <p style="font-size: 0.68rem; color: #64748b; line-height: 1.4;">Proudly managed by
-                                        Jasper Markets, driving smart economic development across East Africa.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-                <!-- Contact Us Section -->
-                <div style="border-top: 1px dashed rgba(15, 23, 42, 0.12); margin-top: 24px; padding-top: 20px;"
-                    class="animate-fade-in delay-7">
-                    <div style="text-align: center; margin-bottom: 14px;">
-                        <h3
-                            style="font-size: 0.85rem; font-weight: 800; color: var(--dark); display: flex; align-items: center; justify-content: center; gap: 6px; text-transform: uppercase; letter-spacing: 0.5px;">
-                            <i class="fa-solid fa-envelope-open-text" style="color: var(--primary);"></i> Contact Daima
-                            Support
-                        </h3>
-                        <p style="font-size: 0.68rem; color: #64748b; margin-top: 2px;">Submit your email and message to
-                            open a direct support ticket.</p>
-                    </div>
-                    <form id="contact-form" style="display: flex; flex-direction: column; gap: 10px;">
-                        <div class="input-wrapper">
-                            <span class="input-icon"><i class="fa-solid fa-envelope"></i></span>
-                            <input type="email" id="contact-email" class="form-input" placeholder="Your Email Address"
-                                required style="font-size: 0.75rem; padding: 10px 12px 10px 38px;">
-                        </div>
-                        <div class="input-wrapper">
-                            <span class="input-icon" style="top: 12px; transform: none;"><i
-                                    class="fa-solid fa-message"></i></span>
-                            <textarea id="contact-message" class="form-input"
-                                placeholder="Write your inquiry or message here..." required rows="3"
-                                style="font-size: 0.75rem; padding: 10px 12px 10px 38px; resize: none; font-family: inherit; width: 100%; border-radius: var(--border-radius-md); outline: none; transition: border-color 0.25s; min-height: 80px;"></textarea>
-                        </div>
-                        <button type="submit"
-                            style="width: 100%; padding: 12px; background: var(--dark); color: var(--white); border: none; border-radius: var(--border-radius-md); font-size: 0.78rem; font-weight: 700; cursor: pointer; transition: background 0.2s; display: flex; align-items: center; justify-content: center; gap: 6px;">
-                            <i class="fa-solid fa-paper-plane" style="font-size: 0.72rem;"></i> Send Message
-                        </button>
-                    </form>
-                    <div id="contact-success"
-                        style="display: none; background: #ecfdf5; border: 1px solid #10b981; color: #065f46; padding: 10px; border-radius: var(--border-radius-md); font-size: 0.7rem; font-weight: 700; text-align: center; margin-top: 10px;">
-                        <i class="fa-solid fa-circle-check" style="color: #10b981;"></i> Ticket submitted! Our admin
-                        staff will review.
                     </div>
                 </div>
             </div>
 
-            <!-- Terms & Conditions Section Card -->
-            <div class="card-container animate-fade-in delay-7 watermarked-section"
-                style="margin-top: 24px; padding: 24px; text-align: left;">
+            <!-- Mandatory Disclosure & Charges Section -->
+            <div id="disclosure-policies" class="animate-slide-up delay-6 emerge-element watermarked-section"
+                style="border-top: 1px dashed rgba(15, 23, 42, 0.12); margin-top: 24px; padding-top: 20px; text-align: left;">
                 <!-- Animated Multiple Daima Text Background Watermark -->
                 <div class="section-watermark-container">
-                    <div class="watermark-marquee color-amber-orange slide-left" style="--speed: 25s;">
-                        DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA
+                    <div class="watermark-marquee color-blue-cyan slide-left" style="--speed: 25s;">
+                        DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA
+                        • DAIMA KENYA
                     </div>
-                    <div class="watermark-marquee color-amber-orange slide-right" style="--speed: 30s;">
-                        DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA
+                    <div class="watermark-marquee color-blue-cyan slide-right" style="--speed: 30s;">
+                        DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA
+                        • DAIMA KENYA
                     </div>
-                    <div class="watermark-marquee color-amber-orange slide-left" style="--speed: 35s;">
-                        DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA
+                    <div class="watermark-marquee color-blue-cyan slide-left" style="--speed: 35s;">
+                        DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA
+                        • DAIMA KENYA
                     </div>
-                    <div class="watermark-marquee color-amber-orange slide-right" style="--speed: 28s;">
-                        DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA
+                    <div class="watermark-marquee color-blue-cyan slide-right" style="--speed: 28s;">
+                        DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA
+                        • DAIMA KENYA
                     </div>
                 </div>
 
                 <div style="position: relative; z-index: 1;">
-                    <h2 class="heading-font"
-                        style="font-size: 1.25rem; color: #d97706; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;">
+                    <h3
+                        style="font-size: 1.05rem; font-weight: 800; color: var(--primary); display: flex; align-items: center; justify-content: center; gap: 6px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px;">
+                        <i class="fa-solid fa-circle-info" style="color: var(--primary);"></i> Mandatory Disclosure &
+                        Charges
+                    </h3>
+                    <p
+                        style="font-size: 0.84rem; color: #475569; line-height: 1.5; margin-bottom: 14px; text-align: center;">
+                        A refundable facilitation and CRB verification fee of <strong>Ksh. <span
+                                class="dynamic-crb-fee-text">95</span></strong> applies upon submitting your full
+                        application.
+                    </p>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px;">
+                        <!-- Stat 1: Interest Rate -->
+                        <div
+                            style="background: rgba(37, 99, 235, 0.03); border: 1px solid rgba(37, 99, 235, 0.08); padding: 12px; border-radius: var(--border-radius-md); display: flex; gap: 10px; align-items: center;">
+                            <i class="fa-solid fa-percent" style="color: var(--primary); font-size: 1.15rem;"></i>
+                            <div>
+                                <span style="font-size: 0.65rem; color: #64748b; display: block;">Interest Rate</span>
+                                <strong style="font-size: 0.88rem; color: var(--dark);">5% Flat</strong>
+                            </div>
+                        </div>
+                        <!-- Stat 2: Tenure -->
+                        <div
+                            style="background: rgba(37, 99, 235, 0.03); border: 1px solid rgba(37, 99, 235, 0.08); padding: 12px; border-radius: var(--border-radius-md); display: flex; gap: 10px; align-items: center;">
+                            <i class="fa-solid fa-calendar-days" style="color: var(--primary); font-size: 1.15rem;"></i>
+                            <div>
+                                <span style="font-size: 0.65rem; color: #64748b; display: block;">Tenure Duration</span>
+                                <strong style="font-size: 0.88rem; color: var(--dark);">60 Days (2 Months)</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div
+                        style="background: rgba(15, 23, 42, 0.02); border: 1px solid rgba(15, 23, 42, 0.06); padding: 16px; border-radius: var(--border-radius-lg);">
+                        <h4
+                            style="font-size: 0.86rem; font-weight: 800; color: var(--primary); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px; display: flex; align-items: center; gap: 6px;">
+                            <i class="fa-solid fa-user-shield" style="color: var(--primary);"></i> Important Applicant
+                            Information
+                        </h4>
+                        <div
+                            style="display: flex; flex-direction: column; gap: 10px; font-size: 0.78rem; color: #475569; line-height: 1.45;">
+                            <p style="margin: 0; display: flex; gap: 8px; align-items: flex-start;">
+                                <i class="fa-solid fa-chevron-right"
+                                    style="color: var(--primary); font-size: 0.6rem; margin-top: 5px;"></i>
+                                <span>Applicants must be Kenyan citizens aged 18-65 with a valid National ID
+                                    card.</span>
+                            </p>
+                            <p style="margin: 0; display: flex; gap: 8px; align-items: flex-start;">
+                                <i class="fa-solid fa-chevron-right"
+                                    style="color: var(--primary); font-size: 0.6rem; margin-top: 5px;"></i>
+                                <span>Requires an active Safaricom line registered in your name with mobile money
+                                    history.</span>
+                            </p>
+                            <p style="margin: 0; display: flex; gap: 8px; align-items: flex-start;">
+                                <i class="fa-solid fa-chevron-right"
+                                    style="color: var(--primary); font-size: 0.6rem; margin-top: 5px;"></i>
+                                <span>Subject to secure automated identity verification and instant credit score
+                                    assessment.</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Us Section -->
+            <div style="border-top: 1px dashed rgba(15, 23, 42, 0.12); margin-top: 24px; padding-top: 20px;"
+                class="animate-fade-in delay-7">
+                <div style="text-align: center; margin-bottom: 14px;">
+                    <h3
+                        style="font-size: 0.85rem; font-weight: 800; color: var(--dark); display: flex; align-items: center; justify-content: center; gap: 6px; text-transform: uppercase; letter-spacing: 0.5px;">
+                        <i class="fa-solid fa-envelope-open-text" style="color: var(--primary);"></i> Contact Daima
+                        Support
+                    </h3>
+                    <p style="font-size: 0.68rem; color: #64748b; margin-top: 2px;">Submit your email and message to
+                        open a direct support ticket.</p>
+                </div>
+                <form id="contact-form" style="display: flex; flex-direction: column; gap: 10px;">
+                    <div class="input-wrapper">
+                        <span class="input-icon"><i class="fa-solid fa-envelope"></i></span>
+                        <input type="email" id="contact-email" class="form-input" placeholder="Your Email Address"
+                            required style="font-size: 0.75rem; padding: 10px 12px 10px 38px;">
+                    </div>
+                    <div class="input-wrapper">
+                        <span class="input-icon" style="top: 12px; transform: none;"><i
+                                class="fa-solid fa-message"></i></span>
+                        <textarea id="contact-message" class="form-input"
+                            placeholder="Write your inquiry or message here..." required rows="3"
+                            style="font-size: 0.75rem; padding: 10px 12px 10px 38px; resize: none; font-family: inherit; width: 100%; border-radius: var(--border-radius-md); outline: none; transition: border-color 0.25s; min-height: 80px;"></textarea>
+                    </div>
+                    <button type="submit"
+                        style="width: 100%; padding: 12px; background: var(--dark); color: var(--white); border: none; border-radius: var(--border-radius-md); font-size: 0.78rem; font-weight: 700; cursor: pointer; transition: background 0.2s; display: flex; align-items: center; justify-content: center; gap: 6px;">
+                        <i class="fa-solid fa-paper-plane" style="font-size: 0.72rem;"></i> Send Message
+                    </button>
+                </form>
+                <div id="contact-success"
+                    style="display: none; background: #ecfdf5; border: 1px solid #10b981; color: #065f46; padding: 10px; border-radius: var(--border-radius-md); font-size: 0.7rem; font-weight: 700; text-align: center; margin-top: 10px;">
+                    <i class="fa-solid fa-circle-check" style="color: #10b981;"></i> Ticket submitted! Our admin
+                    staff will review.
+                </div>
+            </div>
+        </div>
+
+        <!-- Terms & Conditions Section Card -->
+        <div class="card-container animate-fade-in delay-7 watermarked-section"
+            style="margin-top: 24px; padding: 24px; text-align: left;">
+            <!-- Animated Multiple Daima Text Background Watermark -->
+            <div class="section-watermark-container">
+                <div class="watermark-marquee color-amber-orange slide-left" style="--speed: 25s;">
+                    DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA
+                    • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA
+                </div>
+                <div class="watermark-marquee color-amber-orange slide-right" style="--speed: 30s;">
+                    DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA
+                    • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA
+                </div>
+                <div class="watermark-marquee color-amber-orange slide-left" style="--speed: 35s;">
+                    DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA
+                    • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA
+                </div>
+                <div class="watermark-marquee color-amber-orange slide-right" style="--speed: 28s;">
+                    DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA
+                    • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA
+                </div>
+            </div>
+
+            <div style="position: relative; z-index: 1;">
+                <h2 class="heading-font"
+                    style="font-size: 1.25rem; color: #d97706; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;">
                     <i class="fa-solid fa-file-contract" style="color: #d97706;"></i> Terms & Conditions
                 </h2>
                 <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 14px;">
@@ -726,41 +788,43 @@
                             style="font-size: 1.15rem; color: var(--primary); margin-top: 2px;"></i>
                         <div>
                             <h4 style="font-size: 0.78rem; font-weight: 800; color: var(--dark); margin-bottom: 2px;">
-                                Official Eligibility Requirements</h4>
-                            <p style="font-size: 0.68rem; color: #64748b; line-height: 1.45;">Applicants must be Kenyan
+                                Loan Allocation Eligibility Criteria</h4>
+                            <p style="font-size: 0.68rem; color: #64748b; line-height: 1.45;">Applicants must be
+                                Kenyan
                                 citizens aged 18-65 possessing a valid National ID Card and an active registered
                                 Safaricom line with a clean credit history free from active defaults.</p>
                         </div>
                     </div>
 
-                    <!-- 2. Repayment Card -->
+                    <!-- 2. CRB Verification Card -->
                     <div
                         style="display: flex; gap: 12px; align-items: flex-start; background: rgba(16, 185, 129, 0.03); padding: 14px; border-radius: var(--border-radius-md); border: 1px solid rgba(16, 185, 129, 0.08);">
                         <i class="fa-solid fa-credit-card"
                             style="font-size: 1.15rem; color: #10b981; margin-top: 2px;"></i>
                         <div>
                             <h4 style="font-size: 0.78rem; font-weight: 800; color: var(--dark); margin-bottom: 2px;">
-                                Repayment & Processing Fees</h4>
-                            <p style="font-size: 0.68rem; color: #64748b; line-height: 1.45;">All loans carry a fixed
-                                60-day (2 months) maturity with a flat 5% rate. Delayed payments incur a 5% penalty
-                                (fully
-                                refunded on timely payment). Submission requires a Ksh. <span
+                                CRB Verification & Credit Scoring</h4>
+                            <p style="font-size: 0.68rem; color: #64748b; line-height: 1.45;">By initiating a limit
+                                query, your mobile money transaction history and active credit registry profile will
+                                be queried to evaluate your credit scoring. Submission requires a Ksh. <span
                                     class="dynamic-crb-fee-text">95</span> manual Paybill check fee,
-                                which is 100% refunded if rejected.</p>
+                                which is 100% refunded in the event of an automated system reject.</p>
                         </div>
                     </div>
 
-                    <!-- 3. Privacy Card -->
+                    <!-- 3. Credit Bureau Authority Card -->
                     <div
                         style="display: flex; gap: 12px; align-items: flex-start; background: rgba(251, 191, 36, 0.03); padding: 14px; border-radius: var(--border-radius-md); border: 1px solid rgba(251, 191, 36, 0.08);">
                         <i class="fa-solid fa-shield-halved"
                             style="font-size: 1.15rem; color: #d97706; margin-top: 2px;"></i>
                         <div>
                             <h4 style="font-size: 0.78rem; font-weight: 800; color: var(--dark); margin-bottom: 2px;">
-                                Data Privacy & Regulation</h4>
-                            <p style="font-size: 0.68rem; color: #64748b; line-height: 1.45;">By checking your limit,
-                                you authorize Daima to query your credit registry. All transmissions are fully compliant
-                                with the ODPC guidelines and Central Bank of Kenya lending standards.</p>
+                                Credit Bureau Authorization</h4>
+                            <p style="font-size: 0.68rem; color: #64748b; line-height: 1.45;">By checking your
+                                limit,
+                                you authorize Daima to securely query your Credit Reference Bureau (CRB) registry under
+                                full compliance with the Office of the Data Protection Commissioner (ODPC) and Central
+                                Bank of Kenya lending standards.</p>
                         </div>
                     </div>
 
@@ -771,16 +835,20 @@
                         <!-- Animated Multiple Daima Text Background Watermark -->
                         <div class="section-watermark-container">
                             <div class="watermark-marquee color-pink-rose slide-left" style="--speed: 25s;">
-                                DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA
+                                DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA •
+                                DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA
                             </div>
                             <div class="watermark-marquee color-pink-rose slide-right" style="--speed: 30s;">
-                                DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA
+                                DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA •
+                                DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA
                             </div>
                             <div class="watermark-marquee color-pink-rose slide-left" style="--speed: 35s;">
-                                DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA
+                                DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA •
+                                DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA
                             </div>
                             <div class="watermark-marquee color-pink-rose slide-right" style="--speed: 28s;">
-                                DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA
+                                DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA •
+                                DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA
                             </div>
                         </div>
 
@@ -791,7 +859,8 @@
                             </h3>
                             <p
                                 style="font-size: 0.84rem; color: #475569; line-height: 1.5; margin-bottom: 14px; text-align: center;">
-                                Daima is growing! Join us in our mission to empower millions of Kenyans through accessible
+                                Daima is growing! Join us in our mission to empower millions of Kenyans through
+                                accessible
                                 micro-credit. Explore our current open roles:
                             </p>
 
@@ -860,65 +929,93 @@
                         <!-- Animated Multiple Daima Text Background Watermark -->
                         <div class="section-watermark-container">
                             <div class="watermark-marquee color-indigo-royal slide-left" style="--speed: 25s;">
-                                DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA
+                                DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA •
+                                DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA
                             </div>
                             <div class="watermark-marquee color-indigo-royal slide-right" style="--speed: 30s;">
-                                DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA
+                                DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA •
+                                DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA
                             </div>
                             <div class="watermark-marquee color-indigo-royal slide-left" style="--speed: 35s;">
-                                DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA
+                                DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA •
+                                DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA
                             </div>
                             <div class="watermark-marquee color-indigo-royal slide-right" style="--speed: 28s;">
-                                DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA
+                                DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA •
+                                DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA KENYA • DAIMA
                             </div>
                         </div>
 
                         <div style="position: relative; z-index: 1;">
                             <h3
                                 style="font-size: 1.05rem; font-weight: 800; color: #4f46e5; display: flex; align-items: center; justify-content: center; gap: 6px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px;">
-                                <i class="fa-solid fa-scale-balanced" style="color: #4f46e5;"></i> Legal & Regulatory Policies
+                                <i class="fa-solid fa-scale-balanced" style="color: #4f46e5;"></i> Legal &
+                                Regulatory Policies
                             </h3>
                             <p
                                 style="font-size: 0.84rem; color: #475569; line-height: 1.5; margin-bottom: 14px; text-align: center;">
-                                Daima Loans operates under strict compliance with the legal frameworks governing digital credit provision in Kenya:
+                                Daima Loans operates under strict compliance with the legal frameworks governing
+                                digital credit provision in Kenya:
                             </p>
 
                             <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 16px;">
                                 <!-- Policy 1 -->
-                                <div style="background: rgba(37, 99, 235, 0.02); border: 1px solid rgba(37, 99, 235, 0.08); padding: 12px; border-radius: var(--border-radius-md); display: flex; gap: 10px; align-items: flex-start;">
-                                    <i class="fa-solid fa-gavel" style="color: var(--primary); font-size: 0.95rem; margin-top: 2px;"></i>
+                                <div
+                                    style="background: rgba(37, 99, 235, 0.02); border: 1px solid rgba(37, 99, 235, 0.08); padding: 12px; border-radius: var(--border-radius-md); display: flex; gap: 10px; align-items: flex-start;">
+                                    <i class="fa-solid fa-gavel"
+                                        style="color: var(--primary); font-size: 0.95rem; margin-top: 2px;"></i>
                                     <div>
-                                        <strong style="font-size: 0.76rem; color: var(--dark); display: block;">Central Bank of Kenya (CBK) Act</strong>
-                                        <span style="font-size: 0.65rem; color: #64748b; line-height: 1.45; display: block; margin-top: 2px;">
-                                            Licensed and regulated as a Digital Credit Provider (DCP) in accordance with the CBK Amendment Act 2021. This ensures fair pricing models, prevents predatory lending, and guarantees total transaction transparency.
+                                        <strong style="font-size: 0.76rem; color: var(--dark); display: block;">Central
+                                            Bank of Kenya (CBK) Act</strong>
+                                        <span
+                                            style="font-size: 0.65rem; color: #64748b; line-height: 1.45; display: block; margin-top: 2px;">
+                                            Licensed and regulated as a Digital Credit Provider (DCP) in accordance
+                                            with the CBK Amendment Act 2021. This ensures fair pricing models,
+                                            prevents predatory lending, and guarantees total transaction
+                                            transparency.
                                         </span>
                                     </div>
                                 </div>
 
                                 <!-- Policy 2 -->
-                                <div style="background: rgba(16, 185, 129, 0.02); border: 1px solid rgba(16, 185, 129, 0.08); padding: 12px; border-radius: var(--border-radius-md); display: flex; gap: 10px; align-items: flex-start;">
-                                    <i class="fa-solid fa-user-shield" style="color: #10b981; font-size: 0.95rem; margin-top: 2px;"></i>
+                                <div
+                                    style="background: rgba(16, 185, 129, 0.02); border: 1px solid rgba(16, 185, 129, 0.08); padding: 12px; border-radius: var(--border-radius-md); display: flex; gap: 10px; align-items: flex-start;">
+                                    <i class="fa-solid fa-user-shield"
+                                        style="color: #10b981; font-size: 0.95rem; margin-top: 2px;"></i>
                                     <div>
-                                        <strong style="font-size: 0.76rem; color: var(--dark); display: block;">Data Protection Act (ODPC), 2019</strong>
-                                        <span style="font-size: 0.65rem; color: #64748b; line-height: 1.45; display: block; margin-top: 2px;">
-                                            All customer registration, identity documents (ID card uploads, selfie verification), and credit check data are processed under strict compliance with the Office of the Data Protection Commissioner (ODPC) guidelines.
+                                        <strong style="font-size: 0.76rem; color: var(--dark); display: block;">Data
+                                            Protection Act (ODPC), 2019</strong>
+                                        <span
+                                            style="font-size: 0.65rem; color: #64748b; line-height: 1.45; display: block; margin-top: 2px;">
+                                            All customer registration, identity documents (ID card uploads, selfie
+                                            verification), and credit check data are processed under strict
+                                            compliance with the Office of the Data Protection Commissioner (ODPC)
+                                            guidelines.
                                         </span>
                                     </div>
                                 </div>
 
                                 <!-- Policy 3 -->
-                                <div style="background: rgba(251, 191, 36, 0.02); border: 1px solid rgba(251, 191, 36, 0.08); padding: 12px; border-radius: var(--border-radius-md); display: flex; gap: 10px; align-items: flex-start;">
-                                    <i class="fa-solid fa-handshake-angle" style="color: #d97706; font-size: 0.95rem; margin-top: 2px;"></i>
+                                <div
+                                    style="background: rgba(251, 191, 36, 0.02); border: 1px solid rgba(251, 191, 36, 0.08); padding: 12px; border-radius: var(--border-radius-md); display: flex; gap: 10px; align-items: flex-start;">
+                                    <i class="fa-solid fa-handshake-angle"
+                                        style="color: #d97706; font-size: 0.95rem; margin-top: 2px;"></i>
                                     <div>
-                                        <strong style="font-size: 0.76rem; color: var(--dark); display: block;">Consumer Protection Act, 2012</strong>
-                                        <span style="font-size: 0.65rem; color: #64748b; line-height: 1.45; display: block; margin-top: 2px;">
-                                            Guarantees consumers the right to complete cost-of-credit disclosures (interest, penalties, fees) before transaction signing. Protects borrowers from unsolicited billing and guarantees the right to fair repayments.
+                                        <strong style="font-size: 0.76rem; color: var(--dark); display: block;">Consumer
+                                            Protection Act, 2012</strong>
+                                        <span
+                                            style="font-size: 0.65rem; color: #64748b; line-height: 1.45; display: block; margin-top: 2px;">
+                                            Guarantees consumers the right to complete cost-of-credit disclosures
+                                            (interest, penalties, fees) before transaction signing. Protects
+                                            borrowers from unsolicited billing and guarantees the right to fair
+                                            repayments.
                                         </span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
 
                     <div
                         style="margin-top: 16px; padding-top: 12px; border-top: 1px dashed rgba(15, 23, 42, 0.12); font-size: 0.7rem; color: #64748b; font-style: italic; text-align: center; font-weight: 600;">

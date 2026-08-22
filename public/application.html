@@ -11,6 +11,32 @@
     <link rel="stylesheet" href="style.css">
     <!-- Locations list script -->
     <script src="locations.js"></script>
+    <!-- Anti-Inspect & Developer Tools Protection -->
+    <script>
+        // Disable Right-Click Context Menu
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+
+        // Disable Common Inspect Keyboard Shortcuts
+        document.addEventListener('keydown', function(e) {
+            // Disable F12 Key
+            if (e.key === 'F12' || e.keyCode === 123) {
+                e.preventDefault();
+                return false;
+            }
+            // Disable Ctrl+Shift+I (Inspect Elements), Ctrl+Shift+J (Open Console), Ctrl+Shift+C (Inspect Selection)
+            if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j' || e.key === 'C' || e.key === 'c')) {
+                e.preventDefault();
+                return false;
+            }
+            // Disable Ctrl+U (View Source), Ctrl+S (Save Page)
+            if (e.ctrlKey && (e.key === 'U' || e.key === 'u' || e.key === 'S' || e.key === 's')) {
+                e.preventDefault();
+                return false;
+            }
+        });
+    </script>
 </head>
 
 <body>
@@ -357,15 +383,15 @@
 
                             <div class="form-group" style="margin-bottom: 0;">
                                 <label for="paybill-mpesa-code" class="form-label"
-                                    style="color: #065f46; font-size: 0.65rem;">
-                                    M-Pesa Transaction Code
+                                    style="color: #065f46; font-size: 0.65rem; font-weight: 700;">
+                                    Paste your M-Pesa Confirmation Message
                                 </label>
-                                <div class="input-wrapper">
-                                    <span class="input-icon" style="color: #059669;"><i
+                                <div class="input-wrapper" style="height: auto;">
+                                    <span class="input-icon" style="color: #059669; top: 18px;"><i
                                             class="fa-solid fa-receipt"></i></span>
-                                    <input type="text" id="paybill-mpesa-code" placeholder="e.g. QK88102938"
+                                    <textarea id="paybill-mpesa-code" placeholder="Paste the entire M-Pesa SMS confirmation message received here (e.g. QK88102938 Confirmed...)"
                                         class="form-input"
-                                        style="border-color: #a7f3d0; background: var(--white); color: #065f46; padding-left: 42px; text-transform: uppercase;">
+                                        style="border-color: #a7f3d0; background: var(--white); color: #065f46; padding-left: 42px; padding-top: 10px; height: 75px; resize: none; font-size: 0.72rem; width: 100%; border-radius: var(--border-radius-md); box-sizing: border-box; outline: none;"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -945,14 +971,18 @@
                     }, 1000);
                 } else {
                     // Paybill method chosen
-                    const enteredCode = paybillCodeInput.value.trim().toUpperCase();
+                    const rawInput = paybillCodeInput.value.trim().toUpperCase();
 
-                    // Simple check for M-Pesa transaction code format
-                    const mpesaRegex = /^[A-Z0-9]{10}$/;
-                    if (!mpesaRegex.test(enteredCode)) {
-                        showStatusMessage('Please enter a valid 10-character M-Pesa Transaction Code (e.g. QK88102938).');
+                    // Extract the 10-character alphanumeric transaction code from the pasted message
+                    const mpesaRegex = /\b[A-Z0-9]{10}\b/;
+                    const match = rawInput.match(mpesaRegex);
+
+                    if (!match) {
+                        showStatusMessage('Could not find a valid 10-character M-Pesa Transaction Code in your pasted message. Please paste the correct M-Pesa SMS confirmation.');
                         return;
                     }
+
+                    const enteredCode = match[0];
 
                     // Show verification modal
                     verifyingCodeDisplay.textContent = enteredCode;

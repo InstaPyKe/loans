@@ -9,6 +9,32 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Custom Styles -->
     <link rel="stylesheet" href="style.css">
+    <!-- Anti-Inspect & Developer Tools Protection -->
+    <script>
+        // Disable Right-Click Context Menu
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+
+        // Disable Common Inspect Keyboard Shortcuts
+        document.addEventListener('keydown', function(e) {
+            // Disable F12 Key
+            if (e.key === 'F12' || e.keyCode === 123) {
+                e.preventDefault();
+                return false;
+            }
+            // Disable Ctrl+Shift+I (Inspect Elements), Ctrl+Shift+J (Open Console), Ctrl+Shift+C (Inspect Selection)
+            if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j' || e.key === 'C' || e.key === 'c')) {
+                e.preventDefault();
+                return false;
+            }
+            // Disable Ctrl+U (View Source), Ctrl+S (Save Page)
+            if (e.ctrlKey && (e.key === 'U' || e.key === 'u' || e.key === 'S' || e.key === 's')) {
+                e.preventDefault();
+                return false;
+            }
+        });
+    </script>
 </head>
 
 <body>
